@@ -1,0 +1,408 @@
+#content .stage-list {
+	position: relative;
+	padding: 10px 5px 8px;
+	color: gray;
+	*overflow: hidden
+}
+
+#content .stage-list table {
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse
+}
+
+#content .stage-list td {
+	padding: 16px 0;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+	background: #fafcff;
+	border: 1px solid #e8f2ff;
+	border-left: 0;
+	border-right: 1px solid #fff
+}
+
+#content .stage-list .current td {
+	background: #f2f7ff;
+	color: #404040
+}
+
+#content .stage-list .current .stress {
+	font-weight: 700
+}
+
+#content .stage-list .done td {
+	color: #404040
+}
+
+#content .stage-list .triangle {
+	position: absolute;
+	top: 3px;
+	left: 126px;
+	width: 14px;
+	height: 8px;
+	overflow: hidden;
+	background:
+		url(http://img03.taobaocdn.com/tps/i3/T1fCuCXnN3XXXcoUw.-13-8.png)
+		no-repeat
+}
+
+#content .stage-list .base-info {
+	padding: 0
+}
+
+#content .stage-list ul {
+	display: table-row;
+	*zoom: 1;
+	*text-align: left
+}
+
+#content .stage-list li {
+	display: table-cell;
+	vertical-align: middle;
+	word-wrap: break-word;
+	*display: inline;
+	*zoom: 1;
+	*margin: -200px 0;
+	*text-align: center
+}
+
+#content .stage-list .stage li {
+	padding: 16px 0;
+	*padding: 216px 0
+}
+
+#content .stage-list .services li {
+	padding: 5px 0;
+	*padding: 205px 0
+}
+
+#content .cycle-list {
+	position: relative;
+	padding: 10px 5px 8px;
+	color: #333;
+	*overflow: hidden
+}
+
+#content .cycle-list table {
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse
+}
+
+#content .cycle-list td {
+	padding: 16px 0;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+	background: #fafcff;
+	border: 1px solid #e8f2ff;
+	border-left: 0;
+	border-right: 1px solid #fff
+}
+
+#content .cycle-list .cycle-operable td {
+	background: #f2f7ff
+}
+
+#content .cycle-list .cycle-paused td {
+	color: #666
+}
+
+#content .cycle-list .cycle-closed td {
+	color: #999
+}
+
+#content .cycle-list .base-info {
+	padding: 0
+}
+
+#content .cycle-list ul {
+	display: table-row;
+	*zoom: 1;
+	*text-align: left
+}
+
+#content .cycle-list li {
+	display: table-cell;
+	vertical-align: middle;
+	word-wrap: break-word;
+	*display: inline;
+	*zoom: 1;
+	*margin: -200px 0;
+	*text-align: center
+}
+
+#content .cycle-list .detail li {
+	padding: 16px 0;
+	*padding: 216px 0
+}
+
+#content .cycle-list .triangle {
+	position: absolute;
+	top: 3px;
+	left: 126px;
+	width: 14px;
+	height: 8px;
+	overflow: hidden;
+	background:
+		url(http://img03.taobaocdn.com/tps/i3/T1fCuCXnN3XXXcoUw.-13-8.png)
+		no-repeat
+}
+
+.tm-gray {
+	color: gray
+}
+
+.navigation {
+	position: relative
+}
+
+.navigation .help {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	float: left;
+	height: 16px;
+	padding: 0 0 0 21px;
+	line-height: 16px;
+	*line-height: 18px;
+	_line-height: 16px;
+	background:
+		url(http://gtms03.alicdn.com/tps/i3/T1kZa6Fh0cXXaSQP_X-16-16.png)
+		no-repeat
+}
+
+.item-list .order .modify-price {
+	display: block
+}
+
+.item-list .btn, .item-list .small-btn, .item-list .long-btn, .item-list .short-btn,
+	.item-list .small-long-btn {
+	overflow: hidden;
+	white-space: nowrap
+}
+
+.item-list .stage-item .skin-blue .small-long-btn {
+	width: 70px;
+	background:
+		url(http://img01.taobaocdn.com/tps/i1/T13._uXixnXXcE5X6m-70-21.png)
+		no-repeat
+}
+
+.item-list .order-item .service-providers {
+	overflow: visible;
+	background: #f8f8f8
+}
+
+.item-list .order-item .service-providers .wrap {
+	position: relative;
+	width: 100%
+}
+
+.item-list .order-item .service-providers .btn {
+	font-weight: 400
+}
+
+.item-list .order-item .service-providers .triangle {
+	position: absolute;
+	bottom: -16px;
+	left: 50%;
+	z-index: 10;
+	width: 11px;
+	height: 8px;
+	overflow: hidden;
+	margin-left: -6px;
+	background: #fff
+		url(http://img02.taobaocdn.com/tps/i2/T1kV0rXv0eXXaT2SU.-11-7.png)
+		no-repeat
+}
+
+.item-list .order-item .contact .ww-light {
+	display: block
+}
+
+.item-list .unfound-results {
+	padding: 10px 0 200px
+}
+
+.item-list .unfound-results .attention {
+	padding: 18px 24px 18px 52px;
+	text-align: left;
+	font-weight: 400;
+	font-size: 12px;
+	background: #ffeadf
+		url(http://gtms01.alicdn.com/tps/i1/T1MeApXjViXXbKu7Ha-22-22.png)
+		no-repeat 24px 15px;
+	border: 1px solid #fdb08e;
+	color: #2e2e2e
+}
+
+.item-list .unfound-results a {
+	margin: 0 6px
+}
+
+.item-list-bd .price {
+	text-align: center
+}
+
+.item-list-bd .stage-order .order-item .order-price, .item-list-bd .stage-order .order-item .contact,
+	.item-list-bd .stage-order .order-item .trade-status {
+	border-bottom-color: #eee
+}
+
+.item-list-bd .stage-item {
+	padding: 0;
+	border-left: 1px solid #D4E7FF;
+	border-bottom: 1px solid #D4E7FF
+}
+
+.item-list-bd .closed-order .stage-item, .item-list-bd .success-order .stage-item
+	{
+	border-left-color: #E6E6E6;
+	border-bottom-color: #E6E6E6
+}
+
+#content .stage-list col.base-info {
+	width: 467px;
+	*width: 457px
+}
+
+#content .stage-list col.stage-name {
+	width: 299px;
+	*width: 289px
+}
+
+#content .stage-list col.price {
+	width: 64px
+}
+
+#content .stage-list col.num {
+	width: 40px
+}
+
+#content .stage-list col.after-sales {
+	width: 64px
+}
+
+#content .stage-list col.contact {
+	width: 110px
+}
+
+#content .stage-list col.trade-status {
+	width: 100px;
+	*width: 98px
+}
+
+#content .stage-list col.total-price {
+	width: 96px
+}
+
+#content .stage-list .stage-name, #content .stage-list .price, #content .stage-list .num,
+	#content .stage-list .total-price {
+	border-right: 0
+}
+
+#content .stage-list .stage-name {
+	text-indent: 56px
+}
+
+#content .stage-list .triangle {
+	left: 329px
+}
+
+#content .stage-list .total-price .post-info {
+	color: gray
+}
+
+#content .base-info .services {
+	padding-bottom: 5px;
+	color: gray;
+	border-top: 1px solid #fff
+}
+
+#content .base-info .services li {
+	padding-bottom: 0;
+	*padding-bottom: 200px
+}
+
+#content .base-info .stage .name, #content .base-info .services .name {
+	width: 243px;
+	*width: 233px;
+	padding-left: 56px;
+	text-align: left
+}
+
+#content .base-info .price {
+	width: 64px
+}
+
+#content .base-info .num {
+	width: 40px
+}
+
+#content .cycle-items {
+	padding: 0;
+	border: 1px solid #D4E7FF
+}
+
+#content .closed-order .cycle-items, #content .success-order .cycle-items
+	{
+	border-left-color: #E6E6E6;
+	border-bottom-color: #E6E6E6
+}
+
+#content .cycle-list col.base-info {
+	width: 400px
+}
+
+#content .cycle-list col.trouble {
+	width: 66px
+}
+
+#content .cycle-list col.contact {
+	width: 110px;
+	*width: 100px
+}
+
+#content .cycle-list col.trade-status {
+	width: 100px;
+	*width: 98px
+}
+
+#content .cycle-list col.total-price {
+	width: 102px
+}
+
+#content .cycle-list col.remark {
+	width: 48px
+}
+
+#content .cycle-list .base-info .name, #content .cycle-list .base-info .price,
+	#content .cycle-list .base-info .num, #content .cycle-list .base-info .total-price
+	{
+	border-right: 0
+}
+
+#content .cycle-list .base-info .name {
+	width: 243px;
+	*width: 236px;
+	padding-left: 56px;
+	text-align: left
+}
+
+#content .cycle-list .base-info .price {
+	width: 64px
+}
+
+#content .cycle-list .base-info .num {
+	width: 40px
+}
+
+#content .cycle-list .total-price .stress {
+	font-weight: 700
+}
+
+#content .cycle-list .triangle {
+	left: 329px
+}

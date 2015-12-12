@@ -1,0 +1,47 @@
+.loginin_div1 {
+	text-align: center;
+}
+
+.loginin_div2 {
+	border: double;
+	background: url(../images/templatemo_body.jpg);
+	border-color: #ff7800;
+	text-align: center;
+	position: absolute;
+	top: 150px;
+	width: 500;
+	z-index: 1000;
+}
+
+.loginin_div3 {
+	background-image: url(../images/bgimg.png);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 0px;
+	width: 0px;
+	z-index: 999;
+}
+
+.logintable {
+	font-size: 18px;
+	padding-top: 20px;
+	text-align: center;
+	border-bottom: none;
+}
+
+.logintable input {
+	font-size: 18px;
+	width: 100%;
+	height: 90%;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.logincontent {
+	width: 500px;
+	margin-top: 6px;
+	margin-right: auto;
+	margin-bottom: 6px;
+	margin-left: auto;
+}
