@@ -1,0 +1,1367 @@
+* {
+    margin: 0;
+}
+
+
+/**
+ * html
+ */
+
+html {
+    height: 100%;
+}
+
+
+/**
+ * body
+ */
+
+body {
+    margin: 0;
+    font-family: "Ping Hei", "冬青黑体", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "微软雅黑";
+    font-size: 1em;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+
+/**
+ * s
+ */
+
+s {
+    color: #ccc;
+}
+
+
+/*********************************************************************************
+ *
+ * common
+ *
+ ********************************************************************************/
+
+#header,
+#footer {
+    width: 100%;
+    height: 95px;
+    background-color: #011334;
+}
+
+.cart-container,
+.order-container {
+    padding: 0 4% 97px;
+}
+
+.clear-fix {
+    clear: both;
+}
+
+.button {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+}
+
+.button:active {
+    transform: scale(0.9, 0.9);
+    -webkit-transform: scale(0.9, 0.9);
+    -moz-transform: scale(0.9, 0.9);
+    -o-transform: scale(0.9, 0.9);
+    -ms-transform: scale(0.9, 0.9);
+}
+
+.scroll {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.fix-scroll {
+    overflow-y: scroll;
+    position: fixed;
+}
+
+
+/*************************************************
+     *
+     * Dialog
+     *
+     *********************************/
+
+.dialog,
+.dialog__overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.dialog {
+    position: fixed;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+#communicate-btn {
+    position: fixed;
+    z-index: 99;
+    right: 0;
+    width: 30px;
+    height: 100px;
+    top: 50%;
+    margin-top: -50px;
+    background-color: #ffa200;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px auto;
+    background-image: url(./../images/communicate-btn.png);
+    cursor: pointer;
+    transition: width 0.6s;
+    -webkit-transition: width 0.6s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.dialog__overlay {
+    position: absolute;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    -webkit-backface-visibility: hidden;
+}
+
+.dialog--open .dialog__overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dialog__content {
+    width: 50%;
+    background: #ffa200;
+    padding: 15px;
+    text-align: left;
+    position: relative;
+    z-index: 5;
+    opacity: 0;
+}
+
+.dialog--open .dialog__content {
+    pointer-events: auto;
+}
+
+
+/* Content */
+
+.dialog h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 2em;
+    margin: 0;
+}
+
+.dialog .close-btn {
+    width: 30px;
+    height: 30px;
+    right: 15px;
+    top: 15px;
+    background-image: url(./../images/close-btn.png);
+}
+
+.dialog .dialog-back-btn {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 2em;
+    height: 2em;
+    margin-right: 20px;
+    cursor: pointer;
+    float: left;
+    background-image: url(./../images/dialog-back-btn.png);
+}
+
+.dialog .list ul {
+    padding: 5px 0;
+}
+
+.dialog .list ul > li {
+    list-style-type: none;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+.dialog .list ul .select {
+    background-color: #b27100;
+    color: #fff;
+}
+
+
+/*************************************************
+         *
+         * Main
+         *
+         *********************************/
+
+.dialog .close-btn,
+.dialog #main .bottom-buttons {
+    position: absolute;
+    z-index: 7;
+}
+
+.dialog .close-btn,
+.dialog .add-friend-btn,
+.dialog .del-friend-btn,
+.dialog .certain-btn,
+.dialog .cancel-btn {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.dialog #main .bottom-buttons {
+    right: 15px;
+    bottom: 15px;
+}
+
+.dialog #main .bottom-buttons .add-friend-btn,
+.dialog #main .bottom-buttons .del-friend-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #main .bottom-buttons .add-friend-btn {
+    background-image: url(./../images/add-friend-btn.png);
+}
+
+.dialog #main .bottom-buttons .del-friend-btn {
+    background-image: url(./../images/del-friend-btn.png);
+}
+
+.dialog #main .dialog-show,
+.dialog #main .dialog-input {
+    width: 60%;
+    margin-top: 15px;
+}
+
+.dialog #main .dialog-show {
+    height: 300px;
+    float: left;
+    background-color: #ce8300;
+    border: 1px solid #B27100;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.dialog #main .dialog-input {
+    padding-top: 15px;
+}
+
+.dialog #main .dialog-input textarea {
+    width: 80%;
+    height: 100px;
+    resize: none;
+    outline: none;
+    display: inline-block;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+}
+
+.dialog #main .dialog-input .send-btn {
+    height: 100px;
+    border: 1px solid #B27100;
+    background-color: #ce8300;
+    width: 16%;
+    height: 100px;
+    border: 1px solid #B27100;
+    background-color: #ce8300;
+    display: inline-block;
+    float: right;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+.dialog #main .friend-list {
+    height: 300px;
+    width: 38%;
+    margin-left: 60%;
+    padding-left: 15px;
+}
+
+.dialog #main .friend-list .title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.dialog #main .friend-list .list {
+    height: 260px;
+    background-color: #ce8300;
+    border: 1px solid #B27100;
+}
+
+.dialog #main .friend-list p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.dialog #main .dialog-show p {
+    font-size: 1.2em;
+    margin-top: 2.4em;
+    width: 60%;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+
+/*************************************************
+         *
+         * Add Friend Main
+         *
+         *********************************/
+
+.dialog #add-friend-main .search-box {
+    width: 100%;
+    background: #ce8300;
+    border: 1px solid #b27100;
+    margin-top: 15px;
+}
+
+.dialog #add-friend-main .search-box .search-btn {
+    width: 7%;
+    height: 30px;
+    float: right;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 68%;
+    background-image: url(./../images/search-btn.png);
+    cursor: pointer;
+}
+
+.dialog #add-friend-main .search-box input[type="text"] {
+    width: 85%;
+    height: 24px;
+    line-height: 24px;
+    font-size: 1.2em;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 3px;
+}
+
+
+/**
+ * placeholder
+ */
+
+.dialog #add-friend-main .search-box input[type="text"]::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #000;
+}
+
+.dialog #add-friend-main .search-box input[type="text"]:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.dialog #add-friend-main .search-box input[type="text"]::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.dialog #add-friend-main .search-box input[type="text"]:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+
+/*************************************************
+         *
+         * People List Main
+         *
+         *********************************/
+
+.dialog #people-list-main .list {
+    margin-top: 10px;
+    height: 200px;
+}
+
+.dialog #people-list-main .bottom-buttons {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.dialog #people-list-main .bottom-buttons .certain-btn,
+.dialog #people-list-main .bottom-buttons .cancel-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #people-list-main .bottom-buttons .certain-btn {
+    background-image: url(./../images/certain-btn.png);
+}
+
+.dialog #people-list-main .bottom-buttons .cancel-btn {
+    background-image: url(./../images/cancel-btn.png);
+}
+
+
+/*************************************************
+         *
+         * Certain Add Main
+         *
+         *********************************/
+
+.dialog #certain-add-main .dialog-msg {
+    line-height: 32px;
+}
+
+.dialog #certain-add-main .bottom-buttons {
+    float: right;
+}
+
+.dialog #certain-add-main .bottom-buttons .certain-btn,
+.dialog #certain-add-main .bottom-buttons .cancel-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #certain-add-main .bottom-buttons .certain-btn {
+    background-image: url(./../images/certain-btn.png);
+}
+
+.dialog #certain-add-main .bottom-buttons .cancel-btn {
+    background-image: url(./../images/cancel-btn.png);
+}
+
+
+/*************************************************
+         *
+         * Certain Delete Main
+         *
+         *********************************/
+
+.dialog #certain-delete-main .dialog-msg {
+    line-height: 32px;
+}
+
+.dialog #certain-delete-main .bottom-buttons {
+    float: right;
+}
+
+.dialog #certain-delete-main .bottom-buttons .certain-btn,
+.dialog #certain-delete-main .bottom-buttons .cancel-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #certain-delete-main .bottom-buttons .certain-btn {
+    background-image: url(./../images/certain-btn.png);
+}
+
+.dialog #certain-delete-main .bottom-buttons .cancel-btn {
+    background-image: url(./../images/cancel-btn.png);
+}
+
+
+/*************************************************
+     *
+     * Picture
+     *
+     *********************************/
+
+.pic-container {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.pic-container .shop {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform 4s;
+    -webkit-transition: transform 4s;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+.pic-container .over {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.8s;
+    -webkit-transition: opacity 0.8s;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+.pic-container .over .link-btn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 50%;
+    background-image: url(./../images/link-btn.png);
+    z-index: 3;
+}
+
+.pic-container:hover .shop {
+    transform: scale(1.4, 1.4);
+    -webkit-transform: scale(1.4, 1.4);
+}
+
+.pic-container:hover .over {
+    opacity: 1;
+}
+
+
+/*********************************************************************************
+ *
+ * header
+ *
+ ********************************************************************************/
+
+
+/**
+ * common div image
+ */
+
+#header .header-div {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+
+/**
+ * common text btn
+ */
+
+#header .text-btn {
+    font-size: 1.375em;
+    float: right;
+    margin-right: 1.56%;
+    color: #fff;
+    line-height: 95px;
+}
+
+
+/**
+ * search-btn
+ */
+
+#header #search-btn {
+    width: 2.656%;
+    height: 100%;
+    background-image: url(./../images/parknshop-search.png);
+    float: right;
+    margin-right: 3.125%;
+}
+
+
+/**
+ * cart
+ */
+
+#header #cart {
+    width: 10.16%;
+    height: 100%;
+    background-image: url(./../images/parknshop-cart.png);
+    float: right;
+    margin-right: 1.56%;
+}
+
+
+/**
+ * myshop
+ */
+
+#header #myshop {
+    width: 10.16%;
+    height: 100%;
+    background-image: url(./../images/parknshop-myshop.png);
+    float: right;
+    margin-right: 1.56%;
+}
+
+
+/**
+ * logo-icon
+ */
+
+#header #logo-icon {
+    width: 10.16%;
+    height: 100%;
+    background-image: url(./../images/parknshop-logo.png);
+    margin-left: 3.125%;
+    float: left;
+}
+
+
+/*********************************************************************************
+ *
+ * footer
+ *
+ ********************************************************************************/
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+}
+
+#footer #copyright {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 1.125em;
+    line-height: 97px;
+}
+
+
+/*********************************************************************************
+ *
+ * common parts of each page
+ *
+ ********************************************************************************/
+
+.page-title {
+    margin: 2% 0 0 0;
+    padding-bottom: 3px;
+    width: 45%;
+    border-bottom: 2px solid #000;
+}
+
+.page-title span {
+    margin-right: 5px;
+}
+
+.page-title .back-btn {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: 20px;
+    cursor: pointer;
+    float: left;
+    background-image: url(./../images/back-btn.png);
+}
+
+.page-title .parknshop,
+.page-title .main-title {
+    font-size: 1.6em;
+}
+
+.page-title .main-title {
+    color: #ffa200;
+}
+
+
+/**************************************************
+     *
+     * Cart
+     *
+     **********************************************/
+
+.cart-container #shop-lists {
+    margin-top: 15px;
+    width: 70%;
+    display: inline-block;
+}
+
+.cart-container #shop-cost {
+    width: 15%;
+    display: inline-block;
+    position: absolute;
+    right: 5%;
+    margin-top: 15px;
+    min-width: 100px;
+}
+
+
+/**************************************************
+         *
+         * Shop Item
+         *
+         *****************************************/
+
+.cart-container #shop-lists .shop-item {
+    margin: 0 15px 15px 0;
+    display: inline-block;
+}
+
+
+/*************************************************
+                 *
+                 * Shop Infos
+                 *
+                 *********************************/
+
+.cart-container #shop-lists .shop-info {
+    margin-top: 11px;
+    border-top: 1px solid #999;
+    width: 100%;
+}
+
+.cart-container #shop-lists .shop-info .value {
+    float: right;
+}
+
+.cart-container #shop-lists .shop-info .main {
+    margin: 10px 0;
+    font-size: 1.3em;
+}
+
+.cart-container #shop-lists .shop-info .main .value {
+    color: #ffa200;
+}
+
+.cart-container #shop-lists .shop-info .sub-main {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+.cart-container #shop-lists .shop-info .quality {
+    line-height: 25px;
+}
+
+.cart-container #shop-lists .shop-info .quality .value {
+    width: 20%;
+}
+
+.cart-container #shop-lists .shop-info .quality .value input[type="number"] {
+    width: 100%;
+    border-radius: 4px;
+    background-color: #f0eff5;
+    border: 1px solid #ccc;
+    height: 25px;
+    padding-left: 0.5em;
+    box-sizing: border-box;
+    outline-color: #ffa200;
+}
+
+.cart-container #shop-lists .shop-info .color {
+    line-height: 20px;
+}
+
+.cart-container #shop-lists .shop-info .color .value {
+    width: 10px;
+    height: 20px;
+}
+
+.cart-container #shop-lists .shop-info .delete .value {
+    width: 50px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 67%;
+    background-image: url(./../images/del-btn.png);
+    cursor: pointer;
+}
+
+
+/*************************************************
+                 *
+                 * Shop Cost
+                 *
+                 *********************************/
+
+.cart-container #shop-cost .main {
+    text-align: right;
+    width: 100%;
+    font-size: 2em;
+    color: #ffa200;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #999;
+}
+
+.cart-container #shop-cost .sub-main {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.cart-container #shop-cost .sub-main .value {
+    float: right;
+}
+
+.cart-container #shop-cost .cost {
+    margin-top: 30px;
+    font-size: 1.8em;
+}
+
+.cart-container #shop-cost .pay .value {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ffa200;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 50%;
+    background-image: url(./../images/pay-btn.png);
+    margin-top: 100px;
+    cursor: pointer;
+}
+
+
+/**************************************************
+     *
+     * Order
+     *
+     **********************************************/
+
+.order-container #order-addr,
+#order-details,
+#final-order,
+#order-info,
+#order-list {
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+/**************************************************
+         *
+         * Order Address
+         *
+         *****************************************/
+
+.order-container #order-addr .main {
+    margin: 15px 0;
+    font-size: 1.3em;
+    color: #ffa200;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #999;
+    width: 15%;
+}
+
+.order-container #order-addr .addresses {
+    width: 100%;
+    padding: 0 4%;
+    box-sizing: border-box;
+}
+
+.order-container #order-addr .addresses div {
+    margin: 5px 0;
+}
+
+.order-container #order-addr .addresses #other-addr a {
+    color: #ffa200;
+}
+
+.order-container #order-addr .addresses #other-addr a:focus {
+    color: #ffa200;
+}
+
+
+/**************************************************
+         *
+         * Order Details
+         *
+         *****************************************/
+
+.order-container #order-details .main {
+    margin: 15px 0;
+    font-size: 1.3em;
+    color: #ffa200;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #999;
+    width: 15%;
+}
+
+.order-container #order-details .order-item {
+    margin-bottom: 15px;
+    padding: 0 4%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.order-container #order-details .order-item .pic-container {
+    width: 15%;
+    height: 100px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.order-container #order-details .order-item .order-info {
+    display: inline-block;
+    margin-left: 10px;
+    position: relative;
+    height: 100px;
+    width: 0;
+    vertical-align: middle;
+}
+
+.order-container #order-details .order-item .order-info .name {
+    font-size: 1.5em;
+}
+
+.order-container #order-details .order-item .order-info .size {
+    font-size: 1.2em;
+    color: #999;
+}
+
+.order-container #order-details .order-item .order-info .color {
+    width: 100px;
+    height: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+.order-container #order-details .order-item .order-origin-price,
+.order-container #order-details .order-item .order-price,
+.order-container #order-details .order-delivery,
+.order-container #order-details .order-delivery-price {
+    display: inline-block;
+    top: 0;
+    vertical-align: middle;
+}
+
+.order-container #order-details .order-item .order-origin-price {
+    margin-left: 15%;
+}
+
+.order-container #order-details .order-item .order-origin-price s {
+    font-size: 1.3em;
+}
+
+.order-container #order-details .order-item .order-origin-price span {
+    font-size: 2em;
+    margin-left: 10px;
+}
+
+.order-container #order-details .order-item .order-price {
+    right: 0;
+    position: absolute;
+}
+
+.order-container #order-details .order-item .shop-price {
+    font-size: 2.7em;
+}
+
+.order-container #order-details .order-item .delivery-price {
+    font-size: 1.3em;
+    float: right;
+    color: #999;
+}
+
+.order-container #order-details .order-delivery {
+    margin-left: 8%;
+}
+
+.order-container #order-details .order-delivery-price {
+    margin-left: 5px;
+}
+
+.order-container #order-details .order-delivery select,
+.order-container #order-details .order-delivery-price select {
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #ffa200;
+    border: none;
+    outline: none;
+}
+
+
+/**************************************************
+         *
+         * Final Order
+         *
+         *****************************************/
+
+.order-container #final-order {
+    position: relative;
+}
+
+.order-container #final-order .box {
+    width: 40%;
+    height: 200px;
+    border-radius: 4px;
+    border: 2px dashed #ffa200;
+    margin: 0 0 50px auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.order-container #final-order .box .item {
+    margin: 10px 0;
+}
+
+.order-container #final-order .box .value {
+    float: right;
+}
+
+.order-container #final-order .box .real {
+    height: 55px;
+}
+
+.order-container #final-order .box .real .name {
+    font-size: 1.5em;
+    line-height: 55px;
+}
+
+.order-container #final-order .box .real .value {
+    font-size: 2.8em;
+    line-height: 55px;
+    color: #ffa200;
+}
+
+.order-container #final-order .box .send .name,
+.order-container #final-order .box .send .value {
+    font-size: 1.2em;
+}
+
+.order-container #final-order .box .send .value {
+    width: 50%;
+    max-height: 110px;
+    overflow: hidden;
+}
+
+.order-container #final-order .box .submit-btn {
+    width: 100px;
+    height: 45px;
+    position: absolute;
+    bottom: -2px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    background-color: #ffa200;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(./../images/order-btn.png);
+    background-size: auto 40%;
+}
+
+.order-container #final-order a {
+    color: black;
+}
+
+.order-container #final-order a:focus {
+    color: black;
+}
+
+.order-container #final-order #return {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    font-size: 1.2em;
+}
+
+
+/**************************************************
+         *
+         * Order Info
+         *
+         *****************************************/
+
+.order-container #order-info {
+    background-color: #ffa200;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.order-container #order-info .shop-info,
+.order-container #order-info .shop-status,
+.order-container #order-info .shop-rate,
+.order-container #order-info .shop-deliver,
+.order-container #order-info .shop-confirm,
+.order-container #order-info .comment-submit {
+    display: inline-block;
+}
+
+.order-container #order-info .shop-info {
+    width: 30%;
+    padding: 15px;
+    border: 2px dashed #ffa200;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.order-container #order-info .shop-status,
+.order-container #order-info .shop-deliver,
+.order-container #order-info .shop-confirm,
+.order-container #order-info .comment-submit {
+    width: 20%;
+    height: 80px;
+    position: absolute;
+    text-align: center;
+    line-height: 80px;
+}
+
+.order-container #order-info .shop-status {
+    margin: 10% auto 0 23%;
+}
+
+.order-container #order-info .shop-rate {
+    width: 30%;
+    height: 80px;
+    position: absolute;
+    text-align: center;
+    line-height: 80px;
+    margin: 10% auto 0 18%;
+}
+
+.order-container #order-info .shop-rate .shop,
+.order-container #order-info .shop-rate .product,
+.order-container #order-info .shop-rate .delivery {
+    height: 29px;
+    margin-bottom: 10px;
+}
+
+.order-container #order-info .shop-rate .name {
+    line-height: 29px;
+    float: left;
+}
+
+.order-container #order-info .shop-rate .value {
+    float: right;
+}
+
+.order-container #order-info .shop-rate .star-on,
+.order-container #order-info .shop-rate .star-hover {
+    background: #000;
+}
+
+.order-container #order-info .shop-deliver {
+    margin: 15% auto 0 23%;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+.order-container #order-info .shop-status .value {
+    float: right;
+    font-size: 1.8em;
+}
+
+.order-container #order-info .shop-confirm,
+.order-container #order-info .comment-submit {
+    border-radius: 4px;
+    border: 2px solid #B27100;
+    background-color: #ce8300;
+    margin: 30% auto 0 23%;
+    font-size: 2.5em;
+    cursor: pointer;
+}
+
+.order-container #order-info .shop-info .pic-container {
+    margin-bottom: 10px;
+}
+
+.order-container #order-info .shop-info .info {
+    padding-top: 10px;
+    border-top: 1px solid #999;
+}
+
+.order-container #order-info .shop-info .item {
+    margin-bottom: 10px;
+}
+
+.order-container #order-info .shop-info .name {
+    color: #999;
+}
+
+.order-container #order-info .shop-info .value {
+    float: right;
+    width: 50%;
+    text-align: right;
+    overflow: hidden;
+}
+
+.order-container #order-info .shop-info .address .value {
+    min-height: 90px;
+}
+
+.order-container #order-info .shop-info .time {
+    padding-top: 10px;
+    margin-top: 120px;
+    border-top: 1px solid #999;
+}
+
+
+/**************************************************
+         *
+         * Order List
+         *
+         *****************************************/
+
+.order-container #order-list .order-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f0eff5;
+    position: relative;
+}
+
+.order-container #order-list .order-item .order-id,
+.order-container #order-list .order-item .order-ctime,
+.order-container #order-list .order-item .delete-btn {
+    margin: 5px 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.order-container #order-list .order-item .delete-btn {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url(./../images/order-del-btn.png);
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.order-container #order-list .order-item .order-id {
+    width: 20%;
+}
+
+.order-container #order-list .order-item .order-ctime {
+    width: 75%;
+}
+
+.order-container #order-list .order-item .brief-info {
+    width: 100%;
+    background-color: #ffa200;
+    padding: 10px 15px 10px 15px;
+    margin: -20px -15px 10px -15px;
+}
+
+.order-container #order-list .order-item .color {
+    width: 10px;
+    height: 100px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.order-container #order-list .order-item .value {
+    font-weight: bold;
+    float: right;
+}
+
+.order-container #order-list .order-item .pic-container {
+    width: 15%;
+    height: 100px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.order-container #order-list .order-item .origin-price,
+.order-container #order-list .order-item .price,
+.order-container #order-list .order-item .size,
+.order-container #order-list .order-item .quality,
+.order-container #order-list .order-item .info,
+.order-container #order-list .order-item .handle-btn {
+    display: inline-block;
+    margin-left: 2%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.order-container #order-list .order-item .origin-price .origin {
+    font-size: 1.2em;
+}
+
+.order-container #order-list .order-item .origin-price .current {
+    font-size: 1.6em;
+}
+
+.order-container #order-list .order-item .origin-price p {
+    width: 122px;
+}
+
+.order-container #order-list .order-item .size .name,
+.order-container #order-list .order-item .quality .name {
+    color: #999;
+}
+
+.order-container #order-list .order-item .size .value,
+.order-container #order-list .order-item .quality .value {
+    font-size: 2em;
+}
+
+.order-container #order-list .order-item .size p,
+.order-container #order-list .order-item .quality p {
+    text-align: right;
+    width: 90px;
+}
+
+.order-container #order-list .order-item .price p {
+    text-align: right;
+    width: 201px;
+}
+
+.order-container #order-list .order-item .price .shop-price {
+    font-size: 3em;
+    color: #ffa200;
+    text-align: right;
+}
+
+.order-container #order-list .order-item .price .delivery-price {
+    font-size: 1em;
+    color: #999;
+}
+
+.order-container #order-list .order-item .info p {
+    text-align: right;
+}
+
+.order-container #order-list .order-item .info .delivery-status a {
+    color: #ffa200;
+}
+
+.order-container #order-list .order-item .info .delivery-status a:focus {
+    color: #ffa200;
+}
+
+.order-container #order-list .order-item .info .delivery-status .name {
+    color: #999;
+}
+
+.order-container #order-list .order-item .info .delivery-status .value {
+    float: none;
+}
+
+.order-container #order-list .order-item .handle-btn {
+    width: 90px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #ffa200;
+    cursor: pointer;
+    font-size: 1.2em;
+}
