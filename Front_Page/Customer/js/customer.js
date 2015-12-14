@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 var customer = {
     /**
@@ -37,6 +37,21 @@ var customer = {
 
         /** init the dialog */
         this.initDialog();
+
+        /** disable enter key keydown */
+        $(document).on("keydown", function(event) {
+            var userAgent = navigator.userAgent.toLowerCase();
+            var keycode;
+            if (userAgent.indexOf('firefox') >= 0 || userAgent.indexOf('ie') >= 0) {
+                keycode = event.which;
+            } else {
+                var ev = (event === undefined) ? window.event : event;
+                keycode = ev.keyCode;
+            }
+            if (keycode === 13) {
+                return false;
+            }
+        });
     },
 
     /**
@@ -180,7 +195,7 @@ var customer = {
         $('#communicate-btn').hover(function() {
             $(this).css('width', '120px');
         }, function() {
-        	$(this).css('width', '30px');
+            $(this).css('width', '30px');
         })
     },
 
@@ -291,42 +306,42 @@ var customer = {
         for (var i in cart) {
             /** append list item */
             $('.cart-container #shop-lists').append('<div class="shop-item">\
-				<div class="pic-container">\
-					<a href="' + cart[i].shop_url + '" target="_blank">\
-						<div class="over">\
-							<div class="link-btn"></div>\
-						</div>\
-					</a>\
-					<div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
-				</div>\
-				<div class="shop-info">\
-					<div class="name main">\
-						<span>Name</span>\
-						<span class="value">' + cart[i].name + '</span>\
-					</div>\
-					<div class="size sub-main">\
-						<span>size</span>\
-						<span class="value">' + cart[i].size + '</span>\
-					</div>\
-					<div class="price sub-main">\
-						<span>price</span>\
-						<span class="value"><span class="origin-cost"><s>$' + cart[i].origin_price + '</s></span>&nbsp;<span class="right-cost">$' + cart[i].price + '</span></span>\
-					</div>\
-					<div class="quality sub-main">\
-						<span>quality</span>\
-						<span class="value">\
-							<input type="number" min="1" value="' + cart[i].quality + '">\
-						</span>\
-					</div>\
-					<div class="color sub-main">\
-						<span>color</span>\
-						<span class="value" style="background-color: ' + cart[i].color + ';"></span>\
-					</div>\
-					<div class="delete sub-main">\
-						<span class="value button"></span>\
-					</div>\
-				</div>\
-			</div>');
+                <div class="pic-container">\
+                    <a href="' + cart[i].shop_url + '" target="_blank">\
+                        <div class="over">\
+                            <div class="link-btn"></div>\
+                        </div>\
+                    </a>\
+                    <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
+                </div>\
+                <div class="shop-info">\
+                    <div class="name main">\
+                        <span>Name</span>\
+                        <span class="value">' + cart[i].name + '</span>\
+                    </div>\
+                    <div class="size sub-main">\
+                        <span>size</span>\
+                        <span class="value">' + cart[i].size + '</span>\
+                    </div>\
+                    <div class="price sub-main">\
+                        <span>price</span>\
+                        <span class="value"><span class="origin-cost"><s>$' + cart[i].origin_price + '</s></span>&nbsp;<span class="right-cost">$' + cart[i].price + '</span></span>\
+                    </div>\
+                    <div class="quality sub-main">\
+                        <span>quality</span>\
+                        <span class="value">\
+                            <input type="number" min="1" value="' + cart[i].quality + '">\
+                        </span>\
+                    </div>\
+                    <div class="color sub-main">\
+                        <span>color</span>\
+                        <span class="value" style="background-color: ' + cart[i].color + ';"></span>\
+                    </div>\
+                    <div class="delete sub-main">\
+                        <span class="value button"></span>\
+                    </div>\
+                </div>\
+            </div>');
         }
 
         /** update cost info at the beginning */
@@ -339,8 +354,8 @@ var customer = {
         });
 
         /** [click function of the pay button] */
-        $('.cart-container #shop-cost .pay .value').click(function(){
-        	window.location.href = "./order.jsp?type=certain";
+        $('.cart-container #shop-cost .pay .value').click(function() {
+            window.location.href = "./order.jsp?type=certain";
         });
     },
 
@@ -391,21 +406,38 @@ var customer = {
          * @return {[type]} [description]
          */
         var updateCost = function() {
-            var list = $('.order-container #order-details .order-item .order-price .shop-price');
+                var list = $('.order-container #order-details .order-item .order-price .shop-price');
 
-            cost = 0;
+                cost = 0;
 
-            /** update cost */
-            for (var i = 0; i < list.length; i++) {
-            	var priceItem = list[i].textContent;
-            	priceItem = parseFloat(priceItem.substring(1, priceItem.length));
+                /** update cost */
+                for (var i = 0; i < list.length; i++) {
+                    var priceItem = list[i].textContent;
+                    priceItem = parseFloat(priceItem.substring(1, priceItem.length));
 
-            	cost += priceItem;
-            }
+                    cost += priceItem;
+                }
 
-            /** set the cost info */
-            $('.order-container #final-order .real .value').html('$' + cost.toFixed(1));
-        };
+                /** set the cost info */
+                $('.order-container #final-order .real .value').html('$' + cost.toFixed(1));
+            },
+
+            /**
+             * [getValue: get the value of an object and check whether it's empty]
+             * @param  {[type]} object [description]
+             * @return {[type]}        [description]
+             */
+            getValue = function(object) {
+                var value = object.val();
+
+                if (typeof(value) != 'undefined' && value == '') {
+                    object.focus();
+                    alert('please input the empty item');
+                    return '';
+                }
+                return value;
+            };
+
         /** get data by uid */
         $.ajax({
                 url: '',
@@ -437,74 +469,139 @@ var customer = {
             /** generate delivery company options */
             var company_options = '';
             for (var j in cart[i].delivery_options) {
-            	company_options += '<option value="' + j + '">' + cart[i].delivery_options[j].company_name + '</option>';
+                company_options += '<option value="' + j + '">' + cart[i].delivery_options[j].company_name + '</option>';
             }
 
             /** generate options of the first company */
             var price_options = '';
             for (var j in cart[i].delivery_options[0].price_option) {
-            	price_options += '<option value="' + cart[i].delivery_options[0].price_option[j].value + '">' + cart[i].delivery_options[0].price_option[j].description + '</option>';
+                price_options += '<option value="' + cart[i].delivery_options[0].price_option[j].value + '">' + cart[i].delivery_options[0].price_option[j].description + '</option>';
             }
 
             /** append list item */
             $('.order-container #order-details').append('<div class="order-item">\
-	            <div class="pic-container">\
-	            	<a href="' + cart[i].shop_url + '" target="_blank">\
-		                <div class="over">\
-		                    <div class="link-btn"></div>\
-		                </div>\
-	                </a>\
-	                <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
-	            </div>\
-	            <div class="order-info">\
-	                <span class="name">' + cart[i].name + '</span>\
-	                <span class="size">' + cart[i].size + '</span>\
-	                <span class="color" style="background-color: ' + cart[i].color + ';"></span>\
-	            </div>\
-	            <div class="order-origin-price">\
-	                <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
-	            </div>\
-	            <div class="order-delivery">\
-	                <select item="' + i + '">\
-	                ' + company_options + '\
-	                </select>\
-	            </div>\
-	            <div class="order-delivery-price">\
-	                <select>\
-	                    ' + price_options + '\
-	                </select>\
-	            </div>\
-	            <div class="order-price">\
-	                <p class="shop-price">$' + (parseFloat(cart[i].price) + parseFloat(cart[i].delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
-	                <p class="delivery-price">+ $' + cart[i].delivery_options[0].price_option[0].value + '</p>\
-	            </div>\
-        	</div>');
+                <div class="pic-container">\
+                    <a href="' + cart[i].shop_url + '" target="_blank">\
+                        <div class="over">\
+                            <div class="link-btn"></div>\
+                        </div>\
+                    </a>\
+                    <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
+                </div>\
+                <div class="order-info">\
+                    <span class="name">' + cart[i].name + '</span>\
+                    <span class="size">' + cart[i].size + '</span>\
+                    <span class="color" style="background-color: ' + cart[i].color + ';"></span>\
+                </div>\
+                <div class="order-origin-price">\
+                    <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
+                </div>\
+                <div class="order-delivery">\
+                    <select item="' + i + '">\
+                    ' + company_options + '\
+                    </select>\
+                </div>\
+                <div class="order-delivery-price">\
+                    <select>\
+                        ' + price_options + '\
+                    </select>\
+                </div>\
+                <div class="order-price">\
+                    <p class="shop-price">$' + (parseFloat(cart[i].price) + parseFloat(cart[i].delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
+                    <p class="delivery-price">+ $' + cart[i].delivery_options[0].price_option[0].value + '</p>\
+                </div>\
+            </div>');
         }
 
         /** update cost info */
         updateCost();
 
         $('.order-container #order-details .order-delivery').change(function() {
-        	console.log(cart);
+            console.log(cart);
         });
 
         /** [delivery price change] */
         $('.order-container #order-details .order-delivery-price').change(function() {
-        	/** @type {[type]} [the selected delivery price] */
-        	var selectPrice = parseFloat($(this).children('select').val());
+            /** @type {[type]} [the selected delivery price] */
+            var selectPrice = parseFloat($(this).children('select').val());
 
-        	/** @type {[type]} [cost without delivery price] */
-        	var origin_cost = $(this).prev().prev().children('span').html();
-        	origin_cost = parseFloat(origin_cost.substring(1, origin_cost.length));
+            /** @type {[type]} [cost without delivery price] */
+            var origin_cost = $(this).prev().prev().children('span').html();
+            origin_cost = parseFloat(origin_cost.substring(1, origin_cost.length));
 
-        	/** update cost of the item */
-        	$(this).next().children('.delivery-price').html('+ $' + selectPrice.toFixed(1));
-        	$(this).next().children('.shop-price').html('$' + (origin_cost + selectPrice).toFixed(1));
+            /** update cost of the item */
+            $(this).next().children('.delivery-price').html('+ $' + selectPrice.toFixed(1));
+            $(this).next().children('.shop-price').html('$' + (origin_cost + selectPrice).toFixed(1));
 
-        	/** update cost info */
-        	updateCost();
+            /** update cost info */
+            updateCost();
         });
 
+        /** [click function of other addr] */
+        $('.order-container #order-addr .other').click(function(event) {
+            /* Act on the event */
+            /** initialize the map */
+            $('.order-container #order-addr .addresses #other-addr-input .map').locationpicker({
+                location: {
+                    latitude: 34.123636,
+                    longitude: 108.83636
+                },
+                radius: 10,
+                inputBinding: {
+                    locationNameInput: $('#add-addr')
+                },
+                enableAutocomplete: true
+            });
+
+            /** show the map */
+            $('.order-container #order-addr .addresses #other-addr-input').show();
+        });
+
+        /** [click function of adding address] */
+        $('.order-container #order-addr .addresses #other-addr-input a').click(function(event) {
+            /* Act on the event */
+            var otherAddr = getValue($('.order-container #order-addr .addresses #other-addr-input #add-addr'));
+
+            /** [if: return when otherAddr is empty] */
+            if (otherAddr == '') {
+                return;
+            }
+
+            var receiver = getValue($('.order-container #order-addr .addresses #other-addr-input #receiver'));
+
+            /** [if: return when receiver is empty] */
+            if (receiver == '') {
+                return;
+            }
+
+            var phone = getValue($('.order-container #order-addr .addresses #other-addr-input #phone'));
+
+            /** [if: return when phone is empty] */
+            if (phone == '') {
+                return;
+            }           
+
+            /**
+             * [append div]
+             */
+            $('.order-container #order-addr .addresses').append('<div>\
+                <label>\
+                    <input type="radio" name="addr" checked="checked">\
+                    <span>' + otherAddr + '</span>\
+                    <span class="receiver">\
+                    <span class="name">receiver name: </span>\
+                    <span class="value">' + receiver + '</span>\
+                    </span>\
+                    <span class="phone">\
+                    <span class="name">phone number: </span>\
+                    <span class="value">' + phone + '</span>\
+                    </span>\
+                </label>\
+            </div>');
+
+            /** hide the map */
+            $('.order-container #order-addr .addresses #other-addr-input').hide();
+        });
     },
 
     initShow: function() {

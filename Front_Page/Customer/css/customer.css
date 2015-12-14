@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
 }
 
@@ -873,18 +873,72 @@ s {
     width: 100%;
     padding: 0 4%;
     box-sizing: border-box;
+    margin: 10px 0;
 }
 
-.order-container #order-addr .addresses div {
+.order-container #order-addr .addresses input[type="radio"] {
     margin: 5px 0;
 }
 
-.order-container #order-addr .addresses #other-addr a {
+.order-container #order-addr .addresses .receiver .name,
+.order-container #order-addr .addresses .phone .name {
+    color: #ddd;
+}
+
+.order-container #order-addr .addresses .receiver .value,
+.order-container #order-addr .addresses .phone .value {
     color: #ffa200;
 }
 
-.order-container #order-addr .addresses #other-addr a:focus {
+.order-container #order-addr .other {
+    margin-left: 4%;
+    width: 10%;
+}
+
+.order-container #order-addr .other {
     color: #ffa200;
+}
+
+.order-container #order-addr .other:focus {
+    color: #ffa200;
+}
+
+.order-container #order-addr .addresses #other-addr-input {
+    width: 100%;
+    margin: 5px 0;
+    display: none;
+}
+
+.order-container #order-addr .addresses #other-addr-input input[type="text"] {
+    background-color: #f0eff5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.3em;
+    width: 80%;
+    outline-color: #ffa200;
+    padding: 3px 10px;
+    margin: 5px 0;
+}
+
+.order-container #order-addr .addresses #other-addr-input a {
+    font-size: 1.3em;
+    margin-left: 10px;
+    color: #ffa200;
+}
+
+.order-container #order-addr .addresses #other-addr-input a:focus {
+    color: #ffa200;
+}
+
+.order-container #order-addr .addresses #other-addr-input .map {
+    width: 80%;
+    height: 400px;
+    margin: 10px 0;
+    background-color: #f0eff5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline-color: #ffa200;
+    padding: 3px 10px;
 }
 
 
