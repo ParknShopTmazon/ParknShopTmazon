@@ -738,6 +738,31 @@ var customer = {
 
     initList: function() {
         "use strict";
+        /** Date format */
+        Date.prototype.format = function(format) {
+            var date = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S+": this.getMilliseconds()
+            };
+            if (/(y+)/i.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+            }
+            for (var k in date) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                }
+            }
+            return format;
+        }
+
+        /** date object */
+        var date = new Date();
+
         /** get data by uid and page */
         $.ajax({
                 url: '',
@@ -764,6 +789,9 @@ var customer = {
         for (var i in orders.orderDatas) {
             /** loop to get shop item for this order */
             var shopItem = '';
+
+            /** order time */
+            date.setTime(orders.orderDatas[i].ctime * 1000);
             for (var j in orders.orderDatas[i].order) {
                 shopItem += '<div class="shop-item">\
                     <div class="pic-container">\
@@ -813,13 +841,21 @@ var customer = {
                 <div class="brief-info">\
                     <div class="order-id">\
                         <span class="name">order id:</span>\
-                        <span class="value">1234531152</span>\
+                        <span class="value">' + orders.orderDatas[i].oid + '</span>\
                     </div>\
                     <div class="order-ctime">\
-                        <span class="value">2015-12-05 13:08:25</span>\
+                        <span class="value"> ' + date.format('yyyy-MM-dd hh:mm:ss') +  ' </span>\
                     </div>\
                     <div class="delete-btn button"></div>\
                 </div>' + shopItem + '</div>');
         }
+
+        /** [click function of delete order] */
+        $('.order-container #order-list .order-item .delete-btn').click(function(event) {
+
+
+            /** remove dom node */
+            $(this).parent().parent().remove();
+        })
     }
 };
