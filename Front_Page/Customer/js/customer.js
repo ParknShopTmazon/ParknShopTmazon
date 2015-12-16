@@ -473,6 +473,23 @@ var customer = {
             },
 
             /**
+             * [changeRadio: change radio event]
+             * @return {[type]} [description]
+             */
+            changeRadio = function() {
+                /** clear checked */
+                /** clear all the check attribute of input tags */
+                var addr_list = $('.order-container #order-addr .addresses input[type="radio"]');
+                for (var i = 0; i < addr_list.length; i++) {
+                    addr_list[i].removeAttribute('checked');
+                }
+                /** set checked */
+                $(this).attr('checked', 'checked');
+                /** update addr info */
+                updateCertainAddr();
+            },
+
+            /**
              * [getValue: get the value of an object and check whether it's empty]
              * @param  {[type]} object [description]
              * @return {[type]}        [description]
@@ -630,6 +647,9 @@ var customer = {
             updateCost();
         });
 
+        /** [radio change] */
+        $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+
         /** [click function of other addr] */
         $('.order-container #order-addr .other').click(function(event) {
             /* Act on the event */
@@ -675,7 +695,7 @@ var customer = {
             }
 
             /** clear all the check attribute of input tags */
-            var addr_list = $('.order-container #order-addr .addresses input[type="radio"]')
+            var addr_list = $('.order-container #order-addr .addresses input[type="radio"]');
             for (var i = 0; i < addr_list.length; i++) {
                 addr_list[i].removeAttribute('checked');
             }
@@ -697,6 +717,12 @@ var customer = {
                     </span>\
                 </label>\
             </div>');
+
+            /** rebinding the radio change */
+            /** [unbind] */
+            $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
+            /** [radio change] */
+            $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
 
             /** hide the map */
             $('.order-container #order-addr .addresses #other-addr-input').hide();
