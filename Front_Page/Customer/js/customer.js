@@ -269,15 +269,15 @@ var customer = {
             var list = $('.cart-container #shop-lists .shop-info .price .value');
             var origin_list = $('.cart-container #shop-lists .shop-info .price .value .origin-cost');
             var right_list = $('.cart-container #shop-lists .shop-info .price .value .right-cost');
+            var quality_list = $('.cart-container #shop-lists .shop-info .quality .value input');
             /** update quality */
             $('#shop-cost .quality .value').html(list.length);
 
             origin_cost = right_cost = 0;
-
             /** update cost */
             for (var i = 0; i < list.length; i++) {
-                origin_cost += parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
-                right_cost += parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
+                origin_cost += parseInt(quality_list[i].value) * parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
+                right_cost += parseInt(quality_list[i].value) * parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
             }
             $('#shop-cost .origin .value').html('<s>$' + origin_cost.toFixed(1) + '</s>');
             $('#shop-cost .cost .value').html('$' + right_cost.toFixed(1));
@@ -299,7 +299,7 @@ var customer = {
             });
 
         /** test data */
-        var testData = "{\n\t\"cid\": \"1\",\n\t\"cart\": [\n\t\t{\n\t\t\t\"sid\" : \"1\",\n\t\t\t\"name\": \"shop1\",\n\t\t\t\"size\": \"S\",\n\t\t\t\"origin_price\": \"38.9\",\n\t\t\t\"price\": \"28.9\",\n\t\t\t\"quality\": 2,\n\t\t\t\"color\": \"#000000\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"2\",\n\t\t\t\"name\": \"shop2\",\n\t\t\t\"size\": \"XL\",\n\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#232122\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"3\",\n\t\t\t\"name\": \"shop3\",\n\t\t\t\"size\": \"XXL\",\n\t\t\t\"origin_price\": \"59.9\",\n\t\t\t\"price\": \"35.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#d1b699\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop3.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"4\",\n\t\t\t\"name\": \"shop4\",\n\t\t\t\"size\": \"L\",\n\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#3f205c\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n";
+        var testData = "{\n\t\"cid\": \"1\", \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"uid\": \"123\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"cart\": [\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t{\n\t\t\t\"sid\" : \"1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"name\": \"shop1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"size\": \"S\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"origin_price\": \"38.9\",\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"price\": \"28.9\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"quality\": 2,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"color\": \"#000000\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_url\": \"#\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\t\t\t\t\t\t\t\t\n\t\t\t\"delivery_options\": [\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\"price_option\": [\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"2\",\n\t\t\t\"name\": \"shop2\",\n\t\t\t\"size\": \"XL\",\n\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#232122\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"3\",\n\t\t\t\"name\": \"shop3\",\n\t\t\t\"size\": \"XXL\",\n\t\t\t\"origin_price\": \"59.9\",\n\t\t\t\"price\": \"35.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#d1b699\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop3.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"4\",\n\t\t\t\"name\": \"shop4\",\n\t\t\t\"size\": \"L\",\n\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#3f205c\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"11.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $11.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n";
 
         /** parse */
         var cart = JSON.parse(testData).cart;
@@ -357,6 +357,29 @@ var customer = {
         $('.cart-container #shop-cost .pay .value').click(function() {
             window.location.href = "./order.jsp?type=certain";
         });
+
+        /** [change function of quality changing] */
+        $('.cart-container #shop-lists .shop-info .quality .value input[type="number"]').change(function(event) {
+            /* Act on the event */
+
+            /** check legality when keydown */
+            var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
+            if (regex.test($(this).val())) {
+                if (parseInt($(this).val()) > 99) {
+                    $(this).focus();
+                    $(this).val(99);
+                    alert('you can only enter integer number between 1 and 99');
+                } else {
+                    $(this).attr('value', $(this).val());
+                }
+            } else {
+                $(this).focus();
+                $(this).val(Math.abs(parseInt($(this).val())));
+                alert('you can only enter integer number between 1 and 99');
+            }
+
+            updateCost();
+        });
     },
 
     /************************************************************
@@ -407,19 +430,46 @@ var customer = {
          */
         var updateCost = function() {
                 var list = $('.order-container #order-details .order-item .order-price .shop-price');
+                var quality = $('.order-container #order-details .quality input[type="number"]');
+                var price = $('.order-container #order-details .order-item .order-origin-price span');
+                var delivery_price = $('.order-container #order-details .order-item .delivery-price');
 
                 cost = 0;
 
                 /** update cost */
                 for (var i = 0; i < list.length; i++) {
-                    var priceItem = list[i].textContent;
-                    priceItem = parseFloat(priceItem.substring(1, priceItem.length));
+                    var priceItem = price[i].textContent;
+                    var deliveryPriceItem = delivery_price[i].textContent;
+                    priceItem = parseInt(quality[i].value) * parseFloat(priceItem.substring(priceItem.indexOf('$') + 1, priceItem.length)) + parseFloat(deliveryPriceItem.substring(deliveryPriceItem.indexOf('$') + 1, deliveryPriceItem.length));
+
+                    list[i].innerHTML = '$' + priceItem.toFixed(2);
 
                     cost += priceItem;
                 }
 
                 /** set the cost info */
-                $('.order-container #final-order .real .value').html('$' + cost.toFixed(1));
+                $('.order-container #final-order .real .value').html('$' + cost.toFixed(2));
+            },
+
+            /**
+             * [updateCertainAddr: when another address is choosen, then change the certain addr in the bottom box ]
+             * @return {[type]} [description]
+             */
+            updateCertainAddr = function() {
+                var radio_list = $('.order-container #order-addr .addresses input[type="radio"]');
+                var addr_list = $('.order-container #order-addr .addresses .address');
+                var receiver_list = $('.order-container #order-addr .addresses .receiver .value');
+                var phone_list = $('.order-container #order-addr .addresses .phone .value');
+                for (var i = 0; i < radio_list.length; i++) {
+                    if (radio_list[i].getAttribute('checked') == 'checked') {
+                        /** addr */
+                        $('.order-container #final-order .box .send .value').html(addr_list[i].getAttribute('title'));
+                        /** receiver */
+                        $('.order-container #final-order .box .receiver .value').html(receiver_list[i].innerHTML);
+                        /** phone */
+                        $('.order-container #final-order .box .phone .value').html(phone_list[i].innerHTML);
+                    };
+                }
             },
 
             /**
@@ -454,7 +504,7 @@ var customer = {
             });
 
         /** test data */
-        var testData = "{\n\t\"cid\": \"1\",\n\t\"cart\": [\n\t\t{\n\t\t\t\"sid\" : \"1\",\n\t\t\t\"name\": \"shop1\",\n\t\t\t\"size\": \"S\",\n\t\t\t\"origin_price\": \"38.9\",\n\t\t\t\"price\": \"28.9\",\n\t\t\t\"quality\": 2,\n\t\t\t\"color\": \"#000000\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"2\",\n\t\t\t\"name\": \"shop2\",\n\t\t\t\"size\": \"XL\",\n\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#232122\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"3\",\n\t\t\t\"name\": \"shop3\",\n\t\t\t\"size\": \"XXL\",\n\t\t\t\"origin_price\": \"59.9\",\n\t\t\t\"price\": \"35.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#d1b699\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop3.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"4\",\n\t\t\t\"name\": \"shop4\",\n\t\t\t\"size\": \"L\",\n\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#3f205c\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n";
+        var testData = "{\n\t\"cid\": \"1\", \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"uid\": \"123\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"cart\": [\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t{\n\t\t\t\"sid\" : \"1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"name\": \"shop1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"size\": \"S\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"origin_price\": \"38.9\",\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"price\": \"28.9\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"quality\": 2,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"color\": \"#000000\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_url\": \"#\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\t\t\t\t\t\t\t\t\n\t\t\t\"delivery_options\": [\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\"price_option\": [\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"2\",\n\t\t\t\"name\": \"shop2\",\n\t\t\t\"size\": \"XL\",\n\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#232122\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"3\",\n\t\t\t\"name\": \"shop3\",\n\t\t\t\"size\": \"XXL\",\n\t\t\t\"origin_price\": \"59.9\",\n\t\t\t\"price\": \"35.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#d1b699\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop3.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"4\",\n\t\t\t\"name\": \"shop4\",\n\t\t\t\"size\": \"L\",\n\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#3f205c\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"11.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $11.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n";
 
         /** parse */
         var cart = JSON.parse(testData).cart,
@@ -463,8 +513,8 @@ var customer = {
             delivery_infos = {};
         for (var i in cart) {
             /** calculate the cost */
-            origin_cost += parseFloat(cart[i].origin_price);
-            right_cost += parseFloat(cart[i].price);
+            origin_cost += parseInt(cart[i].quality) * parseFloat(cart[i].origin_price);
+            right_cost += parseInt(cart[i].quality) * parseFloat(cart[i].price);
 
             /** generate delivery company options */
             var company_options = '';
@@ -479,7 +529,7 @@ var customer = {
             }
 
             /** append list item */
-            $('.order-container #order-details').append('<div class="order-item">\
+            $('.order-container #order-details').append('<div class="order-item" item="' + i + '">\
                 <div class="pic-container">\
                     <a href="' + cart[i].shop_url + '" target="_blank">\
                         <div class="over">\
@@ -496,6 +546,9 @@ var customer = {
                 <div class="order-origin-price">\
                     <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
                 </div>\
+                <div class="quality">\
+                    <input type="number" name="quality" min="1" value="' + cart[i].quality + '">\
+                </div>\
                 <div class="order-delivery">\
                     <select item="' + i + '">\
                     ' + company_options + '\
@@ -507,7 +560,7 @@ var customer = {
                     </select>\
                 </div>\
                 <div class="order-price">\
-                    <p class="shop-price">$' + (parseFloat(cart[i].price) + parseFloat(cart[i].delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
+                    <p class="shop-price">$' + (parseInt(cart[i].quality) * parseFloat(cart[i].price) + parseFloat(cart[i].delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
                     <p class="delivery-price">+ $' + cart[i].delivery_options[0].price_option[0].value + '</p>\
                 </div>\
             </div>');
@@ -516,8 +569,28 @@ var customer = {
         /** update cost info */
         updateCost();
 
+        /** update addr info */
+        updateCertainAddr();
+
+        /** [change function of changing delivery company ] */
         $('.order-container #order-details .order-delivery').change(function() {
-            console.log(cart);
+            /** clear option */
+            $(this).next().children('select').children('option').remove();
+
+            /** index the item */
+            var i = $(this).parent().attr('item');
+
+            /** index the company item */
+            var k = $(this).children('select').val();
+
+            /** append the new option */
+            var price_options = '';
+            for (var j in cart[i].delivery_options[0].price_option) {
+                price_options += '<option value="' + cart[i].delivery_options[k].price_option[j].value + '">' + cart[i].delivery_options[k].price_option[j].description + '</option>';
+            }
+            $(this).next().children('select').append(price_options);
+
+            $('.order-container #order-details .order-delivery-price').change();
         });
 
         /** [delivery price change] */
@@ -526,14 +599,34 @@ var customer = {
             var selectPrice = parseFloat($(this).children('select').val());
 
             /** @type {[type]} [cost without delivery price] */
-            var origin_cost = $(this).prev().prev().children('span').html();
+            var origin_cost = $(this).prev().prev().prev().children('span').html();
             origin_cost = parseFloat(origin_cost.substring(1, origin_cost.length));
 
             /** update cost of the item */
             $(this).next().children('.delivery-price').html('+ $' + selectPrice.toFixed(1));
-            $(this).next().children('.shop-price').html('$' + (origin_cost + selectPrice).toFixed(1));
 
             /** update cost info */
+            updateCost();
+        });
+
+        /** [change function of quality changing ] */
+        $('.order-container #order-details .quality input[type="number"]').change(function(event) {
+            /** check legality when keydown */
+            var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
+            if (regex.test($(this).val())) {
+                if (parseInt($(this).val()) > 99) {
+                    $(this).focus();
+                    $(this).val(99);
+                    alert('you can only enter integer number between 1 and 99');
+                } else {
+                    $(this).attr('value', $(this).val());
+                }
+            } else {
+                $(this).focus();
+                $(this).val(Math.abs(parseInt($(this).val())));
+                alert('you can only enter integer number between 1 and 99');
+            }
+
             updateCost();
         });
 
@@ -579,7 +672,13 @@ var customer = {
             /** [if: return when phone is empty] */
             if (phone == '') {
                 return;
-            }           
+            }
+
+            /** clear all the check attribute of input tags */
+            var addr_list = $('.order-container #order-addr .addresses input[type="radio"]')
+            for (var i = 0; i < addr_list.length; i++) {
+                addr_list[i].removeAttribute('checked');
+            }
 
             /**
              * [append div]
@@ -587,7 +686,7 @@ var customer = {
             $('.order-container #order-addr .addresses').append('<div>\
                 <label>\
                     <input type="radio" name="addr" checked="checked">\
-                    <span>' + otherAddr + '</span>\
+                    <span class="address" title="' + otherAddr + '">' + otherAddr + '</span>\
                     <span class="receiver">\
                     <span class="name">receiver name: </span>\
                     <span class="value">' + receiver + '</span>\
@@ -601,6 +700,9 @@ var customer = {
 
             /** hide the map */
             $('.order-container #order-addr .addresses #other-addr-input').hide();
+
+            /** update addr info */
+            updateCertainAddr();
         });
     },
 
