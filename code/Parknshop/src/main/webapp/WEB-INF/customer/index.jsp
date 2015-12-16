@@ -15,6 +15,12 @@
 	<%@ include file="header.html"%>
 	<%@ include file="dialog.html"%>
 	<%@ include file="footer.html"%>
-	<!--<script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>-->
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/customer.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    customer.init();
+	});
+	</script>
 </body>
 </html>
