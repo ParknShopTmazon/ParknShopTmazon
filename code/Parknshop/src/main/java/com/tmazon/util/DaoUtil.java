@@ -8,10 +8,9 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class DaoUtil {
+	private DaoUtil() {}
 
 	private static DataSource source = new ComboPooledDataSource();
-	
-	private DaoUtil() {}
 	
 	public static DataSource getDataSource() {
 		return source;
