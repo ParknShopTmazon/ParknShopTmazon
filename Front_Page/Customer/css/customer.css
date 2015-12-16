@@ -765,7 +765,7 @@ s {
 .cart-container #shop-lists .shop-info .quality .value input[type="number"] {
     width: 100%;
     border-radius: 4px;
-    background-color: #f0eff5;
+    background-color: #f0ede5;
     border: 1px solid #ccc;
     height: 25px;
     padding-left: 0.5em;
@@ -876,8 +876,24 @@ s {
     margin: 10px 0;
 }
 
+.order-container #order-addr .addresses .address {
+    width: 500px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .order-container #order-addr .addresses input[type="radio"] {
     margin: 5px 0;
+}
+
+.order-container #order-addr .addresses .receiver,
+.order-container #order-addr .addresses .phone {
+    margin: 0 3%;
+    vertical-align: middle;
 }
 
 .order-container #order-addr .addresses .receiver .name,
@@ -910,7 +926,7 @@ s {
 }
 
 .order-container #order-addr .addresses #other-addr-input input[type="text"] {
-    background-color: #f0eff5;
+    background-color: #f0ede5;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1.3em;
@@ -934,7 +950,7 @@ s {
     width: 80%;
     height: 400px;
     margin: 10px 0;
-    background-color: #f0eff5;
+    background-color: #f0ede5;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline-color: #ffa200;
@@ -999,11 +1015,28 @@ s {
 
 .order-container #order-details .order-item .order-origin-price,
 .order-container #order-details .order-item .order-price,
+.order-container #order-details .quality,
 .order-container #order-details .order-delivery,
 .order-container #order-details .order-delivery-price {
     display: inline-block;
     top: 0;
     vertical-align: middle;
+}
+
+.order-container #order-details .quality {
+    width: 5%;
+    margin-left: 5%;
+}
+
+.order-container #order-details .quality input[type="number"] {
+    width: 100%;
+    border-radius: 4px;
+    background-color: #f0ede5;
+    border: 1px solid #ccc;
+    height: 25px;
+    padding-left: 0.5em;
+    box-sizing: border-box;
+    outline-color: #ffa200;
 }
 
 .order-container #order-details .order-item .order-origin-price {
@@ -1035,7 +1068,7 @@ s {
 }
 
 .order-container #order-details .order-delivery {
-    margin-left: 8%;
+    margin-left: 5px;
 }
 
 .order-container #order-details .order-delivery-price {
@@ -1064,7 +1097,7 @@ s {
 
 .order-container #final-order .box {
     width: 40%;
-    height: 200px;
+    height: 220px;
     border-radius: 4px;
     border: 2px dashed #ffa200;
     margin: 0 0 50px auto;
@@ -1104,6 +1137,13 @@ s {
     width: 50%;
     max-height: 110px;
     overflow: hidden;
+}
+
+.order-container #final-order .box .receiver .value,
+.order-container #final-order .box .phone .value {
+    color: #ffa200;
+    font-size: 1.2em;
+    margin-right: 20px;
 }
 
 .order-container #final-order .box .submit-btn {
@@ -1275,7 +1315,7 @@ s {
 .order-container #order-list .order-item {
     padding: 15px;
     margin-bottom: 15px;
-    background-color: #f0eff5;
+    background-color: #f0ede5;
     position: relative;
 }
 
