@@ -5,7 +5,7 @@ USE parknshop;
 CREATE TABLE user (
 	user_id int AUTO_INCREMENT,
 	name varchar(50) NOT NULL,
-	passowrd varchar(50) NOT NULL,
+	password varchar(50) NOT NULL,
 	role varchar(50) NOT NULL,
 	status varchar(50) NOT NULL,
 	PRIMARY KEY (user_id),
@@ -42,18 +42,31 @@ CREATE TABLE shop(
 	FOREIGN KEY (owner) REFERENCES user(user_id)
 );
 
+CREATE TABLE category_type (
+	type varchar(50),
+	PRIMARY KEY (type)
+);
+
+CREATE TABLE category (
+	category varchar(50),
+	type varchar(50) NOT NULL,
+	PRIMARY KEY (category),
+	FOREIGN KEY (type) REFERENCES category_type(type)
+);
+
 CREATE TABLE product (
 	product_id int AUTO_INCREMENT,
 	shop_id int NOT NULL,
 	name varchar(50) NOT NULL,
 	price int NOT NULL,
-	type varchar(50) NOT NULL,
+	category varchar(50) NOT NULL,
 	stock_num int NOT NULL,
 	sold_num int NOT NULL,
 	description text NOT NULL,
 	picture varchar(100) NOT NULL,
 	PRIMARY KEY (product_id),
-	FOREIGN KEY (shop_id) REFERENCES shop(shop_id)
+	FOREIGN KEY (shop_id) REFERENCES shop(shop_id),
+	FOREIGN KEY (category) REFERENCES category(category)
 );
 
 CREATE TABLE orders (
@@ -113,5 +126,4 @@ CREATE TABLE comment(
 	FOREIGN KEY (product_id) REFERENCES product(product_id),
 	FOREIGN KEY (reply_id) REFERENCES comment(comment_id)
 );
-
 
