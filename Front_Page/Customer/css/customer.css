@@ -1366,6 +1366,10 @@ s {
     float: right;
 }
 
+.order-container #order-list .order-item .shop-item {
+    margin-top: 15px;
+}
+
 .order-container #order-list .order-item .pic-container {
     width: 15%;
     height: 100px;

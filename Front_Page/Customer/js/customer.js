@@ -526,8 +526,8 @@ var customer = {
         /** parse */
         var cart = JSON.parse(testData).cart,
             origin_cost = 0,
-            right_cost = 0,
-            delivery_infos = {};
+            right_cost = 0;
+
         for (var i in cart) {
             /** calculate the cost */
             origin_cost += parseInt(cart[i].quality) * parseFloat(cart[i].origin_price);
@@ -738,5 +738,88 @@ var customer = {
 
     initList: function() {
         "use strict";
+        /** get data by uid and page */
+        $.ajax({
+                url: '',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    uid: '',
+                    page: 0
+                },
+            })
+            .done(function() {})
+            .fail(function() {})
+            .always(function() {
+                console.log("get cart data complete");
+            });
+
+        /** test data */
+        var testData = "{\n\t\"uid\": \"123\",\n\t\"count\": 2,\n\t\"page\": 1,\n\t\"orderDatas\": [\n\t\t{\n\t\t\t\"oid\": \"12341544234\",\n\t\t\t\"ctime\": \"1446692400\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"1\",\n\t\t\t\t\t\"name\": \"shop1\",\n\t\t\t\t\t\"size\": \"S\",\n\t\t\t\t\t\"origin_price\": \"38.9\",\n\t\t\t\t\t\"price\": \"28.9\",\n\t\t\t\t\t\"quality\": 2,\n\t\t\t\t\t\"color\": \"#000000\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.0\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"2\",\n\t\t\t\t\t\"name\": \"shop2\",\n\t\t\t\t\t\"size\": \"XL\",\n\t\t\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quality\": 1,\n\t\t\t\t\t\"color\": \"#232122\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.8\"\n\t\t\t\t}\n\t\t\t]\t\t\n\t\t},\n\t\t{\n\t\t\t\"oid\": \"12341241323\",\n\t\t\t\"ctime\":  \"1417751768\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"4\",\n\t\t\t\t\t\"name\": \"shop4\",\n\t\t\t\t\t\"size\": \"L\",\n\t\t\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quality\": 1,\n\t\t\t\t\t\"color\": \"#3f205c\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\t\t\"delivery_price\": \"11.8\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}";
+
+        /** parse */
+        var orders = JSON.parse(testData);
+
+        /** [for: append] */
+        for (var i in orders.orderDatas) {
+            /** loop to get shop item for this order */
+            var shopItem = '';
+            for (var j in orders.orderDatas[i].order) {
+                shopItem += '<div class="shop-item">\
+                    <div class="pic-container">\
+                        <a href="' + orders.orderDatas[i].order[j].shop_url + '" target="_blank">\
+                            <div class="over">\
+                                <div class="link-btn"></div>\
+                            </div>\
+                        </a>\
+                    <div class="shop" style="background-image: url(' + orders.orderDatas[i].order[j].shop_pic + ');"></div>\
+                    </div>\
+                    <div class="color" style="background-color: ' + orders.orderDatas[i].order[j].color + '"></div>\
+                    <div class="origin-price">\
+                        <p class="origin">\
+                            <s>$' + orders.orderDatas[i].order[j].origin_price + '</s>\
+                        </p>\
+                        <p class="current">$' + orders.orderDatas[i].order[j].price + '</p>\
+                    </div>\
+                    <div class="quality">\
+                        <p class="value">' + orders.orderDatas[i].order[j].quality + '</p>\
+                        <p class="name">quality</p>\
+                    </div>\
+                    <div class="size">\
+                        <p class="value">' + orders.orderDatas[i].order[j].size + '</p>\
+                        <p class="name">size</p>\
+                    </div>\
+                    <div class="price">\
+                        <p class="shop-price">\
+                            $' + (parseInt(orders.orderDatas[i].order[j].quality) * parseFloat(orders.orderDatas[i].order[j].price) + parseFloat(orders.orderDatas[i].order[j].delivery_price)) + '\
+                        </p>\
+                        <p class="delivery-price">delivery price: + $' + orders.orderDatas[i].order[j].delivery_price + '</p>\
+                    </div>\
+                    <div class="info">\
+                        <div class="delivery-status">\
+                            <p class="value">delivering</p>\
+                            <p class="name">delivery status</p>\
+                            <p><a class="value" href="#">details</a></p>\
+                            <p class="name">more details</p>\
+                            <p><a class="value" href="#">track the delivery</a></p>\
+                            <p class="name">track where the shop is</p>\
+                        </div>\
+                    </div>\
+                    <div class="handle-btn button">Deal</div>\
+                </div>';
+            }
+
+            $('.order-container #order-list').append('<div class="order-item">\
+                <div class="brief-info">\
+                    <div class="order-id">\
+                        <span class="name">order id:</span>\
+                        <span class="value">1234531152</span>\
+                    </div>\
+                    <div class="order-ctime">\
+                        <span class="value">2015-12-05 13:08:25</span>\
+                    </div>\
+                    <div class="delete-btn button"></div>\
+                </div>' + shopItem + '</div>');
+        }
     }
 };
