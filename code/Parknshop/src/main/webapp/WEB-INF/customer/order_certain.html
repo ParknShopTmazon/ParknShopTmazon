@@ -1,0 +1,63 @@
+<div class="page-title">
+    <span class="back-btn button"></span>
+    <span class="parknshop">PARKnSHOP</span>
+    <span class="main-title">Order</span>
+</div>
+<form action="">
+    <div id="order-addr">
+        <div class="main">Order Address</div>
+        <div class="addresses">
+            <div>
+                <label>
+                    <input type="radio" name="addr" checked="checked">
+                    <span> Room 701, Unit 3, No.46, JiHua Road 4, Chan City Disrict, Foshan, Guangdong, China</span>
+                    <span class="receiver">
+                    <span class="name">receiver name: </span>
+                    <span class="value">PuiMan Cheui</span>
+                    </span>
+                    <span class="phone">
+                    <span class="name">phone number: </span>
+                    <span class="value">18575893728</span>
+                    </span>
+                </label>
+            </div>
+            <div id="other-addr-input">
+                <div>
+                    <input type="text" required name="receiver" id="receiver" placeholder="receiver name">
+                    <input type="text" required name="phone" id="phone" placeholder="phone number">
+                    <input type="text" required name="add-addr" id="add-addr">
+                    <a href="javascript: void(0);">add</a>
+                </div>
+                <div class="map"></div>
+            </div>
+        </div>
+        <a href="javascript: void(0);" class="other">other address</a>
+    </div>
+    <div id="order-details">
+        <div class="main">Order Details</div>
+    </div>
+    <div id="final-order">
+        <a id="return" href="./cart.jsp">return to the cart</a>
+        <div class="box">
+            <div class="real item">
+                <span class="name">real cost</span>
+                <span class="value">$74.8</span>
+            </div>
+            <div class="send item">
+                <span class="name">send to</span>
+                <span class="value">Room 701, Unit 3, No.46, JiHua Road 4, Chan City Disrict, Foshan, Guangdong, China</span>
+            </div>
+            <div class="submit-btn button"></div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places&language=en'></script>
+<script type="text/javascript" src="./js/locationpicker.jquery.js"></script>
+<script type="text/javascript" src="./js/customer.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    customer.init();
+    customer.initCertain();
+});
+</script>
