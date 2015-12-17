@@ -6,11 +6,11 @@
 	<c:choose>
 		<c:when test="${ not empty s_user }">
 			<div class="text-btn">${ s_user.name }</div>
-			<div class="text-btn">Logout</div>
+			<div class="text-btn"><a href="logout">Logout</a></div>
 		</c:when>
 		<c:otherwise>
 			<div class="text-btn"><a href="login">Login</a></div>
-			<div class="text-btn">Register</div>
+			<div class="text-btn"><a href="register">Register</a></div>
 		</c:otherwise>
 	</c:choose>
 </div>

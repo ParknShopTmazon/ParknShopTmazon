@@ -23,19 +23,20 @@
 
 		<div class="span4">
 			<h2>Welcomt to PARKnSHOP</h2>
-			</br> </br>
+			</br> 
+			<c:if test="${ not empty r_error_name_password }">
+						<label style="color: red;">error name or password</label>
+					</c:if>
+					<c:if test="${ not empty r_error_parameters }">
+						<label style="color: red;">no name or password</label>
+					</c:if>
+			</br>
 			<form class="form-horizontal" action="login" method="post">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">USERNAME</label>
 					<div class="controls">
 						<input id="inputEmail" type="text" name="name" />
 					</div>
-					<c:if test="${ not empty r_error_name_password }">
-						error name or password
-					</c:if>
-					<c:if test="${ not empty r_error_parameters }">
-						no name or password
-					</c:if>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">PASSWORD</label>

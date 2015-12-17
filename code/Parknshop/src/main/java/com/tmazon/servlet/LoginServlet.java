@@ -57,8 +57,7 @@ public class LoginServlet extends HttpServlet {
 
 		// check if logged-on
 		if (req.getSession().getAttribute(AttrName.SessionScope.USER) != null) {
-			req.getRequestDispatcher("WEB-INF/customer/index.jsp").forward(req,
-					resp);
+			resp.sendRedirect("index");
 			return;
 		}
 
@@ -76,7 +75,8 @@ public class LoginServlet extends HttpServlet {
 		User user = userService.findByName(name);
 		req.getSession().setAttribute(AttrName.SessionScope.USER, user);
 		users.put(name, req.getSession());
-		req.getRequestDispatcher("WEB-INF/customer/index.jsp").forward(req,
-				resp);
+		System.out.println("online user: " + users.size());
+		
+		resp.sendRedirect("index");
 	}
 }
