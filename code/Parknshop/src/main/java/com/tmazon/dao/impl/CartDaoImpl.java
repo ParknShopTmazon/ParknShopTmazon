@@ -16,7 +16,7 @@ import com.tmazon.util.DaoUtil;
 public class CartDaoImpl implements CartDao {
 
 	public List<Cart> select(Cart cart) {
-		StringBuilder sqlBuilder = new StringBuilder("SELECT FROM cart WHERE 1=1 ");
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM cart WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if(cart.getUserId() != null){
 			sqlBuilder.append("AND user_id = ? ");
