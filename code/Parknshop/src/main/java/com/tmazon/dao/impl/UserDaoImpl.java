@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.insert(sql, new BeanHandler<User>(User.class));
+			runner.insert(sql, new BeanHandler<User>(User.class), user.getUserId(), user.getName(), user.getPassword(), user.getRole(), user.getStatus());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

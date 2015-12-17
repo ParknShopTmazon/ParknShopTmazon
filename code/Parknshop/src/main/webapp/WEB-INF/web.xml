@@ -24,6 +24,10 @@
   	<servlet-name>LogoutServlet</servlet-name>
   	<servlet-class>com.tmazon.servlet.LogoutServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<servlet-class>com.tmazon.servlet.RegisterServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>IndexServlet</servlet-name>
@@ -36,6 +40,10 @@
   <servlet-mapping>
   	<servlet-name>LogoutServlet</servlet-name>
   	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<url-pattern>/register</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
