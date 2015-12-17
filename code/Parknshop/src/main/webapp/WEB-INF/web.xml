@@ -5,6 +5,10 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   
+  <listener>
+  	<listener-class>com.tmazon.listener.MyServletContextListener</listener-class>
+  </listener>
+
   <servlet>
   	<servlet-name>IndexServlet</servlet-name>
   	<servlet-class>com.tmazon.servlet.IndexServlet</servlet-class>

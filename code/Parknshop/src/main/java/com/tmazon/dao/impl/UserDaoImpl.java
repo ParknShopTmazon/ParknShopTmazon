@@ -15,26 +15,26 @@ import com.tmazon.util.DaoUtil;
 public class UserDaoImpl implements UserDao {
 
 	public List<User> select(User user) {
-		StringBuilder sqlBuilder = new StringBuilder("SELECT FROM user WHERE 1=1 ");
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM user WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (user.getUserId() != null) {
-			sqlBuilder.append("AND user_id = ? ");
+			sqlBuilder.append("AND user_id=? ");
 			params.add(user.getUserId());
 		}
 		if (user.getName() != null) {
-			sqlBuilder.append("AND name = ? ");
+			sqlBuilder.append("AND name=? ");
 			params.add(user.getName());
 		}
 		if (user.getPassword() != null) {
-			sqlBuilder.append("AND password = ? ");
+			sqlBuilder.append("AND password=? ");
 			params.add(user.getPassword());
 		}
 		if (user.getRole() != null) {
-			sqlBuilder.append("AND role = ? ");
+			sqlBuilder.append("AND role=? ");
 			params.add(user.getRole());
 		}
 		if (user.getStatus() != null) {
-			sqlBuilder.append("AND status = ? ");
+			sqlBuilder.append("AND status=? ");
 			params.add(user.getStatus());
 		}
 		
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<User> result = runner.query(sql, new BeanListHandler<User>(User.class), params);
+			List<User> result = runner.query(sql, new BeanListHandler<User>(User.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
