@@ -42,31 +42,40 @@ CREATE TABLE shop(
 	FOREIGN KEY (owner) REFERENCES user(user_id)
 );
 
-CREATE TABLE category_type (
-	type varchar(50),
-	PRIMARY KEY (type)
-);
-
 CREATE TABLE category (
 	category varchar(50),
-	type varchar(50) NOT NULL,
-	PRIMARY KEY (category),
-	FOREIGN KEY (type) REFERENCES category_type(type)
+	PRIMARY KEY (category)
 );
 
 CREATE TABLE product (
 	product_id int AUTO_INCREMENT,
 	shop_id int NOT NULL,
 	name varchar(50) NOT NULL,
-	price int NOT NULL,
+	price decimal(10,2) NOT NULL,
+	discont_price decimal(10,2) NOT NULL,
 	category varchar(50) NOT NULL,
 	stock_num int NOT NULL,
 	sold_num int NOT NULL,
 	description text NOT NULL,
-	picture varchar(100) NOT NULL,
+	picture varchar(100),
 	PRIMARY KEY (product_id),
 	FOREIGN KEY (shop_id) REFERENCES shop(shop_id),
 	FOREIGN KEY (category) REFERENCES category(category)
+);
+
+CREATE TABLE product_info (
+	product_id int,
+	size varchar(50),
+	color varchar(50),
+	FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+CREATE TABLE delivery(
+	delivery_id int AUTO_INCREMENT,
+	company varchar(50) NOT NULL,
+	price decimal(10,2) NOT NULL,
+	type varchar(50) NOT NULL,
+	PRIMARY KEY (delivery_id)
 );
 
 CREATE TABLE orders (
@@ -75,8 +84,10 @@ CREATE TABLE orders (
 	status varchar(50) NOT NULL,
 	order_time datetime NOT NULL,
 	user_id int NOT NULL,
+	delivery_id int NOT NULL,
 	PRIMARY KEY (order_id),
-	FOREIGN KEY (user_id) REFERENCES user(user_id)
+	FOREIGN KEY (user_id) REFERENCES user(user_id),
+	FOREIGN KEY (delivery_id) REFERENCES delivery(delivery_id)
 	
 );
 
