@@ -20,10 +20,10 @@ public class LoginServlet extends HttpServlet {
 	private UserService userService = BasicFactory.getImpl(UserService.class);
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
 		
-		System.out.println(userService.getClass().getName());
 		
 	}
 	
