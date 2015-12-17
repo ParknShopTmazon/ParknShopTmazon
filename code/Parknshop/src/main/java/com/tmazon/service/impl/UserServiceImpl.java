@@ -19,5 +19,9 @@ public class UserServiceImpl implements UserService {
 		List<User> list = userDao.select(user);
 		return list != null && !list.isEmpty();
 	}
+
+	public User findByName(String name) {
+		return userDao.findByName(name);
+	}
 	
 }
