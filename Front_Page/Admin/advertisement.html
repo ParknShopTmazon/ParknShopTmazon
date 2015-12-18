@@ -16,31 +16,43 @@
 		<ul id="navigation">
 			<li><img src="css/logo.png"></li>
 			<li><a href="overview.html">Overview</a></li>
-			<li><span class="active">User Management</span></li>
+			<li><a href="user.html">User Management</a></li>
 			<li><a href="shopApply.html">Shop-Apply Management</a></li>
-			<li><a href="advertisement.html">Advertisement Management</a></li>
+			<li><span class="active">Advertisement Management</span></li>
 			<li><a href="other.html">Other</a></li>
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
 				<div class="grid_4">
 					<p>
-						<label>Username<small>Alpha-numeric values</small></label>
-						<input type="text" value="all"/>
+						<label>Cost</label>
+						<select>
+							<option>ALL</option>
+							<option>0-99</option>
+							<option>100-999</option>
+							<option>1000-9999</option>
+						</select>
 					</p>
 				</div>
 				<div class="grid_5">
 					<p>
-						<label>NickName</label>
-						<input type="text" value="all"/>
+						<label>Company</label>
+						<select>
+							<option>ALL</option>
+							<option>B</option>
+							<option>C</option>
+							<option>D</option>
+						</select>
 					</p>
 				</div>
 				<div class="grid_5">
 					<p>
 						<label>Type</label>
 						<select>
-							<option>Shop-Owner</option>
-							<option>Customer</option>
+							<option>ALL</option>
+							<option>Food</option>
+							<option>Clothes</option>
+							<option>Book</option>
 						</select>
 					</p>
 				</div>
@@ -54,9 +66,9 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Username</th>
-								<th>E-mail</th>
-								<th>Address</th>
+								<th>Company</th>
+								<th>Type</th>
+								<th>Cost</th>
 								<th colspan="3" width="10%">Actions</th>
 							</tr>
 						</thead>
@@ -69,113 +81,113 @@
 						</tfoot>
 						<tbody>
 							<tr>
-								<td>Philip</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>	
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Thomas</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>Ben</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Richard</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>Alon</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Alex</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>Nathan</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Habib</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>Jeremy</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Ed</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Claire</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>Philip</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>Thomas</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>Ben</td>
-								<td>xxxxxxxxx@qq.com</td>
-								<td>Xi'an</td>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
