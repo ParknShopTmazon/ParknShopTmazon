@@ -1,0 +1,84 @@
+#menu
+{
+	float:left;
+	background-color:#FFFFFF;
+	width:200px;
+}
+#content
+{
+	float:left;
+}
+.order-form{
+	text-align:center;
+	font-size:14px;
+	overflow:hidden;
+}
+.order-item{
+	background-color:#CCCCCC;
+	height:120px;
+	border-bottom:solid 1px;
+}
+.item-form-head{
+	padding-top:10px;
+	font:bold 16px;
+	height:30px;
+}
+.item-form-head-info{
+	float:left;
+	padding-top:10px;
+	width:360px;
+}
+.item-form-head-mum,.item-product-mum{
+	float:left;
+	padding-top:10px;
+	width:80px;
+}
+.item-form-head-totalprice,.item-product-totalprice{
+	float:left;
+	padding-top:10px;
+	width:100px;
+}
+.item-form-head-orderstate,.item-product-orderstate{
+	float:left;
+	padding-top:10px;
+	width:100px;
+}
+.item-form-head-manage,.item-product-manage{
+	float:left;
+	padding-top:10px;
+	width:150px;
+}
+.item-product-id{
+	background-color:#FFFFFF;
+	padding-top:5px;
+	height:20px;
+	text-align:left;
+	margin-right:10px;
+}
+.item-product-photo img{
+	float:left;
+	padding:10px 20px 10px 20px;
+	background-color:#CCCCCC;
+	width:120px;
+	height:70px;;
+}
+
+.item-name-time-shop{
+	padding-top:10px;
+	text-align:left;
+	float:left;
+    width:200px;
+	height:80px;
+}
+.color1{
+	background-color:#FFFF99;
+}
+.color2{
+	background-color:#6699FF;
+}
+.color3{
+	background-color:#CC6699;
+}
+.color4{
+	background-color:#FFFFFF;
+}

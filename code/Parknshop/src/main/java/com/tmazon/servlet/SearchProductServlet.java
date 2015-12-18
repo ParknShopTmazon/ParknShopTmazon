@@ -8,12 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.Product;
 import com.tmazon.service.ProductService;
-import com.tmazon.service.UserService;
 import com.tmazon.util.BasicFactory;
+
 
 public class SearchProductServlet extends HttpServlet {
 

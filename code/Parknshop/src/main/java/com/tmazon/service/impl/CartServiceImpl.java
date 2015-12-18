@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.tmazon.dao.CartDao;
-import com.tmazon.dao.ProductDao;
-import com.tmazon.dao.UserDao;
 import com.tmazon.domain.Cart;
-import com.tmazon.domain.Product;
 import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
+import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 
 public class CartServiceImpl implements CartService {
@@ -36,8 +34,8 @@ public class CartServiceImpl implements CartService {
 			cart = carts.get(i);
 			map = new HashMap<String, Integer>();
 			
-			map.put("productId", cart.getProductId());
-			map.put("quantity", cart.getQuantity());
+			map.put(AttrName.CartServiceImplMapGet.PRODUCT_ID, cart.getProductId());
+			map.put(AttrName.CartServiceImplMapGet.QUANTITY, cart.getQuantity());
 			
 			result.add(map);
 		}
