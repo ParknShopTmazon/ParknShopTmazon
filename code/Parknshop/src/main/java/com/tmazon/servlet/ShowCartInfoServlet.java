@@ -49,19 +49,20 @@ public class ShowCartInfoServlet extends HttpServlet {
 				int quantity = list.get(i).get(AttrName.CartServiceImplMapGet.QUANTITY);
 				
 				Product product = productService.getProductById(productId);
-				Shop shop = shopService.findById(product.getShopId());
 				ProductInfo productInfo = productService.getProductInfo(productId);
 				
 				JSONObject item = new JSONObject();
-				item.put("sid", shop.getShopId());
-				item.put("sname", shop.getName());
-				item.put("pname", product.getName());
+				item.put("sid", product.getProductId());
+				item.put("name", product.getName());
 				item.put("origin_price", product.getPrice());
 				item.put("price", product.getDiscontPrice());
 				item.put("quality", quantity);
 				if(productInfo != null){
 					item.put("size", productInfo.getSize());
 					item.put("color", productInfo.getColor());
+				}else {
+					item.put("size", null);
+					item.put("color", null);
 				}
 				
 //				item.put("shop_url", "#");
