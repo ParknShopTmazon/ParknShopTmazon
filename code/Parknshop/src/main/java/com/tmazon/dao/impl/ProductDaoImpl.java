@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
-		sqlBuilder.append(" order by sold_bum ");
+		sqlBuilder.append(" order by sold_num ");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
