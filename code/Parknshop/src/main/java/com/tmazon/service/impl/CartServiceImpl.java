@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tmazon.dao.CartDao;
-import com.tmazon.dao.ProductDao;
-import com.tmazon.dao.UserDao;
 import com.tmazon.domain.Cart;
-import com.tmazon.domain.Product;
 import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
 import com.tmazon.util.AttrName;
