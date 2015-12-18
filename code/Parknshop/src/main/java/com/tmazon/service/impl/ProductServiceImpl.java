@@ -17,4 +17,10 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.select(product);
 	}
 
+	public Product getProductById(Integer id) {
+		
+		return productDao.findById(id);
+		
+	}
+
 }

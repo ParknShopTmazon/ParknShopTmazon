@@ -89,5 +89,17 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return null;
 	}
+
+	public Product findById(Integer id) {
+		
+		List<Product> list = select(new Product(id, null, null, null, null, null, null, null, null, null));
+		
+		if(list.isEmpty()){
+			return null;
+		}else {
+			return list.get(0);
+		}
+		
+	}
 	
 }

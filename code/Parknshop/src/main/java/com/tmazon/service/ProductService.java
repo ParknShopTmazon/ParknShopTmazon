@@ -7,4 +7,7 @@ import com.tmazon.domain.Product;
 public interface ProductService {
 
 	public List<Product> select(Product product );
+	
+	public Product getProductById(Integer id);
+	
 }

@@ -1,4 +1,4 @@
-ï»¿* {
+* {
     margin: 0;
 }
 
@@ -18,7 +18,7 @@ html {
 
 body {
     margin: 0;
-    font-family: "Ping Hei", "å†¬é’é»‘ä½“", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "å¾®è½¯é›…é»‘";
+    font-family: "Ping Hei", "¶¬ÇàºÚÌå", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "Î¢ÈíÑÅºÚ";
     font-size: 1em;
     min-height: 100%;
     height: auto !important;
@@ -561,6 +561,7 @@ s {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    cursor:pointer;
 }
 
 

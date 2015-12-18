@@ -60,13 +60,33 @@ public class CartDaoImpl implements CartDao {
 
 	public boolean update(Cart cart) {
 		
+		String sql = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+		System.out.println(sql);
 		
-		return false;
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, cart.getQuantity(), cart.getUserId(), cart.getProductId());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public boolean delete(Cart cart) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, cart.getUserId(), cart.getProductId());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	public List<Cart> findByUser(User user) {
