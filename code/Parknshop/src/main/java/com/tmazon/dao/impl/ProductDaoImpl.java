@@ -18,11 +18,11 @@ public class ProductDaoImpl implements ProductDao{
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (product.getProductId() != null) {
-			sqlBuilder.append("AND product_id = ? ");
+			sqlBuilder.append("AND productId = ? ");
 			params.add(product.getProductId());
 		}
 		if (product.getShopId() != null) {
-			sqlBuilder.append("AND shop_id = ? ");
+			sqlBuilder.append("AND shopId = ? ");
 			params.add(product.getShopId());
 		}
 		if (product.getName() != null) {
@@ -35,7 +35,7 @@ public class ProductDaoImpl implements ProductDao{
 			params.add(product.getPrice());
 		}
 		if (product.getDiscontPrice() != null) {
-			sqlBuilder.append("AND discont_price = ? ");
+			sqlBuilder.append("AND discontPrice = ? ");
 			params.add(product.getDiscontPrice());
 		}
 		if (product.getCategory() != null) {
@@ -43,11 +43,11 @@ public class ProductDaoImpl implements ProductDao{
 			params.add(product.getCategory());
 		}
 		if (product.getStockNum() != null) {
-			sqlBuilder.append("AND stock_num = ? ");
+			sqlBuilder.append("AND stockNum = ? ");
 			params.add(product.getStockNum());
 		}
 		if(product.getSoldNum()!=null){
-			sqlBuilder.append(" AND sold_num=? ");
+			sqlBuilder.append(" AND soldNum=? ");
 			params.add(product.getSoldNum());
 		}
 		if(product.getDescription()!=null){
@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
-		sqlBuilder.append(" order by sold_num ");
+		sqlBuilder.append(" order by soldNum ");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
