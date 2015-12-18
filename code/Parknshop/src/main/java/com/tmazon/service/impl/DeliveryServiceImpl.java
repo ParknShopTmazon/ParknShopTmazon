@@ -19,4 +19,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 		return select(new Delivery());
 	}
 
+	public List<String> getAllCompany() {
+		return deliveryDao.getAllCompany();
+	}
+
 }

@@ -37,6 +37,11 @@ public class CartDaoImpl implements CartDao {
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			List<Cart> result = runner.query(sql, new BeanListHandler<Cart>(Cart.class), params);
+			
+			for(Cart c : result){
+				System.out.println(c.getProductId() + " " + "##########");
+			}
+			
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
