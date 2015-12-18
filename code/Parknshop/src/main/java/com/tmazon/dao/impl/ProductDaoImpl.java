@@ -64,7 +64,7 @@ public class ProductDaoImpl implements ProductDao{
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Product> result = runner.query(sql, new BeanListHandler<Product>(Product.class), params);
+			List<Product> result = runner.query(sql, new BeanListHandler<Product>(Product.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();

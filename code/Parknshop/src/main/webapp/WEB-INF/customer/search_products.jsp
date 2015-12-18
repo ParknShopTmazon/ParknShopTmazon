@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <title>search products</title>
-<link href="bootstrap-combined.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="style.css">
+<link href="css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <div class="container-fluid">
 	<div class="row-fluid" id="head">
 		<div class="span4">
-			<img src = "logo.png">
+			<img src = "images/logo.png">
 			
 		</div>
 		<div class ="span3">
@@ -31,34 +31,34 @@
 					<h3>All Products</h3>
 					<div class="row-fluid">					
 						<div class="span4">
-							<img src="1.jpg">
+							<img src="images/temp/1.jpg">
 							<h4>$10</h4>
 							<h4>lemon</h4>
 						</div>
 						<div class="span4">
-							<img src="1.jpg">
+							<img src="images/temp/1.jpg">
 							<h4>$10</h4>
 							<h4>lemon</h4>
 						</div>
 						<div class="span4">
-							<img src="1.jpg">
+							<img src="images/temp/1.jpg">
 							<h4>$10</h4>
 							<h4>lemon</h4>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span4">
-							<img src="1.jpg">
+							<img src="images/temp/1.jpg">
 							<h4>$10</h4>
 							<h4>lemon</h4>
 						</div>
 						<div class="span4">
-							<img src="1.jpg">
+							<img src="images/temp/1.jpg">
 							<h4>$10</h4>
 							<h4>lemon</h4>
 						</div>
 						<div class="span4">
-							<img src="1.jpg">
+							<img src="images/temp/1.jpg">
 							<h4>$10</h4>
 							<h4>lemon</h4>
 						</div>
@@ -66,11 +66,11 @@
 				</div>
 				<div class="span4">
 				<h3>Host products</h3>
-					<img src="1.jpg"></br>
-					<img src="1.jpg"></br>
-					<img src="1.jpg"></br>
-					<img src="1.jpg"></br>
-					<img src="1.jpg">	</br>				
+					<img src="images/temp/1.jpg"></br>
+					<img src="images/temp/1.jpg"></br>
+					<img src="images/temp/1.jpg"></br>
+					<img src="images/temp/1.jpg"></br>
+					<img src="images/temp/1.jpg">	</br>				
 				</div>
 			</div>
 		</div>
