@@ -14,10 +14,10 @@ import com.tmazon.util.DaoUtil;
 public class ProductInfoDaoImpl implements ProductInfoDao {
 
 	public List<ProductInfo> select(ProductInfo productInfo) {
-		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product_info WHERE 1=1 ");
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM productinfo WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (productInfo.getProductId() != null) {
-			sqlBuilder.append("AND product_id=? ");
+			sqlBuilder.append("AND productId=? ");
 			params.add(productInfo.getProductId());
 		}
 		if (productInfo.getSize() != null) {

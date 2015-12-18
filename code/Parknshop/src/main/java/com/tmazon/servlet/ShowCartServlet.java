@@ -26,12 +26,13 @@ public class ShowCartServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("in the servlet");
-		
-		List<Cart> list = cartService.getCart(new User(1, null, null, null, null));
-		for(Cart c : list){
-			System.out.println(c.getQuantity());
-		}
+//		System.out.println("in the servlet");
+//		
+//		List<Cart> list = cartService.getCart(new User(1, null, null, null, null));
+//		System.out.println("########## " + list.size());
+//		for(Cart c : list){
+//			System.out.println(c.getQuantity());
+//		}
 		req.getRequestDispatcher("WEB-INF/customer/cart.jsp").forward(req, resp);
 	}
 	

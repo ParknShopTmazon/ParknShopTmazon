@@ -22,7 +22,7 @@ public class DeliveryDaoImpl implements DeliveryDao {
 			params.add(delivery.getCompany());
 		}
 		if(delivery.getDeliveryId() != null){
-			sqlBuilder.append("AND delivery_id = ? ");
+			sqlBuilder.append("AND deliveryId = ? ");
 			params.add(delivery.getDeliveryId());
 		}
 		if(delivery.getPrice() != null){
@@ -40,7 +40,7 @@ public class DeliveryDaoImpl implements DeliveryDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Delivery> result = runner.query(sql, new BeanListHandler<Delivery>(Delivery.class), params);
+			List<Delivery> result = runner.query(sql, new BeanListHandler<Delivery>(Delivery.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
