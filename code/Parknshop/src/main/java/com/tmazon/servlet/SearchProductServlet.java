@@ -33,8 +33,14 @@ public class SearchProductServlet extends HttpServlet {
 		List<Product> productList = productService.select(product);
 		if(productList==null||productList.isEmpty()){
 			req.setAttribute("num", 0);
+			System.out.println("num:"+req.getAttribute("num"));
 		}else{
+			req.setAttribute("num", productList.size());
 			req.setAttribute("productList", productList);
+			for (Product product2 : productList) {
+				System.out.println(product2.getProductId()+"  "+product2.getName()+"  "+product2.getPrice()+"  "+product2.getSoldNum());
+			}
+			req.setAttribute("test", 0);
 		}
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp");
 		requestDispatcher.forward(req, resp);

@@ -22,61 +22,44 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="row-fluid">
-				<div class="span8">
+				<div class="span12">
 					<h3>All Products</h3>
-					<div class="row-fluid">					
-						<div class="span4">
-							<img src="images/temp/1.jpg">
-							<h4>$10</h4>
-							<h4>lemon</h4>
-						</div>
-						<div class="span4">
-							<img src="images/temp/1.jpg">
-							<h4>$10</h4>
-							<h4>lemon</h4>
-						</div>
-						<div class="span4">
-							<img src="images/temp/1.jpg">
-							<h4>$10</h4>
-							<h4>lemon</h4>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span4">
-							<img src="images/temp/1.jpg">
-							<h4>$10</h4>
-							<h4>lemon</h4>
-						</div>
-						<div class="span4">
-							<img src="images/temp/1.jpg">
-							<h4>$10</h4>
-							<h4>lemon</h4>
-						</div>
-						<div class="span4">
-							<img src="images/temp/1.jpg">
-							<h4>$10</h4>
-							<h4>lemon</h4>
-						</div>
-					</div>
-				</div>
-				<div class="span4">
-				<h3>Host products</h3>
-					<img src="images/temp/1.jpg"></br>
-					<img src="images/temp/1.jpg"></br>
-					<img src="images/temp/1.jpg"></br>
-					<img src="images/temp/1.jpg"></br>
-					<img src="images/temp/1.jpg">	</br>				
-				</div>
+					<c:if test="${num == 0}">
+						<p>not found</p>
+					</c:if>
+					<c:if test="${num >0}">
+						<c:forEach var="product" items="${productList}" >
+							<c:if test="${test%4==0 }">
+								<div class="row-fluid">
+							</c:if>
+								<div class="span3">
+									<img src="images/temp/1.jpg">
+									<h4>${ product.name }</h4>
+									<h4>lemon</h4>
+								</div>
+							<c:if test="${test%4==3 }"></div></c:if>
+						</c:forEach>
+					</c:if>
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid" id = "foot">
-		<div class="span12">
-			<h3>
-				Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
-			</h3>
+	<c:if test="${num <=4 }">
+		<div class="row-fluid" id = "foot"  style="position:absolute; bottom:0; left:0">
+			<div class="span12">
+				<h3>
+					Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
+				</h3>
+			</div>
+		</div>			
+	</c:if>
+	<c:if test="${num >4 }">
+		<div class="row-fluid" id = "foot">
+			<div class="span12">
+				<h3>
+					Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
+				</h3>
+			</div>
 		</div>
-	</div>
+	</c:if>
 </div>
-<%@ include file="footer.html"%>
 </body>
