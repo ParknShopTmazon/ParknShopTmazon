@@ -49,4 +49,20 @@ public class DeliveryDaoImpl implements DeliveryDao {
 		
 	}
 
+	public List<String> getAllCompany() {
+		
+		String sql = "SELECT DISTINCT company from delivery WHERE 1=1 ";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<String> result = runner.query(sql, new BeanListHandler<String>(String.class));
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
 }
