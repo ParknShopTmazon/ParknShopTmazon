@@ -34,8 +34,8 @@
 							</c:if>
 								<div class="span3">
 									<img src="images/temp/1.jpg">
+									<h4>${ product.price } dollar</h4>
 									<h4>${ product.name }</h4>
-									<h4>lemon</h4>
 								</div>
 							<c:if test="${test%4==3 }"></div></c:if>
 						</c:forEach>
