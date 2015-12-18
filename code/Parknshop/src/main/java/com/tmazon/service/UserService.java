@@ -8,4 +8,5 @@ public interface UserService {
 	
 	public boolean isUserExist(User user);
 	
+	public User findByName(String name);
 }
