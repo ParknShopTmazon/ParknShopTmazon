@@ -8,7 +8,6 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.DeliveryDao;
-import com.tmazon.domain.Cart;
 import com.tmazon.domain.Delivery;
 import com.tmazon.util.DaoUtil;
 

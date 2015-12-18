@@ -8,4 +8,6 @@ public interface DeliveryDao {
 
 	public List<Delivery> select(Delivery delivery);
 	
+	
+	
 }

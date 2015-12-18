@@ -9,7 +9,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.ProductInfoDao;
 import com.tmazon.domain.ProductInfo;
-import com.tmazon.domain.User;
 import com.tmazon.util.DaoUtil;
 
 public class ProductInfoDaoImpl implements ProductInfoDao {

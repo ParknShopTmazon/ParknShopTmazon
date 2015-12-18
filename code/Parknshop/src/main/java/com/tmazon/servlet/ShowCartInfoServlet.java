@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tmazon.domain.Delivery;
 import com.tmazon.domain.Product;
 import com.tmazon.domain.ProductInfo;
-import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
+import com.tmazon.service.DeliveryService;
 import com.tmazon.service.ProductService;
 import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
@@ -28,6 +29,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	private CartService cartService = BasicFactory.getImpl(CartService.class);
 	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
+	private DeliveryService deliveryService = BasicFactory.getImpl(DeliveryService.class);
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -35,6 +37,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 		User user = (User) session.getAttribute(AttrName.SessionScope.USER);
 		JSONObject jsonObject = new JSONObject();
 		
+		//cart
 		if (user == null) {
 			
 		} else {
@@ -57,6 +60,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 				item.put("origin_price", product.getPrice());
 				item.put("price", product.getDiscontPrice());
 				item.put("quality", quantity);
+				item.put("stock", product.getStockNum());
 				if(productInfo != null){
 					item.put("size", productInfo.getSize());
 					item.put("color", productInfo.getColor());
@@ -72,6 +76,13 @@ public class ShowCartInfoServlet extends HttpServlet {
 				
 			}
 			jsonObject.put("cart", cart);
+			
+			//delivery_options
+			JSONArray deliveryOptions = new JSONArray();
+			List<Delivery> deliveries = deliveryService.getAllDelivery();
+			for(int i = 0, size = deliveries.size(); i < size; i++){
+				JSONObject deliveryJson = new JSONObject();
+			}
 			
 		}
 		
