@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
-		
+		sqlBuilder.append(" order by sold_num ");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
@@ -81,11 +81,11 @@ public class ProductDaoImpl implements ProductDao{
 		return null;
 	}
 
-	public Product findByCategory(String category) {
+	public List<Product> findByCategory(String category) {
 		// TODO Auto-generated method stub
 		List<Product> list =select(new Product(null, null, null, null, null,category,null,null,null,null));
 		if (list != null && !list.isEmpty()) {
-			return list.get(0);
+			return list;
 		}
 		return null;
 	}
