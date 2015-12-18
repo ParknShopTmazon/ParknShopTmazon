@@ -13,6 +13,9 @@ import com.tmazon.service.ProductService;
 import com.tmazon.service.UserService;
 import com.tmazon.util.BasicFactory;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 public class SearchProductServlet extends HttpServlet {
 
 	/**

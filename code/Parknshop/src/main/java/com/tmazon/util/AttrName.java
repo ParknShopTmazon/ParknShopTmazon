@@ -27,4 +27,14 @@ public class AttrName {
 		public static final String ERROR_USER_EXISTS = "r_error_user_exists";
 		public static final String IS_REGISTER_SUCCESS = "r_is_register_success";
 	}
+	
+	public class CartServiceImplMapGet {
+		public CartServiceImplMapGet() {
+		}
+		
+		public static final String PRODUCT_ID = "product_id";
+		public static final String QUANTITY = "quantity";
+		
+	}
+	
 }
