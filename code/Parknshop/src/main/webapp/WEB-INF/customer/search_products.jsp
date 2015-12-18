@@ -1,29 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	isELIgnored="false" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
 <title>search products</title>
 <link href="css/bootstrap-combined.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/customer.css">
 
 </head>
+<body>
+<%@ include file="header.html"%>
 <div class="container-fluid">
-	<div class="row-fluid" id="head">
-		<div class="span4">
-			<img src = "images/logo.png">
-			
-		</div>
-		<div class ="span3">
+	<br>
+	<div class ="span3">
 			<form class="form-search">
-				<input class="input-medium search-query" type="text" /> <button type="submit" class="btn-warning">search</button>
+				<input class="input-medium search-query" type="text" name="name" /> <button type="submit" class="btn-warning">search</button>
 			</form>
 		</div>
-		<div class="span5">
-			<a href ="#">Personal_center |</a>
-			<a href ="#">Shopping_cart |</a>
-			<a href ="#">Favorites |</a>
-			<a href ="#">Seller_center </a>
-		</div>
-	</div>
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="row-fluid">
@@ -83,3 +78,5 @@
 		</div>
 	</div>
 </div>
+<%@ include file="footer.html"%>
+</body>
