@@ -15,7 +15,7 @@ import com.tmazon.util.DaoUtil;
 public class ProductDaoImpl implements ProductDao{
 
 	public List<Product> select(Product product) {
-		StringBuilder sqlBuilder = new StringBuilder("SELECT FROM product WHERE 1=1 ");
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (product.getProductId() != null) {
 			sqlBuilder.append("AND product_id = ? ");
