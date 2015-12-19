@@ -68,6 +68,14 @@ public class Delivery {
 		return true;
 	}
 
+	
+
+	@Override
+	public String toString() {
+		return "Delivery [deliveryId=" + deliveryId + ", company=" + company + ", price=" + price + ", type=" + type
+				+ "]";
+	}
+
 
 	public Integer getDeliveryId() {
 		return deliveryId;

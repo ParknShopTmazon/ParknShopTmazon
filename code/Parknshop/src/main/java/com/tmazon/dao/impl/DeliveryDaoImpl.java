@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.DeliveryDao;
@@ -49,14 +51,14 @@ public class DeliveryDaoImpl implements DeliveryDao {
 		
 	}
 
-	public List<String> getAllCompany() {
+	public List<Delivery> getAllCompany() {
 		
 		String sql = "SELECT DISTINCT company from delivery WHERE 1=1 ";
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<String> result = runner.query(sql, new BeanListHandler<String>(String.class));
+			List<Delivery> result = runner.query(sql, new BeanListHandler<Delivery>(Delivery.class));
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -20,19 +20,9 @@ import net.sf.json.JSONObject;
 
 public class ShowCartServlet extends HttpServlet {
 	
-	private DeliveryService deliveryService = BasicFactory.getImpl(DeliveryService.class);
-	private CartService cartService = BasicFactory.getImpl(CartService.class);
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-//		System.out.println("in the servlet");
-//		
-//		List<Cart> list = cartService.getCart(new User(1, null, null, null, null));
-//		System.out.println("########## " + list.size());
-//		for(Cart c : list){
-//			System.out.println(c.getQuantity());
-//		}
+
 		req.getRequestDispatcher("WEB-INF/customer/cart.jsp").forward(req, resp);
 	}
 	

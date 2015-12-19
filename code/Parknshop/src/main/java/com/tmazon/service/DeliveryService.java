@@ -10,6 +10,6 @@ public interface DeliveryService {
 	
 	public List<Delivery> getAllDelivery();
 	
-	public List<String> getAllCompany();
+	public List<Delivery> getAllCompany();
 	
 }
