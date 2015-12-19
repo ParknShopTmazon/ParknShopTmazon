@@ -68,7 +68,6 @@ public class LoginServlet extends HttpServlet {
 				.getAttribute(AttrName.ApplicationScope.ONLINE_USERS);
 		if (users.containsKey(name)) {
 			users.get(name).invalidate();
-			users.remove(name);
 		}
 
 		// log in
