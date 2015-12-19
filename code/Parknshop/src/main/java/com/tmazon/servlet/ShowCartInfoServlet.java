@@ -19,6 +19,7 @@ import com.tmazon.service.DeliveryService;
 import com.tmazon.service.ProductService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.ParseUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -57,8 +58,8 @@ public class ShowCartInfoServlet extends HttpServlet {
 				JSONObject item = new JSONObject();
 				item.put("sid", product.getProductId());
 				item.put("name", product.getName());
-				item.put("origin_price", product.getPrice());
-				item.put("price", product.getDiscontPrice());
+				item.put("origin_price", ParseUtil.Price2String(product.getPrice()));
+				item.put("price", ParseUtil.Price2String(product.getDiscountPrice()));
 				item.put("quality", quantity);
 				item.put("stock", product.getStockNum());
 				if(productInfo != null){
@@ -69,8 +70,8 @@ public class ShowCartInfoServlet extends HttpServlet {
 					item.put("color", null);
 				}
 				
-				item.put("shop_url", "#");
-				item.put("shop_pic", null);
+				item.put("shop_url", "");
+				item.put("shop_pic", "");
 				
 				cart.add(item);
 				
@@ -90,8 +91,8 @@ public class ShowCartInfoServlet extends HttpServlet {
 					JSONObject priceJson = new JSONObject();
 					Delivery deliveryPriceItem = priceList.get(ii);
 					priceJson.put("delivery_id", deliveryPriceItem.getDeliveryId());
-					priceJson.put("value", deliveryPriceItem.getPrice());
-					priceJson.put("description", "delivery price: $" + deliveryPriceItem.getPrice() + "(" + deliveryPriceItem.getType() + ")");
+					priceJson.put("value", ParseUtil.Price2String(deliveryPriceItem.getPrice()));
+					priceJson.put("description", "delivery price: $" + ParseUtil.Price2String(deliveryPriceItem.getPrice()) + "(" + deliveryPriceItem.getType() + ")");
 					priceOption.add(priceJson);
 				}
 				deliveryJson.put("price_option", priceOption);

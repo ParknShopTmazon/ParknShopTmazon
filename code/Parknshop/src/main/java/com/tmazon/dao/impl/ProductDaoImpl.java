@@ -33,9 +33,9 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append("AND price = ? ");
 			params.add(product.getPrice());
 		}
-		if (product.getDiscontPrice() != null) {
-			sqlBuilder.append("AND discontPrice = ? ");
-			params.add(product.getDiscontPrice());
+		if (product.getDiscountPrice() != null) {
+			sqlBuilder.append("AND discountPrice = ? ");
+			params.add(product.getDiscountPrice());
 		}
 		if (product.getCategory() != null) {
 			sqlBuilder.append("AND category = ? ");
