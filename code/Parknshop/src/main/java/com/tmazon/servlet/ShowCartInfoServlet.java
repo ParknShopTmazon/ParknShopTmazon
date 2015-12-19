@@ -17,7 +17,6 @@ import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
 import com.tmazon.service.DeliveryService;
 import com.tmazon.service.ProductService;
-import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 
@@ -26,9 +25,10 @@ import net.sf.json.JSONObject;
 
 public class ShowCartInfoServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	private CartService cartService = BasicFactory.getImpl(CartService.class);
-	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 	private DeliveryService deliveryService = BasicFactory.getImpl(DeliveryService.class);
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -79,10 +79,25 @@ public class ShowCartInfoServlet extends HttpServlet {
 			
 			//delivery_options
 			JSONArray deliveryOptions = new JSONArray();
-			List<Delivery> deliveries = deliveryService.getAllDelivery();
-			for(int i = 0, size = deliveries.size(); i < size; i++){
+			List<Delivery> deliverieCompanies = deliveryService.getAllDelivery();
+			for(int i = 0, size = deliverieCompanies.size(); i < size; i++){
 				JSONObject deliveryJson = new JSONObject();
+				Delivery deliveryItem = deliverieCompanies.get(i);
+				deliveryJson.put("company_name", deliveryItem.getCompany());
+				List<Delivery> priceList = deliveryService.select(deliveryItem);
+				JSONArray priceOption = new JSONArray();
+				for(int ii = 0, sizes = priceList.size(); ii < sizes; ii++){
+					JSONObject priceJson = new JSONObject();
+					Delivery deliveryPriceItem = priceList.get(ii);
+					priceJson.put("delivery_id", deliveryPriceItem.getDeliveryId());
+					priceJson.put("value", deliveryPriceItem.getPrice());
+					priceJson.put("description", "delivery price: $" + deliveryPriceItem.getPrice() + "(" + deliveryPriceItem.getType() + ")");
+					priceOption.add(priceJson);
+				}
+				deliveryJson.put("price_option", priceOption);
+				deliveryOptions.add(deliveryJson);
 			}
+			jsonObject.put("delivery_options", deliveryOptions);
 			
 		}
 		

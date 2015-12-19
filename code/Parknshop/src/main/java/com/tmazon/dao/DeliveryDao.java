@@ -8,6 +8,6 @@ public interface DeliveryDao {
 
 	public List<Delivery> select(Delivery delivery);
 	
-	public List<String> getAllCompany();
+	public List<Delivery> getAllCompany();
 	
 }
