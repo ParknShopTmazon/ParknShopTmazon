@@ -17,7 +17,6 @@ import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
 import com.tmazon.service.DeliveryService;
 import com.tmazon.service.ProductService;
-import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 
@@ -26,6 +25,8 @@ import net.sf.json.JSONObject;
 
 public class ShowCartInfoServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	private CartService cartService = BasicFactory.getImpl(CartService.class);
 	private DeliveryService deliveryService = BasicFactory.getImpl(DeliveryService.class);
