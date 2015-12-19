@@ -69,8 +69,8 @@ public class ShowCartInfoServlet extends HttpServlet {
 					item.put("color", null);
 				}
 				
-//				item.put("shop_url", "#");
-//				item.put("shop_pic", null);
+				item.put("shop_url", "#");
+				item.put("shop_pic", null);
 				
 				cart.add(item);
 				
