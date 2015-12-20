@@ -21,8 +21,8 @@
 		</div>
 		<div id="shop-cost">
 			<div class="main">Cost</div>
-			<div class="quality clear-fix sub-main">
-				<span>total quality</span>
+			<div class="quantity clear-fix sub-main">
+				<span>total quantity</span>
 				<span class="value"></span>
 			</div>
 			<div class="origin clear-fix sub-main">

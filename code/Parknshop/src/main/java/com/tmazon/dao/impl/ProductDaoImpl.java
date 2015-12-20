@@ -9,7 +9,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.ProductDao;
 import com.tmazon.domain.Product;
-import com.tmazon.domain.User;
 import com.tmazon.util.DaoUtil;
 
 public class ProductDaoImpl implements ProductDao{
@@ -18,11 +17,11 @@ public class ProductDaoImpl implements ProductDao{
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (product.getProductId() != null) {
-			sqlBuilder.append("AND product_id = ? ");
+			sqlBuilder.append("AND productId = ? ");
 			params.add(product.getProductId());
 		}
 		if (product.getShopId() != null) {
-			sqlBuilder.append("AND shop_id = ? ");
+			sqlBuilder.append("AND shopId = ? ");
 			params.add(product.getShopId());
 		}
 		if (product.getName() != null) {
@@ -34,20 +33,20 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append("AND price = ? ");
 			params.add(product.getPrice());
 		}
-		if (product.getDiscontPrice() != null) {
-			sqlBuilder.append("AND discont_price = ? ");
-			params.add(product.getDiscontPrice());
+		if (product.getDiscountPrice() != null) {
+			sqlBuilder.append("AND discountPrice = ? ");
+			params.add(product.getDiscountPrice());
 		}
 		if (product.getCategory() != null) {
 			sqlBuilder.append("AND category = ? ");
 			params.add(product.getCategory());
 		}
 		if (product.getStockNum() != null) {
-			sqlBuilder.append("AND stock_num = ? ");
+			sqlBuilder.append("AND stockNum = ? ");
 			params.add(product.getStockNum());
 		}
 		if(product.getSoldNum()!=null){
-			sqlBuilder.append(" AND sold_num=? ");
+			sqlBuilder.append(" AND soldNum=? ");
 			params.add(product.getSoldNum());
 		}
 		if(product.getDescription()!=null){
@@ -58,7 +57,7 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
-		sqlBuilder.append(" order by sold_num ");
+		sqlBuilder.append(" order by soldNum  DESC");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		

@@ -19,11 +19,11 @@ public class CartDaoImpl implements CartDao {
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM cart WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if(cart.getUserId() != null){
-			sqlBuilder.append("AND user_id = ? ");
+			sqlBuilder.append("AND userId = ? ");
 			params.add(cart.getUserId());
 		}
 		if(cart.getProductId() != null){
-			sqlBuilder.append("AND product_id = ? ");
+			sqlBuilder.append("AND productId = ? ");
 			params.add(cart.getProductId());
 		}
 		if(cart.getQuantity() != null){
@@ -36,7 +36,7 @@ public class CartDaoImpl implements CartDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Cart> result = runner.query(sql, new BeanListHandler<Cart>(Cart.class), params);
+			List<Cart> result = runner.query(sql, new BeanListHandler<Cart>(Cart.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class CartDaoImpl implements CartDao {
 
 	public boolean update(Cart cart) {
 		
-		String sql = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+		String sql = "UPDATE cart SET quantity = ? WHERE userId = ? AND productId = ?";
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
@@ -75,7 +75,7 @@ public class CartDaoImpl implements CartDao {
 
 	public boolean delete(Cart cart) {
 		
-		String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+		String sql = "DELETE FROM cart WHERE userId = ? AND productId = ?";
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());

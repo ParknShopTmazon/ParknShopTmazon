@@ -5,7 +5,7 @@ package com.tmazon.domain;
 	shop_id int NOT NULL,
 	name varchar(50) NOT NULL,
 	price decimal(10,2) NOT NULL,
-	discont_price decimal(10,2) NOT NULL,
+	discount_price decimal(10,2) NOT NULL,
 	category varchar(50) NOT NULL,
 	stock_num int NOT NULL,
 	sold_num int NOT NULL,
@@ -22,7 +22,7 @@ public class Product {
 	private Integer shopId;
 	private String name;
 	private Double price;
-	private Double discontPrice;
+	private Double discountPrice;
 	private String category;
 	private Integer stockNum;
 	private Integer soldNum;
@@ -52,11 +52,11 @@ public class Product {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public Double getDiscontPrice() {
-		return discontPrice;
+	public Double getDiscountPrice() {
+		return discountPrice;
 	}
-	public void setDiscontPrice(Double discontPrice) {
-		this.discontPrice = discontPrice;
+	public void setDiscountPrice(Double discountPrice) {
+		this.discountPrice = discountPrice;
 	}
 	public String getCategory() {
 		return category;
@@ -88,14 +88,14 @@ public class Product {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	public Product(Integer productId, Integer shopId, String name, Double price, Double discontPrice, String category,
+	public Product(Integer productId, Integer shopId, String name, Double price, Double discountPrice, String category,
 			Integer stockNum, Integer soldNum, String description, String picture) {
 		super();
 		this.productId = productId;
 		this.shopId = shopId;
 		this.name = name;
 		this.price = price;
-		this.discontPrice = discontPrice;
+		this.discountPrice = discountPrice;
 		this.category = category;
 		this.stockNum = stockNum;
 		this.soldNum = soldNum;

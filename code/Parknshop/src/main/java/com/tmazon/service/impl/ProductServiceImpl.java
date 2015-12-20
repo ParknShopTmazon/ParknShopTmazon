@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.tmazon.dao.ProductDao;
 import com.tmazon.dao.ProductInfoDao;
-import com.tmazon.dao.UserDao;
 import com.tmazon.domain.Product;
 import com.tmazon.domain.ProductInfo;
 import com.tmazon.service.ProductService;

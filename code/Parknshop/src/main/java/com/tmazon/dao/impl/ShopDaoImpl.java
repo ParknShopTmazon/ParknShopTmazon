@@ -26,7 +26,7 @@ public class ShopDaoImpl implements ShopDao {
 			params.add(shop.getOwner());
 		}
 		if(shop.getShopId() != null){
-			sqlBuilder.append("AND shop_id = ? ");
+			sqlBuilder.append("AND shopId = ? ");
 			params.add(shop.getShopId());
 		}
 		if(shop.getType() != null){
@@ -39,7 +39,7 @@ public class ShopDaoImpl implements ShopDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Shop> result = runner.query(sql, new BeanListHandler<Shop>(Shop.class), params);
+			List<Shop> result = runner.query(sql, new BeanListHandler<Shop>(Shop.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();

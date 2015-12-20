@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tmazon.dao.CartDao;
-import com.tmazon.dao.ProductDao;
-import com.tmazon.dao.UserDao;
 import com.tmazon.domain.Cart;
-import com.tmazon.domain.Product;
 import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
 import com.tmazon.util.AttrName;
@@ -47,14 +44,29 @@ public class CartServiceImpl implements CartService {
 	}
 
 
-	public boolean addProduct(Integer userId, Integer productId, int count) {
+	public boolean addProduct(Integer userId, Integer productId, Integer quantity) {
 		
-		return false;
+		return cartDao.insert(new Cart(userId, productId, quantity));
 	}
 
-	public boolean deleteProduct(Integer userId, Integer productId, int count) {
+	public boolean deleteProduct(Integer userId, Integer productId) {
 		
-		return false;
+		return cartDao.delete(new Cart(userId, productId, null));
+	}
+
+	public boolean updateProduct(Integer userId, Integer productId, Integer quantity) {
+		
+		return cartDao.update(new Cart(userId, productId, quantity));
+	}
+
+	public boolean isExists(Integer userId, Integer productId) {
+		
+		List<Cart> list = cartDao.select(new Cart(userId, productId, null));
+		
+		if(list.isEmpty())
+			return false;
+		
+		return true;
 	}
 
 }

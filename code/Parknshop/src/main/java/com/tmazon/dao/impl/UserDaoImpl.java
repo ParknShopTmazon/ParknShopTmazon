@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM user WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (user.getUserId() != null) {
-			sqlBuilder.append("AND user_id=? ");
+			sqlBuilder.append("AND userId=? ");
 			params.add(user.getUserId());
 		}
 		if (user.getName() != null) {
