@@ -341,7 +341,7 @@ var customer = {
                             <div class="quantity sub-main">\
                                 <span>quantity</span>\
                                 <span class="value">\
-                                    <input type="number" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
+                                    <input type="number" sid="' + cart[i].sid + '" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
                                 </span>\
                             </div>\
                             <div class="color sub-main">\
@@ -384,8 +384,20 @@ var customer = {
 
         /** delete shop item */
         $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-            $(this).parent().parent().parent().remove();
-            updateCost();
+
+            /** store data into database */
+            $.getJSON('deleteCart', {
+                sid: $(this).attr('sid')
+            }, function(data, textStatus) {
+                /*optional stuff to do after success */
+                if (typeof(data.status) != 'undefined' && data.status == 'true') {
+                    $(this).parent().parent().parent().remove();
+                    updateCost();
+                } else {
+                    var error = data.errMsg || '';
+                    alert('failed to delete: ' + error);
+                }
+            });
         });
 
         /** [click function of the pay button] */
@@ -405,7 +417,20 @@ var customer = {
                     $(this).val($(this).attr('max_quantity'));
                     alert('the product is limited for sale');
                 } else {
-                    $(this).attr('value', $(this).val());
+                    /** store data into database */
+                    $.getJSON('updateCart', {
+                        sid: $(this).attr('sid'),
+                        quantity: $(this).val()
+                    }, function(data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (typeof(data.status) != 'undefined' && data.status == 'true') {
+                            $(this).attr('value', $(this).val());
+                        } else {
+                            var error = data.errMsg || '';
+                            alert('failed to modify: ' + error);
+                            $(this).val($(this).attr('value'));
+                        }
+                    });
                 }
             } else {
                 $(this).focus();
