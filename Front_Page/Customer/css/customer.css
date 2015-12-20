@@ -755,15 +755,15 @@ s {
     font-size: 1em;
 }
 
-.cart-container #shop-lists .shop-info .quality {
+.cart-container #shop-lists .shop-info .quantity {
     line-height: 25px;
 }
 
-.cart-container #shop-lists .shop-info .quality .value {
+.cart-container #shop-lists .shop-info .quantity .value {
     width: 20%;
 }
 
-.cart-container #shop-lists .shop-info .quality .value input[type="number"] {
+.cart-container #shop-lists .shop-info .quantity .value input[type="number"] {
     width: 100%;
     border-radius: 4px;
     background-color: #f0ede5;
@@ -1016,7 +1016,7 @@ s {
 
 .order-container #order-details .order-item .order-origin-price,
 .order-container #order-details .order-item .order-price,
-.order-container #order-details .quality,
+.order-container #order-details .quantity,
 .order-container #order-details .order-delivery,
 .order-container #order-details .order-delivery-price {
     display: inline-block;
@@ -1024,12 +1024,12 @@ s {
     vertical-align: middle;
 }
 
-.order-container #order-details .quality {
+.order-container #order-details .quantity {
     width: 5%;
     margin-left: 5%;
 }
 
-.order-container #order-details .quality input[type="number"] {
+.order-container #order-details .quantity input[type="number"] {
     width: 100%;
     border-radius: 4px;
     background-color: #f0ede5;
@@ -1381,7 +1381,7 @@ s {
 .order-container #order-list .order-item .origin-price,
 .order-container #order-list .order-item .price,
 .order-container #order-list .order-item .size,
-.order-container #order-list .order-item .quality,
+.order-container #order-list .order-item .quantity,
 .order-container #order-list .order-item .info,
 .order-container #order-list .order-item .handle-btn {
     display: inline-block;
@@ -1403,17 +1403,17 @@ s {
 }
 
 .order-container #order-list .order-item .size .name,
-.order-container #order-list .order-item .quality .name {
+.order-container #order-list .order-item .quantity .name {
     color: #999;
 }
 
 .order-container #order-list .order-item .size .value,
-.order-container #order-list .order-item .quality .value {
+.order-container #order-list .order-item .quantity .value {
     font-size: 2em;
 }
 
 .order-container #order-list .order-item .size p,
-.order-container #order-list .order-item .quality p {
+.order-container #order-list .order-item .quantity p {
     text-align: right;
     width: 90px;
 }

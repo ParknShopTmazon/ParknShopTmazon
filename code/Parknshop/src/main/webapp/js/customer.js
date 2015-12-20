@@ -1,4 +1,27 @@
-﻿"use strict";
+﻿/***********************************************************************
+ *                                                                   _
+ *       _____  _                           ____  _                 |_|
+ *      |  _  |/ \   ____  ____ __ ___     / ___\/ \   __   _  ____  _
+ *      | |_| || |  / __ \/ __ \\ '_  \ _ / /    | |___\ \ | |/ __ \| |
+ *      |  _  || |__. ___/. ___/| | | ||_|\ \___ |  _  | |_| |. ___/| |
+ *      |_/ \_|\___/\____|\____||_| |_|    \____/|_| |_|_____|\____||_| 
+ *                                                                      
+ *      ================================================================
+ *                 More than a coder, More than a designer              
+ *      ================================================================
+ *
+ *
+ *      - Document: customer.js
+ *      - Author: aleen42
+ *      - Description: including all the function of customer role, this
+ *                     file is a javascript file to control all the 
+ *                     interaction of customers. 
+ *      - Create Time: Dec 9, 2015
+ *      - Update Time: Dec 20, 2015 
+ *
+ *
+ **********************************************************************/
+"use strict";
 
 var customer = {
     /**
@@ -269,15 +292,15 @@ var customer = {
             var list = $('.cart-container #shop-lists .shop-info .price .value');
             var origin_list = $('.cart-container #shop-lists .shop-info .price .value .origin-cost');
             var right_list = $('.cart-container #shop-lists .shop-info .price .value .right-cost');
-            var quality_list = $('.cart-container #shop-lists .shop-info .quality .value input');
-            /** update quality */
-            $('#shop-cost .quality .value').html(list.length);
+            var quantity_list = $('.cart-container #shop-lists .shop-info .quantity .value input');
+            /** update quantity */
+            $('#shop-cost .quantity .value').html(list.length);
 
             origin_cost = right_cost = 0;
             /** update cost */
             for (var i = 0; i < list.length; i++) {
-                origin_cost += parseInt(quality_list[i].value) * parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
-                right_cost += parseInt(quality_list[i].value) * parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
+                origin_cost += parseInt(quantity_list[i].value) * parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
+                right_cost += parseInt(quantity_list[i].value) * parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
             }
             $('#shop-cost .origin .value').html('<s>$' + origin_cost.toFixed(1) + '</s>');
             $('#shop-cost .cost .value').html('$' + right_cost.toFixed(1));
@@ -299,7 +322,7 @@ var customer = {
             });
 
         /** test data */
-        var testData = "{\n\t\"cid\": \"1\", \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"uid\": \"123\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"cart\": [\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t{\n\t\t\t\"sid\" : \"1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"name\": \"shop1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"size\": \"S\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"origin_price\": \"38.9\",\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"price\": \"28.9\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"quality\": 2,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"color\": \"#000000\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_url\": \"#\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\t\t\t\t\t\t\t\t\n\t\t\t\"delivery_options\": [\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\"price_option\": [\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"2\",\n\t\t\t\"name\": \"shop2\",\n\t\t\t\"size\": \"XL\",\n\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#232122\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"3\",\n\t\t\t\"name\": \"shop3\",\n\t\t\t\"size\": \"XXL\",\n\t\t\t\"origin_price\": \"59.9\",\n\t\t\t\"price\": \"35.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#d1b699\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop3.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"4\",\n\t\t\t\"name\": \"shop4\",\n\t\t\t\"size\": \"L\",\n\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#3f205c\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"11.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $11.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n";
+        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
 
         /** parse */
         var cart = JSON.parse(testData).cart;
@@ -327,10 +350,10 @@ var customer = {
                         <span>price</span>\
                         <span class="value"><span class="origin-cost"><s>$' + cart[i].origin_price + '</s></span>&nbsp;<span class="right-cost">$' + cart[i].price + '</span></span>\
                     </div>\
-                    <div class="quality sub-main">\
-                        <span>quality</span>\
+                    <div class="quantity sub-main">\
+                        <span>quantity</span>\
                         <span class="value">\
-                            <input type="number" min="1" value="' + cart[i].quality + '">\
+                            <input type="number" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
                         </span>\
                     </div>\
                     <div class="color sub-main">\
@@ -358,17 +381,17 @@ var customer = {
             window.location.href = "./order.jsp?type=certain";
         });
 
-        /** [change function of quality changing] */
-        $('.cart-container #shop-lists .shop-info .quality .value input[type="number"]').change(function(event) {
+        /** [change function of quantity changing] */
+        $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
             /* Act on the event */
 
             /** check legality when keydown */
             var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
             if (regex.test($(this).val())) {
-                if (parseInt($(this).val()) > 99) {
+                if (parseInt($(this).val()) > parseInt($(this).attr('max_quantity'))) {
                     $(this).focus();
-                    $(this).val(99);
-                    alert('you can only enter integer number between 1 and 99');
+                    $(this).val($(this).attr('max_quantity'));
+                    alert('the product is limited for sale');
                 } else {
                     $(this).attr('value', $(this).val());
                 }
@@ -430,7 +453,7 @@ var customer = {
          */
         var updateCost = function() {
                 var list = $('.order-container #order-details .order-item .order-price .shop-price');
-                var quality = $('.order-container #order-details .quality input[type="number"]');
+                var quantity = $('.order-container #order-details .quantity input[type="number"]');
                 var price = $('.order-container #order-details .order-item .order-origin-price span');
                 var delivery_price = $('.order-container #order-details .order-item .delivery-price');
 
@@ -440,7 +463,7 @@ var customer = {
                 for (var i = 0; i < list.length; i++) {
                     var priceItem = price[i].textContent;
                     var deliveryPriceItem = delivery_price[i].textContent;
-                    priceItem = parseInt(quality[i].value) * parseFloat(priceItem.substring(priceItem.indexOf('$') + 1, priceItem.length)) + parseFloat(deliveryPriceItem.substring(deliveryPriceItem.indexOf('$') + 1, deliveryPriceItem.length));
+                    priceItem = parseInt(quantity[i].value) * parseFloat(priceItem.substring(priceItem.indexOf('$') + 1, priceItem.length)) + parseFloat(deliveryPriceItem.substring(deliveryPriceItem.indexOf('$') + 1, deliveryPriceItem.length));
 
                     list[i].innerHTML = '$' + priceItem.toFixed(2);
 
@@ -521,28 +544,29 @@ var customer = {
             });
 
         /** test data */
-        var testData = "{\n\t\"cid\": \"1\", \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"uid\": \"123\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\"cart\": [\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t{\n\t\t\t\"sid\" : \"1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"name\": \"shop1\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"size\": \"S\",\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"origin_price\": \"38.9\",\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"price\": \"28.9\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"quality\": 2,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"color\": \"#000000\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_url\": \"#\",\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\t\t\t\t\t\t\t\t\n\t\t\t\"delivery_options\": [\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\"price_option\": [\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"2\",\n\t\t\t\"name\": \"shop2\",\n\t\t\t\"size\": \"XL\",\n\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#232122\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"3\",\n\t\t\t\"name\": \"shop3\",\n\t\t\t\"size\": \"XXL\",\n\t\t\t\"origin_price\": \"59.9\",\n\t\t\t\"price\": \"35.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#d1b699\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop3.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"sid\" : \"4\",\n\t\t\t\"name\": \"shop4\",\n\t\t\t\"size\": \"L\",\n\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\"price\": \"25.9\",\n\t\t\t\"quality\": 1,\n\t\t\t\"color\": \"#3f205c\",\n\t\t\t\"shop_url\": \"#\",\n\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\"delivery_options\": [\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"STO inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"10.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $10(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.0\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"company_name\": \"EMS inc.\",\n\t\t\t\t\t\"price_option\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"11.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $11.8(normal)\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"12.8\",\n\t\t\t\t\t\t\t\"description\": \"delivery price: $12.8(fast)\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n";
+        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
 
         /** parse */
         var cart = JSON.parse(testData).cart,
+            delivery_options = JSON.parse(testData).delivery_options,
             origin_cost = 0,
             right_cost = 0;
 
         for (var i in cart) {
             /** calculate the cost */
-            origin_cost += parseInt(cart[i].quality) * parseFloat(cart[i].origin_price);
-            right_cost += parseInt(cart[i].quality) * parseFloat(cart[i].price);
+            origin_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].origin_price);
+            right_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].price);
 
             /** generate delivery company options */
             var company_options = '';
-            for (var j in cart[i].delivery_options) {
-                company_options += '<option value="' + j + '">' + cart[i].delivery_options[j].company_name + '</option>';
+            for (var j in delivery_options) {
+                company_options += '<option value="' + j + '">' + delivery_options[j].company_name + '</option>';
             }
 
             /** generate options of the first company */
             var price_options = '';
-            for (var j in cart[i].delivery_options[0].price_option) {
-                price_options += '<option value="' + cart[i].delivery_options[0].price_option[j].value + '">' + cart[i].delivery_options[0].price_option[j].description + '</option>';
+            for (var j in delivery_options[0].price_option) {
+                price_options += '<option value="' + delivery_options[0].price_option[j].value + '">' + delivery_options[0].price_option[j].description + '</option>';
             }
 
             /** append list item */
@@ -563,8 +587,8 @@ var customer = {
                 <div class="order-origin-price">\
                     <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
                 </div>\
-                <div class="quality">\
-                    <input type="number" name="quality" min="1" value="' + cart[i].quality + '">\
+                <div class="quantity">\
+                    <input type="number" name="quantity" min="1" value="' + cart[i].quantity + '">\
                 </div>\
                 <div class="order-delivery">\
                     <select item="' + i + '">\
@@ -577,8 +601,8 @@ var customer = {
                     </select>\
                 </div>\
                 <div class="order-price">\
-                    <p class="shop-price">$' + (parseInt(cart[i].quality) * parseFloat(cart[i].price) + parseFloat(cart[i].delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
-                    <p class="delivery-price">+ $' + cart[i].delivery_options[0].price_option[0].value + '</p>\
+                    <p class="shop-price">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
+                    <p class="delivery-price">+ $' + delivery_options[0].price_option[0].value + '</p>\
                 </div>\
             </div>');
         }
@@ -602,8 +626,8 @@ var customer = {
 
             /** append the new option */
             var price_options = '';
-            for (var j in cart[i].delivery_options[0].price_option) {
-                price_options += '<option value="' + cart[i].delivery_options[k].price_option[j].value + '">' + cart[i].delivery_options[k].price_option[j].description + '</option>';
+            for (var j in delivery_options[0].price_option) {
+                price_options += '<option value="' + delivery_options[k].price_option[j].value + '">' + delivery_options[k].price_option[j].description + '</option>';
             }
             $(this).next().children('select').append(price_options);
 
@@ -626,8 +650,8 @@ var customer = {
             updateCost();
         });
 
-        /** [change function of quality changing ] */
-        $('.order-container #order-details .quality input[type="number"]').change(function(event) {
+        /** [change function of quantity changing ] */
+        $('.order-container #order-details .quantity input[type="number"]').change(function(event) {
             /** check legality when keydown */
             var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
             if (regex.test($(this).val())) {
@@ -738,6 +762,31 @@ var customer = {
 
     initList: function() {
         "use strict";
+        /** Date format */
+        Date.prototype.format = function(format) {
+            var date = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S+": this.getMilliseconds()
+            };
+            if (/(y+)/i.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+            }
+            for (var k in date) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                }
+            }
+            return format;
+        }
+
+        /** date object */
+        var date = new Date();
+
         /** get data by uid and page */
         $.ajax({
                 url: '',
@@ -755,7 +804,7 @@ var customer = {
             });
 
         /** test data */
-        var testData = "{\n\t\"uid\": \"123\",\n\t\"count\": 2,\n\t\"page\": 1,\n\t\"orderDatas\": [\n\t\t{\n\t\t\t\"oid\": \"12341544234\",\n\t\t\t\"ctime\": \"1446692400\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"1\",\n\t\t\t\t\t\"name\": \"shop1\",\n\t\t\t\t\t\"size\": \"S\",\n\t\t\t\t\t\"origin_price\": \"38.9\",\n\t\t\t\t\t\"price\": \"28.9\",\n\t\t\t\t\t\"quality\": 2,\n\t\t\t\t\t\"color\": \"#000000\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.0\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"2\",\n\t\t\t\t\t\"name\": \"shop2\",\n\t\t\t\t\t\"size\": \"XL\",\n\t\t\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quality\": 1,\n\t\t\t\t\t\"color\": \"#232122\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.8\"\n\t\t\t\t}\n\t\t\t]\t\t\n\t\t},\n\t\t{\n\t\t\t\"oid\": \"12341241323\",\n\t\t\t\"ctime\":  \"1417751768\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"4\",\n\t\t\t\t\t\"name\": \"shop4\",\n\t\t\t\t\t\"size\": \"L\",\n\t\t\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quality\": 1,\n\t\t\t\t\t\"color\": \"#3f205c\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\t\t\"delivery_price\": \"11.8\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}";
+        var testData = "{\n\t\"uid\": \"123\",\n\t\"count\": 2,\n\t\"page\": 1,\n\t\"orderDatas\": [\n\t\t{\n\t\t\t\"oid\": \"12341544234\",\n\t\t\t\"ctime\": \"1446692400\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"1\",\n\t\t\t\t\t\"name\": \"shop1\",\n\t\t\t\t\t\"size\": \"S\",\n\t\t\t\t\t\"origin_price\": \"38.9\",\n\t\t\t\t\t\"price\": \"28.9\",\n\t\t\t\t\t\"quantity\": 2,\n\t\t\t\t\t\"color\": \"#000000\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.0\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"2\",\n\t\t\t\t\t\"name\": \"shop2\",\n\t\t\t\t\t\"size\": \"XL\",\n\t\t\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quantity\": 1,\n\t\t\t\t\t\"color\": \"#232122\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.8\"\n\t\t\t\t}\n\t\t\t]\t\t\n\t\t},\n\t\t{\n\t\t\t\"oid\": \"12341241323\",\n\t\t\t\"ctime\":  \"1417751768\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"4\",\n\t\t\t\t\t\"name\": \"shop4\",\n\t\t\t\t\t\"size\": \"L\",\n\t\t\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quantity\": 1,\n\t\t\t\t\t\"color\": \"#3f205c\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\t\t\"delivery_price\": \"11.8\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}";
 
         /** parse */
         var orders = JSON.parse(testData);
@@ -764,6 +813,9 @@ var customer = {
         for (var i in orders.orderDatas) {
             /** loop to get shop item for this order */
             var shopItem = '';
+
+            /** order time */
+            date.setTime(orders.orderDatas[i].ctime * 1000);
             for (var j in orders.orderDatas[i].order) {
                 shopItem += '<div class="shop-item">\
                     <div class="pic-container">\
@@ -781,9 +833,9 @@ var customer = {
                         </p>\
                         <p class="current">$' + orders.orderDatas[i].order[j].price + '</p>\
                     </div>\
-                    <div class="quality">\
-                        <p class="value">' + orders.orderDatas[i].order[j].quality + '</p>\
-                        <p class="name">quality</p>\
+                    <div class="quantity">\
+                        <p class="value">' + orders.orderDatas[i].order[j].quantity + '</p>\
+                        <p class="name">quantity</p>\
                     </div>\
                     <div class="size">\
                         <p class="value">' + orders.orderDatas[i].order[j].size + '</p>\
@@ -791,7 +843,7 @@ var customer = {
                     </div>\
                     <div class="price">\
                         <p class="shop-price">\
-                            $' + (parseInt(orders.orderDatas[i].order[j].quality) * parseFloat(orders.orderDatas[i].order[j].price) + parseFloat(orders.orderDatas[i].order[j].delivery_price)) + '\
+                            $' + (parseInt(orders.orderDatas[i].order[j].quantity) * parseFloat(orders.orderDatas[i].order[j].price) + parseFloat(orders.orderDatas[i].order[j].delivery_price)) + '\
                         </p>\
                         <p class="delivery-price">delivery price: + $' + orders.orderDatas[i].order[j].delivery_price + '</p>\
                     </div>\
@@ -813,13 +865,21 @@ var customer = {
                 <div class="brief-info">\
                     <div class="order-id">\
                         <span class="name">order id:</span>\
-                        <span class="value">1234531152</span>\
+                        <span class="value">' + orders.orderDatas[i].oid + '</span>\
                     </div>\
                     <div class="order-ctime">\
-                        <span class="value">2015-12-05 13:08:25</span>\
+                        <span class="value"> ' + date.format('yyyy-MM-dd hh:mm:ss') +  ' </span>\
                     </div>\
                     <div class="delete-btn button"></div>\
                 </div>' + shopItem + '</div>');
         }
+
+        /** [click function of delete order] */
+        $('.order-container #order-list .order-item .delete-btn').click(function(event) {
+
+
+            /** remove dom node */
+            $(this).parent().parent().remove();
+        })
     }
 };
