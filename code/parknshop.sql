@@ -37,6 +37,7 @@ CREATE TABLE shop(
 	shop_id int AUTO_INCREMENT,
 	name varchar(50) NOT NULL,
 	type varchar(50) NOT NULL,
+	status varchar(50) NOT NULL,
 	owner int NOT NULL,
 	CONSTRAINT pk_shop_id PRIMARY KEY (shop_id),
 	FOREIGN KEY (owner) REFERENCES user(user_id)
