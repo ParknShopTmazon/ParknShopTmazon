@@ -44,14 +44,29 @@ public class CartServiceImpl implements CartService {
 	}
 
 
-	public boolean addProduct(Integer userId, Integer productId, int count) {
+	public boolean addProduct(Integer userId, Integer productId, Integer quantity) {
 		
-		return false;
+		return cartDao.insert(new Cart(userId, productId, quantity));
 	}
 
-	public boolean deleteProduct(Integer userId, Integer productId, int count) {
+	public boolean deleteProduct(Integer userId, Integer productId) {
 		
-		return false;
+		return cartDao.delete(new Cart(userId, productId, null));
+	}
+
+	public boolean updateProduct(Integer userId, Integer productId, Integer quantity) {
+		
+		return cartDao.update(new Cart(userId, productId, quantity));
+	}
+
+	public boolean isExists(Integer userId, Integer productId) {
+		
+		List<Cart> list = cartDao.select(new Cart(userId, productId, null));
+		
+		if(list.isEmpty())
+			return false;
+		
+		return true;
 	}
 
 }
