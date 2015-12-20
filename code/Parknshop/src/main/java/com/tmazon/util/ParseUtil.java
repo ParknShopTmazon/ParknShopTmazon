@@ -14,4 +14,23 @@ public class ParseUtil {
 		return null;
 	}
 	
+	public static Integer String2Integer(String s, Integer defaultValue) {
+		
+		try
+		{
+			if (s == null || s.isEmpty())
+			{
+				return defaultValue;
+			}
+			Integer re = Integer.parseInt(s);
+			return re;
+		}
+		catch (NumberFormatException e)
+		{
+			e.printStackTrace();
+		}
+		return defaultValue;
+		
+	}
+	
 }

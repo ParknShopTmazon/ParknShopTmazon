@@ -40,7 +40,8 @@ public class ShowCartInfoServlet extends HttpServlet {
 		
 		//cart
 		if (user == null) {
-			
+			jsonObject.put("cid", "");
+			jsonObject.put("uid", "");
 		} else {
 			List<Map<String, Integer>> list = cartService.getProductIdANDQuantity(user);
 			jsonObject.put("cid", user.getUserId());
@@ -60,14 +61,14 @@ public class ShowCartInfoServlet extends HttpServlet {
 				item.put("name", product.getName());
 				item.put("origin_price", ParseUtil.Price2String(product.getPrice()));
 				item.put("price", ParseUtil.Price2String(product.getDiscountPrice()));
-				item.put("quality", quantity);
+				item.put("quantity", quantity);
 				item.put("stock", product.getStockNum());
 				if(productInfo != null){
 					item.put("size", productInfo.getSize());
 					item.put("color", productInfo.getColor());
 				}else {
-					item.put("size", null);
-					item.put("color", null);
+					item.put("size", "");
+					item.put("color", "");
 				}
 				
 				item.put("shop_url", "");
@@ -80,7 +81,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 			
 			//delivery_options
 			JSONArray deliveryOptions = new JSONArray();
-			List<Delivery> deliverieCompanies = deliveryService.getAllDelivery();
+			List<Delivery> deliverieCompanies = deliveryService.getAllCompany();
 			for(int i = 0, size = deliverieCompanies.size(); i < size; i++){
 				JSONObject deliveryJson = new JSONObject();
 				Delivery deliveryItem = deliverieCompanies.get(i);
@@ -107,7 +108,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		doGet(req, resp);
 	};
 
 }

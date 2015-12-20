@@ -37,6 +37,14 @@
   <servlet-name>ShowCartInfoServlet</servlet-name>
   <servlet-class>com.tmazon.servlet.ShowCartInfoServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>DeleteCartServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteCartServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdateCartServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.UpdateCartServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>IndexServlet</servlet-name>
   <url-pattern>/index</url-pattern>
@@ -64,6 +72,14 @@
  <servlet-mapping>
   <servlet-name>ShowCartInfoServlet</servlet-name>
   <url-pattern>/cartInfo</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeleteCartServlet</servlet-name>
+  <url-pattern>/deleteCart</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateCartServlet</servlet-name>
+  <url-pattern>/updateCart</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>
