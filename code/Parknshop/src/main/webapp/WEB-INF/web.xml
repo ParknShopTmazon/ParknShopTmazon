@@ -37,6 +37,30 @@
   <servlet-name>ShowCartInfoServlet</servlet-name>
   <servlet-class>com.tmazon.servlet.ShowCartInfoServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>ProfitServlet</servlet-name>
+ 	<display-name>ProfitServlet</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.ProfitServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>ModifyRate</servlet-name>
+ 	<display-name>ModifyRate</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.ModifyRate</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>ModifyRateServlet</servlet-name>
+ 	<display-name>ModifyRateServlet</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.ModifyRateServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>ShowRate</servlet-name>
+ 	<display-name>ShowRate</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.ShowRate</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>IndexServlet</servlet-name>
   <url-pattern>/index</url-pattern>
@@ -65,7 +89,24 @@
   <servlet-name>ShowCartInfoServlet</servlet-name>
   <url-pattern>/cartInfo</url-pattern>
  </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ProfitServlet</servlet-name>
+ 	<url-pattern>/ProfitServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ModifyRate</servlet-name>
+ 	<url-pattern>/ModifyRate</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ModifyRateServlet</servlet-name>
+ 	<url-pattern>/ModifyRateServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ShowRate</servlet-name>
+ 	<url-pattern>/ShowRate</url-pattern>
+ </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>
+  
  </welcome-file-list>
 </web-app>
