@@ -22,10 +22,18 @@ public class ProfitServiceImpl implements ProfitService {
 		int pro=0;
 		List<Profit> l=pd.getList();
 		for(Profit p:l){
-			pro+=p.getNumber()*p.getPrice()*Rate.getRate();
+			pro+=p.getQuantity()*p.getPrice()*Rate.getRate();
 		}
-		
-		return pro;
+	/*	System.out.println("----------------");
+		System.out.println(l.get(0).getProductId());
+		System.out.println("----------------");
+		System.out.println(l.get(0).getPrice());
+		System.out.println("----------------");
+		System.out.println(l.get(0).getQuantity());
+		System.out.println("----------------");
+		System.out.println(Rate.getRate());
+		System.out.println("----------------");*/
+		return pro/100;
 	
 	}
 	

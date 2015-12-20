@@ -24,9 +24,15 @@ public class ModifyRateServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Rate.setRate(Integer.parseInt(request.getParameter("rate")));
-		request.getSession().setAttribute("rate", 100*Integer.parseInt(request.getParameter("rate")));
+	//	System.out.println(123);
+		if(!request.getParameter("rate").equals(null)&&!request.getParameter("rate").equals("")){
+			Rate.setRate(Integer.parseInt(""+request.getParameter("rate")));
+			request.getSession().setAttribute("rate", Integer.parseInt(request.getParameter("rate")));
+		}
 		
+		
+		String url = request.getHeader("Referer");
+		response.sendRedirect(url);
 	}
 
 }

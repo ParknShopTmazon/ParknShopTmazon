@@ -1,6 +1,7 @@
 package com.tmazon.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -20,8 +21,8 @@ public class ProfitDaoImpl implements ProfitDao {
 	 * 
 	 * */
 	public List<Profit> getList() {
-		String sql="SELECT product_id,price,quantity"+" FROM order_info oi,delivery d,orders o"
-				       +" WHERE	o.order_id=oi.order_id AND o.delivery_id=d.delivery_id"
+		String sql="SELECT productId,price,quantity"+" FROM orderinfo oi,delivery d,orders o"
+				       +" WHERE	o.orderId=oi.orderId AND o.deliveryId=d.deliveryId"
 				       + "   AND o.status='complete'";
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
@@ -29,7 +30,6 @@ public class ProfitDaoImpl implements ProfitDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-			
 		}finally{
 			return list;
 		}

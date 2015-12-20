@@ -21,53 +21,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<ul id="navigation">
 			<li><img src="css/logo.png"></li>
-			<li><a href="overview.html">Overview</a></li>
-			<li><a href="user.html">User Management</a></li>
-			<li><a href="shopApply.html">Shop-Apply Management</a></li>
+			<li><a href="overview">Overview</a></li>
+			<li><a href="user">User Management</a></li>
+			<li><a href="shopApply">Shop-Apply Management</a></li>
 			<li><span class="active">Advertisement Management</span></li>
-			<li><a href="other.html">Other</a></li>
+			<li><a href="other">Other</a></li>
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
-				<div class="grid_4">
-					<p>
-						<label>Cost</label>
-						<select>
-							<option>ALL</option>
-							<option>0-99</option>
-							<option>100-999</option>
-							<option>1000-9999</option>
-						</select>
-					</p>
-				</div>
-				<div class="grid_5">
-					<p>
-						<label>Company</label>
-						<select>
-							<option>ALL</option>
-							<option>B</option>
-							<option>C</option>
-							<option>D</option>
-						</select>
-					</p>
-				</div>
-				<div class="grid_5">
-					<p>
-						<label>Type</label>
-						<select>
-							<option>ALL</option>
-							<option>Food</option>
-							<option>Clothes</option>
-							<option>Book</option>
-						</select>
-					</p>
-				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input type="submit" value="Search" />
-					</p>
-				</div>
+				
 				<div class="grid_16">
 					<table>
 						<thead>

@@ -14,11 +14,22 @@
 <%@ include file="header.html"%>
 <div class="container-fluid">
 	<br>
-	<div class ="span3">
-			<form class="form-search">
-				<input class="input-medium search-query" type="text" name="name" /> <button type="submit" class="btn-warning">search</button>
-			</form>
-		</div>
+	<form class="form-search">
+		<input class="input-medium search-query" type="text" name="name" />
+		<select name="type">
+    		<option value="" selected='1'>ALL</option>
+    		<option value="TV& Home Theater">TV& Home Theater</option>
+    		<option value="Computers & Tablets" >Computers & Tablets</option>
+    		<option value="Cell Phones" >Cell Phones</option>
+    		<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    		<option value="Audio" >Audio</option>
+    		<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    		<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    		<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    		<option value="Home & Office" >Home & Office</option>
+      	</select>
+		<button type="submit" class="btn-warning">search</button>
+	</form>
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="row-fluid">
