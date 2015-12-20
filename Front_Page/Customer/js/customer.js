@@ -289,22 +289,72 @@ var customer = {
          * @return {[type]} [description]
          */
         var updateCost = function() {
-            var list = $('.cart-container #shop-lists .shop-info .price .value');
-            var origin_list = $('.cart-container #shop-lists .shop-info .price .value .origin-cost');
-            var right_list = $('.cart-container #shop-lists .shop-info .price .value .right-cost');
-            var quantity_list = $('.cart-container #shop-lists .shop-info .quantity .value input');
-            /** update quantity */
-            $('#shop-cost .quantity .value').html(list.length);
+                var list = $('.cart-container #shop-lists .shop-info .price .value');
+                var origin_list = $('.cart-container #shop-lists .shop-info .price .value .origin-cost');
+                var right_list = $('.cart-container #shop-lists .shop-info .price .value .right-cost');
+                var quantity_list = $('.cart-container #shop-lists .shop-info .quantity .value input');
+                /** update quantity */
+                $('#shop-cost .quantity .value').html(list.length);
 
-            origin_cost = right_cost = 0;
-            /** update cost */
-            for (var i = 0; i < list.length; i++) {
-                origin_cost += parseInt(quantity_list[i].value) * parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
-                right_cost += parseInt(quantity_list[i].value) * parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
-            }
-            $('#shop-cost .origin .value').html('<s>$' + origin_cost.toFixed(1) + '</s>');
-            $('#shop-cost .cost .value').html('$' + right_cost.toFixed(1));
-        };
+                origin_cost = right_cost = 0;
+                /** update cost */
+                for (var i = 0; i < list.length; i++) {
+                    origin_cost += parseInt(quantity_list[i].value) * parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
+                    right_cost += parseInt(quantity_list[i].value) * parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
+                }
+                $('#shop-cost .origin .value').html('<s>$' + origin_cost.toFixed(1) + '</s>');
+                $('#shop-cost .cost .value').html('$' + right_cost.toFixed(1));
+            },
+
+            /**
+             * [initData: init cart data]
+             * @param  {[type]} data [data from the interface]
+             * @return {[type]}      [description]
+             */
+            initData = function(data) {
+                /** parse */
+                var cart = data.cart;
+                for (var i in cart) {
+                    /** append list item */
+                    $('.cart-container #shop-lists').append('<div class="shop-item">\
+                        <div class="pic-container">\
+                            <a href="' + cart[i].shop_url + '" target="_blank">\
+                                <div class="over">\
+                                    <div class="link-btn"></div>\
+                                </div>\
+                            </a>\
+                            <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
+                        </div>\
+                        <div class="shop-info">\
+                            <div class="name main">\
+                                <span>Name</span>\
+                                <span class="value">' + cart[i].name + '</span>\
+                            </div>\
+                            <div class="size sub-main">\
+                                <span>size</span>\
+                                <span class="value">' + cart[i].size + '</span>\
+                            </div>\
+                            <div class="price sub-main">\
+                                <span>price</span>\
+                                <span class="value"><span class="origin-cost"><s>$' + cart[i].origin_price + '</s></span>&nbsp;<span class="right-cost">$' + cart[i].price + '</span></span>\
+                            </div>\
+                            <div class="quantity sub-main">\
+                                <span>quantity</span>\
+                                <span class="value">\
+                                    <input type="number" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
+                                </span>\
+                            </div>\
+                            <div class="color sub-main">\
+                                <span>color</span>\
+                                <span class="value" style="background-color: ' + cart[i].color + ';"></span>\
+                            </div>\
+                            <div class="delete sub-main">\
+                                <span class="value button"></span>\
+                            </div>\
+                        </div>\
+                    </div>');
+                }
+            };
 
         /** get data by uid */
         $.ajax({
@@ -315,57 +365,19 @@ var customer = {
                     uid: ''
                 },
             })
-            .done(function() {})
-            .fail(function() {})
-            .always(function() {
-                console.log("get cart data complete");
+            .done(function(data) {
+                /** init the data of cart */
+                initData(data);
+            })
+            .fail(function() {
+                console.log('failed to get cart data');
             });
 
         /** test data */
-        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
+        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
 
-        /** parse */
-        var cart = JSON.parse(testData).cart;
-        for (var i in cart) {
-            /** append list item */
-            $('.cart-container #shop-lists').append('<div class="shop-item">\
-                <div class="pic-container">\
-                    <a href="' + cart[i].shop_url + '" target="_blank">\
-                        <div class="over">\
-                            <div class="link-btn"></div>\
-                        </div>\
-                    </a>\
-                    <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
-                </div>\
-                <div class="shop-info">\
-                    <div class="name main">\
-                        <span>Name</span>\
-                        <span class="value">' + cart[i].name + '</span>\
-                    </div>\
-                    <div class="size sub-main">\
-                        <span>size</span>\
-                        <span class="value">' + cart[i].size + '</span>\
-                    </div>\
-                    <div class="price sub-main">\
-                        <span>price</span>\
-                        <span class="value"><span class="origin-cost"><s>$' + cart[i].origin_price + '</s></span>&nbsp;<span class="right-cost">$' + cart[i].price + '</span></span>\
-                    </div>\
-                    <div class="quantity sub-main">\
-                        <span>quantity</span>\
-                        <span class="value">\
-                            <input type="number" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
-                        </span>\
-                    </div>\
-                    <div class="color sub-main">\
-                        <span>color</span>\
-                        <span class="value" style="background-color: ' + cart[i].color + ';"></span>\
-                    </div>\
-                    <div class="delete sub-main">\
-                        <span class="value button"></span>\
-                    </div>\
-                </div>\
-            </div>');
-        }
+        /** init data of cart */
+        initData(JSON.parse(testData));
 
         /** update cost info at the beginning */
         updateCost();
@@ -526,86 +538,96 @@ var customer = {
                     return '';
                 }
                 return value;
+            },
+
+            /**
+             * [initData: init cart data]
+             * @param  {[type]} data [data from the interface]
+             * @return {[type]}      [description]
+             */
+            initData = function(data) {
+                /** parse */
+                var cart = data.cart,
+                    delivery_options = data.delivery_options,
+                    origin_cost = 0,
+                    right_cost = 0;
+
+                for (var i in cart) {
+                    /** calculate the cost */
+                    origin_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].origin_price);
+                    right_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].price);
+
+                    /** generate delivery company options */
+                    var company_options = '';
+                    for (var j in delivery_options) {
+                        company_options += '<option value="' + j + '">' + delivery_options[j].company_name + '</option>';
+                    }
+
+                    /** generate options of the first company */
+                    var price_options = '';
+                    for (var j in delivery_options[0].price_option) {
+                        price_options += '<option value="' + delivery_options[0].price_option[j].value + '">' + delivery_options[0].price_option[j].description + '</option>';
+                    }
+
+                    /** append list item */
+                    $('.order-container #order-details').append('<div class="order-item" item="' + i + '">\
+                        <div class="pic-container">\
+                            <a href="' + cart[i].shop_url + '" target="_blank">\
+                                <div class="over">\
+                                    <div class="link-btn"></div>\
+                                </div>\
+                            </a>\
+                            <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
+                        </div>\
+                        <div class="order-info">\
+                            <span class="name">' + cart[i].name + '</span>\
+                            <span class="size">' + cart[i].size + '</span>\
+                            <span class="color" style="background-color: ' + cart[i].color + ';"></span>\
+                        </div>\
+                        <div class="order-origin-price">\
+                            <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
+                        </div>\
+                        <div class="quantity">\
+                            <input type="number" name="quantity" min="1" value="' + cart[i].quantity + '">\
+                        </div>\
+                        <div class="order-delivery">\
+                            <select item="' + i + '">\
+                            ' + company_options + '\
+                            </select>\
+                        </div>\
+                        <div class="order-delivery-price">\
+                            <select>\
+                                ' + price_options + '\
+                            </select>\
+                        </div>\
+                        <div class="order-price">\
+                            <p class="shop-price">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
+                            <p class="delivery-price">+ $' + delivery_options[0].price_option[0].value + '</p>\
+                        </div>\
+                    </div>');
+                }
             };
 
         /** get data by uid */
         $.ajax({
-                url: '',
+                url: 'cartInfo',
                 type: 'post',
                 dataType: 'json',
-                data: {
-                    uid: ''
-                },
+                data: {},
             })
-            .done(function() {})
-            .fail(function() {})
-            .always(function() {
-                console.log("get cart data complete");
+            .done(function(data) {
+                /** init the data of order */
+                initData(data);
+            })
+            .fail(function() {
+                console.log('failed to get order data');
             });
 
         /** test data */
-        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
+        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
 
-        /** parse */
-        var cart = JSON.parse(testData).cart,
-            delivery_options = JSON.parse(testData).delivery_options,
-            origin_cost = 0,
-            right_cost = 0;
-
-        for (var i in cart) {
-            /** calculate the cost */
-            origin_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].origin_price);
-            right_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].price);
-
-            /** generate delivery company options */
-            var company_options = '';
-            for (var j in delivery_options) {
-                company_options += '<option value="' + j + '">' + delivery_options[j].company_name + '</option>';
-            }
-
-            /** generate options of the first company */
-            var price_options = '';
-            for (var j in delivery_options[0].price_option) {
-                price_options += '<option value="' + delivery_options[0].price_option[j].value + '">' + delivery_options[0].price_option[j].description + '</option>';
-            }
-
-            /** append list item */
-            $('.order-container #order-details').append('<div class="order-item" item="' + i + '">\
-                <div class="pic-container">\
-                    <a href="' + cart[i].shop_url + '" target="_blank">\
-                        <div class="over">\
-                            <div class="link-btn"></div>\
-                        </div>\
-                    </a>\
-                    <div class="shop" style="background-image: url(' + cart[i].shop_pic + ');"></div>\
-                </div>\
-                <div class="order-info">\
-                    <span class="name">' + cart[i].name + '</span>\
-                    <span class="size">' + cart[i].size + '</span>\
-                    <span class="color" style="background-color: ' + cart[i].color + ';"></span>\
-                </div>\
-                <div class="order-origin-price">\
-                    <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
-                </div>\
-                <div class="quantity">\
-                    <input type="number" name="quantity" min="1" value="' + cart[i].quantity + '">\
-                </div>\
-                <div class="order-delivery">\
-                    <select item="' + i + '">\
-                    ' + company_options + '\
-                    </select>\
-                </div>\
-                <div class="order-delivery-price">\
-                    <select>\
-                        ' + price_options + '\
-                    </select>\
-                </div>\
-                <div class="order-price">\
-                    <p class="shop-price">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
-                    <p class="delivery-price">+ $' + delivery_options[0].price_option[0].value + '</p>\
-                </div>\
-            </div>');
-        }
+        /** init data of orders */
+        initData(JSON.parse(testData));
 
         /** update cost info */
         updateCost();
@@ -868,7 +890,7 @@ var customer = {
                         <span class="value">' + orders.orderDatas[i].oid + '</span>\
                     </div>\
                     <div class="order-ctime">\
-                        <span class="value"> ' + date.format('yyyy-MM-dd hh:mm:ss') +  ' </span>\
+                        <span class="value"> ' + date.format('yyyy-MM-dd hh:mm:ss') + ' </span>\
                     </div>\
                     <div class="delete-btn button"></div>\
                 </div>' + shopItem + '</div>');
