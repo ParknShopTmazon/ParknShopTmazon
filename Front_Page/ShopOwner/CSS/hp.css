@@ -1,0 +1,85 @@
+.containter{
+}
+.
+#head form{
+	margin:5px 10px 0px 0px;
+	float:right;
+}
+
+#head-up
+{
+	height:60px; 
+}
+#head-bottom
+{
+	height:35px; 
+}
+.search{
+	float:right;
+	margin:0px 60px 0px 0px;
+	height:35px;
+}
+
+#logo{
+	width:200px;
+	height:22px;
+	margin:30px 20px 8px 40px;
+}
+.side-nav-list{
+	position:relative;
+	font-weight:400;
+	border-right:1px solid #66FF66;
+	padding:0px;
+}
+.side-nav-list dl{
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.side-nav-list dd{
+    display:block;
+	-webkit-margin-before: 5px;	 /*top*/ 
+    -webkit-margin-start: 0px;  /*left*/
+	-webkit-margin-end: 0px;	
+}
+.side-nav-list dt {
+    padding: 5px 0px 5px 20px; 
+    color: #666;
+	font-size:20px;
+}
+.side-nav-list ul{
+	margin:0px;
+	padding:20px;
+} 
+.side-nav-list li{
+	padding:5px 0px 0px 0px;
+	margin:0px 0px 0px 20px;
+} 
+.side-nav-list .current {
+    color:#66FF66;
+}
+.side-nav-list .home,{
+    height: 30px;
+	padding:20px;
+	font-size:24px;
+	border-bottom:1px solid #FFFFFF;
+}
+.side-nav-list .home{
+	height: 30px;
+	padding:10px 20px;
+	font-size:20px;
+	border-bottom:1px solid #FFFFFF;
+}
+.side-nav-list .item-list {
+	font-size:16px;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+
+
+
+
+

@@ -3,127 +3,138 @@ CREATE DATABASE parknshop character set  utf8 collate utf8_general_ci;
 USE parknshop;
 
 CREATE TABLE user (
-	user_id int AUTO_INCREMENT,
+	userId int AUTO_INCREMENT,
 	name varchar(50) NOT NULL,
 	password varchar(50) NOT NULL,
 	role varchar(50) NOT NULL,
 	status varchar(50) NOT NULL,
-	PRIMARY KEY (user_id),
+	PRIMARY KEY (userId),
 	UNIQUE (name)
 );
 
 CREATE TABLE address(
-	user_id int NOT NULL,
+	userId int NOT NULL,
 	province varchar(50),
 	city varchar(50),
 	country varchar(50),
 	street varchar(50),
-	FOREIGN KEY (user_id) REFERENCES user(user_id)
+	FOREIGN KEY (userId) REFERENCES user(userId)
 );
 
-CREATE TABLE user_info(
-	user_id int NOT NULL,
+CREATE TABLE userInfo(
+	userId int NOT NULL,
 	phone varchar(50) NOT NULL,
 	email varchar(50) NOT NULL,
-	real_name varchar(50) NOT NULL,
+	realName varchar(50) NOT NULL,
 	sex bit NOT NULL,
 	birthday date NOT NULL,
 	detail text,
 	alipay varchar(50) NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES user(user_id)
+	FOREIGN KEY (userId) REFERENCES user(userId)
 );
 
 CREATE TABLE shop(
-	shop_id int AUTO_INCREMENT,
+	shopId int AUTO_INCREMENT,
 	name varchar(50) NOT NULL,
 	type varchar(50) NOT NULL,
 	owner int NOT NULL,
-	CONSTRAINT pk_shop_id PRIMARY KEY (shop_id),
-	FOREIGN KEY (owner) REFERENCES user(user_id)
-);
-
-CREATE TABLE category_type (
-	type varchar(50),
-	PRIMARY KEY (type)
+	CONSTRAINT pk_shopId PRIMARY KEY (shopId),
+	FOREIGN KEY (owner) REFERENCES user(userId)
 );
 
 CREATE TABLE category (
 	category varchar(50),
-	type varchar(50) NOT NULL,
-	PRIMARY KEY (category),
-	FOREIGN KEY (type) REFERENCES category_type(type)
+	PRIMARY KEY (category)
 );
 
 CREATE TABLE product (
-	product_id int AUTO_INCREMENT,
-	shop_id int NOT NULL,
+	productId int AUTO_INCREMENT,
+	shopId int NOT NULL,
 	name varchar(50) NOT NULL,
-	price int NOT NULL,
+	price decimal(10,2) NOT NULL,
+	discountPrice decimal(10,2) NOT NULL,
 	category varchar(50) NOT NULL,
-	stock_num int NOT NULL,
-	sold_num int NOT NULL,
+	stockNum int NOT NULL,
+	soldNum int NOT NULL,
 	description text NOT NULL,
-	picture varchar(100) NOT NULL,
-	PRIMARY KEY (product_id),
-	FOREIGN KEY (shop_id) REFERENCES shop(shop_id),
+	picture varchar(100),
+	PRIMARY KEY (productId),
+	FOREIGN KEY (shopId) REFERENCES shop(shopId),
 	FOREIGN KEY (category) REFERENCES category(category)
 );
 
+CREATE TABLE productInfo (
+	productId int,
+	size varchar(50),
+	color varchar(50),
+	FOREIGN KEY (productId) REFERENCES product(productId)
+);
+
+CREATE TABLE delivery(
+	deliveryId int AUTO_INCREMENT,
+	company varchar(50) NOT NULL,
+	price decimal(10,2) NOT NULL,
+	type varchar(50) NOT NULL,
+	PRIMARY KEY (deliveryId)
+);
+
 CREATE TABLE orders (
-	order_id int AUTO_INCREMENT,
-	pay_type varchar(50) NOT NULL,
+	orderId int AUTO_INCREMENT,
+	payType varchar(50) NOT NULL,
 	status varchar(50) NOT NULL,
-	order_time datetime NOT NULL,
-	user_id int NOT NULL,
-	PRIMARY KEY (order_id),
-	FOREIGN KEY (user_id) REFERENCES user(user_id)
+	orderTime datetime NOT NULL,
+	userId int NOT NULL,
+	deliveryId int NOT NULL,
+	PRIMARY KEY (orderId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
 	
 );
 
-CREATE TABLE order_info(
+CREATE TABLE orderInfo(
 	quantity int NOT NULL,
-	product_id int NOT NULL,
-	order_id int NOT NULL,
-	FOREIGN KEY (product_id) REFERENCES product(product_id),
-	FOREIGN KEY (order_id) REFERENCES orders(order_id)
+	productId int NOT NULL,
+	orderId int NOT NULL,
+	FOREIGN KEY (productId) REFERENCES product(productId),
+	FOREIGN KEY (orderId) REFERENCES orders(orderId)
 );
 
 CREATE TABLE cart (
-	user_id int NOT NULL,
-	product_id int NOT NULL,
+	userId int NOT NULL,
+	productId int NOT NULL,
 	quantity int NOT NULL,
-	PRIMARY KEY (user_id, product_id),
-	FOREIGN KEY (user_id) REFERENCES user(user_id),
-	FOREIGN KEY (product_id) REFERENCES product(product_id)
+	PRIMARY KEY (userId, productId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (productId) REFERENCES product(productId)
 );
 
 CREATE TABLE friend (
-	user_id int NOT NULL,
-	friend_id int NOT NULL,
-	PRIMARY KEY (user_id, friend_id),
-	FOREIGN KEY (user_id) REFERENCES user(user_id),
-	FOREIGN KEY (friend_id) REFERENCES user(user_id)
+	userId int NOT NULL,
+	friendId int NOT NULL,
+	PRIMARY KEY (userId, friendId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (friendId) REFERENCES user(userId)
 );
 
 CREATE TABLE message(
-	user_id int NOT NULL,
-	friend_id int NOT NULL,
+	userId int NOT NULL,
+	friendId int NOT NULL,
 	content text NOT NULL,
-	message_time datetime NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES user(user_id),
-	FOREIGN KEY (friend_id) REFERENCES user(user_id)
+	messageTime datetime NOT NULL,
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (friendId) REFERENCES user(userId)
 );
 
 CREATE TABLE comment(
-	comment_id int AUTO_INCREMENT,
-	user_id int NOT NULL,
-	product_id int NOT NULL,
+	commentId int AUTO_INCREMENT,
+	userId int NOT NULL,
+	productId int NOT NULL,
 	content text NOT NULL,
-	comment_time datetime NOT NULL,
-	reply_id int,
-	CONSTRAINT pk_comment_id PRIMARY KEY (comment_id),
-	FOREIGN KEY (user_id) REFERENCES user(user_id),
-	FOREIGN KEY (product_id) REFERENCES product(product_id),
-	FOREIGN KEY (reply_id) REFERENCES comment(comment_id)
+	commentTime datetime NOT NULL,
+	replyId int,
+	CONSTRAINT pk_commentId PRIMARY KEY (commentId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (productId) REFERENCES product(productId),
+	FOREIGN KEY (replyId) REFERENCES comment(commentId)
 );
 
