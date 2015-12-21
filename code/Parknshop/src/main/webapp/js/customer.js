@@ -372,7 +372,7 @@ var customer = {
                         sid: $(this).attr('sid')
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
-                        if (typeof(data.status) != 'undefined' && data.status == 'true') {
+                        if (typeof(data.status) != 'undefined' && data.result == 'true') {
                             $(this).parent().parent().parent().remove();
                             updateCost();
                         } else {
@@ -405,7 +405,7 @@ var customer = {
                                 quantity: $(this).val()
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
-                                if (typeof(data.status) != 'undefined' && data.status == 'true') {
+                                if (typeof(data.status) != 'undefined' && data.result == 'true') {
                                     $(this).attr('value', $(this).val());
                                 } else {
                                     var error = data.errMsg || '';
