@@ -43,12 +43,7 @@
 						<input class="form-input" id="type" name="type" type="text" maxlength="18" business="id_number" require="true";>
 					</div>
 				</div>
-				<div class="form-item">
-					<div class="form-lable-left">Shop Owner:</div>
-					<div class="form-control">
-						<input class="form-input" id="owner" name="owner" type="text" maxlength="18" business="shop_name" require="true";>
-					</div>
-				</div>	
+				
 				<div class="form-item">
 					<div class="form-lable-left">Address:</div>
 					<div class="form-control">
