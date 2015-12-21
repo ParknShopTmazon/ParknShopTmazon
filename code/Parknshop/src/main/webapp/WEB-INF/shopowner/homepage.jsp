@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div id="head">
 		<div id="head-up">
-			<div class="logo"><a href=""><img id="logo" src="Images/logo.jpg"></a></div>
+			<div class="logo"><a href=""><img id="logo" src="images_shop/logo.jpg"></a></div>
 		</div>
 		<div id="head-bottom">
 			<form action="/s/" class="search" name="searchForm" method="get">

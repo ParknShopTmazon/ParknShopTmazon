@@ -37,25 +37,26 @@ public class RegisterNewShopServlet extends HttpServlet{
 		// check parameters
 		String name = req.getParameter("name");
 		String type = req.getParameter("type");
-//		String ownerNum =req.getParameter("owner");
+		Integer owner = null;
 		
 		System.out.println(name + " ####### " + type);
 		
 		User onlineUser = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
-		if(onlineUser == null){
-			
+		
+		if(onlineUser != null){
+			owner = onlineUser.getUserId();
 		}
-		Integer owner = onlineUser.getUserId();
+		
 		
 		if (name == null || type == null ) {
-			req.getRequestDispatcher("WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
 			return;
 		}
 		
 		// check if shop exists
 		if (shopService.isShopExist(new Shop(null, name, null, null,null))) {
 			req.setAttribute(AttrName.RequestScope.ERROR_SHOP_EXISTS, true);
-			req.getRequestDispatcher("WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
 			return;
 		}
 		
@@ -63,7 +64,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		Shop shop = new Shop(null, name, type,Shop.STATUS_CHECKING,owner);
 		boolean success = shopService.register(shop);
 		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
-		req.getRequestDispatcher("WEB-INF/shopowner/HomePage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/shopowner/homepage.jsp").forward(req, resp);
 
 	}
 }

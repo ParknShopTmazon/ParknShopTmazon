@@ -29,25 +29,25 @@
 		<div id="shopinfo">
 			<h2>Please Register</h2>
 			
-			<form class="complete-info" action="/registernewshop" method="post">
+			<form class="complete-info" action="registernewshop" method="post">
 				
 				<div class="form-item">
 					<div class="form-lable-left">Shop Name:</div>
 					<div class="form-control">
-						<input class="form-input" id="name" name="name" type="text" maxlength="20" business="trueName" require="true";>
+						<input class="form-input" id="name" name="name" type="text" value="${param.name}" maxlength="20" business="trueName" require="true";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Shop Type:</div>
 					<div class="form-control">
-						<input class="form-input" id="type" name="type" type="text" maxlength="18" business="id_number" require="true";>
+						<input class="form-input" id="type" name="type" type="text" value="${param.type}" maxlength="18" business="id_number" require="true";>
 					</div>
 				</div>
 				
 				<div class="form-item">
 					<div class="form-lable-left">Address:</div>
 					<div class="form-control">
-						<input class="form-input" id="address" name="address" type="text" maxlength="18" business="address" require="true";>
+						<input class="form-input" id="address" name="address" type="text" value="${param.address}" maxlength="18" business="address" require="true";>
 					</div>
 				</div>	
 				
