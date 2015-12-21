@@ -14,6 +14,18 @@
 		<jsp-file>/WEB-INF/customer/index.jsp</jsp-file>
 	</servlet>
 	<servlet>
+		<servlet-name>MyShopServlet</servlet-name>
+		<jsp-file>/WEB-INF/shopowner/myshop.jsp</jsp-file>
+	</servlet>
+	<servlet>
+		<servlet-name>RegisterShopPageServlet</servlet-name>
+		<jsp-file>/WEB-INF/shopowner/RegisterShopPage.jsp</jsp-file>
+	</servlet>
+	<servlet>
+	    <servlet-name>RegisterNewShopServlet</servlet-name>
+		<servlet-class>com.tmazon.servlet.RegisterNewShopServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>com.tmazon.servlet.LoginServlet</servlet-class>
 	</servlet>
@@ -96,6 +108,24 @@
   	<description></description>
   	<servlet-class>com.tmazon.servlet.AgreeServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddAdvertisementServlet</servlet-name>
+  	<display-name>AddAdvertisementServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.AddAdvertisementServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DeleteAdvServlet</servlet-name>
+  	<display-name>DeleteAdvServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.DeleteAdvServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ModifyAdvServlet</servlet-name>
+  	<display-name>ModifyAdvServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.ModifyAdvServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>userJsp</servlet-name>
@@ -146,9 +176,22 @@
 		<servlet-name>RegisterServlet</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>ShowCartServlet</servlet-name>
 		<url-pattern>/cart</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MyShopServlet</servlet-name>
+		<url-pattern>/myshop</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegisterShopPageServlet</servlet-name>
+		<url-pattern>/registershoppage</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegisterNewShopServlet</servlet-name>
+		<url-pattern>/registernewshop</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ShowCartInfoServlet</servlet-name>
@@ -173,6 +216,18 @@
 	<servlet-mapping>
 		<servlet-name>UpdateCartServlet</servlet-name>
 		<url-pattern>/updateCart</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddAdvertisementServlet</servlet-name>
+		<url-pattern>/AddAdvertisementServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteAdvServlet</servlet-name>
+		<url-pattern>/DeleteAdvServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyAdvServlet</servlet-name>
+		<url-pattern>/ModifyAdvServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>
