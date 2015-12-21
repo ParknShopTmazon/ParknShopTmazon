@@ -17,7 +17,7 @@
  *                     file is a javascript file to control all the 
  *                     interaction of customers. 
  *      - Create Time: Dec 9, 2015
- *      - Update Time: Dec 20, 2015 
+ *      - Update Time: Dec 21, 2015 
  *
  *
  **********************************************************************/
@@ -640,7 +640,7 @@ var customer = {
             .fail(function() {
                 console.log('failed to get order data');
             });
-            
+
         /** init data of orders */
         initData(JSON.parse(testData));
 
