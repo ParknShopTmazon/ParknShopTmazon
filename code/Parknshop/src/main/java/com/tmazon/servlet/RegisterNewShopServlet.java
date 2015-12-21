@@ -60,7 +60,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		}
 		
 		// register
-		Shop shop = new Shop(null, name, type,0,"0");
+		Shop shop = new Shop(null, name, type,Shop.STATUS_CHECKING,owner);
 		boolean success = shopService.register(shop);
 		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
 		req.getRequestDispatcher("WEB-INF/shopowner/HomePage.jsp").forward(req, resp);

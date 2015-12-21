@@ -2,56 +2,69 @@ package com.tmazon.domain;
 
 public class Shop {
 
-	
-	public static final Integer STATUS_CHECKING = 0;
-	public static final Integer STATUS_FAIL = 2;
-	public static final Integer STATUS_SUCCESS = 1;
-	
+	public static final String STATUS_CHECKING = "checking";
+	public static final String STATUS_FAIL = "fail";
+	public static final String STATUS_SUCCESS = "success";
+
 	private Integer shopId;
 	private String name;
 	private String type;
 	private String status;
 	private Integer owner;
+
+	public Shop(Integer shopId, String name, String type, String status, Integer owner) {
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
 		this.status = status;
-		this.owner = owner;	}
-	
+		this.owner = owner;
+	}
+
 	public Shop() {
 		super();
 	}
+
 	public Integer getShopId() {
 		return shopId;
 	}
+
 	public void setShopId(Integer shopId) {
 		this.shopId = shopId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public Integer getOwner() {
 		return owner;
 	}
+
 	public void setOwner(Integer owner) {
 		this.owner = owner;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,6 +76,7 @@ public class Shop {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,23 +107,20 @@ public class Shop {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if(status == null){
-			if(other.status != null){
+		if (status == null) {
+			if (other.status != null) {
 				return false;
-			}else if(!status.equals(other.status)){
+			} else if (!status.equals(other.status)) {
 				return false;
 			}
 		}
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Shop [shopId=" + shopId + ", name=" + ame + ", type=" + type + ", owner=" + owner + "]";
-		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", owner=" + owner + ", status="+ status +"]";
+		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", owner=" + owner + ", status="
+				+ status + "]";
 	}
-	
-	
-	
-	
-	
+
 }

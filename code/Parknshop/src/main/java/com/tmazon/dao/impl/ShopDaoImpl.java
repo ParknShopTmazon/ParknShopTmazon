@@ -15,7 +15,7 @@ import com.tmazon.util.DaoUtil;
 public class ShopDaoImpl implements ShopDao {
 
 
-		
+	public List<Shop> select(Shop shop) {
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM shop WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if(shop.getName() != null){
@@ -44,7 +44,7 @@ public class ShopDaoImpl implements ShopDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			
+			List<Shop> result = runner.query(sql, new BeanListHandler<Shop>(Shop.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
