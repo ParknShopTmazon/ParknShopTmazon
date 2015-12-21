@@ -1,9 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -22,21 +19,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ul id="navigation">
 			<li><img src="css/logo.png"></li>
 			<li><a href="overview">Overview</a></li>
-			<li><a href="user">User Management</a></li>
+			<li><span class="active">User Management</span></li>
 			<li><a href="shopApply">Shop-Apply Management</a></li>
-			<li><span class="active">Advertisement Management</span></li>
+			<li><a href="advertisement">Advertisement Management</a></li>
 			<li><a href="other">Other</a></li>
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
-				
+				<div class="grid_4">
+					<p>
+						<label>Username<small>Alpha-numeric values</small></label>
+						<input type="text" value="all"/>
+					</p>
+				</div>
+				<div class="grid_5">
+					<p>
+						<label>NickName</label>
+						<input type="text" value="all"/>
+					</p>
+				</div>
+				<div class="grid_5">
+					<p>
+						<label>Type</label>
+						<select>
+							<option>Shop-Owner</option>
+							<option>Customer</option>
+						</select>
+					</p>
+				</div>
+				<div class="grid_2">
+					<p>
+						<label>&nbsp;</label>
+						<input type="submit" value="Search" />
+					</p>
+				</div>
 				<div class="grid_16">
 					<table>
 						<thead>
 							<tr>
-								<th>Company</th>
-								<th>Type</th>
-								<th>Cost</th>
+								<th>Username</th>
+								<th>E-mail</th>
+								<th>Address</th>
 								<th colspan="3" width="10%">Actions</th>
 							</tr>
 						</thead>
@@ -49,113 +72,113 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tfoot>
 						<tbody>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Philip</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>	
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Thomas</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Ben</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Richard</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Alon</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Alex</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Nathan</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Habib</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Jeremy</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Ed</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Claire</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Philip</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Thomas</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>
 							</tr>
 							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
+								<td>Ben</td>
+								<td>xxxxxxxxx@qq.com</td>
+								<td>Xi'an</td>
 								<td><a href="#" class="edit">Edit</a></td>
 								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">BlackList</a></td>

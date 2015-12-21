@@ -64,6 +64,68 @@
 		<servlet-name>UpdateCartServlet</servlet-name>
 		<servlet-class>com.tmazon.servlet.UpdateCartServlet</servlet-class>
 	</servlet>
+	  <servlet>
+ 	<servlet-name>otherJSP</servlet-name>
+ 	<jsp-file>/WEB-INF/admin/other.jsp</jsp-file>
+ </servlet>
+  <servlet>
+  	<servlet-name>advertisementJsp</servlet-name>
+  	<jsp-file>/WEB-INF/admin/advertisement.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<servlet-name>overviewJsp</servlet-name>
+  	<jsp-file>/WEB-INF/admin/overview.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<servlet-name>shopApplyJsp</servlet-name>
+  	<jsp-file>/WEB-INF/admin/shopApply.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<servlet-name>userJsp</servlet-name>
+  	<jsp-file>/WEB-INF/admin/user.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<servlet-name>DisagreeServlet</servlet-name>
+  	<display-name>DisagreeServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.DisagreeServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AgreeServlet</servlet-name>
+  	<display-name>AgreeServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.AgreeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>userJsp</servlet-name>
+  	<url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>shopApplyJsp</servlet-name>
+  	<url-pattern>/shopApply</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>overviewJsp</servlet-name>
+  	<url-pattern>/overview</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>advertisementJsp</servlet-name>
+  	<url-pattern>/advertisement</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+ 	<servlet-name>otherJSP</servlet-name>
+ 	<url-pattern>/other</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>DisagreeServlet</servlet-name>
+ 	<url-pattern>/DisagreeServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AgreeServlet</servlet-name>
+ 	<url-pattern>/AgreeServlet</url-pattern>
+ </servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>IndexJsp</servlet-name>
 		<url-pattern>/index</url-pattern>

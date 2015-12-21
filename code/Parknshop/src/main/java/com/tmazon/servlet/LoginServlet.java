@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tmazon.dao.ShopApplyDao;
+import com.tmazon.dao.impl.ShopApplyDaoImpl;
+import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
 import com.tmazon.service.UserService;
 import com.tmazon.util.AttrName;
@@ -34,8 +38,11 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+		// admin 入口
 		if(req.getParameter("name").equals("admin")&&req.getParameter("password").equals("admin")){ 
+			ShopApplyDao s=new ShopApplyDaoImpl();
+			List <Shop> list=s.getApply();
+			req.getSession().setAttribute("apply", list);//店铺申请集
 			req.getSession().setAttribute("rate", 5);
 			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req, resp);;
 			return ;

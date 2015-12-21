@@ -6,33 +6,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tmazon.util.Rate;
 
-
-public class ModifyRateServlet extends HttpServlet {
+public class DisagreeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
-    public ModifyRateServlet() {
+   
+    public DisagreeServlet() {
         super();
     }
 
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
+		doPost(request, response);
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//	System.out.println(123);
-		if(!request.getParameter("rate").equals(null)&&!request.getParameter("rate").equals("")){
-			Rate.setRate(Integer.parseInt(""+request.getParameter("rate")));
-			request.getSession().setAttribute("rate", Integer.parseInt(request.getParameter("rate")));
-		}
-		
-		
-		String url = request.getHeader("Referer");
-		response.sendRedirect(url);
+			System.out.println(request.getParameter("sid"));
 	}
 
 }
