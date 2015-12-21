@@ -358,12 +358,10 @@ var customer = {
 
         /** get data by uid */
         $.ajax({
-                url: '',
+                url: 'cartInfo',
                 type: 'post',
                 dataType: 'json',
-                data: {
-                    uid: ''
-                },
+                data: {},
             })
             .done(function(data) {
                 /** init the data of cart */
@@ -372,12 +370,6 @@ var customer = {
             .fail(function() {
                 console.log('failed to get cart data');
             });
-
-        /** test data */
-        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
-
-        /** init data of cart */
-        initData(JSON.parse(testData));
 
         /** update cost info at the beginning */
         updateCost();
@@ -466,7 +458,8 @@ var customer = {
                     data: {},
                 })
                 .done(function() {
-                    // console.log("success");
+                    /** init the data of order */
+                initData(data);
                 })
                 .fail(function() {
                     // console.log("error");
@@ -647,10 +640,7 @@ var customer = {
             .fail(function() {
                 console.log('failed to get order data');
             });
-
-        /** test data */
-        var testData = "{\n    \"cid\": 111111,\n    \"uid\": 111111,\n    \"cart\": [\n        {\n            \"sid\": 1,\n            \"name\": \"p1\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 2,\n            \"stock\": 2,\n            \"size\": \"s\",\n            \"color\": \"red\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 2,\n            \"name\": \"p2\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 1,\n            \"stock\": 2,\n            \"size\": \"ssssssssssss\",\n            \"color\": \"ssred\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        },\n        {\n            \"sid\": 3,\n            \"name\": \"p3\",\n            \"origin_price\": \"1.00\",\n            \"price\": \"1.00\",\n            \"quantity\": 3,\n            \"stock\": 2,\n\t\t\t\"size\": \"\",\n            \"color\": \"\",\n            \"shop_url\": \"\",\n            \"shop_pic\": \"\"\n        }\n    ],\n    \"delivery_options\": [\n        {\n            \"company_name\": \"sto\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 1,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 2,\n                    \"value\": \"8.00\",\n                    \"description\": \"delivery price: $8.00(n)\"\n                }\n            ]\n        },\n        {\n            \"company_name\": \"ems\",\n            \"price_option\": [\n                {\n                    \"delivery_id\": 3,\n                    \"value\": \"12.00\",\n                    \"description\": \"delivery price: $12.00(f)\"\n                },\n\t\t\t\t{\n                    \"delivery_id\": 4,\n                    \"value\": \"10.00\",\n                    \"description\": \"delivery price: $10.00(n)\" \n                } \n            ]\n        }\n    ] \n}";
-
+            
         /** init data of orders */
         initData(JSON.parse(testData));
 
