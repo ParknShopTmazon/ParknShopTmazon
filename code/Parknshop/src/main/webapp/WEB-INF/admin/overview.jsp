@@ -37,9 +37,9 @@
 		<ul id="navigation">
 			<li><img src="css/logo.png"></li>
 			<li><span class="active">Overview</span></li>
-			<li><a href="user.jsp">User Management</a></li>
-			<li><a href="shopApply.jsp">Shop-Apply Management</a></li>
-			<li><a href="/admin/advertisement.jsp">Advertisement Management</a></li>
+			<li><a href="user">User Management</a></li>
+			<li><a href="shopApply">Shop-Apply Management</a></li>
+			<li><a href="advertisement">Advertisement Management</a></li>
 			<li><a href="other">Other</a></li>
 		</ul>
 
@@ -73,7 +73,7 @@
 								</tr>
 								<tr>
 									<td>Rate</td>
-									<td><%=session.getAttribute("rate") %>>%</td>
+									<td><%=session.getAttribute("rate") %>%</td>
 								</tr>
 							</tbody>
 						</table>

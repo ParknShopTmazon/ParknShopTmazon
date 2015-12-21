@@ -22,8 +22,15 @@ public class ProfitServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ProfitService p=new ProfitServiceImpl();
-		request.getSession().setAttribute("profit",p.getProfit() );
-		response.sendRedirect(request.getRequestURI().toString());
+		if(p.getProfit()==0){
+			request.getSession().setAttribute("profit","" );
+		}else{
+			request.getSession().setAttribute("profit",p.getProfit() );
+		}
+		
+		//System.out.println(p.getProfit());
+		String url = request.getHeader("Referer");
+		response.sendRedirect(url);
 		
 	}
 

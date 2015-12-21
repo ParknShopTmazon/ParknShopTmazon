@@ -43,6 +43,12 @@ public class DeleteCartServlet extends HttpServlet {
 		
 		@SuppressWarnings("unchecked")
 		Map<String, String[]> params = req.getParameterMap();
+		if(params.get("sid") == null){
+			jsonObject.put("result", false + "");
+			jsonObject.put("errMsg", "Can't get product id, please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
 		String productIdString = params.get("sid")[0];
 		if(productIdString == null || productIdString.isEmpty() || productIdString == ""){
 			jsonObject.put("result", false + "");

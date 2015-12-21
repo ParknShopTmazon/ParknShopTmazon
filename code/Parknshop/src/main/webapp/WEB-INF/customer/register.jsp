@@ -22,13 +22,13 @@
 				<div class="control-group">
 					<label class="control-label" for="input1">USERNAME</label>
 					<div class="controls">
-						<input id="input1" type="text" name="name" />
+						<input id="input1" type="text" name="name" value="${ param.name }" />
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="input2">PASSWORD</label>
 					<div class="controls">
-						<input id="input2" type="password" name="password"
+						<input id="input2" type="password" name="password" value="${ param.password }"
 							autoComplete="off" />
 					</div>
 				</div>
@@ -86,6 +86,9 @@
 				<div class="control-group" align="center">
 					<c:if test="${ not empty r_error_user_exists }">
 						<label style="color: red;">user name already exists</label>
+					</c:if>
+					<c:if test="${ not empty r_error_parameters }">
+						<label style="color: red;">6-20 characters for name and password only</label>
 					</c:if>
 					<c:if test="${ not empty r_is_register_success }">
 						<c:choose>
