@@ -7,22 +7,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>My Home Page' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+    <meta charset="text/html UTF-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57GMT">
+<title>parknshop</title>
+<link rel="stylesheet" type="text/css" href="css/customer.css">
 
   </head>
   
   <body>
+  <%@ include file="header.html"%>
     <div id="head">
 		<div id="head-up">
 			<div class="logo"><a href=""><img id="logo" src="images_shop/logo.jpg"></a></div>
@@ -55,10 +50,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </dl>
 	</div>
 	<div id="content">
+	   <h2>In the review,please wait...</h2>
 	</div>
-	<div id="foot">
-			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
-	</div>
+	<%@ include file="footer.html"%>
 
   </body>
 </html>
