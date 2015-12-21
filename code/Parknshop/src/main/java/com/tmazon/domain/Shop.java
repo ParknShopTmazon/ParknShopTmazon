@@ -2,17 +2,23 @@ package com.tmazon.domain;
 
 public class Shop {
 
+	
+	public static final Integer STATUS_CHECKING = 0;
+	public static final Integer STATUS_FAIL = 2;
+	public static final Integer STATUS_SUCCESS = 1;
+	
 	private Integer shopId;
 	private String name;
 	private String type;
+	private String status;
 	private Integer owner;
-	public Shop(Integer shopId, String name, String type, Integer owner) {
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
-		this.owner = owner;
-	}
+		this.status = status;
+		this.owner = owner;	}
+	
 	public Shop() {
 		super();
 	}
@@ -40,6 +46,12 @@ public class Shop {
 	public void setOwner(Integer owner) {
 		this.owner = owner;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,6 +59,7 @@ public class Shop {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result + ((shopId == null) ? 0 : shopId.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -74,17 +87,28 @@ public class Shop {
 				return false;
 		} else if (!shopId.equals(other.shopId))
 			return false;
+
 		if (type == null) {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if(status == null){
+			if(other.status != null){
+				return false;
+			}else if(!status.equals(other.status)){
+				return false;
+			}
+		}
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", owner=" + owner + "]";
+		return "Shop [shopId=" + shopId + ", name=" + ame + ", type=" + type + ", owner=" + owner + "]";
+		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", owner=" + owner + ", status="+ status +"]";
 	}
+	
+	
 	
 	
 	

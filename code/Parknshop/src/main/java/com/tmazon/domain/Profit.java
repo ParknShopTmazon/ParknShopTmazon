@@ -3,12 +3,16 @@ package com.tmazon.domain;
 public class Profit {
 	private int productId;
 	private int  price;
-	private int number;
+	private int quantity;
+	public Profit(){}
 	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(int productId) {
+	public Profit(int productId, int price, int quantityr) {
+		super();
 		this.productId = productId;
+		this.price = price;
+		this.quantity= quantityr;
 	}
 	public int getPrice() {
 		return price;
@@ -16,10 +20,15 @@ public class Profit {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getNumber() {
-		return number;
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	
 }

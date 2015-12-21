@@ -26,6 +26,8 @@ public class AttrName {
 		public static final String ERROR_PARAMETERS = "r_error_parameters";
 		public static final String ERROR_USER_EXISTS = "r_error_user_exists";
 		public static final String IS_REGISTER_SUCCESS = "r_is_register_success";
+		public static final String ERROR_SHOP_EXISTS = "r_error_shop_exists";
+		public static final String IS_SHOP_REGISTER_SUCCESS = "r_is_shop_register_success";
 	}
 	
 	public class CartServiceImplMapGet {

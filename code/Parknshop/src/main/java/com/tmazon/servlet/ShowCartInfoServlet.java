@@ -72,7 +72,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 				}
 				
 				item.put("shop_url", "");
-				item.put("shop_pic", "");
+				item.put("shop_pic", product.getPicture());
 				
 				cart.add(item);
 				

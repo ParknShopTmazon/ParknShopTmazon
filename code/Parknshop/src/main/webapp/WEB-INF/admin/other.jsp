@@ -21,32 +21,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<ul id="navigation">
 			<li><img src="css/logo.png"></li>
-			<li><a href="overview.html">Overview</a></li>
-			<li><a href="user.html">User Management</a></li>
-			<li><a href="shopApply.html">Shop-Apply Management</a></li>
-			<li><a href="advertisement.html">Advertisement Management</a></li>
+			<li><a href="overview">Overview</a></li>
+			<li><a href="user">User Management</a></li>
+			<li><a href="shopApply">Shop-Apply Management</a></li>
+			<li><a href="advertisement">Advertisement Management</a></li>
 			<li><span class="active">Ohter</span></li>
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
-				<div class="grid_4">
-					<p>
-						<label>Back Up Database To</label>
-						<input type='text' value=""></input>
-					</p>
-				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input type="submit" value="Browse" />
-					</p>
-				</div>
+			
 				
 				<form action="ProfitServlet" method="post">
 				<div class="grid_4">
 					<p>
 						<label>Income</label>
-						<input type='text' value=""></input>
+						<input type='text' value=<%=session.getAttribute("profit") %>></input>
 					</p>
 				</div>
 				<div class="grid_2">

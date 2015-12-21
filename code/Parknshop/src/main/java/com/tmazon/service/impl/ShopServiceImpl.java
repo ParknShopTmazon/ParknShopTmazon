@@ -1,5 +1,7 @@
 package com.tmazon.service.impl;
 
+import java.util.List;
+
 import com.tmazon.dao.ShopDao;
 import com.tmazon.domain.Shop;
 import com.tmazon.service.ShopService;
@@ -15,4 +17,12 @@ public class ShopServiceImpl implements ShopService {
 
 	}
 
+	public boolean register(Shop shop) {
+		return shopDao.insert(shop);
+	}
+	
+	public boolean isShopExist(Shop shop) {
+		List<Shop> list = shopDao.select(shop);
+		return list != null && !list.isEmpty();
+	}
 }

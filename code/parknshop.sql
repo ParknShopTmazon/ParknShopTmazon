@@ -139,3 +139,9 @@ CREATE TABLE comment(
 	FOREIGN KEY (replyId) REFERENCES comment(commentId)
 );
 
+create table advertisement(
+adId int(11) auto_increment primary key,
+productID int(11),
+cost int(10),
+foreign key(productID) references product(productId)
+);
