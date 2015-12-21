@@ -14,6 +14,18 @@
 		<jsp-file>/WEB-INF/customer/index.jsp</jsp-file>
 	</servlet>
 	<servlet>
+		<servlet-name>MyShopServlet</servlet-name>
+		<jsp-file>/WEB-INF/shopowner/myshop.jsp</jsp-file>
+	</servlet>
+	<servlet>
+		<servlet-name>RegisterShopPageServlet</servlet-name>
+		<jsp-file>/WEB-INF/shopowner/RegisterShopPage.jsp</jsp-file>
+	</servlet>
+	<servlet>
+	    <servlet-name>RegisterNewShopServlet</servlet-name>
+		<servlet-class>com.tmazon.servlet.RegisterNewShopServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>com.tmazon.servlet.LoginServlet</servlet-class>
 	</servlet>
@@ -84,9 +96,22 @@
 		<servlet-name>RegisterServlet</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>ShowCartServlet</servlet-name>
 		<url-pattern>/cart</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MyShopServlet</servlet-name>
+		<url-pattern>/myshop</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegisterShopPageServlet</servlet-name>
+		<url-pattern>/registershoppage</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegisterNewShopServlet</servlet-name>
+		<url-pattern>/registernewshop</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ShowCartInfoServlet</servlet-name>
