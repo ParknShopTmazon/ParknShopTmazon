@@ -6,13 +6,16 @@ public class Shop {
 	private String name;
 	private String type;
 	private Integer owner;
+	
 	public Shop(Integer shopId, String name, String type, Integer owner) {
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
 		this.owner = owner;
+	
 	}
+	
 	public Shop() {
 		super();
 	}

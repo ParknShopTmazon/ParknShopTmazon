@@ -11,7 +11,6 @@ import com.tmazon.domain.Shop;
 import com.tmazon.util.DaoUtil;
 
 public class ShopApplyDaoImpl implements ShopApplyDao {
-
 	public List<Shop> getApply() {
 		String sql="SELECT *FROM shop WHERE	STATUS=?";
 		String param="0";		
@@ -26,6 +25,20 @@ public class ShopApplyDaoImpl implements ShopApplyDao {
 			return list;
 		}
 		
+	}
+	public boolean setStatus(int id, boolean isOk) {
+		String sql = "UPDATE  shop SET STATUS = ? WHERE shopId = ? ";
+		String status=isOk?"1":"2";
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, status,id);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("update shop status Failure");
+		}finally{
+			return false;
+		}		
 	}
 
 }

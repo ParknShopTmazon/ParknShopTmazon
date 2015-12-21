@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tmazon.dao.ShopApplyDao;
+import com.tmazon.dao.impl.ShopApplyDaoImpl;
+
 public class AgreeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
     public AgreeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	
@@ -21,7 +23,14 @@ public class AgreeServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("sid"));
+	
+		if((!request.getParameter("sid").equals(null))&&(!request.getParameter("sid").equals(""))){
+			int shopId=Integer.parseInt(request.getParameter("sid"));
+			ShopApplyDao sad=new ShopApplyDaoImpl();
+			sad.setStatus(shopId, true);
+		}
+		String url = request.getHeader("Referer");
+		response.sendRedirect(url);
 	}
 
 }
