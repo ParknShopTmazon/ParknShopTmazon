@@ -5,12 +5,22 @@ public class Shop {
 	private Integer shopId;
 	private String name;
 	private String type;
+	private String status;
 	private Integer owner;
-	public Shop(Integer shopId, String name, String type, Integer owner) {
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Shop(Integer shopId, String name, String type, String status, Integer owner) {
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
+		this.status = status;
 		this.owner = owner;
 	}
 	public Shop() {
