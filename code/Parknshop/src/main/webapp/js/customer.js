@@ -354,6 +354,74 @@ var customer = {
                         </div>\
                     </div>');
                 }
+            },
+
+            /**
+             * [init: init the cart after initialzing the data]
+             * @return {[type]} [description]
+             */
+            init = function() {
+                /** update cost info at the beginning */
+                updateCost();
+
+                /** delete shop item */
+                $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
+
+                    /** store data into database */
+                    $.getJSON('deleteCart', {
+                        sid: $(this).attr('sid')
+                    }, function(data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (typeof(data.result) != 'undefined' && data.result == 'true') {
+                            $(this).parent().parent().parent().remove();
+                            updateCost();
+                        } else {
+                            var error = data.errMsg || '';
+                            alert('failed to delete: ' + error);
+                        }
+                    });
+                });
+
+                /** [click function of the pay button] */
+                $('.cart-container #shop-cost .pay .value').click(function() {
+                    window.location.href = "./order.jsp?type=certain";
+                });
+
+                /** [change function of quantity changing] */
+                $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
+                    /* Act on the event */
+
+                    /** check legality when keydown */
+                    var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
+                    if (regex.test($(this).val())) {
+                        if (parseInt($(this).val()) > parseInt($(this).attr('max_quantity'))) {
+                            $(this).focus();
+                            $(this).val($(this).attr('max_quantity'));
+                            alert('the product is limited for sale');
+                        } else {
+                            /** store data into database */
+                            $.getJSON('updateCart', {
+                                sid: $(this).attr('sid'),
+                                quantity: $(this).val()
+                            }, function(data, textStatus) {
+                                /*optional stuff to do after success */
+                                if (typeof(data.result) != 'undefined' && data.result == 'true') {
+                                    $(this).attr('value', $(this).val());
+                                } else {
+                                    var error = data.errMsg || '';
+                                    alert('failed to modify: ' + error);
+                                    $(this).val($(this).attr('value'));
+                                }
+                            });
+                        }
+                    } else {
+                        $(this).focus();
+                        $(this).val(Math.abs(parseInt($(this).val())));
+                        alert('you can only enter integer number between 1 and 99');
+                    }
+
+                    updateCost();
+                });
             };
 
         /** get data by uid */
@@ -366,72 +434,13 @@ var customer = {
             .done(function(data) {
                 /** init the data of cart */
                 initData(data);
+
+                /** init the cart */
+                init();
             })
             .fail(function() {
                 console.log('failed to get cart data');
             });
-
-        /** update cost info at the beginning */
-        updateCost();
-
-        /** delete shop item */
-        $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-
-            /** store data into database */
-            $.getJSON('deleteCart', {
-                sid: $(this).attr('sid')
-            }, function(data, textStatus) {
-                /*optional stuff to do after success */
-                if (typeof(data.status) != 'undefined' && data.status == 'true') {
-                    $(this).parent().parent().parent().remove();
-                    updateCost();
-                } else {
-                    var error = data.errMsg || '';
-                    alert('failed to delete: ' + error);
-                }
-            });
-        });
-
-        /** [click function of the pay button] */
-        $('.cart-container #shop-cost .pay .value').click(function() {
-            window.location.href = "./order.jsp?type=certain";
-        });
-
-        /** [change function of quantity changing] */
-        $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
-            /* Act on the event */
-
-            /** check legality when keydown */
-            var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
-            if (regex.test($(this).val())) {
-                if (parseInt($(this).val()) > parseInt($(this).attr('max_quantity'))) {
-                    $(this).focus();
-                    $(this).val($(this).attr('max_quantity'));
-                    alert('the product is limited for sale');
-                } else {
-                    /** store data into database */
-                    $.getJSON('updateCart', {
-                        sid: $(this).attr('sid'),
-                        quantity: $(this).val()
-                    }, function(data, textStatus) {
-                        /*optional stuff to do after success */
-                        if (typeof(data.status) != 'undefined' && data.status == 'true') {
-                            $(this).attr('value', $(this).val());
-                        } else {
-                            var error = data.errMsg || '';
-                            alert('failed to modify: ' + error);
-                            $(this).val($(this).attr('value'));
-                        }
-                    });
-                }
-            } else {
-                $(this).focus();
-                $(this).val(Math.abs(parseInt($(this).val())));
-                alert('you can only enter integer number between 1 and 99');
-            }
-
-            updateCost();
-        });
     },
 
     /************************************************************
@@ -459,7 +468,7 @@ var customer = {
                 })
                 .done(function() {
                     /** init the data of order */
-                initData(data);
+                    initData(data);
                 })
                 .fail(function() {
                     // console.log("error");
