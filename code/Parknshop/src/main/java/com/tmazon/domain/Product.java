@@ -1,23 +1,18 @@
 package com.tmazon.domain;
 
-/*
- * product_id int AUTO_INCREMENT,
-	shop_id int NOT NULL,
-	name varchar(50) NOT NULL,
-	price decimal(10,2) NOT NULL,
-	discount_price decimal(10,2) NOT NULL,
-	category varchar(50) NOT NULL,
-	stock_num int NOT NULL,
-	sold_num int NOT NULL,
-	description text NOT NULL,
-	picture varchar(100),
-	PRIMARY KEY (product_id),
-	FOREIGN KEY (shop_id) REFERENCES shop(shop_id),
-	FOREIGN KEY (category) REFERENCES category(category)
- */
-
 public class Product {
 
+	public static final String CATEGORY_TV = "TV& Home Theater";
+	public static final String CATEGORY_COMP = "Computers & Tablets";
+	public static final String CATEGORY_CELL = "Cell Phones";
+	public static final String CATEGORY_CAMER = "Cameras & Camcorders";
+	public static final String CATEGORY_AUDIO = "Audio";
+	public static final String CATEGORY_CAR = "Car Electronics & GPS";
+	public static final String CATEGORY_VIDEO = "Video, Games, Movies & Music";
+	public static final String CATEGORY_HEALTH = "Health, Fitness & Sports";
+	public static final String CATEGORY_HOME = "Home & Office";
+
+	
 	private Integer productId;
 	private Integer shopId;
 	private String name;
