@@ -5,13 +5,25 @@ public class Shop {
 	private Integer shopId;
 	private String name;
 	private String type;
+	private String status;
 	private Integer owner;
+
 	
-	public Shop(Integer shopId, String name, String type, Integer owner) {
+
+
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Shop(Integer shopId, String name, String type, String status, Integer owner) {
+
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
+		this.status = status;
 		this.owner = owner;
 	
 	}
@@ -50,6 +62,7 @@ public class Shop {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result + ((shopId == null) ? 0 : shopId.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -77,6 +90,11 @@ public class Shop {
 				return false;
 		} else if (!shopId.equals(other.shopId))
 			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
@@ -86,8 +104,11 @@ public class Shop {
 	}
 	@Override
 	public String toString() {
-		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", owner=" + owner + "]";
+		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", status=" + status + ", owner="
+				+ owner + "]";
 	}
+	
+	
 	
 	
 	

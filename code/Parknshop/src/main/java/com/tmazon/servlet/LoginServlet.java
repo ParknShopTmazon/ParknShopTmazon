@@ -38,16 +38,9 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// admin 入口
-		if(req.getParameter("name").equals("admin")&&req.getParameter("password").equals("admin")){ 
-			ShopApplyDao s=new ShopApplyDaoImpl();
-			List <Shop> list=s.getApply();
-			req.getSession().setAttribute("apply", list);//店铺申请集
-			req.getSession().setAttribute("rate", 5);
-			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req, resp);;
-			return ;
-		}
 		
+		
+	
 	
 		// check parameters
 		@SuppressWarnings("unchecked")
@@ -93,6 +86,14 @@ public class LoginServlet extends HttpServlet {
 		users.put(name, req.getSession());
 		System.out.println("online user: " + users.size());
 		
+		if (user.getRole().equals(User.ROLE_ADMIN)) {
+			ShopApplyDao s=new ShopApplyDaoImpl();
+			List <Shop> list=s.getApply();
+			req.getSession().setAttribute("apply", list);//店铺申请集
+			req.getSession().setAttribute("rate", 5);
+			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req, resp);;
+			return ;
+		}
 		resp.sendRedirect("index");
 	}
 }

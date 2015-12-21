@@ -33,6 +33,10 @@ public class ShopDaoImpl implements ShopDao {
 			sqlBuilder.append("AND type = ? ");
 			params.add(shop.getType());
 		}
+		if(shop.getStatus() != null){
+			sqlBuilder.append("AND status = ? ");
+			params.add(shop.getStatus());
+		}
 		
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
@@ -50,7 +54,7 @@ public class ShopDaoImpl implements ShopDao {
 
 	public Shop findById(Integer id) {
 		
-		List<Shop> list = select(new Shop(id, null, null, null));
+		List<Shop> list = select(new Shop(id, null, null, null, null));
 		
 		if(!list.isEmpty()){
 			return list.get(0);
