@@ -40,28 +40,23 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		
-		
-	
+			throws ServletException, IOException {		
 	
 		// check parameters
-		@SuppressWarnings("unchecked")
-		Map<String, String[]> params = req.getParameterMap();
-		if (!params.containsKey("name") || !params.containsKey("password")) {
+		String name = req.getParameter("name");
+		String password = req.getParameter("password");
+		User user = new User(null, name, password, null, null);
+		
+		if (!user.isNamePasswordValid()) {
 			req.setAttribute(AttrName.RequestScope.ERROR_PARAMETERS, true);
 			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
 					resp);
 			return;
 		}
-
-		// check user name and password
-		String name = params.get("name")[0];
-		String password = params.get("password")[0];
 	
-			
+		// check user name and password
 		if (!userService
-				.isUserExist(new User(null, name, password, null, null))) {
+				.isUserExist(user)) {
 			req.setAttribute(AttrName.RequestScope.ERROR_NAME_PASSWORD, true);
 			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
 					resp);
@@ -84,7 +79,7 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		// log in
-		User user = userService.findByName(name);
+		user = userService.findByName(name);
 		req.getSession().setAttribute(AttrName.SessionScope.USER, user);
 		users.put(name, req.getSession());
 		System.out.println("online user: " + users.size());

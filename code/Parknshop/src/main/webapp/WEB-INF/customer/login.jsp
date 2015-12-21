@@ -22,13 +22,13 @@
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">USERNAME</label>
 					<div class="controls">
-						<input id="inputEmail" type="text" name="name" />
+						<input id="inputEmail" type="text" name="name" value="${ param.name }" />
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">PASSWORD</label>
 					<div class="controls">
-						<input id="inputPassword" type="password" name="password" />
+						<input id="inputPassword" type="password" name="password" value="${ param.password }" />
 					</div>
 				</div>
 				<div class="control-group">
@@ -49,7 +49,7 @@
 						<label style="color: red;">error name or password</label>
 					</c:if>
 					<c:if test="${ not empty r_error_parameters }">
-						<label style="color: red;">no name or password</label>
+						<label style="color: red;">6-20 characters for name and password only</label>
 					</c:if>
 				</div>
 			</form>

@@ -9,6 +9,15 @@ public class User {
 	public static final String STATUS_NORMAL = "normal";
 	public static final String STATUS_BLACK = "black";
 	
+	/**
+	 * min characters of user name and password
+	 */
+	public static final int CHAR_MIN = 6;
+	/**
+	 * max characters of user name and password
+	 */
+	public static final int CHAR_MAX = 20;
+	
 	private Integer userId;
 	private String name;
 	private String password;
@@ -57,6 +66,11 @@ public class User {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public boolean isNamePasswordValid() {
+		return (name != null && password != null && name.length() >= CHAR_MIN && name.length() <= CHAR_MAX
+				&& password.length() >= CHAR_MIN && password.length() <= CHAR_MAX);
 	}
 	
 }
