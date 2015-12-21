@@ -36,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		User user = new User(null, name, password, User.ROLE_CUSTOMER, User.STATUS_NORMAL);
 		if (!user.isNamePasswordValid()) {
+			req.setAttribute(AttrName.RequestScope.ERROR_PARAMETERS, true);
 			req.getRequestDispatcher("WEB-INF/customer/register.jsp").forward(req, resp);
 			return;
 		}
