@@ -4,6 +4,7 @@ public class User {
 
 	public static final String ROLE_CUSTOMER = "customer";
 	public static final String ROLE_SHOP_OWNER = "shop_owner";
+	public static final String ROLE_ADMIN = "admin";
 	
 	public static final String STATUS_NORMAL = "normal";
 	public static final String STATUS_BLACK = "black";

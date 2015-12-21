@@ -34,7 +34,8 @@ public class RegisterServlet extends HttpServlet {
 		// check parameters
 		String name = req.getParameter("name");
 		String password = req.getParameter("password");
-		if (name == null || password == null) {
+		User user = new User(null, name, password, User.ROLE_CUSTOMER, User.STATUS_NORMAL);
+		if (!user.isNamePasswordValid()) {
 			req.getRequestDispatcher("WEB-INF/customer/register.jsp").forward(req, resp);
 			return;
 		}
@@ -47,7 +48,6 @@ public class RegisterServlet extends HttpServlet {
 		}
 		
 		// register
-		User user = new User(null, name, password, User.ROLE_CUSTOMER, User.STATUS_NORMAL);
 		boolean success = userService.register(user);
 		req.setAttribute(AttrName.RequestScope.IS_REGISTER_SUCCESS, success);
 		req.getRequestDispatcher("WEB-INF/customer/register.jsp").forward(req, resp);

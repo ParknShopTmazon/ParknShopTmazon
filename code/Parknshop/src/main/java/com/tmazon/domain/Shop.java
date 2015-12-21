@@ -7,8 +7,10 @@ public class Shop {
 	private String type;
 	private String status;
 	private Integer owner;
+
 	
-	
+
+
 	public String getStatus() {
 		return status;
 	}
@@ -16,13 +18,16 @@ public class Shop {
 		this.status = status;
 	}
 	public Shop(Integer shopId, String name, String type, String status, Integer owner) {
+
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
 		this.status = status;
 		this.owner = owner;
+	
 	}
+	
 	public Shop() {
 		super();
 	}
