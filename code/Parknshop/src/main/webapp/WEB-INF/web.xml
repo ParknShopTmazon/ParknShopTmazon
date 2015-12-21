@@ -109,10 +109,22 @@
   	<servlet-class>com.tmazon.servlet.AgreeServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>AddAdvertisementDao</servlet-name>
-  	<display-name>AddAdvertisementDao</display-name>
+  	<servlet-name>AddAdvertisementServlet</servlet-name>
+  	<display-name>AddAdvertisementServlet</display-name>
   	<description></description>
-  	<servlet-class>com.tmazon.servlet.AddAdvertisementDao</servlet-class>
+  	<servlet-class>com.tmazon.servlet.AddAdvertisementServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DeleteAdvServlet</servlet-name>
+  	<display-name>DeleteAdvServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.DeleteAdvServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ModifyAdvServlet</servlet-name>
+  	<display-name>ModifyAdvServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.tmazon.servlet.ModifyAdvServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -206,8 +218,16 @@
 		<url-pattern>/updateCart</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>AddAdvertisementDao</servlet-name>
-		<url-pattern>/AddAdvertisementDao</url-pattern>
+		<servlet-name>AddAdvertisementServlet</servlet-name>
+		<url-pattern>/AddAdvertisementServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteAdvServlet</servlet-name>
+		<url-pattern>/DeleteAdvServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyAdvServlet</servlet-name>
+		<url-pattern>/ModifyAdvServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>

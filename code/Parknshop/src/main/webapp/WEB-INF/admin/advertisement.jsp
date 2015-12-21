@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.* ,com.tmazon.domain.Advertisement" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,17 +29,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
-				
+
+			  <form action="AddAdvertisementServlet" method="post">
+				<div class="grid_4">
+					<p>
+						<label>Product_ID</label>
+						<input type='text' name="productID" value=""/>
+					</p>
+				</div>
+			
+				<div class="grid_4">
+					<p>
+						<label>Cost</label>
+						<input type='text' name="cost" value=""/>
+					</p>
+				</div>
+				<div class="grid_4">
+					<p>
+						<label>&nbsp;</label>
+						<input type="submit" value="Add" />
+					</p>
+				</div>
+			  </form>
+
 				<div class="grid_16">
 					<table>
 						<thead>
 							<tr>
-								<th>Company</th>
-								<th>Type</th>
+								<th>AD_ID</th>
+								<th>Product_ID</th>
 								<th>Cost</th>
 								<th colspan="3" width="10%">Actions</th>
 							</tr>
 						</thead>
+						
+						<tbody>
+							<%
+								if (session.getAttribute("showAd") != null) {
+									List<Advertisement> ls = (List<Advertisement>) session.getAttribute("showAd");
+									if (ls.size() > 0) {
+										for (Advertisement s : ls) {
+							%>
+							<tr>
+								<td><%=s.getAdId()%></td>
+								<td><%=s.getProductID()%></td>
+								<td><input type='text' class="grid_4"  value=<%=s.getCost() %> ></td>
+								<td><a href="javascript: void(0);" class="edit">Modify</a></td>
+								<td><a href="javascript: void(0);" class="delete" type="del">Delete</a></td>	
+							</tr>
+							<%
+								}
+									}
+								}
+							%>
+						</tbody>
+
 						<tfoot>
 							<tr>
 								<td colspan="5" class="pagination">
@@ -47,120 +91,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</td>
 							</tr>
 						</tfoot>
-						<tbody>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>	
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								<td><a href="#" class="delete">BlackList</a></td>
-							</tr>
-						</tbody>
 					</table>
 				</div>
 			</div>
@@ -168,5 +98,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="foot">
 			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
 		</div>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript">
+			$(document)
+				.ready(
+						function() {
+							$('.grid_16 .delete')
+									.click(
+											function() {
+												$(this).parent().parent()
+														.hide();
+
+													var url = 'DeleteAdvServlet';
+													var sid = $(this).parent()
+																.prev().prev()
+																.prev().prev()
+																.html();
+
+											$.ajax({
+													url : url,
+													type : 'POST',
+													data : {
+														sid : sid
+													},
+													dataType : 'json'
+												}).done(function() {
+													console.log('success');
+												}).fail(function() {
+													console.log('error');
+												});
+											});
+						});
+			$(document)
+			.ready(
+					function() {
+						$('.grid_16 .edit')
+								.click(
+										function() {
+											var url = 'ModifyAdvServlet';
+											var advId = $(this).parent()
+															.prev().prev()
+															.prev()
+															.html(); 
+											var cost = $(this).parent()
+															.prev().children().val();
+										$.ajax({
+												url : url,
+												type : 'POST',
+												data : {
+													advId : advId ,
+													cost : cost
+												},
+												dataType : 'json'
+											}).done(function() {
+												console.log('success');
+											}).fail(function() {
+												console.log('error');
+											});alert("修改成功");
+										});
+					});
+
+	</script>
 	</body>
 </html>

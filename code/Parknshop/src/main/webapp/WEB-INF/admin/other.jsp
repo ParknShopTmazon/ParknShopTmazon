@@ -29,18 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
-				<div class="grid_4">
-					<p>
-						<label>Back Up Database To</label>
-						<input type='text' value=""></input>
-					</p>
-				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input type="submit" value="Browse" />
-					</p>
-				</div>
+			
 				
 				<form action="ProfitServlet" method="post">
 				<div class="grid_4">
