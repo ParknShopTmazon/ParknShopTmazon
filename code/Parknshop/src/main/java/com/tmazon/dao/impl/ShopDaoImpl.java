@@ -59,7 +59,7 @@ public class ShopDaoImpl implements ShopDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.insert(sql, new BeanHandler<Shop>(Shop.class), shop.getShopId(), shop.getName(), shop.getType(), shop.getOwner(),shop.getStatus());
+			runner.insert(sql, new BeanHandler<Shop>(Shop.class), shop.getShopId(), shop.getName(), shop.getType(), shop.getStatus(), shop.getOwner());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

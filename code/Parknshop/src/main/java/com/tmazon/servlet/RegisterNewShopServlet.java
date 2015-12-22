@@ -39,14 +39,16 @@ public class RegisterNewShopServlet extends HttpServlet{
 		String type = req.getParameter("type");
 		Integer owner = null;
 		
-		System.out.println(name + " ####### " + type);
+//		System.out.println(name + " ####### " + type);
 		
 		User onlineUser = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
 		
-		if(onlineUser != null){
-			owner = onlineUser.getUserId();
+		if(onlineUser == null){
+			resp.sendRedirect("login");
+			return;
 		}
-		
+		owner = onlineUser.getUserId();
+		System.out.println("owner ="+owner);
 		
 		if (name == null || type == null ) {
 			req.getRequestDispatcher("/WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
@@ -65,6 +67,6 @@ public class RegisterNewShopServlet extends HttpServlet{
 		boolean success = shopService.register(shop);
 		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
 		req.getRequestDispatcher("/WEB-INF/shopowner/homepage.jsp").forward(req, resp);
-
+		
 	}
 }
