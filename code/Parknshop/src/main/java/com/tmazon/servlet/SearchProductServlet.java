@@ -49,6 +49,7 @@ public class SearchProductServlet extends HttpServlet {
 			}
 			req.setAttribute("test", 0);
 		}
+		req.setAttribute("namess", name);
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp");
 		requestDispatcher.forward(req, resp);
 	}
