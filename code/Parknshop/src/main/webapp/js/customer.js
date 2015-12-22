@@ -401,7 +401,7 @@ var customer = {
                         } else {
                             /** store data into database */
                             $.getJSON('updateCart', {
-                                sid: $(this).attr('sid'),
+                                sid: $(this).parent().prev().prev().children('input').attr('sid'),
                                 quantity: $(this).val()
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */

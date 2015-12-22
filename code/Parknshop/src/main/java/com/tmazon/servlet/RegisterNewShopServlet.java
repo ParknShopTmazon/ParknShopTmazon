@@ -32,7 +32,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		System.out.println("###################");
+//		System.out.println("###################");
 		
 		// check parameters
 		String name = req.getParameter("name");
@@ -48,7 +48,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 			return;
 		}
 		owner = onlineUser.getUserId();
-		System.out.println("owner ="+owner);
+//		System.out.println("owner ="+owner);
 		
 		if (name == null || type == null ) {
 			req.getRequestDispatcher("/WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
@@ -67,6 +67,8 @@ public class RegisterNewShopServlet extends HttpServlet{
 		boolean success = shopService.register(shop);
 		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
 		req.getRequestDispatcher("/WEB-INF/shopowner/homepage.jsp").forward(req, resp);
+		
+//		resp.sendRedirect("");
 		
 	}
 }
