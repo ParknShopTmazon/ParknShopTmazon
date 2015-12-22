@@ -15,7 +15,7 @@
 <div class="container-fluid">
 	<br>
 	<form class="form-search">
-		<input class="input-medium search-query" type="text" name="name" />
+		<input class="input-medium search-query" type="text" name="name" value="${namess}"/>
 		<select name="type">
     		<option value="" selected='1'>ALL</option>
     		<option value="TV& Home Theater">TV& Home Theater</option>
