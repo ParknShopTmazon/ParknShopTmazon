@@ -13,10 +13,7 @@
 		<servlet-name>IndexJsp</servlet-name>
 		<jsp-file>/WEB-INF/customer/index.jsp</jsp-file>
 	</servlet>
-	<servlet>
-		<servlet-name>MyShopServlet</servlet-name>
-		<jsp-file>/WEB-INF/shopowner/myshop.jsp</jsp-file>
-	</servlet>
+	
 	<servlet>
 		<servlet-name>RegisterShopPageServlet</servlet-name>
 		<jsp-file>/WEB-INF/shopowner/RegisterShopPage.jsp</jsp-file>
@@ -24,6 +21,10 @@
 	<servlet>
 	    <servlet-name>RegisterNewShopServlet</servlet-name>
 		<servlet-class>com.tmazon.servlet.RegisterNewShopServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>MyShopServlet</servlet-name>
+		<servlet-class>com.tmazon.servlet.MyShopServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
