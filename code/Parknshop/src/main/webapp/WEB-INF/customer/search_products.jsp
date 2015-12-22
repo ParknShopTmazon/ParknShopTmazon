@@ -15,18 +15,128 @@
 <div class="container-fluid">
 	<br>
 	<form class="form-search">
-		<input class="input-medium search-query" type="text" name="name" value="${namess}"/>
-		<select name="type">
-    		<option value="" selected='1'>ALL</option>
-    		<option value="TV& Home Theater">TV& Home Theater</option>
-    		<option value="Computers & Tablets" >Computers & Tablets</option>
-    		<option value="Cell Phones" >Cell Phones</option>
-    		<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
-    		<option value="Audio" >Audio</option>
-    		<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
-    		<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
-    		<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
-    		<option value="Home & Office" >Home & Office</option>
+		<input class="input-medium search-query" type="text" name="name" value="${param.name}"/>
+		<select name="type" >
+    		<c:if test="${param.type=='' ||empty param.type}">
+    			<option value="" selected="selected">ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='TV& Home Theater'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater" selected="selected">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Computers & Tablets'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" selected="selected">Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Cell Phones'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" selected="selected">Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Cameras & Camcorders'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" selected="selected">Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Audio'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" selected="selected">Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Car Electronics & GPS'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" selected="selected" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Video, Games, Movies & Music'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" selected="selected">Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Health, Fitness & Sports'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports"  selected="selected">Health, Fitness & Sports</option>
+    			<option value="Home & Office" >Home & Office</option>
+    		</c:if>
+    		<c:if test="${param.type=='Home & Office'}">
+    			<option value="" >ALL</option>
+    			<option value="TV& Home Theater">TV& Home Theater</option>
+    			<option value="Computers & Tablets" >Computers & Tablets</option>
+    			<option value="Cell Phones" >Cell Phones</option>
+    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+    			<option value="Audio" >Audio</option>
+    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+    			<option value="Home & Office" selected="selected">Home & Office</option>
+    		</c:if>
       	</select>
 		<button type="submit" class="btn-warning">search</button>
 	</form>
@@ -74,3 +184,4 @@
 	</c:if>
 </div>
 </body>
+</html>
