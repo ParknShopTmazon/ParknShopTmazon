@@ -3,65 +3,37 @@
 <head>
 <title>Modify HomePage product list</title>
 <link rel="stylesheet" type="text/css" href="CSS/style.css">
-<link rel="stylesheet" type="text/css" href="CSS/AHpl.css">
+<link rel="stylesheet" type="text/css" href="CSS/photobox.css">
 </head>
 <body>
-	<div id=head>
-			<img id="logo" src="Images/logo.png">
-			<span id="topline">
-				<a href="../public/index.html">Home_page|</a>
-				<a href="../seller/Update_store_information.html" >Store_information|</a>
-				<a href="../seller/Account_setting.html">Accont_setting</a></font>
-			</span>
-	</div>
-
+<script type="text/javascript" src="js/display.js"></script>
 	<div id="container">
-	
-		<div><span>choose all the product and Click to Add</span> <input type="button" value="submit"> </div>
+		<div class="productbox">
+			
+			<div class="product-photo">
+			  <input name="" id="product" type="image" class="selected_ok_img" src="Images/ok.jpg" onClick="changestate('product',-1)"/>
+			  <input name="" id="" type="image" class="product-img-box" onClick="changestate('product',1)" src="Images/product1.jpg" alt="no photo no truth" />
+			</div>
+			<div class="product-name">
+				<a href=""><strong><span >Name:</span><span class="float-right">product1</span></strong></a>
+			</div>
+			<div class="product-prcie">
+				<strong><span id="">Price:</span><span class="float-right">$:27</span></strong>
+			</div>
+		</div>
+		<div class="productbox">
+			<div class="product-photo">
+			<input name="" id="test" type="image" class="selected_ok_img" src="Images/ok.jpg"  onClick="changestate('test',-1)"/>
+			  <input name="" id="" type="image" class="product-img-box" onClick="changestate('test',1)" src="Images/product1.jpg" alt="no photo no truth" />
+			</div>
+			<div class="product-name">
+				<a href=""><strong><span >Name:</span><span class="float-right">product1</span></strong></a>
+			</div>
+			<div class="product-prcie">
+				<strong><span id="">Price:</span><span class="float-right">$:27</span></strong>
+			</div>
+		</div>
 		
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop1.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name1</span></a></div>
-			<div><a href="">more info<a></div>
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop2.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name2</span></a></div>
-			<div>more info</div>	
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop3.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name3</span></a></div>
-			<div>more info</div>	
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop4.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name4</span></a></div>
-			<div>more info</div>	
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop5.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name5</span></a></div>
-			<div>more info</div>	
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop6.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name6</span></a></div>
-			<div>more info</div>	
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop7.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name7</span></a></div>
-			<div>more info</div>	
-		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="Images/shop8.jpg" alt="无"></a></div>
-			<div><a id="shopname" href=""><span id="">product name8</span></a></div>
-			<div>more info</div>	
-		</div>
-	</div>
-	<div id="foot">
-			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
 	</div>
 </body>
 </html>
