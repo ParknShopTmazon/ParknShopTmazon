@@ -1,0 +1,55 @@
+.side-nav-list{
+	font-weight:400;
+	color:#FFFFFF;
+	border-right:;
+}
+.side-nav-list ul,.side-nav-list li,.side-nav-list dl,.side-nav-list dt,.side-nav-list dd{margin:0px;padding:0px;}
+.side-nav-list ul li{height:2em;}
+.side-nav-list ul{
+	margin:0px;
+	padding:0px 0px 0px 20px;
+} 
+.side-nav-list .current{color:#660000;}
+.side-nav-list .home{border-bottom:1px solid #FFFFFF;}
+.side-nav-list .home, .side-nav-list .head-item{
+    height: 2em;
+	padding-top:10px;
+	padding-left:20px;
+	font-size:20px;
+}
+.side-nav-list .item-list {
+	font-size:16px;
+	border-bottom:1px solid #FFFFFF;
+}
+.side-nav-list a{text-decoration:none;}
+.side-nav-list li:visit a{color:#FF0000;}
+
+.manage-nav
+{
+	color:#FFFFFF;
+	height:2em;
+}
+.manage-nav .unit{
+	float:left;
+	border:1px solid #330099;
+	background-color:#6699FF;
+	height:2em;
+	width:120px;
+	text-align:center;
+}
+.manage-nav .unit span{
+	display:block;
+	padding-top:8px;
+	vertical-align:center;
+}
+.manage-nav .fillspace{
+	float:left;
+	height:2em;
+	width:0;
+	border-bottom:1px solid #330099;
+}
+.manage-nav .selected{
+	background-color:#000099;
+	color:#FF0000;
+	font-weight:600;
+}

@@ -28,6 +28,7 @@ public class SearchProductServlet extends HttpServlet {
 		String name = req.getParameter("name");
 		String category = req.getParameter("type");
 		if((name==null||"".trim().equals(name))&&(category==null||"".trim().equals(category))){
+			req.setAttribute("num", 0);
 			req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp").forward(req, resp);
 			return;
 		}
@@ -40,16 +41,11 @@ public class SearchProductServlet extends HttpServlet {
 		List<Product> productList = productService.select(product);
 		if(productList==null||productList.isEmpty()){
 			req.setAttribute("num", 0);
-			System.out.println("num:"+req.getAttribute("num"));
 		}else{
 			req.setAttribute("num", productList.size());
 			req.setAttribute("productList", productList);
-			for (Product product2 : productList) {
-				System.out.println(product2.getProductId()+"  "+product2.getName()+"  "+product2.getPrice()+"  "+product2.getSoldNum());
-			}
 			req.setAttribute("test", 0);
 		}
-		req.setAttribute("namess", name);
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp");
 		requestDispatcher.forward(req, resp);
 	}
