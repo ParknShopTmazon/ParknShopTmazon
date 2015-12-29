@@ -136,6 +136,42 @@ var customer = {
             },
 
             /**
+             * [updateFriendList: update the friends list]
+             * @return {[type]} [description]
+             */
+            updateFriendList = function() {
+                $.ajax({
+                    url: 'friends',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {},
+                })
+                .done(function(data) {
+                    if (typeof(data.friends) != 'undefined') {
+                        /** clear all friends first */
+                        for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
+                            $('.dialog #main .friend-list .list ul').children(i).remove();
+                        }
+
+                        /** append */
+                        for (var j in data.friends) {
+                            /** [if: firts child] */
+                            if (j == 0) {
+                                $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                            } else {
+                                $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                            }
+                        }
+                    } else {
+                        console.log("failed to get friends list");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to get friends list");
+                });
+            },
+
+            /**
              * [init: init the animation trigger of the` dialog]
              * @return {[type]} [description]
              */
@@ -220,6 +256,10 @@ var customer = {
         }, function() {
             $(this).css('width', '30px');
         })
+
+        /** update friends list */
+        updateFriendList();
+        
     },
 
     /**
@@ -366,14 +406,14 @@ var customer = {
 
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-
+                    var _this = $(this);
                     /** store data into database */
                     $.getJSON('deleteCart', {
-                        sid: $(this).attr('sid')
+                        sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
                         if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                            $(this).parent().parent().parent().remove();
+                            _this.parent().parent().parent().remove();
                             updateCost();
                         } else {
                             var error = data.errMsg || '';
@@ -384,13 +424,13 @@ var customer = {
 
                 /** [click function of the pay button] */
                 $('.cart-container #shop-cost .pay .value').click(function() {
-                    window.location.href = "./order.jsp?type=certain";
+                    window.location.href = "./order?type=certain";
                 });
 
                 /** [change function of quantity changing] */
                 $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
                     /* Act on the event */
-
+                    var _this = $(this);
                     /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
@@ -401,16 +441,16 @@ var customer = {
                         } else {
                             /** store data into database */
                             $.getJSON('updateCart', {
-                                sid: $(this).parent().prev().prev().children('input').attr('sid'),
+                                sid: $(this).attr('sid'),
                                 quantity: $(this).val()
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
                                 if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                                    $(this).attr('value', $(this).val());
+                                    _this.attr('value', _this.val());
                                 } else {
                                     var error = data.errMsg || '';
                                     alert('failed to modify: ' + error);
-                                    $(this).val($(this).attr('value'));
+                                    _this.val(_this.attr('value'));
                                 }
                             });
                         }
@@ -649,9 +689,6 @@ var customer = {
             .fail(function() {
                 console.log('failed to get order data');
             });
-
-        /** init data of orders */
-        initData(JSON.parse(testData));
 
         /** update cost info */
         updateCost();

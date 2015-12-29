@@ -13,16 +13,7 @@
 </script>
 </head>
 <div class="container-fluid">
-	<div class="row-fluid" id="head">
-		<div class="span4">
-			<img src = "images/logo.png">
-			
-		</div>
-		<div class="span5">
-			<b href ="#">${ user.name }</b>
-			<a href ="./cart">|Shopping_cart</a>
-		</div>
-	</div>
+	<%@ include file="header.html"%>
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="row-fluid">
@@ -138,11 +129,5 @@
 			</table>
 		</div>
 	</div>
-	<div class="row-fluid" id = "foot">
-		<div class="span12">
-			<h3>
-				Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
-			</h3>
-		</div>
-	</div>
+	<%@ include file="footer.html"%>
 </div>
