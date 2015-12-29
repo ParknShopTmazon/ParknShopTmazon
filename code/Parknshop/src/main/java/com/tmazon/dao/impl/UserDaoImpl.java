@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -81,6 +82,50 @@ public class UserDaoImpl implements UserDao {
 			return list.get(0);
 		}
 		return null;
+	}
+
+	public List<User> findFriendsById(Integer id) {
+		String sql = "SELECT * FROM user WHERE userId in (SELECT userId FROM friend WHERE friendId = ? UNION SELECT friendId FROM friend WHERE userId = ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<User> firends = runner.query(sql, new BeanListHandler<User>(User.class), id, id);
+			return firends;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	public boolean insertFriend(Integer userId, Integer friendId) {
+		String sql = "INSERT INTO friend VALUES (?, ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.query(sql, new ArrayHandler(), userId, friendId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	public List<User> SearchByName(String name) {
+		String sql = "SELECT * FROM user WHERE name like ?";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<User> result = runner.query(sql, new BeanListHandler<User>(User.class), "%" + name + "%");
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	

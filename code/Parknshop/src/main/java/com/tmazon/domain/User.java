@@ -1,5 +1,7 @@
 package com.tmazon.domain;
 
+import java.util.List;
+
 public class User {
 
 	public static final String ROLE_CUSTOMER = "customer";
@@ -23,6 +25,7 @@ public class User {
 	private String password;
 	private String role;
 	private String status;
+	private List<User> friends;
 	
 	public User() {
 	}
@@ -71,6 +74,30 @@ public class User {
 	public boolean isNamePasswordValid() {
 		return (name != null && password != null && name.length() >= CHAR_MIN && name.length() <= CHAR_MAX
 				&& password.length() >= CHAR_MIN && password.length() <= CHAR_MAX);
+	}
+
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
+	}
+	
+	@Override
+	public int hashCode() {
+		return userId == null ? -1 : userId.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof User) {
+			User other = (User) obj;
+			if (userId != null) {
+				return userId.equals(other.userId);
+			}
+		}
+		return false;
 	}
 	
 }
