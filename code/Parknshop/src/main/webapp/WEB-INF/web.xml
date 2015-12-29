@@ -122,6 +122,10 @@
   <display-name>ProductInfoServlet</display-name>
   <servlet-class>com.tmazon.servlet.ProductInfoServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>FriendListServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.FriendListServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -225,6 +229,10 @@
  <servlet-mapping>
   <servlet-name>ProductInfoServlet</servlet-name>
   <url-pattern>/productInfo</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>FriendListServlet</servlet-name>
+ 	<url-pattern>/friends</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>
