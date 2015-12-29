@@ -6,6 +6,9 @@ public class Shop {
 	public static final String STATUS_FAIL = "fail";
 	public static final String STATUS_SUCCESS = "success";
 
+	public static final String TYPE_PERSON = "person";
+	public static final String TYPE_COMPANY = "company";
+	
 	private Integer shopId;
 	private String name;
 	private String type;

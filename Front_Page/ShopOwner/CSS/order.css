@@ -1,20 +1,11 @@
-#menu
-{
-	float:left;
-	background-color:#FFFFFF;
-	width:200px;
-}
-#content
-{
-	float:left;
-}
+
 .order-form{
 	text-align:center;
 	font-size:14px;
 	overflow:hidden;
 }
 .order-item{
-	background-color:#CCCCCC;
+	background-color:#99CCFF;
 	height:120px;
 	border-bottom:solid 1px;
 }
@@ -70,15 +61,35 @@
     width:200px;
 	height:80px;
 }
-.color1{
-	background-color:#FFFF99;
+.item-name-time-shop .name, .item-name-time-shop .time,.item-name-time-shop .shop{
+	font-size:16px;
+	line-height:1.4em;
 }
-.color2{
-	background-color:#6699FF;
+.dropedlist ul,.dropedlist li{
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
 }
-.color3{
-	background-color:#CC6699;
+.dropedlist ul li ul{
+	display:none;
 }
-.color4{
+.dropedlist ul li{
+	margin:0px 42px;
+	border:1px solid #FFFFFF;
+}
+.dropedlist ul li ul li{
+	display:block;
+	margin:0px 0px;
+	line-height:1.4em;
 	background-color:#FFFFFF;
+	border:1px solid #FFFFFF;
+}
+.dropedlist ul li:hover ul{
+	display:block;
+	border-bottom:1px solid #FFFFFF;
+	border-left:1px solid #FFFFFF;
+	border-right:1px solid #FFFFFF;
+}
+.dropedlist ul li ul li:hover{
+	background-color:#FFFF00;
 }

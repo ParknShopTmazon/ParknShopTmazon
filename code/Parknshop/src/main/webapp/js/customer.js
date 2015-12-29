@@ -363,17 +363,17 @@ var customer = {
             init = function() {
                 /** update cost info at the beginning */
                 updateCost();
-
+                
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-
-                    /** store data into database */
+                	var _this = $(this);
+                	/** store data into database */
                     $.getJSON('deleteCart', {
-                        sid: $(this).attr('sid')
+                        sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
                         if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                            $(this).parent().parent().parent().remove();
+                            _this.parent().parent().parent().remove();
                             updateCost();
                         } else {
                             var error = data.errMsg || '';
@@ -390,7 +390,7 @@ var customer = {
                 /** [change function of quantity changing] */
                 $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
                     /* Act on the event */
-
+                	var _this = $(this);
                     /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
@@ -406,11 +406,11 @@ var customer = {
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
                                 if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                                    $(this).attr('value', $(this).val());
+                                    _this.attr('value', _this.val());
                                 } else {
                                     var error = data.errMsg || '';
                                     alert('failed to modify: ' + error);
-                                    $(this).val($(this).attr('value'));
+                                    $_this.val(_this.attr('value'));
                                 }
                             });
                         }
