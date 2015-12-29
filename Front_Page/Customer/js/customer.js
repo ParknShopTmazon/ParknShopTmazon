@@ -136,6 +136,42 @@ var customer = {
             },
 
             /**
+             * [updateFriendList: update the friends list]
+             * @return {[type]} [description]
+             */
+            updateFriendList = function() {
+                $.ajax({
+                    url: 'friends',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {},
+                })
+                .done(function(data) {
+                    if (typeof(data.friends) != 'undefined') {
+                        /** clear all friends first */
+                        for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
+                            $('.dialog #main .friend-list .list ul').children(i).remove();
+                        }
+
+                        /** append */
+                        for (var j in data.friends) {
+                            /** [if: firts child] */
+                            if (j == 0) {
+                                $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                            } else {
+                                $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                            }
+                        }
+                    } else {
+                        console.log("failed to get friends list");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to get friends list");
+                });
+            },
+
+            /**
              * [init: init the animation trigger of the` dialog]
              * @return {[type]} [description]
              */
@@ -220,6 +256,10 @@ var customer = {
         }, function() {
             $(this).css('width', '30px');
         })
+
+        /** update friends list */
+        updateFriendList();
+        
     },
 
     /**
