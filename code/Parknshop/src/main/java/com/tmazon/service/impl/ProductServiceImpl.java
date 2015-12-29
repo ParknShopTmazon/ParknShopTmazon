@@ -15,7 +15,6 @@ public class ProductServiceImpl implements ProductService{
 	private ProductInfoDao productInfoDao = BasicFactory.getImpl(ProductInfoDao.class);
 	
 	public List<Product> select(Product product) {
-		
 		return productDao.select(product);
 	}
 

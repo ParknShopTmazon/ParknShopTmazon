@@ -27,7 +27,7 @@ public class ShopDaoImpl implements ShopDao {
 			params.add(shop.getOwner());
 		}
 		if(shop.getShopId() != null){
-			
+			sqlBuilder.append("AND shopId = ? ");
 			params.add(shop.getShopId());
 		}
 		if(shop.getType() != null){

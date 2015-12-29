@@ -50,7 +50,7 @@ public class CartDaoImpl implements CartDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.insert(sql, new BeanHandler<Cart>(Cart.class));
+			runner.insert(sql, new BeanHandler<Cart>(Cart.class),cart.getUserId(),cart.getProductId(),cart.getQuantity());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
