@@ -42,6 +42,10 @@
   <servlet-class>com.tmazon.servlet.RegisterServlet</servlet-class>
  </servlet>
  <servlet>
+  <servlet-name>ShowOrderServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.AddOrderServlet</servlet-class>
+ </servlet>
+ <servlet>
   <servlet-name>ShowCartServlet</servlet-name>
   <servlet-class>com.tmazon.servlet.ShowCartServlet</servlet-class>
  </servlet>
@@ -166,6 +170,10 @@
  <servlet-mapping>
   <servlet-name>AgreeServlet</servlet-name>
   <url-pattern>/AgreeServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ShowOrderServlet</servlet-name>
+  <url-pattern>/order</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>IndexJsp</servlet-name>
