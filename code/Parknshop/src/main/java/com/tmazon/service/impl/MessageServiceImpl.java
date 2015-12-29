@@ -19,8 +19,8 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.insert(message);
 	}
 	
-	public boolean setMessageReaded(Integer userId, Integer friendId) {
-		return messageDao.updateUnreadByIds(userId, friendId, true);
+	public boolean setMessagesReaded(int fromId, int toId) {
+		return messageDao.updateUnreadByIds(fromId, toId, false);
 	}
 
 	public int getUnreadCount(Message message, boolean twoWay) {

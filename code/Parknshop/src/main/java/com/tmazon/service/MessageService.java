@@ -12,4 +12,6 @@ public interface MessageService {
 	
 	public int getUnreadCount(Message message, boolean twoWay);
 	
+	public boolean setMessagesReaded(int fromId, int toId);
+	
 }
