@@ -325,10 +325,16 @@ s {
 
 .dialog #main .dialog-show p {
     font-size: 1.2em;
-    margin-top: 2.4em;
+    margin-bottom: 2em;
     width: 60%;
     overflow: hidden;
     word-wrap: break-word;
+}
+
+.dialog #main .dialog-show .time {
+    font-size: 1em;
+    color: #b27100;
+    margin: 0;
 }
 
 

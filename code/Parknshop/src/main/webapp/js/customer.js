@@ -23,6 +23,28 @@
  **********************************************************************/
 "use strict";
 
+/** Date format */
+Date.prototype.format = function(format) {
+    var date = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "h+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S+": this.getMilliseconds()
+    };
+    if (/(y+)/i.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (var k in date) {
+        if (new RegExp("(" + k + ")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+        }
+    }
+    return format;
+}
+
 var customer = {
     /**
      * [scrollController: the controller of the scroll]
@@ -172,6 +194,37 @@ var customer = {
             },
 
             /**
+             * [getMessage: get message from the friend]
+             * @param  {[type]} friendName [the name of the friend]
+             * @return {[type]}            [description]
+             */
+            getMessage = function(friendName) {
+                /** date object */
+                var date = new Date();
+                
+                $.ajax({
+                    url: 'messages',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {friendName: friendName},
+                })
+                .done(function(data) {
+                    if (typeof(data.messages) != 'undefined') {
+                        for (var i in data.messages) {
+                            date.setTime(data.messages[i].messageTime.time);
+                            $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+            <p>' + data.messages[i].content + '</p>')
+                        }
+                    } else {
+                        console.log("failed to get message");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to get message");
+                });
+            },
+
+            /**
              * [init: init the animation trigger of the` dialog]
              * @return {[type]} [description]
              */
@@ -260,6 +313,8 @@ var customer = {
         /** update friends list */
         updateFriendList();
         
+        /** get message from the first friend */
+        getMessage($('.dialog #main .friend-list .list ul .select').html());
     },
 
     /**
@@ -845,27 +900,6 @@ var customer = {
 
     initList: function() {
         "use strict";
-        /** Date format */
-        Date.prototype.format = function(format) {
-            var date = {
-                "M+": this.getMonth() + 1,
-                "d+": this.getDate(),
-                "h+": this.getHours(),
-                "m+": this.getMinutes(),
-                "s+": this.getSeconds(),
-                "q+": Math.floor((this.getMonth() + 3) / 3),
-                "S+": this.getMilliseconds()
-            };
-            if (/(y+)/i.test(format)) {
-                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
-            }
-            for (var k in date) {
-                if (new RegExp("(" + k + ")").test(format)) {
-                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
-                }
-            }
-            return format;
-        }
 
         /** date object */
         var date = new Date();
