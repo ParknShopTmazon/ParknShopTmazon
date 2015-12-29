@@ -363,11 +363,11 @@ var customer = {
             init = function() {
                 /** update cost info at the beginning */
                 updateCost();
-                
+
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-                	var _this = $(this);
-                	/** store data into database */
+                    var _this = $(this);
+                    /** store data into database */
                     $.getJSON('deleteCart', {
                         sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
@@ -390,7 +390,7 @@ var customer = {
                 /** [change function of quantity changing] */
                 $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
                     /* Act on the event */
-                	var _this = $(this);
+                    var _this = $(this);
                     /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
@@ -410,7 +410,7 @@ var customer = {
                                 } else {
                                     var error = data.errMsg || '';
                                     alert('failed to modify: ' + error);
-                                    $_this.val(_this.attr('value'));
+                                    _this.val(_this.attr('value'));
                                 }
                             });
                         }
