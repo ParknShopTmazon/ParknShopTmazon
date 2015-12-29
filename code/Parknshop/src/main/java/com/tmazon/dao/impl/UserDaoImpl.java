@@ -128,6 +128,20 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	public boolean deleteFriend(Integer userId, Integer friendId) {
+		String sql = "DELETE FROM friend WHERE (userId = ? AND friendId = ?) OR (userId = ? AND friendId = ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, userId, friendId, friendId, userId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	
 
 }

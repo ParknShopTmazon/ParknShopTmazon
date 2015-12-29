@@ -21,4 +21,6 @@ public interface UserDao {
 	public List<User> findFriendsById(Integer id);
 	
 	public boolean insertFriend(Integer userId, Integer friendId);
+	
+	public boolean deleteFriend(Integer userId, Integer friendId);
 }
