@@ -649,10 +649,7 @@ var customer = {
             .fail(function() {
                 console.log('failed to get order data');
             });
-
-        /** init data of orders */
-        initData(JSON.parse(testData));
-
+            
         /** update cost info */
         updateCost();
 
