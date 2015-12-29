@@ -123,16 +123,21 @@
   <servlet-class>com.tmazon.servlet.ProductInfoServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>FriendListServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.FriendListServlet</servlet-class>
+  <servlet-name>FriendListServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.FriendListServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>MessageListServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.MessageListServlet</servlet-class>
+  <servlet-name>MessageListServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.MessageListServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>SearchUserServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.SearchUserServlet</servlet-class>
+  <servlet-name>SearchUserServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.SearchUserServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AddCartServlet</servlet-name>
+  <display-name>AddCartServlet</display-name>
+  <servlet-class>com.tmazon.servlet.AddCartServlet</servlet-class>
  </servlet>
  <servlet>
  	<servlet-name>AddFriendServlet</servlet-name>
@@ -251,16 +256,20 @@
   <url-pattern>/productInfo</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>FriendListServlet</servlet-name>
- 	<url-pattern>/friends</url-pattern>
+  <servlet-name>FriendListServlet</servlet-name>
+  <url-pattern>/friends</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>MessageListServlet</servlet-name>
- 	<url-pattern>/messages</url-pattern>
+  <servlet-name>MessageListServlet</servlet-name>
+  <url-pattern>/messages</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>SearchUserServlet</servlet-name>
- 	<url-pattern>/searchUser</url-pattern>
+  <servlet-name>SearchUserServlet</servlet-name>
+  <url-pattern>/searchUser</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AddCartServlet</servlet-name>
+  <url-pattern>/addCart</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
  	<servlet-name>AddFriendServlet</servlet-name>
