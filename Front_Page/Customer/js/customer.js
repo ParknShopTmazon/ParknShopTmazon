@@ -401,7 +401,7 @@ var customer = {
                         } else {
                             /** store data into database */
                             $.getJSON('updateCart', {
-                                sid: $(this).parent().prev().prev().children('input').attr('sid'),
+                                sid: $(this).attr('sid'),
                                 quantity: $(this).val()
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
@@ -649,7 +649,7 @@ var customer = {
             .fail(function() {
                 console.log('failed to get order data');
             });
-            
+
         /** update cost info */
         updateCost();
 
