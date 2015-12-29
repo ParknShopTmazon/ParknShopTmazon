@@ -384,7 +384,7 @@ var customer = {
 
                 /** [click function of the pay button] */
                 $('.cart-container #shop-cost .pay .value').click(function() {
-                    window.location.href = "./order.jsp?type=certain";
+                    window.location.href = "./order?type=certain";
                 });
 
                 /** [change function of quantity changing] */
