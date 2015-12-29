@@ -6,7 +6,7 @@ import com.tmazon.domain.Message;
 
 public interface MessageDao {
 
-	public List<Message> findByIds(Integer userId, Integer friendId);
+	public List<Message> select(Message message, boolean twoWay);
 	
 	public boolean insert(Message message);
 	

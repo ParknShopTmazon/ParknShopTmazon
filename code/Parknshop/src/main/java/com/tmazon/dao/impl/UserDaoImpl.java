@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -105,7 +104,7 @@ public class UserDaoImpl implements UserDao {
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.query(sql, new ArrayHandler(), userId, friendId);
+			runner.update(sql, userId, friendId);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
