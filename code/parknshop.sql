@@ -118,10 +118,13 @@ CREATE TABLE friend (
 );
 
 CREATE TABLE message(
+	messageId int AUTO_INCREMENT,
 	userId int NOT NULL,
 	friendId int NOT NULL,
 	content text NOT NULL,
+	isUnread bit NOT NULL,
 	messageTime datetime NOT NULL,
+	PRIMARY KEY (messageId),
 	FOREIGN KEY (userId) REFERENCES user(userId),
 	FOREIGN KEY (friendId) REFERENCES user(userId)
 );

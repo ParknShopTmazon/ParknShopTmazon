@@ -123,6 +123,18 @@
   <servlet-class>com.tmazon.servlet.ProductInfoServlet</servlet-class>
  </servlet>
  <servlet>
+  <servlet-name>FriendListServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.FriendListServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>MessageListServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.MessageListServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SearchUserServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.SearchUserServlet</servlet-class>
+ </servlet>
+ <servlet>
   <servlet-name>AddCartServlet</servlet-name>
   <display-name>AddCartServlet</display-name>
   <servlet-class>com.tmazon.servlet.AddCartServlet</servlet-class>
@@ -230,6 +242,18 @@
  <servlet-mapping>
   <servlet-name>ProductInfoServlet</servlet-name>
   <url-pattern>/productInfo</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>FriendListServlet</servlet-name>
+  <url-pattern>/friends</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MessageListServlet</servlet-name>
+  <url-pattern>/messages</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SearchUserServlet</servlet-name>
+  <url-pattern>/searchUser</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>AddCartServlet</servlet-name>
