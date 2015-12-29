@@ -177,7 +177,7 @@ var customer = {
 
                         /** append */
                         for (var j in data.friends) {
-                            /** [if: firts child] */
+                            /** [if: first child] */
                             if (j == 0) {
                                 $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
                             } else {
@@ -221,6 +221,43 @@ var customer = {
                 })
                 .fail(function() {
                     console.log("failed to get message");
+                });
+            },
+
+            /**
+             * [searchFriends: search friends by the name]
+             * @param  {[type]} name [the name]
+             * @return {[type]}      [description]
+             */
+            searchFriends = function(name) {
+                $.ajax({
+                    url: 'searchUser',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {name: name},
+                })
+                .done(function(data) {
+                    if (typeof(data.users) != 'undefined') {
+                        /** clear children */
+                        for (var i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
+                            $('.dialog #people-list-main .list ul').children(i).remove();
+                        }
+
+                        /** append */
+                        for (var j in data.users) {
+                            /** [if: first child] */
+                            if (j == 0) {
+                                $('.dialog #people-list-main .list ul').append('<li class="select button">' + data.users[j] + '</li>')
+                            } else {
+                                $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
+                            }
+                        }
+                    } else {
+                        console.log("failed to search friends");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to search friends");
                 });
             },
 
@@ -280,6 +317,9 @@ var customer = {
         /** [click function of search button on the add friend page] */
         $('.dialog #add-friend-main .search-btn').click(function() {
             showPart('people-list-main');
+
+            /** search friends */
+            searchFriends($('.dialog #add-friend-main .search-box input[type="text"]').val());
         });
 
         /** [click function of certaining to add friends] */
