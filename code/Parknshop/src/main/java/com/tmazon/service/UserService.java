@@ -17,4 +17,6 @@ public interface UserService {
 	public boolean addFriend(User user, User friend);
 	
 	public List<User> searchUsersByName(String name);
+	
+	public boolean deleteFriend(User user, User friend);
 }

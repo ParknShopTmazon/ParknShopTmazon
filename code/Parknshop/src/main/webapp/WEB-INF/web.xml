@@ -134,6 +134,14 @@
  	<servlet-name>SearchUserServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.SearchUserServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>AddFriendServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.AddFriendServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>DeleteFriendServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.DeleteFriendServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -249,6 +257,14 @@
  <servlet-mapping>
  	<servlet-name>SearchUserServlet</servlet-name>
  	<url-pattern>/searchUser</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AddFriendServlet</servlet-name>
+ 	<url-pattern>/addFriend</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>DeleteFriendServlet</servlet-name>
+ 	<url-pattern>/deleteFriend</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

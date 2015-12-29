@@ -11,8 +11,8 @@ public class MessageServiceImpl implements MessageService {
 
 	private MessageDao messageDao = BasicFactory.getImpl(MessageDao.class);
 	
-	public List<Message> findByIds(Integer userId, Integer friendId) {
-		return messageDao.findByIds(userId, friendId);
+	public List<Message> find(Message message, boolean twoWay) {
+		return messageDao.select(message, twoWay);
 	}
 
 	public boolean createMessage(Message message) {
@@ -21,6 +21,12 @@ public class MessageServiceImpl implements MessageService {
 	
 	public boolean setMessageReaded(Integer userId, Integer friendId) {
 		return messageDao.updateUnreadByIds(userId, friendId, true);
+	}
+
+	public int getUnreadCount(Message message, boolean twoWay) {
+		message.setIsUnread(true);
+		List<Message> messages = find(message, twoWay);
+		return messages == null ? 0 : messages.size();
 	}
 
 }
