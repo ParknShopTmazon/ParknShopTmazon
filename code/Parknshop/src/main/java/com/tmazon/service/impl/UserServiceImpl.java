@@ -38,5 +38,9 @@ public class UserServiceImpl implements UserService {
 	public List<User> searchUsersByName(String name) {
 		return userDao.SearchByName(name);
 	}
+
+	public boolean deleteFriend(User user, User friend) {
+		return userDao.deleteFriend(user.getUserId(), friend.getUserId());
+	}
 	
 }

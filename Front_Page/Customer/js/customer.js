@@ -366,14 +366,14 @@ var customer = {
 
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-
+                    var _this = $(this);
                     /** store data into database */
                     $.getJSON('deleteCart', {
-                        sid: $(this).attr('sid')
+                        sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
                         if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                            $(this).parent().parent().parent().remove();
+                            _this.parent().parent().parent().remove();
                             updateCost();
                         } else {
                             var error = data.errMsg || '';
@@ -384,13 +384,13 @@ var customer = {
 
                 /** [click function of the pay button] */
                 $('.cart-container #shop-cost .pay .value').click(function() {
-                    window.location.href = "./order.jsp?type=certain";
+                    window.location.href = "./order?type=certain";
                 });
 
                 /** [change function of quantity changing] */
                 $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
                     /* Act on the event */
-
+                    var _this = $(this);
                     /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
@@ -406,11 +406,11 @@ var customer = {
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
                                 if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                                    $(this).attr('value', $(this).val());
+                                    _this.attr('value', _this.val());
                                 } else {
                                     var error = data.errMsg || '';
                                     alert('failed to modify: ' + error);
-                                    $(this).val($(this).attr('value'));
+                                    _this.val(_this.attr('value'));
                                 }
                             });
                         }
@@ -649,10 +649,7 @@ var customer = {
             .fail(function() {
                 console.log('failed to get order data');
             });
-
-        /** init data of orders */
-        initData(JSON.parse(testData));
-
+            
         /** update cost info */
         updateCost();
 

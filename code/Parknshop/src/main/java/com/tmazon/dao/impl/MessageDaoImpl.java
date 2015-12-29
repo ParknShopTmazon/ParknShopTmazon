@@ -1,6 +1,7 @@
 package com.tmazon.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -13,13 +14,27 @@ import com.tmazon.util.DaoUtil;
 
 public class MessageDaoImpl implements MessageDao {
 
-	public List<Message> findByIds(Integer userId, Integer friendId) {
-		String sql = "SELECT * FROM message WHERE userId = ? AND friendId = ?";
+	public List<Message> select(Message message, boolean twoWay) {
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM message WHERE userId = ? AND friendId = ? ");
+		List<Object> params = new ArrayList<Object>();
+		params.add(message.getUserId());
+		params.add(message.getFriendId());
+		if (twoWay) {
+			sqlBuilder.append("OR userId = ? AND friendId = ? ");
+			params.add(message.getFriendId());
+			params.add(message.getUserId());
+		}
+		if (message.getIsUnread() != null) {
+			sqlBuilder.append("AND isUnread = ? ");
+			params.add(message.getIsUnread());
+		}
+		
+		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Message> result = runner.query(sql, new BeanListHandler<Message>(Message.class), userId, friendId);
+			List<Message> result = runner.query(sql, new BeanListHandler<Message>(Message.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,5 +69,6 @@ public class MessageDaoImpl implements MessageDao {
 			return false;
 		}
 	}
+
 
 }
