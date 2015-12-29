@@ -13,16 +13,7 @@
 </script>
 </head>
 <div class="container-fluid">
-	<div class="row-fluid" id="head">
-		<div class="span4">
-			<img src = "images/logo.png">
-			
-		</div>
-		<div class="span5">
-			<b href ="#">${ user.name }</b>
-			<a href ="./cart">|Shopping_cart</a>
-		</div>
-	</div>
+	<%@ include file="header.html"%>
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="row-fluid">
