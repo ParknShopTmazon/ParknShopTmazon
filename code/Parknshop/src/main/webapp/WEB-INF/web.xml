@@ -43,7 +43,7 @@
  </servlet>
  <servlet>
   <servlet-name>ShowOrderServlet</servlet-name>
-  <servlet-class>com.tmazon.servlet.AddOrderServlet</servlet-class>
+  <servlet-class>com.tmazon.servlet.ShowOrderServlet</servlet-class>
  </servlet>
  <servlet>
   <servlet-name>ShowCartServlet</servlet-name>
