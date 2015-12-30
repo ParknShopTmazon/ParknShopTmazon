@@ -325,10 +325,16 @@ s {
 
 .dialog #main .dialog-show p {
     font-size: 1.2em;
-    margin-top: 2.4em;
+    margin-bottom: 2em;
     width: 60%;
     overflow: hidden;
     word-wrap: break-word;
+}
+
+.dialog #main .dialog-show .time {
+    font-size: 1em;
+    color: #b27100;
+    margin: 0;
 }
 
 
@@ -451,6 +457,35 @@ s {
 }
 
 .dialog #certain-add-main .bottom-buttons .cancel-btn {
+    background-image: url(./../images/cancel-btn.png);
+}
+
+
+/*************************************************
+         *
+         * Notice Main
+         *
+         *********************************/
+
+.dialog #notice-add-main .dialog-msg,
+.dialog #notice-del-main .dialog-msg {
+    line-height: 32px;
+}
+
+.dialog #notice-add-main .bottom-buttons,
+.dialog #notice-del-main .bottom-buttons {
+    float: right;
+}
+
+.dialog #notice-add-main .bottom-buttons .cancel-btn,
+.dialog #notice-del-main .bottom-buttons .cancel-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #notice-add-main .bottom-buttons .cancel-btn,
+.dialog #notice-del-main .bottom-buttons .cancel-btn {
     background-image: url(./../images/cancel-btn.png);
 }
 

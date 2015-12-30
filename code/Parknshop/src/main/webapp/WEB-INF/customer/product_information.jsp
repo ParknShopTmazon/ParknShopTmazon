@@ -129,11 +129,5 @@
 			</table>
 		</div>
 	</div>
-	<div class="row-fluid" id = "foot">
-		<div class="span12">
-			<h3>
-				Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
-			</h3>
-		</div>
-	</div>
+	<%@ include file="footer.html"%>
 </div>
