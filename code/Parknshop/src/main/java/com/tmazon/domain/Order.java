@@ -2,7 +2,7 @@ package com.tmazon.domain;
 
 import java.util.Date;
 
-public class Orders {
+public class Order {
 	
 	public static final String PAY_TYPE_CASH_ON_DELIVERY = "cash_on_delivery";
 	public static final String PAY_TYPE_ONLINE_PAYMENT = "online_payment";
@@ -20,7 +20,7 @@ public class Orders {
 	private Integer userId;
 	private Integer addressId;
 	
-	public Orders(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
+	public Order(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
 		this.payType = payType;
@@ -29,7 +29,7 @@ public class Orders {
 		this.userId = userId;
 		this.addressId = addressId;
 	}
-	public Orders() {
+	public Order() {
 		super();
 	}
 	public Integer getOrderId() {
@@ -89,7 +89,7 @@ public class Orders {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Orders other = (Orders) obj;
+		Order other = (Order) obj;
 		if (addressId == null) {
 			if (other.addressId != null)
 				return false;
