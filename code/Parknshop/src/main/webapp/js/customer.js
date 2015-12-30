@@ -114,7 +114,9 @@ var customer = {
                 'add-friend-main': 'main',
                 'people-list-main': 'add-friend-main',
                 'certain-add-main': 'people-list-main',
-                'certain-delete-main': 'main'
+                'certain-delete-main': 'main',
+                'notice-add-main': 'people-list-main',
+                'notice-del-main': 'main'
             },
 
             /**
@@ -130,15 +132,6 @@ var customer = {
              */
             changeTitle = function(title) {
                 $('.dialog #main  h2 > strong').html(title);
-            },
-
-            /**
-             * [getDialog: get the dialog of the specified uid]
-             * @param  {[type]} uid [the uid]
-             * @return {[type]}     [description]
-             */
-            getDialog = function(uid) {
-                console.log('uid: ' + uid);
             },
 
             /**
@@ -159,38 +152,55 @@ var customer = {
 
             /**
              * [updateFriendList: update the friends list]
-             * @return {[type]} [description]
+             * @param  {[type]} name [if the name is not null, then choose the name first]
+             * @return {[type]}      [description]
              */
-            updateFriendList = function() {
-                $.ajax({
-                    url: 'friends',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {},
-                })
-                .done(function(data) {
-                    if (typeof(data.friends) != 'undefined') {
-                        /** clear all friends first */
-                        for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
-                            $('.dialog #main .friend-list .list ul').children(i).remove();
-                        }
+            updateFriendList = function(name) {
+                /** name is null by default */
+                name = name || null;
 
-                        /** append */
-                        for (var j in data.friends) {
-                            /** [if: first child] */
-                            if (j == 0) {
-                                $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
-                            } else {
-                                $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                $.ajax({
+                        url: 'friends',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {},
+                    })
+                    .done(function(data) {
+                        if (typeof(data.friends) != 'undefined') {
+                            /** clear all friends first */
+                            for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
+                                $('.dialog #main .friend-list .list ul').children(i).remove();
                             }
+
+                            /** append */
+                            for (var j in data.friends) {
+                                /** [if: first child] */
+                                if (j == 0) {
+                                    $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+
+                                    /** get the message of choosen name */
+                                    getMessage(data.friends[j].name);
+                                } else {
+                                    if (data.friends[j].name == name) {
+                                        /** remove the select class */
+                                        $('.dialog #main .friend-list .list ul').children(0).removeClass('select');
+
+                                        $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+
+                                        /** get the message of choosen name */
+                                        getMessage(data.friends[j].name);
+                                    } else {
+                                        $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                                    }
+                                }
+                            }
+                        } else {
+                            console.log("failed to get friends list, but post succeed");
                         }
-                    } else {
+                    })
+                    .fail(function() {
                         console.log("failed to get friends list");
-                    }
-                })
-                .fail(function() {
-                    console.log("failed to get friends list");
-                });
+                    });
             },
 
             /**
@@ -201,27 +211,29 @@ var customer = {
             getMessage = function(friendName) {
                 /** date object */
                 var date = new Date();
-                
+
                 $.ajax({
-                    url: 'messages',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {friendName: friendName},
-                })
-                .done(function(data) {
-                    if (typeof(data.messages) != 'undefined') {
-                        for (var i in data.messages) {
-                            date.setTime(data.messages[i].messageTime.time);
-                            $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+                        url: 'messages',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: friendName
+                        },
+                    })
+                    .done(function(data) {
+                        if (typeof(data.messages) != 'undefined') {
+                            for (var i in data.messages) {
+                                date.setTime(data.messages[i].messageTime.time);
+                                $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
             <p>' + data.messages[i].content + '</p>')
+                            }
+                        } else {
+                            console.log("failed to get message, but post succeed");
                         }
-                    } else {
+                    })
+                    .fail(function() {
                         console.log("failed to get message");
-                    }
-                })
-                .fail(function() {
-                    console.log("failed to get message");
-                });
+                    });
             },
 
             /**
@@ -231,34 +243,89 @@ var customer = {
              */
             searchFriends = function(name) {
                 $.ajax({
-                    url: 'searchUser',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {name: name},
-                })
-                .done(function(data) {
-                    if (typeof(data.users) != 'undefined') {
-                        /** clear children */
-                        for (var i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
-                            $('.dialog #people-list-main .list ul').children(i).remove();
-                        }
-
-                        /** append */
-                        for (var j in data.users) {
-                            /** [if: first child] */
-                            if (j == 0) {
-                                $('.dialog #people-list-main .list ul').append('<li class="select button">' + data.users[j] + '</li>')
-                            } else {
-                                $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
+                        url: 'searchUser',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            name: name
+                        },
+                    })
+                    .done(function(data) {
+                        if (typeof(data.users) != 'undefined') {
+                            /** clear children */
+                            for (var i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
+                                $('.dialog #people-list-main .list ul').children(i).remove();
                             }
+
+                            /** append */
+                            for (var j in data.users) {
+                                /** [if: first child] */
+                                if (j == 0) {
+                                    $('.dialog #people-list-main .list ul').append('<li class="select button">' + data.users[j] + '</li>')
+                                } else {
+                                    $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
+                                }
+                            }
+                        } else {
+                            console.log("failed to search friends, but post succeed");
                         }
-                    } else {
+                    })
+                    .fail(function() {
                         console.log("failed to search friends");
-                    }
-                })
-                .fail(function() {
-                    console.log("failed to search friends");
-                });
+                    });
+            },
+
+            /**
+             * [addFriend: add friend by the name]
+             * @param {[type]} name [the name]
+             */
+            addFriend = function(name) {
+                $.ajax({
+                        url: 'addFriend',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: name
+                        },
+                    })
+                    .done(function(data) {
+                        if (data == 'success') {
+                            updateFriendList(name);
+                        } else {
+                            updateFriendList(name);
+                            console.log("failed to add the friend, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to add the friend");
+                    });
+            },
+
+            /**
+             * [delFriend: delete friend by the name]
+             * @param  {[type]} name [the name]
+             * @return {[type]}      [description]
+             */
+            delFriend = function(name) {
+                $.ajax({
+                        url: 'deleteFriend',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: name
+                        },
+                    })
+                    .done(function(data) {
+                        if (data == 'success') {
+                            updateFriendList();
+                        } else {
+                            updateFriendList();
+                            console.log("failed to delete the friend, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to delete the friend");
+                    });
             },
 
             /**
@@ -306,7 +373,7 @@ var customer = {
             /** [set the new selected item] */
             $(this).addClass('select');
             changeTitle($(this).html());
-            getDialog($(this).attr('uid'));
+            getMessage($(this).html());
         });
 
         /** [click function of add friend button] */
@@ -323,15 +390,35 @@ var customer = {
         });
 
         /** [click function of certaining to add friends] */
-        $('.dialog #people-list-main .bottom-buttons .certain-btn').click(function() {
-            showPart('certain-add-main');
+        $('.dialog #people-list-main .bottom-buttons .certain-btn').click(function(event) {
+            /* Act on the event */
+            if ($('.dialog #people-list-main .list ul .select').length > 0) {
+                showPart('certain-add-main');
+            } else {
+                showPart('notice-add-main');
+            }
         });
 
-        /** [click function or certaining to delete friends] */
+        /** [click function of certaining] */
+        $('.dialog #certain-add-main .bottom-buttons .certain-btn').click(function(event) {
+            /* Act on the event */
+            addFriend($('.dialog #people-list-main .list ul .select').html());
+        });
+
+        /** [click function of certaining to delete friends] */
         $('.dialog #main .bottom-buttons .del-friend-btn').click(function() {
-            showPart('certain-delete-main');
+            if ($('.dialog #main .friend-list .list ul .select').length > 0) {
+                showPart('certain-delete-main');
+            } else {
+                showPart('notice-del-main');
+            }
         });
 
+        /** [click function of certaining] */
+        $('.dialog #certain-delete-main .bottom-buttons .certain-btn').click(function(event) {
+            /* Act on the event */
+            delFriend($('.dialog #main .friend-list .list ul .select').html());
+        });
 
         /** [click function of the dialog-back-btn] */
         $('.dialog .dialog-back-btn').click(function() {
@@ -352,9 +439,6 @@ var customer = {
 
         /** update friends list */
         updateFriendList();
-        
-        /** get message from the first friend */
-        getMessage($('.dialog #main .friend-list .list ul .select').html());
     },
 
     /**

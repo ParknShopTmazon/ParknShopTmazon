@@ -463,6 +463,35 @@ s {
 
 /*************************************************
          *
+         * Notice Main
+         *
+         *********************************/
+
+.dialog #notice-add-main .dialog-msg,
+.dialog #notice-del-main .dialog-msg {
+    line-height: 32px;
+}
+
+.dialog #notice-add-main .bottom-buttons,
+.dialog #notice-del-main .bottom-buttons {
+    float: right;
+}
+
+.dialog #notice-add-main .bottom-buttons .cancel-btn,
+.dialog #notice-del-main .bottom-buttons .cancel-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #notice-add-main .bottom-buttons .cancel-btn,
+.dialog #notice-del-main .bottom-buttons .cancel-btn {
+    background-image: url(./../images/cancel-btn.png);
+}
+
+
+/*************************************************
+         *
          * Certain Delete Main
          *
          *********************************/

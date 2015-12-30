@@ -9,6 +9,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.UserDao;
+import com.tmazon.domain.Address;
 import com.tmazon.domain.User;
 import com.tmazon.util.DaoUtil;
 
@@ -139,6 +140,33 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public List<Address> selectAddress(User user) {
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM user WHERE 1=1 ");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if (user.getUserId() != null) {
+			sqlBuilder.append("AND userId=? ");
+			params.add(user.getUserId());
+		}
+		
+		
+		return null;
+	}
+
+	public boolean insertAddress(User user, Address address) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateAddress(User user, Address address) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean deleteAddress(User user, Address address) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
