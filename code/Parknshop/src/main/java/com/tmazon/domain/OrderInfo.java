@@ -10,13 +10,12 @@ public class OrderInfo {
 	private Integer quantity;
 	private Integer productId;
 	private String waybill;
-	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String waybill) {
+	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId) {
 		super();
 		this.orderId = orderId;
 		this.deliveryId = deliveryId;
 		this.quantity = quantity;
 		this.productId = productId;
-		this.waybill = waybill;
 	}
 	public OrderInfo() {
 		super();
@@ -133,5 +132,7 @@ public class OrderInfo {
 	public void setProductUrl(String productUrl) {
 		this.productUrl = productUrl;
 	}
+	
+	
 	
 }

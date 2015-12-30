@@ -765,6 +765,24 @@ s {
     display: inline-block;
 }
 
+.cart-container #shop-lists .expired {
+    color: #999 !important;
+    vertical-align: top;
+}
+
+.cart-container #shop-lists .shop-item .status {
+    color: #ffa200 !important;
+    height: 1.5em;
+}
+
+.cart-container #shop-lists .expired .name .value {
+    color: #999 !important;
+}
+
+.cart-container #shop-lists .expired .quantity .value input[type="number"] {
+    color: #999 !important;
+}
+
 
 /*************************************************
                  *
@@ -1382,7 +1400,7 @@ s {
 }
 
 .order-container #order-list .order-item .order-id {
-    width: 20%;
+    width: 10%;
 }
 
 .order-container #order-list .order-item .order-ctime {
