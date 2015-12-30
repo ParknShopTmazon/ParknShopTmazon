@@ -1,7 +1,0 @@
-INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('1', 'EMS', '10', 'normal');
-
-INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('2', 'EMS', '12', 'fast');
-
-INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('3', 'STO', '8', 'normal');
-
-INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('4', 'STO', '10', 'fast');

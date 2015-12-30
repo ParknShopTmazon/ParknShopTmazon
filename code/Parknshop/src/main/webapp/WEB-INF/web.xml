@@ -168,6 +168,10 @@
   <display-name>ShowAddressServlet</display-name>
   <servlet-class>com.tmazon.servlet.ShowAddressServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>OrderJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/customer/order.jsp</jsp-file>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -315,6 +319,10 @@
  <servlet-mapping>
   <servlet-name>ShowAddressServlet</servlet-name>
   <url-pattern>/showAddress</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>OrderJsp</servlet-name>
+ 	<url-pattern>/viewOrder</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

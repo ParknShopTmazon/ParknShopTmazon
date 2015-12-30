@@ -69,7 +69,7 @@ public class AddressDaoImpl implements AddressDao {
 
 	public Address insert(Address address) {
 
-		String sql = "INSERT INTO address VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO address VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());

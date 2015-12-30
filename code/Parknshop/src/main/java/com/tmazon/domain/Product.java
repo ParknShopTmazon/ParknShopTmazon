@@ -23,6 +23,14 @@ public class Product {
 	private Integer soldNum;
 	private String description;
 	private String picture;
+	private String status;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Integer getProductId() {
 		return productId;
 	}
