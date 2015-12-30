@@ -16,4 +16,6 @@ public interface OrderService {
 	
 	public Order findById(Integer id);
 	
+	public boolean changeStatus(Order order);
+	
 }

@@ -24,6 +24,7 @@ public class Order {
 	private Integer addressId;
 	
 	private  List<OrderInfo> orderInfos;
+	private Address address;
 	
 	
 	public Order(Integer orderId, String payType, String status, Date orderTime, Date deliveryTime, Date dealTime,
@@ -165,5 +166,14 @@ public class Order {
 	public void setOrderInfos(List<OrderInfo> orderInfos) {
 		this.orderInfos = orderInfos;
 	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
 	
 }
