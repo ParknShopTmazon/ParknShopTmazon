@@ -10,7 +10,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.ProductDao;
 import com.tmazon.domain.Product;
-import com.tmazon.domain.User;
 import com.tmazon.util.DaoUtil;
 
 public class ProductDaoImpl implements ProductDao{
@@ -27,8 +26,7 @@ public class ProductDaoImpl implements ProductDao{
 			params.add(product.getShopId());
 		}
 		if (product.getName() != null) {
-			product.setName("%"+product.getName()+"%");
-			sqlBuilder.append("AND name like ? ");
+			sqlBuilder.append("AND name = ? ");
 			params.add(product.getName());
 		}
 		if (product.getPrice() != null) {
@@ -59,10 +57,11 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
-		sqlBuilder.append(" AND (status!=? or status is NULL)");
-		params.add(Product.STATUS_PULL);
-		System.out.println(Product.STATUS_PULL);
-		sqlBuilder.append(" order by soldNum  DESC");
+		if(product.getStatus() != null){
+			sqlBuilder.append(" AND status=? ");
+			params.add(product.getStatus());
+		}
+		
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		

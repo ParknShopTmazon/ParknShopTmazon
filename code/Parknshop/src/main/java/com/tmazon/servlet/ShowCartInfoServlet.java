@@ -51,9 +51,6 @@ public class ShowCartInfoServlet extends HttpServlet {
 			
 			for(int i = 0, size = list.size(); i < size; i++){
 				int productId = list.get(i).get(AttrName.CartServiceImplMapGet.PRODUCT_ID);
-				
-				System.out.println("%%%%%%%%%%%%%" + productId);
-				
 				int quantity = list.get(i).get(AttrName.CartServiceImplMapGet.QUANTITY);
 				
 				Product product = productService.getProductById(productId);
@@ -61,7 +58,6 @@ public class ShowCartInfoServlet extends HttpServlet {
 				
 				JSONObject item = new JSONObject();
 				item.put("sid", product.getProductId());
-				System.out.println("############" + product.getProductId());
 				item.put("name", product.getName());
 				item.put("origin_price", ParseUtil.Price2String(product.getPrice()));
 				item.put("price", ParseUtil.Price2String(product.getDiscountPrice()));
