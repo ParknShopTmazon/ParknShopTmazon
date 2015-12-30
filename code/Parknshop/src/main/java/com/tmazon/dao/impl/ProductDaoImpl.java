@@ -59,9 +59,9 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
-		sqlBuilder.append(" AND status!=? or status is NULL");
-		params.add(product.STATUS_PULL);
-		System.out.println(product.STATUS_PULL);
+		sqlBuilder.append(" AND (status!=? or status is NULL)");
+		params.add(Product.STATUS_PULL);
+		System.out.println(Product.STATUS_PULL);
 		sqlBuilder.append(" order by soldNum  DESC");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
@@ -96,7 +96,7 @@ public class ProductDaoImpl implements ProductDao{
 
 	public Product findById(Integer id) {
 		
-		List<Product> list = select(new Product(id, null, null, null, null, null, null, null, null, null));
+		List<Product> list = select(new Product(id, null, null, null, null, null, null, null, null, null, null));
 		
 		if(list.isEmpty()){
 			return null;
@@ -107,13 +107,13 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	public boolean insert(Product product) {
-		// TODO Auto-generated method stub
-		String sql = "INSERT INTO user(shopId,name,price,discountPrice,category,stockNum,description,picture) VALUES (?, ?, ?,  ? , ? , ? , ? , ?)";
+		product.setStatus("");
+		String sql = "INSERT INTO user(shopId,name,price,discountPrice,category,stockNum,description,picture) VALUES (?, ?, ?,  ? , ? , ? , ? , ?, ?)";
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.insert(sql, new BeanHandler<Product>(Product.class), product.getShopId(), product.getName(), product.getPrice(),product.getDiscountPrice(),product.getCategory(),product.getStockNum(),product.getDescription(),product.getPicture());
+			runner.insert(sql, new BeanHandler<Product>(Product.class), product.getShopId(), product.getName(), product.getPrice(),product.getDiscountPrice(),product.getCategory(),product.getStockNum(),product.getDescription(),product.getPicture(),product.getStatus());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

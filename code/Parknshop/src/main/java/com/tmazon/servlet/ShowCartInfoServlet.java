@@ -51,6 +51,9 @@ public class ShowCartInfoServlet extends HttpServlet {
 			
 			for(int i = 0, size = list.size(); i < size; i++){
 				int productId = list.get(i).get(AttrName.CartServiceImplMapGet.PRODUCT_ID);
+				
+				System.out.println("%%%%%%%%%%%%%" + productId);
+				
 				int quantity = list.get(i).get(AttrName.CartServiceImplMapGet.QUANTITY);
 				
 				Product product = productService.getProductById(productId);
@@ -58,11 +61,21 @@ public class ShowCartInfoServlet extends HttpServlet {
 				
 				JSONObject item = new JSONObject();
 				item.put("sid", product.getProductId());
+				System.out.println("############" + product.getProductId());
 				item.put("name", product.getName());
 				item.put("origin_price", ParseUtil.Price2String(product.getPrice()));
 				item.put("price", ParseUtil.Price2String(product.getDiscountPrice()));
 				item.put("quantity", quantity);
 				item.put("stock", product.getStockNum());
+				if(product.getStatus() == null){
+					item.put("expired", false + "");
+				}else {
+					if(product.getStatus().equals(Product.STATUS_PULL)){
+						item.put("expired", true + "");
+					}else {
+						item.put("expired", false + "");
+					}
+				}
 				if(productInfo != null){
 					item.put("size", productInfo.getSize());
 					item.put("color", productInfo.getColor());

@@ -110,6 +110,22 @@ public class Product {
 
 	public Product() {
 	}
+	public Product(Integer productId, Integer shopId, String name, Double price, Double discountPrice, String category,
+			Integer stockNum, Integer soldNum, String description, String picture, String status) {
+		super();
+		this.productId = productId;
+		this.shopId = shopId;
+		this.name = name;
+		this.price = price;
+		this.discountPrice = discountPrice;
+		this.category = category;
+		this.stockNum = stockNum;
+		this.soldNum = soldNum;
+		this.description = description;
+		this.picture = picture;
+		this.status = status;
+	}
 
+	
 	
 }
