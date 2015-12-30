@@ -33,4 +33,19 @@ public class ProductServiceImpl implements ProductService{
 		return productInfoDao.getByProductId(productId);
 	}
 
+	public boolean insert(Product product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean modify(Product product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delect(Product product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
