@@ -16,7 +16,7 @@
 	
 	<servlet>
 		<servlet-name>RegisterShopPageServlet</servlet-name>
-		<jsp-file>/WEB-INF/shopowner/RegisterShopPage.jsp</jsp-file>
+		<jsp-file>/WEB-INF/shopowner/register_new_shop.jsp</jsp-file>
 	</servlet>
 	<servlet>
 	    <servlet-name>RegisterNewShopServlet</servlet-name>
