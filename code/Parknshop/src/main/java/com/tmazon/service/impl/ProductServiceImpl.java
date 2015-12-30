@@ -48,4 +48,8 @@ public class ProductServiceImpl implements ProductService{
 		return false;
 	}
 
+	public String[] findAllCategory() {
+		return productDao.findAllCategory();
+	}
+
 }

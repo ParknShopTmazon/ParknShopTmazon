@@ -18,4 +18,6 @@ public interface ProductDao {
 	
 	//update the product state
 	public boolean delect(Product product);
+	
+	public String[] findAllCategory();
 }

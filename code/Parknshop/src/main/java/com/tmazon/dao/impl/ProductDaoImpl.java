@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -128,6 +129,26 @@ public class ProductDaoImpl implements ProductDao{
 	public boolean delect(Product product) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public String[] findAllCategory() {
+		String sql = "SELECT * FROM category";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			
+			List<Object[]> result = runner.query(sql, new ArrayListHandler());
+			List<String> categories = new ArrayList<String>();
+			for (Object[] objects : result) {
+				categories.add((String) objects[0]);
+			}
+			
+			return categories.toArray(new String[0]);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }
