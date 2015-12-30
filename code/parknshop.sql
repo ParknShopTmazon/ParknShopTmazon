@@ -44,6 +44,7 @@ CREATE TABLE shop(
 	type varchar(50) NOT NULL,
 	status varchar(50) NOT NULL,
 	owner int NOT NULL,
+	picture varchar(100),
 	CONSTRAINT pk_shopId PRIMARY KEY (shopId),
 	FOREIGN KEY (owner) REFERENCES user(userId)
 );
@@ -64,6 +65,7 @@ CREATE TABLE product (
 	soldNum int NOT NULL,
 	description text NOT NULL,
 	picture varchar(100),
+	status varchar(50) ,
 	PRIMARY KEY (productId),
 	FOREIGN KEY (shopId) REFERENCES shop(shopId),
 	FOREIGN KEY (category) REFERENCES category(category)
