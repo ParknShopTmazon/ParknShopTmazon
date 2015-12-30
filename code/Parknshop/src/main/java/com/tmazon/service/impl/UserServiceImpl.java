@@ -42,5 +42,4 @@ public class UserServiceImpl implements UserService {
 	public boolean deleteFriend(User user, User friend) {
 		return userDao.deleteFriend(user.getUserId(), friend.getUserId());
 	}
-	
 }

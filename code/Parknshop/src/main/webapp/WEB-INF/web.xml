@@ -156,6 +156,10 @@
  	<servlet-class>com.tmazon.servlet.LeaveMessageServlet</servlet-class>
  </servlet>
  <servlet>
+ 	<servlet-name>SearchUserAdminServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.SearchUserAdminServlet</servlet-class>
+ </servlet>
+ <servlet>
  	<servlet-name>OrderServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.OrderServlet</servlet-class>
  </servlet>
@@ -278,6 +282,10 @@
  <servlet-mapping>
   <servlet-name>SearchUserServlet</servlet-name>
   <url-pattern>/searchUser</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>SearchUserAdminServlet</servlet-name>
+  <url-pattern>/searchUserAdmin</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>AddCartServlet</servlet-name>
