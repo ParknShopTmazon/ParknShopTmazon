@@ -94,7 +94,7 @@
  </servlet>
  <servlet>
   <servlet-name>userJsp</servlet-name>
-  <jsp-file>/WEB-INF/admin/user.jsp</jsp-file>
+  <jsp-file>/WEB-INF/admin/userManagement.jsp</jsp-file>
  </servlet>
  <servlet>
   <servlet-name>DisagreeServlet</servlet-name>
