@@ -6,12 +6,14 @@ public class OrderInfo {
 	private Integer deliveryId;
 	private Integer quantity;
 	private Integer productId;
-	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId) {
+	private String waybill;
+	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String waybill) {
 		super();
 		this.orderId = orderId;
 		this.deliveryId = deliveryId;
 		this.quantity = quantity;
 		this.productId = productId;
+		this.waybill = waybill;
 	}
 	public OrderInfo() {
 		super();
@@ -39,6 +41,12 @@ public class OrderInfo {
 	}
 	public void setProductId(Integer productId) {
 		this.productId = productId;
+	}
+	public String getWaybill() {
+		return waybill;
+	}
+	public void setWaybill(String waybill) {
+		this.waybill = waybill;
 	}
 	@Override
 	public int hashCode() {
