@@ -63,12 +63,14 @@ public class RegisterNewShopServlet extends HttpServlet{
 		}
 		
 		// register
+		
 		Shop shop = new Shop(null, name, type,Shop.STATUS_CHECKING,owner);
 		boolean success = shopService.register(shop);
 		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_homepage.jsp").forward(req, resp);
 		
 //		resp.sendRedirect("");
+		   
 		
 	}
 }

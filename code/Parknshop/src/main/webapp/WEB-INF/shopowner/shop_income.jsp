@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	isELIgnored="false" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -6,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="css_shop/order.css">
 </head>
 <body>
+    <%@ include file="header.html"%>
+	
     <hr/>
 	<div class="container">
 		<div id="content">
@@ -36,7 +41,7 @@
 			<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:<a href="">13121217</a></span></div>
 				<div class="item-product-photo"><img src="images_shop/fish.jpg"></div>
-				<div class="item-name-time-shop"><a href="">good fish</a><br/><span>Trade Date£º2015-13-54</span></div>
+				<div class="item-name-time-shop"><a href="">good fish</a><br/><span>Trade Dateï¿½ï¿½2015-13-54</span></div>
 				<div class="item-product-mum"><span>1</span></div>
 				<div class="item-product-totalprice"><span>$32</span></div>
 				<div class="item-product-orderstate"><span>XXXXX</span></div>
@@ -45,7 +50,7 @@
 			<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:<a href="">13121218</a></span></div>
 				<div class="item-product-photo"><img src="images_shop/hehe.jpg"></div>
-				<div class="item-name-time-shop"><a href="">China MM</a><br/><span>Trade Date£º2015-13-54</span></div>
+				<div class="item-name-time-shop"><a href="">China MM</a><br/><span>Trade Dateï¿½ï¿½2015-13-54</span></div>
 				<div class="item-product-mum"><span>1</span></div>
 				<div class="item-product-totalprice"><span>$39</span></div>
 				<div class="item-product-orderstate"><span>XXXXX</span></div>
@@ -54,7 +59,7 @@
 			<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:<a href="">13121219</a></span></div>
 				<div class="item-product-photo"><img src="images_shop/hehe.jpg"></div>
-				<div class="item-name-time-shop"><a href="">China MM</a><br/><span>Trade Date£º2015-13-54</span></div>
+				<div class="item-name-time-shop"><a href="">China MM</a><br/><span>Trade Dateï¿½ï¿½2015-13-54</span></div>
 				<div class="item-product-mum"><span>1</span></div>
 				<div class="item-product-totalprice"><span>$39</span></div>
 				<div class="item-product-orderstate"><span>State</span></div>
