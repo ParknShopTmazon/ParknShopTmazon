@@ -11,4 +11,11 @@ public interface ProductDao {
 	public Product findByName(String name);
 	
 	public Product findById(Integer id);
+	
+	public boolean insert(Product product);
+	
+	public boolean modify(Product product);
+	
+	//update the product state
+	public boolean delect(Product product);
 }

@@ -14,6 +14,15 @@ public class Shop {
 	private String type;
 	private String status;
 	private Integer owner;
+	private String picture;
+	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
 	public Shop(Integer shopId, String name, String type, String status, Integer owner) {
 		super();
