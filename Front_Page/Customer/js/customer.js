@@ -593,19 +593,28 @@ var customer = {
          * @return {[type]} [description]
          */
         var updateCost = function() {
-                var list = $('.cart-container #shop-lists .shop-info .price .value');
+                var list = $('.cart-container #shop-lists .shop-item');
                 var origin_list = $('.cart-container #shop-lists .shop-info .price .value .origin-cost');
                 var right_list = $('.cart-container #shop-lists .shop-info .price .value .right-cost');
                 var quantity_list = $('.cart-container #shop-lists .shop-info .quantity .value input');
-                /** update quantity */
-                $('#shop-cost .quantity .value').html(list.length);
-
                 origin_cost = right_cost = 0;
+
+                var j = 0;
                 /** update cost */
                 for (var i = 0; i < list.length; i++) {
+                    /** continue the expired one */
+                    if (list[i].getAttribute('class').indexOf('expired') >= 0) {
+                        continue;
+                    }
+
+                    /** count the unexpired one */
+                    j++;
                     origin_cost += parseInt(quantity_list[i].value) * parseFloat(origin_list[i].textContent.substring(1, origin_list[i].textContent.length));
                     right_cost += parseInt(quantity_list[i].value) * parseFloat(right_list[i].textContent.substring(1, right_list[i].textContent.length));
                 }
+                /** update quantity */
+                $('#shop-cost .quantity .value').html(j);
+
                 $('#shop-cost .origin .value').html('<s>$' + origin_cost.toFixed(1) + '</s>');
                 $('#shop-cost .cost .value').html('$' + right_cost.toFixed(1));
             },
@@ -617,10 +626,17 @@ var customer = {
              */
             initData = function(data) {
                 /** parse */
-                var cart = data.cart;
+                var cart = data.cart,
+                    expired,
+                    input;
                 for (var i in cart) {
+                    expired = input = '';
+                    if (cart[i].expired == 'true') {
+                        expired = 'expired';
+                        input = 'disabled';
+                    }
                     /** append list item */
-                    $('.cart-container #shop-lists').append('<div class="shop-item">\
+                    $('.cart-container #shop-lists').append('<div class="' + expired + ' shop-item">\
                         <div class="pic-container">\
                             <a href="' + cart[i].shop_url + '" target="_blank">\
                                 <div class="over">\
@@ -645,13 +661,14 @@ var customer = {
                             <div class="quantity sub-main">\
                                 <span>quantity</span>\
                                 <span class="value">\
-                                    <input type="number" sid="' + cart[i].sid + '" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
+                                    <input type="number" sid="' + cart[i].sid + '" min="1" ' + input + ' max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
                                 </span>\
                             </div>\
                             <div class="color sub-main">\
                                 <span>color</span>\
                                 <span class="value" style="background-color: ' + cart[i].color + ';"></span>\
                             </div>\
+                            <div class="status">' + expired + '</div>\
                             <div class="delete sub-main">\
                                 <span class="value button"></span>\
                             </div>\
@@ -872,6 +889,61 @@ var customer = {
             },
 
             /**
+             * [initAddr: init the addr options]
+             * @return {[type]} [description]
+             */
+            initAddr = function() {
+                /** get addrs data */
+                $.ajax({
+                        url: 'showAddress',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {},
+                    })
+                    .done(function(data) {
+                        var checked = '';
+                        for (var i in data.addresses) {
+                            /** [if: choose the first item] */
+                            if (i == 0) {
+                                checked = 'checked="checked"';
+                            } else {
+                                checked = '';
+                            }
+
+                            /** append div */
+                            $('.order-container #order-addr .addresses').append('<div>\
+                            <label>\
+                                <input type="radio" aid="' + data.addresses[i].a_id + '" name="addr" ' + checked + '>\
+                                <span class="address" title="' + data.addresses[i].description + '"> ' + data.addresses[i].description + '</span>\
+                                <span class="receiver">\
+                                <span class="name">receiver name: </span>\
+                                <span class="value">' + data.addresses[i].description.name + '</span>\
+                                </span>\
+                                <span class="phone">\
+                                <span class="name">phone number: </span>\
+                                <span class="value">' + data.addresses[i].description.phone + '</span>\
+                                </span>\
+                            </label>\
+                        </div>');
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to get addr options");
+                    });
+
+                /** update addr info */
+                updateCertainAddr();
+            },
+
+            /**
+             * [addAddr: add an addr option]
+             * @return {[type]} [description]
+             */
+            addAddr = function() {
+
+            },
+
+            /**
              * [initData: init cart data]
              * @param  {[type]} data [data from the interface]
              * @return {[type]}      [description]
@@ -884,6 +956,10 @@ var customer = {
                     right_cost = 0;
 
                 for (var i in cart) {
+                    /** continue expired one */
+                    if (cart[i].expired == 'true') {
+                        continue;
+                    }
                     /** calculate the cost */
                     origin_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].origin_price);
                     right_cost += parseInt(cart[i].quantity) * parseFloat(cart[i].price);
@@ -956,9 +1032,6 @@ var customer = {
 
         /** update cost info */
         updateCost();
-
-        /** update addr info */
-        updateCertainAddr();
 
         /** [change function of changing delivery company ] */
         $('.order-container #order-details .order-delivery').change(function() {
@@ -1110,100 +1183,107 @@ var customer = {
     initList: function() {
         "use strict";
 
-        /** date object */
-        var date = new Date();
+        /**
+         * [initData: init the data of orders list]
+         * @return {[type]} [description]
+         */
+        var initData = function(data) {
+            /** @type {Object} [operations of different statuses] */
+            var operations = {
+                unpaid: {
+                    name: 'Paid',
+                    url: '#'
+                }
+            };
+
+            /** [for: append] */
+            for (var i in data) {
+                /** date object */
+                var date = new Date();
+
+                /** loop to get shop item for this order */
+                var shopItem = '';
+
+                /** order time */
+                date.setTime(data[i].orderTime.time);
+
+                for (var j in data[i].orderInfos) {
+                    shopItem += '<div class="shop-item">\
+                        <div class="pic-container">\
+                            <a href="' + data[i].orderInfos[j].productUrl + '" target="_blank">\
+                                <div class="over">\
+                                    <div class="link-btn"></div>\
+                                </div>\
+                            </a>\
+                        <div class="shop" style="background-image: url(' + data[i].orderInfos[j].product.picture + ');"></div>\
+                        </div>\
+                        <div class="color" style="background-color: ' + data[i].orderInfos[j].color + '"></div>\
+                        <div class="origin-price">\
+                            <p class="origin">\
+                                <s>$' + data[i].orderInfos[j].product.price + '</s>\
+                            </p>\
+                            <p class="current">$' + data[i].orderInfos[j].product.discountPrice + '</p>\
+                        </div>\
+                        <div class="quantity">\
+                            <p class="value">' + data[i].orderInfos[j].quantity + '</p>\
+                            <p class="name">quantity</p>\
+                        </div>\
+                        <div class="size">\
+                            <p class="value">' + data[i].orderInfos[j].size + '</p>\
+                            <p class="name">size</p>\
+                        </div>\
+                        <div class="price">\
+                            <p class="shop-price">\
+                                $' + (parseInt(data[i].orderInfos[j].quantity) * parseFloat(data[i].orderInfos[j].product.discountPrice) + parseFloat(data[i].orderInfos[j].delivery.price)) + '\
+                            </p>\
+                            <p class="delivery-price">delivery price: + $' + data[i].orderInfos[j].delivery.price + '</p>\
+                        </div>\
+                        <div class="info">\
+                            <div class="delivery-status">\
+                                <p class="value">' + data[i].status + '</p>\
+                                <p class="name">delivery status</p>\
+                                <p><a class="value" href="#">details</a></p>\
+                                <p class="name">more details</p>\
+                                <p><a class="value" href="#">track the delivery</a></p>\
+                                <p class="name">track where the shop is</p>\
+                            </div>\
+                        </div>\
+                        <div class="handle-btn button" onclick="window.open(\'' + operations[data[i].status].url + '\');">' + operations[data[i].status].name + '</div>\
+                    </div>';
+                }
+
+                $('.order-container #order-list').append('<div class="order-item">\
+                    <div class="brief-info">\
+                        <div class="order-id">\
+                            <span class="name">order id:</span>\
+                            <span class="value">' + data[i].orderId + '</span>\
+                        </div>\
+                        <div class="order-ctime">\
+                            <span class="value"> ' + date.format('yyyy-MM-dd hh:mm:ss') + ' </span>\
+                        </div>\
+                        <div class="delete-btn button"></div>\
+                    </div>' + shopItem + '</div>');
+            }
+        };
 
         /** get data by uid and page */
         $.ajax({
-                url: '',
-                type: 'post',
+                url: 'orderByType',
+                type: 'POST',
                 dataType: 'json',
                 data: {
-                    uid: '',
-                    page: 0
+                    type: 'list'
                 },
             })
-            .done(function() {})
-            .fail(function() {})
-            .always(function() {
-                console.log("get cart data complete");
+            .done(function(data) {
+                initData(data);
+            })
+            .fail(function() {
+                console.log("failed to get orders list");
             });
-
-        /** test data */
-        var testData = "{\n\t\"uid\": \"123\",\n\t\"count\": 2,\n\t\"page\": 1,\n\t\"orderDatas\": [\n\t\t{\n\t\t\t\"oid\": \"12341544234\",\n\t\t\t\"ctime\": \"1446692400\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"1\",\n\t\t\t\t\t\"name\": \"shop1\",\n\t\t\t\t\t\"size\": \"S\",\n\t\t\t\t\t\"origin_price\": \"38.9\",\n\t\t\t\t\t\"price\": \"28.9\",\n\t\t\t\t\t\"quantity\": 2,\n\t\t\t\t\t\"color\": \"#000000\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop1.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.0\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"2\",\n\t\t\t\t\t\"name\": \"shop2\",\n\t\t\t\t\t\"size\": \"XL\",\n\t\t\t\t\t\"origin_price\": \"29.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quantity\": 1,\n\t\t\t\t\t\"color\": \"#232122\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop2.jpg\",\n\t\t\t\t\t\"delivery_price\": \"10.8\"\n\t\t\t\t}\n\t\t\t]\t\t\n\t\t},\n\t\t{\n\t\t\t\"oid\": \"12341241323\",\n\t\t\t\"ctime\":  \"1417751768\",\n\t\t\t\"order\": [\n\t\t\t\t{\n\t\t\t\t\t\"sid\" : \"4\",\n\t\t\t\t\t\"name\": \"shop4\",\n\t\t\t\t\t\"size\": \"L\",\n\t\t\t\t\t\"origin_price\": \"30.9\",\n\t\t\t\t\t\"price\": \"25.9\",\n\t\t\t\t\t\"quantity\": 1,\n\t\t\t\t\t\"color\": \"#3f205c\",\n\t\t\t\t\t\"shop_url\": \"\",\n\t\t\t\t\t\"shop_pic\": \".\/images\/shops\/shop4.jpg\",\n\t\t\t\t\t\"delivery_price\": \"11.8\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}";
-
-        /** parse */
-        var orders = JSON.parse(testData);
-
-        /** [for: append] */
-        for (var i in orders.orderDatas) {
-            /** loop to get shop item for this order */
-            var shopItem = '';
-
-            /** order time */
-            date.setTime(orders.orderDatas[i].ctime * 1000);
-            for (var j in orders.orderDatas[i].order) {
-                shopItem += '<div class="shop-item">\
-                    <div class="pic-container">\
-                        <a href="' + orders.orderDatas[i].order[j].shop_url + '" target="_blank">\
-                            <div class="over">\
-                                <div class="link-btn"></div>\
-                            </div>\
-                        </a>\
-                    <div class="shop" style="background-image: url(' + orders.orderDatas[i].order[j].shop_pic + ');"></div>\
-                    </div>\
-                    <div class="color" style="background-color: ' + orders.orderDatas[i].order[j].color + '"></div>\
-                    <div class="origin-price">\
-                        <p class="origin">\
-                            <s>$' + orders.orderDatas[i].order[j].origin_price + '</s>\
-                        </p>\
-                        <p class="current">$' + orders.orderDatas[i].order[j].price + '</p>\
-                    </div>\
-                    <div class="quantity">\
-                        <p class="value">' + orders.orderDatas[i].order[j].quantity + '</p>\
-                        <p class="name">quantity</p>\
-                    </div>\
-                    <div class="size">\
-                        <p class="value">' + orders.orderDatas[i].order[j].size + '</p>\
-                        <p class="name">size</p>\
-                    </div>\
-                    <div class="price">\
-                        <p class="shop-price">\
-                            $' + (parseInt(orders.orderDatas[i].order[j].quantity) * parseFloat(orders.orderDatas[i].order[j].price) + parseFloat(orders.orderDatas[i].order[j].delivery_price)) + '\
-                        </p>\
-                        <p class="delivery-price">delivery price: + $' + orders.orderDatas[i].order[j].delivery_price + '</p>\
-                    </div>\
-                    <div class="info">\
-                        <div class="delivery-status">\
-                            <p class="value">delivering</p>\
-                            <p class="name">delivery status</p>\
-                            <p><a class="value" href="#">details</a></p>\
-                            <p class="name">more details</p>\
-                            <p><a class="value" href="#">track the delivery</a></p>\
-                            <p class="name">track where the shop is</p>\
-                        </div>\
-                    </div>\
-                    <div class="handle-btn button">Deal</div>\
-                </div>';
-            }
-
-            $('.order-container #order-list').append('<div class="order-item">\
-                <div class="brief-info">\
-                    <div class="order-id">\
-                        <span class="name">order id:</span>\
-                        <span class="value">' + orders.orderDatas[i].oid + '</span>\
-                    </div>\
-                    <div class="order-ctime">\
-                        <span class="value"> ' + date.format('yyyy-MM-dd hh:mm:ss') + ' </span>\
-                    </div>\
-                    <div class="delete-btn button"></div>\
-                </div>' + shopItem + '</div>');
-        }
 
         /** [click function of delete order] */
         $('.order-container #order-list .order-item .delete-btn').click(function(event) {
-
-
             /** remove dom node */
             $(this).parent().parent().remove();
         })

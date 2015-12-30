@@ -10,13 +10,12 @@ public class OrderInfo {
 	private Integer quantity;
 	private Integer productId;
 	private String waybill;
-	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String waybill) {
+	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId) {
 		super();
 		this.orderId = orderId;
 		this.deliveryId = deliveryId;
 		this.quantity = quantity;
 		this.productId = productId;
-		this.waybill = waybill;
 	}
 	public OrderInfo() {
 		super();
@@ -108,6 +107,30 @@ public class OrderInfo {
 	}
 	public void setDelivery(Delivery delivery) {
 		this.delivery = delivery;
+	}
+	
+	
+	private String size;
+	private String color;
+	private String productUrl;
+
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getProductUrl() {
+		return productUrl;
+	}
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
 	}
 	
 	
