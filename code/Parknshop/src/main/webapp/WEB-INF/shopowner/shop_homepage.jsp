@@ -57,82 +57,10 @@
 			<div class="fillspace"></div>
 		</div>
 		<div class="productlist">
-			<div class="height5px color5" ></div>
-			<div class="productbox">
-				<div class="product-photo">
-				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
-				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
-				</div>
-				<div class="product-name">
-					<a href=""><strong><span >Name:</span></strong><span class="float-right">product1</span></a>
-				</div>
-				<div class="product-prcie">
-					<strong><span id="">Price:</span></strong><span class="float-right font1.4 fontred" >$:27</span>
-				</div>
-				<div>
-				</div>
-		    </div>
-			<div class="height5px color5" ></div>
-			<div class="productbox">
-				<div class="product-photo">
-				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
-				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
-				</div>
-				<div class="product-name">
-					<a href=""><strong><span >Name:</span></strong><span class="float-right">product1</span></a>
-				</div>
-				<div class="product-prcie">
-					<strong><span id="">Price:</span></strong><span class="float-right font1.4 fontred" >$:27</span>
-				</div>
-				<div>
-				</div>
-		    </div>
-			<div class="height5px color5" ></div>
-			<div class="productbox">
-				<div class="product-photo">
-				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
-				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
-				</div>
-				<div class="product-name">
-					<a href=""><strong><span >Name:</span></strong><span class="float-right">product1</span></a>
-				</div>
-				<div class="product-prcie">
-					<strong><span id="">Price:</span></strong><span class="float-right font1.4 fontred" >$:27</span>
-				</div>
-				<div>
-				</div>
-		    </div>
-			<div class="height5px color5" ></div>
-			<div class="productbox">
-				<div class="product-photo">
-				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
-				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
-				</div>
-				<div class="product-name">
-					<a href=""><strong><span >Name:</span></strong><span class="float-right">product1</span></a>
-				</div>
-				<div class="product-prcie">
-					<strong><span id="">Price:</span></strong><span class="float-right font1.4 fontred" >$:27</span>
-				</div>
-				<div>
-				</div>
-		    </div>
-			<div class="height5px color5" ></div>
-			<div class="productbox">
-				<div class="product-photo">
-				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
-				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
-				</div>
-				<div class="product-name">
-					<a href=""><strong><span >Name:</span></strong><span class="float-right">product1</span></a>
-				</div>
-				<div class="product-prcie">
-					<strong><span id="">Price:</span></strong><span class="float-right font1.4 fontred" >$:27</span>
-				</div>
-				<div>
-				</div>
-		    </div>
+			
+			
 	   </div>
 	</div>
+	<%@include file="footer.html" %>
 </body>
 </html>
