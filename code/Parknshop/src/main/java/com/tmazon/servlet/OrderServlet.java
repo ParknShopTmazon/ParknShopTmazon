@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.tmazon.domain.Delivery;
 import com.tmazon.domain.Order;
@@ -63,14 +64,38 @@ public class OrderServlet extends HttpServlet {
 		}
 	}
 	
-	private void comment(HttpServletRequest req, HttpServletResponse resp, Integer orderId) {
-		// TODO Auto-generated method stub
+	private void comment(HttpServletRequest req, HttpServletResponse resp, Integer orderId) throws ServletException, IOException {
 		
+		show(req, resp, orderId);
 	}
 
-	private void show(HttpServletRequest req, HttpServletResponse resp, Integer orderId) {
-		// TODO Auto-generated method stub
+	private void show(HttpServletRequest req, HttpServletResponse resp, Integer orderId) throws ServletException, IOException {
+
+		User user = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
 		
+		Order order = orderService.findById(orderId);
+		if (order == null || !order.getUserId().equals(user.getUserId())) {
+			return;
+		}
+		
+		List<OrderInfo> orderInfos = orderService.getOrderInfo(orderId);
+		order.setOrderInfos(orderInfos);
+		for (OrderInfo orderInfo : orderInfos) {
+			
+			Product product = productService.getProductById(orderInfo.getProductId());
+			orderInfo.setProduct(product);
+			
+			Delivery delivery = deliveryService.select(new Delivery(orderInfo.getDeliveryId(), null, null, null)).get(0);
+			orderInfo.setDelivery(delivery);
+			
+			//
+			orderInfo.setColor("");
+			orderInfo.setSize("/");
+			orderInfo.setProductUrl("productInfo?pid=" + orderInfo.getProductId());
+		}
+		
+		JSONObject jsonObject = JSONObject.fromObject(order);
+		resp.getWriter().write(jsonObject.toString());
 	}
 
 	private void certain(HttpServletRequest req, HttpServletResponse resp) {
