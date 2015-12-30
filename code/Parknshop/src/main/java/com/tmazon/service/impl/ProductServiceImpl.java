@@ -35,17 +35,17 @@ public class ProductServiceImpl implements ProductService{
 
 	public boolean insert(Product product) {
 		// TODO Auto-generated method stub
-		return false;
+		return productDao.insert(product);
 	}
 
 	public boolean modify(Product product) {
 		// TODO Auto-generated method stub
-		return false;
+		return productDao.modify(product);
 	}
 
 	public boolean delect(Product product) {
 		// TODO Auto-generated method stub
-		return false;
+		return productDao.delect(product);
 	}
 
 }
