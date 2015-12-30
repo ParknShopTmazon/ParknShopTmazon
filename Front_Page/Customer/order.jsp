@@ -17,6 +17,9 @@
 			String page_num = request.getParameter("page"); %>
 		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("show")) {%>
 				<%@ include file="order_show.html"%>
+				<% String item = request.getParameter("item"); %>
+				<input type="hidden" id="item_num" value="<%=item%>">
+				<input type="hidden" id="oid" value="<%=order_id%>">
 		<%	} %>
 		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("comment")) {%>
 				<%@ include file="order_comment.html"%>

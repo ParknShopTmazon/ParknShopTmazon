@@ -1176,8 +1176,79 @@ var customer = {
         });
     },
 
-    initShow: function() {
+    initShow: function(oid, item) {
         "use strict";
+        /**
+         * [initData: init the data of the item of the order]
+         * @param  {[type]} data [description]
+         * @return {[type]}      [description]
+         */
+        var initData = function(data) {
+            /** @type {Date} [date object] */
+            var date = new Date();
+            date.setTime(data.orderTime.time);
+
+            /** item should not be greater than the actual quantity */
+            if (item >= data.orderInfos.length) {
+                return;
+            }
+
+            $('.order-container #order-info').append('<div class="shop-info">\
+                <div class="pic-container">\
+                    <div class="over">\
+                        <div class="link-btn"></div>\
+                    </div>\
+                    <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
+                </div>\
+                <div class="info">\
+                    <div class="item">\
+                        <span class="name">Order Id</span>\
+                        <span class="value">' + data.orderId + '</span>\
+                    </div>\
+                    <div class="item">\
+                        <span class="name">Shop Owner</span>\
+                        <span class="value">' + data.orderInfos[item].product.shop.name + '</span>\
+                    </div>\
+                    <div class="address item">\
+                        <span class="name">Address</span>\
+                        <span class="value">' + data.address.description + '</span>\
+                    </div>\
+                    <div class="time item">\
+                        <span class="name">Create Time</span>\
+                        <span class="value">' + date.format('yyyy-MM-dd hh:mm') + '</span>\
+                    </div>\
+                    <div class="item">\
+                        <span class="name">Delivery Time</span>\
+                        <span class="value"></span>\
+                    </div>\
+                    <div class="item">\
+                        <span class="name">Deal Time</span>\
+                        <span class="value"></span>\
+                    </div>\
+                </div>\
+            </div>\
+            <div class="shop-status">\
+                <span class="name">status</span>\
+                <span class="value">' + data.status + '</span>\
+            </div>\
+            <div class="shop-deliver">' + data.orderInfos[item].delivery.company + '</div>');
+        };
+
+        $.ajax({
+            url: 'orderByType',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                type: 'show',
+                oid: oid
+            },
+        })
+        .done(function(data) {
+            initData(data);
+        })
+        .fail(function() {
+            console.log("failed to get order info");
+        });
     },
 
     initList: function() {
@@ -1242,7 +1313,7 @@ var customer = {
                             <div class="delivery-status">\
                                 <p class="value">' + data[i].status + '</p>\
                                 <p class="name">delivery status</p>\
-                                <p><a class="value" href="#">details</a></p>\
+                                <p><a class="value" href="order?type=show&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
                                 <p class="name">more details</p>\
                                 <p><a class="value" href="#">track the delivery</a></p>\
                                 <p class="name">track where the shop is</p>\
