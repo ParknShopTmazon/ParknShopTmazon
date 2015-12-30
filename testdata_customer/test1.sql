@@ -71,8 +71,8 @@ INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VA
 INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('4', 'STO', '10', 'fast');
 
 -- address
-INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('1', '12312', 'xidian', '710126', 'li', '13000000000');
-INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'xibei', '710000', 'wang', '13800000000');
+INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('1', '12312', 'xidian xxxxx', '710126', 'li', '13000000000');
+INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'xibei xxxxxxx', '710000', 'wang', '13800000000');
 
 -- orders
 INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'unpaid', now(), null, null, 12312, 1);
