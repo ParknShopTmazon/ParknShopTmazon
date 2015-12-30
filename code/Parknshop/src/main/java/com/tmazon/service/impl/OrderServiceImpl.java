@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public List<OrderInfo> getOrderInfo(Integer orderId) {
-		return orderInfoDao.select(new OrderInfo(orderId, null, null, null, null));
+		return orderInfoDao.select(new OrderInfo(orderId, null, null, null));
 	}
 
 }

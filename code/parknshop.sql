@@ -102,7 +102,7 @@ CREATE TABLE orderInfo(
 	deliveryId int NOT NULL,
 	quantity int NOT NULL,
 	productId int NOT NULL,
-	waybill varchar(50) NOT NULL,
+	waybill varchar(50),
 	FOREIGN KEY (productId) REFERENCES product(productId),
 	FOREIGN KEY (orderId) REFERENCES orders(orderId),
 	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
