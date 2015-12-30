@@ -46,7 +46,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public List<OrderInfo> getOrderInfo(Integer orderId) {
-		return orderInfoDao.select(new OrderInfo(orderId, null, null, null, null));
+		return orderInfoDao.select(new OrderInfo(orderId, null, null, null));
+	}
+
+	public Order findById(Integer id) {
+		List<Order> orders = ordersDao.select(new Order(id, null, null, null, null, null));
+		return (orders != null && !orders.isEmpty()) ? orders.get(0) : null;
+	}
+
+	public boolean changeStatus(Order order) {
+		return ordersDao.update(order);
 	}
 
 }

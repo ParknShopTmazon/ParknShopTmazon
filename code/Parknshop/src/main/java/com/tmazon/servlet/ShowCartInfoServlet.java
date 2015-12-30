@@ -63,11 +63,20 @@ public class ShowCartInfoServlet extends HttpServlet {
 				item.put("price", ParseUtil.Price2String(product.getDiscountPrice()));
 				item.put("quantity", quantity);
 				item.put("stock", product.getStockNum());
+				if(product.getStatus() == null){
+					item.put("expired", false + "");
+				}else {
+					if(product.getStatus().equals(Product.STATUS_PULL)){
+						item.put("expired", true + "");
+					}else {
+						item.put("expired", false + "");
+					}
+				}
 				if(productInfo != null){
 					item.put("size", productInfo.getSize());
 					item.put("color", productInfo.getColor());
 				}else {
-					item.put("size", "");
+					item.put("size", "/");
 					item.put("color", "");
 				}
 				

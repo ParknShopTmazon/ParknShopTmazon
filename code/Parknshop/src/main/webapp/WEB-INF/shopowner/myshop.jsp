@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Register New  Store</title>
+<title>MyShop Homepage</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
 <link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
 </head>
@@ -14,7 +14,7 @@
   
 	<div id="shoplist">
 		<div class="shopbox">
-			<div class="shopphoto"><a href=""><img src="images_shop/shop1.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div class="shopphoto" onclick="window.open('selectedshop')"><img src="images_shop/shop1.jpg"  class="shop-img-box" alt="no p no t"></div>
 			<div><a class="shopname" href=""><span id="">store name1</span></a></div>
 			<div><a href="">more info<a></div>
 		</div>

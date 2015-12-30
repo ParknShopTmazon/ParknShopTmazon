@@ -41,6 +41,9 @@ INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `disc
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78784', '7880', 'p4CartTest4', '178', '168', 'Home & Office', '12', '38', 'great', '#');
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78785', '7880', 'p4CartTest5', '122', '98', 'Home & Office', '34', '12', 'ookk', '#');
 
+-- update
+UPDATE `parknshop`.`product` SET `status`='pulloff' WHERE `productId`='78781';
+UPDATE `parknshop`.`product` SET `status`='pulloff' WHERE `productId`='78784';
 
 -- productinfo
 INSERT INTO `parknshop`.`productinfo` (`productId`, `size`, `color`) VALUES(78784,'M','#FFFFFF');
@@ -68,8 +71,13 @@ INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VA
 INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('4', 'STO', '10', 'fast');
 
 -- address
-INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `country`, `province`, `city`, `description`, `zipcode`, `name`, `phone`) VALUES ('1', '12312', 'China', 'Shaanxi', 'XiAn', 'xidian', '710126', 'li', '13000000000');
-INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `country`, `province`, `city`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'China', 'Shaanxi', 'XiAn', 'xibei', '710000', 'wang', '13800000000');
+INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('1', '12312', 'xidian xxxxx', '710126', 'li', '13000000000');
+INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'xibei xxxxxxx', '710000', 'wang', '13800000000');
 
+-- orders
+INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'unpaid', now(), null, null, 12312, 1);
 
+-- orderInfo
+INSERT INTO `parknshop`.`orderInfo` VALUES (100, 1, 2, 78781, '50256678700001');
+INSERT INTO `parknshop`.`orderInfo` VALUES (100, 2, 1, 78782, '50256678700002');
 
