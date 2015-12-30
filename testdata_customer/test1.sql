@@ -75,7 +75,7 @@ INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcod
 INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'xibei xxxxxxx', '710000', 'wang', '13800000000');
 
 -- orders
-INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'unpaid', now(), 12312, 1);
+INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'unpaid', now(), null, null, 12312, 1);
 
 -- orderInfo
 INSERT INTO `parknshop`.`orderInfo` VALUES (100, 1, 2, 78781, '50256678700001');
