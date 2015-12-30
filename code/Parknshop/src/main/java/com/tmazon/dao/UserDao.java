@@ -15,4 +15,13 @@ public interface UserDao {
 	public boolean delete(User user);
 	
 	public User findByName(String name);
+	
+	public List<User> SearchByName(String name);
+	
+	public List<User> findFriendsById(Integer id);
+	
+	public boolean insertFriend(Integer userId, Integer friendId);
+	
+	public boolean deleteFriend(Integer userId, Integer friendId);
+	
 }

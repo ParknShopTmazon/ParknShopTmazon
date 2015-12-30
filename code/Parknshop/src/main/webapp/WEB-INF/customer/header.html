@@ -1,8 +1,13 @@
 <div id="header">
 	<div class="header-div" id="logo-icon"></div>
 	<div class="header-div" id="search-btn" onclick="window.open('searchProduct');"></div>
-	<div class="header-div" id="cart" onclick="window.open('cart');"></div>
-	<div class="header-div" id="myshop" onclick="window.open('myshop')"></div>
+	<c:if test="${ not empty s_user }">
+		<div class="header-div" id="cart" onclick="window.open('cart');"></div>
+	</c:if>
+	<c:if test="${ s_user.role eq 'shop_owner' }">
+		<div class="header-div" id="myshop" onclick="window.open('myshop')"></div>
+	</c:if>
+	
 	<c:choose>
 		<c:when test="${ not empty s_user }">
 			<div class="text-btn">${ s_user.name }</div>

@@ -1,130 +1,93 @@
 /* CSS Document */
-body
-{
-	background:url(back.jpeg);
-	background-color: #f5f7f7;
-	font: 15px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-}
-a:link {text-decoration:none;}  /**/
-#head{
-	height:95px; 
-	font-size:22px;
-	background-color:#011334;
-	color:#FFFFFF;
-}
-#head span{
-	margin:10px 10px 0px 0px;
-	float:right;
-}
-#head #logo{
-	margin:30px 0px 0px 40px;
-}
-#foot{
-	clear:both;
-	text-align:center;
-	font-size:18px;
-	height:95px;
-	background-color:#011334;
-	color:#F9F9F9;
-}
-#menu
-{
-	float:left;
-	width:160px;
-	position:relative;
-	min-height:700px;
-	border:1px solid #666666;
-	background-color:#CCCCFF;
-}
-#content{
-	float:left;
-	width:800px;
-	margin-left:5px;
-	min-height:700px;
-}
-#shopinfo{
-	height:800px;
-	width:580px;
-	float:left;	
-}
-#info{
-	min-height:700px;
-	width:580px;
-	float:left;	
-}
+@import url(layout.css);
+@import url(nav.css);
+.text-align-right{text-align:right;}.float-right{float:right;}
+a{text-decoration:none;}
 #info-photo{
 	height:120px;
 	width:120px;
 	text-align:center;
-	isplay:inline;
+	display:inline;
 	float:right;
 }
+.block{
+	display:block;
+}
+
 .complete-info{
 	height:800px;
-	width: 460px;
 	font-size:20px;
 	text-align:left;
 	display:block;
 	overflow:hidden;
-	float£ºleft;
+	float:left;
 }
 .form-item{
-	height: 50px;
-    margin-top: 18px;
+		clear:both;
+		height: 50px;
+		text-align:left;
+		margin-top:18px;
 }
-.item-photo{
+.form-item-img{
+	clear:both;
 	height:150px;
 }
-.item-uphoto{
-	height:150px;
-}
-.item-textarea{
-    height:120px;
+.form-item-textarea{
+	clear:both;
+	height:120px;
 }
 .form-lable-left{
-	float: left;
-    width: 130px;
-    height: 50px;
-	text-align:left;
-    line-height: 18px;
-    font-size: 18px;
-    padding: 8px 0;
-    margin-right: 10px;
-    overflow: hidden;
-	display:inline;
-}
-.form-control{
-    height: 50px;
-    line-height: 30px;
-	text-align:left;
-	display:inline;
 	float:left;
+	width: 130px;
+	line-height: 1em;
+	font-size: 18px;
+	margin-right: 10px;
+	padding-top:10px;
+	overflow: hidden;
 }
-.photo-control{
-    height: 150px;
-	display:inline;
+.form-control-right{
 	float:left;
+	line-height:1em;
+	padding-top:10px;
+	padding: 8px 0;
 }
-.uphoto-control{
-    height: 150px;
-	display:inline;
+.form-shop-img{
 	float:left;
+	padding-top:0px;
+	height: 80px;
 }
-.textarea-control{
-    height: 120px;
-	display:inline;
+.form-textarea{
 	float:left;
+	height: 120px;
 }
-.form-input{
+.form-input-right{
 	padding: 6px 10px;
-    border: 1px solid;
-    outline: 0;
+	border: 1px solid;
+	outline: 0;
 }
-.text-area{
+.textarea{
 	height:120px;
 	width:300px;
 }
-
-	
+.submit-btn{
+	width:100px;
+	height:36px;
+	font-size:18px;
+}
+.hide{display:none;}
+.color1{background-color:#FFFF99;}
+.color2{background-color:#6699FF;}
+.color3{background-color:#CC6699;}
+.color4{background-color:#FFFFFF;}
+.color5{background-color:#1091E4;}
+.white{background-color:#FFFFFF;}
+.black{background-color:#000000;}
+.fontred{font:red;}
+.height10px{height:10px;}
+.height5px{height:5px;}
+.height2px{height:2px;}
+.outset{border-style:outset;};
+.font1.4{font-size:1.4em;}
+.nofloat{clear:both;}
 
 

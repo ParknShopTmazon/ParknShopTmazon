@@ -23,5 +23,23 @@ public class UserServiceImpl implements UserService {
 	public User findByName(String name) {
 		return userDao.findByName(name);
 	}
-	
+
+	public void getFriends(User user) {
+		user.setFriends(userDao.findFriendsById(user.getUserId()));
+	}
+
+	public boolean addFriend(User user, User friend) {
+		if (user.equals(friend)) {
+			return false;
+		}
+		return userDao.insertFriend(user.getUserId(), friend.getUserId());
+	}
+
+	public List<User> searchUsersByName(String name) {
+		return userDao.SearchByName(name);
+	}
+
+	public boolean deleteFriend(User user, User friend) {
+		return userDao.deleteFriend(user.getUserId(), friend.getUserId());
+	}
 }

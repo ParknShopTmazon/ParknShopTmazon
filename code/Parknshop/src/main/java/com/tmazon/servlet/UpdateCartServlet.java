@@ -48,6 +48,13 @@ public class UpdateCartServlet extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		Map<String, String[]> params = req.getParameterMap();
 		
+		//################
+//		Set<String> set = params.keySet();
+//		System.out.println("##############" + set.size());
+//		for(String s : set){
+//			System.out.println("####################" + s);
+//		}
+		
 		if(params.get("sid") == null){
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Can't get product id, please try it again!");
@@ -75,6 +82,10 @@ public class UpdateCartServlet extends HttpServlet {
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
+		
+		
+		
+		
 		
 		int productId = ParseUtil.String2Integer(productIdString, null);
 		int quantity = ParseUtil.String2Integer(quantityString, null);

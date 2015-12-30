@@ -285,17 +285,23 @@ s {
 
 .dialog #main .dialog-input .send-btn {
     height: 100px;
-    border: 1px solid #B27100;
+    border: 1px solid #b27100;
     background-color: #ce8300;
     width: 16%;
     height: 100px;
-    border: 1px solid #B27100;
+    border: 1px solid #b27100;
     background-color: #ce8300;
     display: inline-block;
     float: right;
     text-align: center;
-    line-height: 100px;
     cursor: pointer;
+    line-height: 3em;
+}
+
+.dialog #main .dialog-input .send-btn .notify {
+    font-size: 0.8em;
+    color: #b27100;
+    line-height: 0.8em;
 }
 
 .dialog #main .friend-list {
@@ -325,10 +331,16 @@ s {
 
 .dialog #main .dialog-show p {
     font-size: 1.2em;
-    margin-top: 2.4em;
+    margin-bottom: 2em;
     width: 60%;
     overflow: hidden;
     word-wrap: break-word;
+}
+
+.dialog #main .dialog-show .time {
+    font-size: 1em;
+    color: #b27100;
+    margin: 0;
 }
 
 
@@ -451,6 +463,35 @@ s {
 }
 
 .dialog #certain-add-main .bottom-buttons .cancel-btn {
+    background-image: url(./../images/cancel-btn.png);
+}
+
+
+/*************************************************
+         *
+         * Notice Main
+         *
+         *********************************/
+
+.dialog #notice-add-main .dialog-msg,
+.dialog #notice-del-main .dialog-msg {
+    line-height: 32px;
+}
+
+.dialog #notice-add-main .bottom-buttons,
+.dialog #notice-del-main .bottom-buttons {
+    float: right;
+}
+
+.dialog #notice-add-main .bottom-buttons .cancel-btn,
+.dialog #notice-del-main .bottom-buttons .cancel-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.dialog #notice-add-main .bottom-buttons .cancel-btn,
+.dialog #notice-del-main .bottom-buttons .cancel-btn {
     background-image: url(./../images/cancel-btn.png);
 }
 

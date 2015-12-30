@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 					resp);
 			return;
 		}
-	
+		
 		// check user name and password
 		if (!userService
 				.isUserExist(user)) {

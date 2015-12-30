@@ -4,48 +4,24 @@
     <div class="dialog__overlay"></div>
     <div id="main" class="dialog__content">
         <h2><strong>Aleen</strong></h2>
-        <div class="dialog-show scroll">
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-            <p>afsadfsadfsafsafadffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
+        <div class="dialog-show scroll" id="dialog-show">
         </div>
         <div class="friend-list">
             <div class="title">Friends List</div>
             <div class="list scroll">
                 <ul>
-                    <li class="select button" uid="0">Aleen</li>
-                    <li class="button" uid="1">Alien</li>
-                    <li class="button" uid="2">Alien</li>
-                    <li class="button" uid="3">Alien</li>
-                    <li class="button" uid="4">Alien</li>
-                    <li class="button" uid="5">Alien</li>
-                    <li class="button" uid="6">Alien</li>
-                    <li class="button" uid="7">Alien</li>
-                    <li class="button" uid="8">Alien</li>
-                    <li class="button" uid="9">Alien</li>
-                    <li class="button" uid="10">Alien</li>
+                    <li class="button select">Aleen</li>
                 </ul>
             </div>
         </div>
         <div class="dialog-input">
-            <textarea class="scroll"></textarea>
-            <div class="send-btn button">send</div>
+            <textarea id="message_textarea" class="scroll"></textarea>
+            <div class="send-btn button">
+                <p>send</p>
+                <p class="notify">Ctrl</p>
+                <p class="notify">+</p>
+                <p class="notify">Enter</p>
+            </div>
         </div>
         <div>
             <div class="action close-btn button" data-dialog-close></div>
@@ -67,19 +43,7 @@
         <div class="dialog-back-btn button"></div>
         <h2><strong>People</strong></h2>
         <div class="list scroll">
-            <ul>
-                <li class="select button" uid="0">Aleen</li>
-                <li class="button" uid="1">Alien</li>
-                <li class="button" uid="2">Alien</li>
-                <li class="button" uid="3">Alien</li>
-                <li class="button" uid="4">Alien</li>
-                <li class="button" uid="5">Alien</li>
-                <li class="button" uid="6">Alien</li>
-                <li class="button" uid="7">Alien</li>
-                <li class="button" uid="8">Alien</li>
-                <li class="button" uid="9">Alien</li>
-                <li class="button" uid="10">Alien</li>
-            </ul>
+            <ul></ul>
         </div>
         <div class="bottom-buttons">
             <div class="certain-btn button"></div>
@@ -92,6 +56,22 @@
         </span>
         <span class="bottom-buttons">
             <div class="certain-btn button"></div>
+            <div class="cancel-btn button"></div>
+        </span>
+    </div>
+    <div id="notice-add-main" class="dialog__content">
+        <span class="dialog-msg">
+            <strong>You have not choosen a friend. Please return to retry.</strong>
+        </span>
+        <span class="bottom-buttons">
+            <div class="cancel-btn button"></div>
+        </span>
+    </div>
+    <div id="notice-del-main" class="dialog__content">
+        <span class="dialog-msg">
+            <strong>You have not choosen a friend to delete. Please return to retry.</strong>
+        </span>
+        <span class="bottom-buttons">
             <div class="cancel-btn button"></div>
         </span>
     </div>

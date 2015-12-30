@@ -6,55 +6,52 @@
 <head>
 <title>Register New  Store</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
-<link rel="stylesheet" type="text/css" href="css_shop/rs.css">
-<meta charset="text/html UTF-8">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache, must-revalidate">
-<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57GMT">
-<title>parknshop</title>
-<link rel="stylesheet" type="text/css" href="css/customer.css">
+<link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
 </head>
+
 <body>
    <%@ include file="header.html"%>
-<!-- 	<div id=head> -->
-<!-- 			<img id="logo" src="images_shop/logo.png"> -->
-<!-- 			<span id="topline"> -->
-<!-- 				<a href="../public/index.html">Home_page|</a> -->
-<!-- 				<a href="../seller/Update_store_information.html" >Store_information|</a> -->
-<!-- 				<a href="../seller/Account_setting.html">Accont_setting</a></font> -->
-<!-- 			</span> -->
-<!-- 	</div> -->
-    <hr/>
-	<div id="menu"></div>
-	<div id="container">
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="images_shop/shop1.jpg" alt="��"></a></div>
-			<div><a id="shopname" href=""><span id="">shop name1</span></a></div>
+  
+	<div id="shoplist">
+		<div class="shopbox">
+			<div class="shopphoto"><a href=""><img src="images_shop/shop1.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div><a class="shopname" href=""><span id="">store name1</span></a></div>
 			<div><a href="">more info<a></div>
 		</div>
-		<div id="shopinfo">
-			<div id="shopphoto"><a href=""><img src="images_shop/shop2.jpg" alt="��"></a></div>
-			<div><a id="shopname" href=""><span id="">shop name2</span></a></div>
-			<div>more info</div>	
+		<div class="shopbox">
+			<div class="shopphoto"><a href=""><img src="images_shop/shop2.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div><a class="shopname" href=""><span id="">store name2</span></a></div>
+			<div><a href="">more info<a></div>
 		</div>
-		<!--  
-		<div id="shopinfo">
-			<div><a href="Register New Store.html"><img src=" images_shop/plus.jpg " alt=" "></a></div>
-			<div><a id="shopname" href="Register New Shop.html"><span>click picture to add<span></a></div>
+		<div class="shopbox">
+			<div class="shopphoto"><a href=""><img src="images_shop/shop3.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div><a class="shopname" href=""><span id="">store name3</span></a></div>
+			<div><a href="">more info<a></div>
 		</div>
-		-->
+		<div class="shopbox">
+			<div class="shopphoto"><a href=""><img src="images_shop/shop4.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div><a class="shopname" href=""><span id="">store name4</span></a></div>
+			<div><a href="">more info<a></div>
+		</div>
+		<div class="shopbox">
+			<div class="shopphoto"><a href=""><img src="images_shop/shop5.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div><a class="shopname" href=""><span id="">store name5</span></a></div>
+			<div><a href="">more info<a></div>
+		</div>
+		<div class="shopbox">
+			<div class="shopphoto"><a href=""><img src="images_shop/shop6.jpg"  class="shop-img-box" alt="no p no t"></a></div>
+			<div><a class="shopname" href=""><span id="">store name6</span></a></div>
+			<div><a href="">more info<a></div>
+		</div>
 		
-		<div id="shopinfo">
-		<!-- 
-			<div ><a href="RegisterNewStore.html"><img src=" images_shop/plus.jpg " alt=" "></a></div>
-			 --> 
-			 <div onclick="window.open('registershoppage')"><img src=" images_shop/plus.jpg " alt=" "></div>
-			<div id="shopname" onclick="window.open('registershoppage')"><span>add new store<span></div>
+		<div class="shopbox">
+			<div  class="shopphoto" onclick="window.open('registershoppage')"><img src="images_shop/plus.jpg" class="shop-img-box" alt=" "></div>
+			<div><span id="">Add a new one</span></div>
+			<div id="shopname" onclick="window.open('registershoppage')">more info</div>	
 		</div>
+	</div>
+	</div>
+	<%@ include file="footer.html"%>	
 	
-	</div>
-	 <div id="foot">
-			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
-	</div>
 </body>
 </html>

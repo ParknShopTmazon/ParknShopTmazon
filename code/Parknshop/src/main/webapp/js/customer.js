@@ -23,6 +23,37 @@
  **********************************************************************/
 "use strict";
 
+/** Date format */
+Date.prototype.format = function(format) {
+    var date = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "h+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S+": this.getMilliseconds()
+    };
+    if (/(y+)/i.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (var k in date) {
+        if (new RegExp("(" + k + ")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+        }
+    }
+    return format;
+}
+
+String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
+    if (!RegExp.prototype.isPrototypeOf(reallyDo)) {
+        return this.replace(new RegExp(reallyDo, (ignoreCase ? "gi" : "g")), replaceWith);
+    } else {
+        return this.replace(reallyDo, replaceWith);
+    }
+}
+
+
 var customer = {
     /**
      * [scrollController: the controller of the scroll]
@@ -71,9 +102,6 @@ var customer = {
                 var ev = (event === undefined) ? window.event : event;
                 keycode = ev.keyCode;
             }
-            if (keycode === 13) {
-                return false;
-            }
         });
     },
 
@@ -92,7 +120,9 @@ var customer = {
                 'add-friend-main': 'main',
                 'people-list-main': 'add-friend-main',
                 'certain-add-main': 'people-list-main',
-                'certain-delete-main': 'main'
+                'certain-delete-main': 'main',
+                'notice-add-main': 'people-list-main',
+                'notice-del-main': 'main'
             },
 
             /**
@@ -111,15 +141,6 @@ var customer = {
             },
 
             /**
-             * [getDialog: get the dialog of the specified uid]
-             * @param  {[type]} uid [the uid]
-             * @return {[type]}     [description]
-             */
-            getDialog = function(uid) {
-                console.log('uid: ' + uid);
-            },
-
-            /**
              * [showPart: show the part and hide others]
              * @param  {[type]} part [the part you want to show]
              * @return {[type]}      [description]
@@ -133,6 +154,240 @@ var customer = {
 
                 /** set the last step of this page */
                 lastStep = stateMachine[part];
+            },
+
+            /**
+             * [updateFriendList: update the friends list]
+             * @param  {[type]} name [if the name is not null, then choose the name first]
+             * @return {[type]}      [description]
+             */
+            updateFriendList = function(name) {
+                /** name is null by default */
+                name = name || null;
+
+                $.ajax({
+                        url: 'friends',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {},
+                    })
+                    .done(function(data) {
+                        if (typeof(data.friends) != 'undefined') {
+                            /** clear all friends first */
+                            for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
+                                $('.dialog #main .friend-list .list ul').children(i).remove();
+                            }
+
+                            /** append */
+                            for (var j in data.friends) {
+                                /** [if: first child] */
+                                if (j == 0) {
+                                    $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+
+                                    /** get the message of choosen name */
+                                    getMessage(data.friends[j].name);
+                                } else {
+                                    if (data.friends[j].name == name) {
+                                        /** remove the select class */
+                                        $('.dialog #main .friend-list .list ul').children(0).removeClass('select');
+
+                                        $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+
+                                        /** get the message of choosen name */
+                                        getMessage(data.friends[j].name);
+                                    } else {
+                                        $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                                    }
+                                }
+                            }
+                        } else {
+                            console.log("failed to get friends list, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to get friends list");
+                    });
+            },
+
+            /**
+             * [getMessage: get message from the friend]
+             * @param  {[type]} friendName [the name of the friend]
+             * @return {[type]}            [description]
+             */
+            getMessage = function(friendName) {
+                /** date object */
+                var date = new Date();
+
+                $.ajax({
+                        url: 'messages',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: friendName
+                        },
+                    })
+                    .done(function(data) {
+                        if (typeof(data.messages) != 'undefined') {
+                            for (var i in data.messages) {
+                                date.setTime(data.messages[i].messageTime.time);
+                                $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+            <p>' + data.messages[i].content + '</p>');
+                            }
+                        } else {
+                            console.log("failed to get message, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to get message");
+                    });
+            },
+
+            /**
+             * [sendMessage: send messages to someone]
+             * @param  {[type]} name    [the name]
+             * @param  {[type]} content [the content you want to send]
+             * @return {[type]}         [description]
+             */
+            sendMessage = function(name, content) {
+                $.ajax({
+                        url: 'leaveMsg',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: name,
+                            content: content
+                        },
+                    })
+                    .done(function(data) {
+                        if (data == 'success') {
+                            var date = new Date();
+
+                            /** apeend */
+                            $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+                                <p>' + content + '</p>');
+
+                            /** keep in the bottom */
+                            $('.dialog #main #dialog-show').scrollTop(parseFloat(document.getElementById('dialog-show').scrollHeight));
+
+                            /** clear textarea */
+                            $('.dialog #main .dialog-input textarea').val('');
+                        } else {
+                            console.log("failed to send a message, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to send a message");
+                    });
+            },
+
+            /**
+             * [searchFriends: search friends by the name]
+             * @param  {[type]} name [the name]
+             * @return {[type]}      [description]
+             */
+            searchFriends = function(name) {
+                $.ajax({
+                        url: 'searchUser',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            name: name
+                        },
+                    })
+                    .done(function(data) {
+                        if (typeof(data.users) != 'undefined') {
+                            /** clear children */
+                            for (var i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
+                                $('.dialog #people-list-main .list ul').children(i).remove();
+                            }
+
+                            /** append */
+                            for (var j in data.users) {
+                                /** [if: first child] */
+                                if (j == 0) {
+                                    $('.dialog #people-list-main .list ul').append('<li class="select button">' + data.users[j] + '</li>')
+                                } else {
+                                    $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
+                                }
+                            }
+                        } else {
+                            console.log("failed to search friends, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to search friends");
+                    });
+            },
+
+            /**
+             * [addFriend: add friend by the name]
+             * @param {[type]} name [the name]
+             */
+            addFriend = function(name) {
+                $.ajax({
+                        url: 'addFriend',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: name
+                        },
+                    })
+                    .done(function(data) {
+                        if (data == 'success') {
+                            updateFriendList(name);
+                        } else {
+                            updateFriendList(name);
+                            console.log("failed to add the friend, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to add the friend");
+                    });
+            },
+
+            /**
+             * [delFriend: delete friend by the name]
+             * @param  {[type]} name [the name]
+             * @return {[type]}      [description]
+             */
+            delFriend = function(name) {
+                $.ajax({
+                        url: 'deleteFriend',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: name
+                        },
+                    })
+                    .done(function(data) {
+                        if (data == 'success') {
+                            updateFriendList();
+                        } else {
+                            updateFriendList();
+                            console.log("failed to delete the friend, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to delete the friend");
+                    });
+            },
+
+            /**
+             * [handleSend: the handle function of sending messages]
+             * @return {[type]} [description]
+             */
+            handleSend = function() {
+                if ($('.dialog #main .friend-list .list ul .select').length > 0) {
+                    if ($('.dialog #main .dialog-input textarea').val() == '') {
+                        $('.dialog #main .dialog-input textarea').focus();
+                        $('.dialog #main .dialog-input textarea').attr('placeholder', 'You cannot leave a empty message.');
+                    } else {
+                        var content = $('.dialog #main .dialog-input textarea').val().replaceAll('\n', '<br />');
+                        sendMessage($('.dialog #main .friend-list .list ul .select').html(), content);
+                    }
+                } else {
+                    showPart('notice-del-main');
+                }
             },
 
             /**
@@ -159,6 +414,29 @@ var customer = {
             $(this).attr('placeholder', 'search...');
         });
 
+        /** [click function of sending message button] */
+        $('.dialog #main .dialog-input .send-btn').click(function(event) {
+            /* Act on the event */
+            handleSend();
+        });
+
+        /** [keydown function of sending message button] */
+        $(document).on("keydown", function(event) {
+            var userAgent = navigator.userAgent.toLowerCase();
+            var keycode, ctrl;
+            if (userAgent.indexOf('firefox') >= 0 || userAgent.indexOf('ie') >= 0) {
+                keycode = event.which;
+                ctrl = event.ctrlKey;
+            } else {
+                var ev = (event === undefined) ? window.event : event;
+                keycode = ev.keyCode;
+                ctrl = ev.ctrlKey;
+            }
+            if (keycode === 13 && ctrl && document.activeElement.id === "message_textarea") {
+                handleSend();
+            }
+        });
+
         /** [click function of choosing people to add] */
         $('.dialog #people-list-main .list ul > li').click(function() {
             /** [remove the original selected item] */
@@ -180,7 +458,7 @@ var customer = {
             /** [set the new selected item] */
             $(this).addClass('select');
             changeTitle($(this).html());
-            getDialog($(this).attr('uid'));
+            getMessage($(this).html());
         });
 
         /** [click function of add friend button] */
@@ -191,18 +469,41 @@ var customer = {
         /** [click function of search button on the add friend page] */
         $('.dialog #add-friend-main .search-btn').click(function() {
             showPart('people-list-main');
+
+            /** search friends */
+            searchFriends($('.dialog #add-friend-main .search-box input[type="text"]').val());
         });
 
         /** [click function of certaining to add friends] */
-        $('.dialog #people-list-main .bottom-buttons .certain-btn').click(function() {
-            showPart('certain-add-main');
+        $('.dialog #people-list-main .bottom-buttons .certain-btn').click(function(event) {
+            /* Act on the event */
+            if ($('.dialog #people-list-main .list ul .select').length > 0) {
+                showPart('certain-add-main');
+            } else {
+                showPart('notice-add-main');
+            }
         });
 
-        /** [click function or certaining to delete friends] */
+        /** [click function of certaining] */
+        $('.dialog #certain-add-main .bottom-buttons .certain-btn').click(function(event) {
+            /* Act on the event */
+            addFriend($('.dialog #people-list-main .list ul .select').html());
+        });
+
+        /** [click function of certaining to delete friends] */
         $('.dialog #main .bottom-buttons .del-friend-btn').click(function() {
-            showPart('certain-delete-main');
+            if ($('.dialog #main .friend-list .list ul .select').length > 0) {
+                showPart('certain-delete-main');
+            } else {
+                showPart('notice-del-main');
+            }
         });
 
+        /** [click function of certaining] */
+        $('.dialog #certain-delete-main .bottom-buttons .certain-btn').click(function(event) {
+            /* Act on the event */
+            delFriend($('.dialog #main .friend-list .list ul .select').html());
+        });
 
         /** [click function of the dialog-back-btn] */
         $('.dialog .dialog-back-btn').click(function() {
@@ -220,6 +521,9 @@ var customer = {
         }, function() {
             $(this).css('width', '30px');
         })
+
+        /** update friends list */
+        updateFriendList();
     },
 
     /**
@@ -366,14 +670,14 @@ var customer = {
 
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-
+                    var _this = $(this);
                     /** store data into database */
                     $.getJSON('deleteCart', {
-                        sid: $(this).attr('sid')
+                        sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
                         if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                            $(this).parent().parent().parent().remove();
+                            _this.parent().parent().parent().remove();
                             updateCost();
                         } else {
                             var error = data.errMsg || '';
@@ -384,13 +688,13 @@ var customer = {
 
                 /** [click function of the pay button] */
                 $('.cart-container #shop-cost .pay .value').click(function() {
-                    window.location.href = "./order.jsp?type=certain";
+                    window.location.href = "./order?type=certain";
                 });
 
                 /** [change function of quantity changing] */
                 $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
                     /* Act on the event */
-
+                    var _this = $(this);
                     /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
@@ -401,16 +705,16 @@ var customer = {
                         } else {
                             /** store data into database */
                             $.getJSON('updateCart', {
-                                sid: $(this).parent().prev().prev().children('input').attr('sid'),
+                                sid: $(this).attr('sid'),
                                 quantity: $(this).val()
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
                                 if (typeof(data.result) != 'undefined' && data.result == 'true') {
-                                    $(this).attr('value', $(this).val());
+                                    _this.attr('value', _this.val());
                                 } else {
                                     var error = data.errMsg || '';
                                     alert('failed to modify: ' + error);
-                                    $(this).val($(this).attr('value'));
+                                    _this.val(_this.attr('value'));
                                 }
                             });
                         }
@@ -650,9 +954,6 @@ var customer = {
                 console.log('failed to get order data');
             });
 
-        /** init data of orders */
-        initData(JSON.parse(testData));
-
         /** update cost info */
         updateCost();
 
@@ -808,27 +1109,6 @@ var customer = {
 
     initList: function() {
         "use strict";
-        /** Date format */
-        Date.prototype.format = function(format) {
-            var date = {
-                "M+": this.getMonth() + 1,
-                "d+": this.getDate(),
-                "h+": this.getHours(),
-                "m+": this.getMinutes(),
-                "s+": this.getSeconds(),
-                "q+": Math.floor((this.getMonth() + 3) / 3),
-                "S+": this.getMilliseconds()
-            };
-            if (/(y+)/i.test(format)) {
-                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
-            }
-            for (var k in date) {
-                if (new RegExp("(" + k + ")").test(format)) {
-                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
-                }
-            }
-            return format;
-        }
 
         /** date object */
         var date = new Date();
