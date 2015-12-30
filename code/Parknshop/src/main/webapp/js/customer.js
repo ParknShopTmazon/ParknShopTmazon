@@ -678,13 +678,10 @@ var customer = {
             },
 
             /**
-             * [init: init the cart after initialzing the data]
+             * [initEvent: init all events]
              * @return {[type]} [description]
              */
-            init = function() {
-                /** update cost info at the beginning */
-                updateCost();
-
+            initEvent = function() {
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
                     var _this = $(this);
@@ -756,8 +753,11 @@ var customer = {
                 /** init the data of cart */
                 initData(data);
 
-                /** init the cart */
-                init();
+                /** update cost info at the beginning */
+                updateCost();
+
+                /** init all events */
+                initEvent();
             })
             .fail(function() {
                 console.log('failed to get cart data');
@@ -944,6 +944,154 @@ var customer = {
             },
 
             /**
+             * [initEvent: init all events]
+             * @return {[type]} [description]
+             */
+            initEvent = function() {
+                /** [change function of changing delivery company ] */
+                $('.order-container #order-details .order-delivery').change(function() {
+                    /** clear option */
+                    $(this).next().children('select').children('option').remove();
+
+                    /** index the item */
+                    var i = $(this).parent().attr('item');
+
+                    /** index the company item */
+                    var k = $(this).children('select').val();
+
+                    /** append the new option */
+                    var price_options = '';
+                    for (var j in delivery_options[0].price_option) {
+                        price_options += '<option value="' + delivery_options[k].price_option[j].value + '">' + delivery_options[k].price_option[j].description + '</option>';
+                    }
+                    $(this).next().children('select').append(price_options);
+
+                    $('.order-container #order-details .order-delivery-price').change();
+                });
+
+                /** [delivery price change] */
+                $('.order-container #order-details .order-delivery-price').change(function() {
+                    /** @type {[type]} [the selected delivery price] */
+                    var selectPrice = parseFloat($(this).children('select').val());
+
+                    /** @type {[type]} [cost without delivery price] */
+                    var origin_cost = $(this).prev().prev().prev().children('span').html();
+                    origin_cost = parseFloat(origin_cost.substring(1, origin_cost.length));
+
+                    /** update cost of the item */
+                    $(this).next().children('.delivery-price').html('+ $' + selectPrice.toFixed(1));
+
+                    /** update cost info */
+                    updateCost();
+                });
+
+                /** [change function of quantity changing ] */
+                $('.order-container #order-details .quantity input[type="number"]').change(function(event) {
+                    /** check legality when keydown */
+                    var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
+                    if (regex.test($(this).val())) {
+                        if (parseInt($(this).val()) > 99) {
+                            $(this).focus();
+                            $(this).val(99);
+                            alert('you can only enter integer number between 1 and 99');
+                        } else {
+                            $(this).attr('value', $(this).val());
+                        }
+                    } else {
+                        $(this).focus();
+                        $(this).val(Math.abs(parseInt($(this).val())));
+                        alert('you can only enter integer number between 1 and 99');
+                    }
+
+                    updateCost();
+                });
+
+                /** [radio change] */
+                $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+
+                /** [click function of other addr] */
+                $('.order-container #order-addr .other').click(function(event) {
+                    /* Act on the event */
+                    /** initialize the map */
+                    $('.order-container #order-addr .addresses #other-addr-input .map').locationpicker({
+                        location: {
+                            latitude: 34.123636,
+                            longitude: 108.83636
+                        },
+                        radius: 10,
+                        inputBinding: {
+                            locationNameInput: $('#add-addr')
+                        },
+                        enableAutocomplete: true
+                    });
+
+                    /** show the map */
+                    $('.order-container #order-addr .addresses #other-addr-input').show();
+                });
+
+                /** [click function of adding address] */
+                $('.order-container #order-addr .addresses #other-addr-input a').click(function(event) {
+                    /* Act on the event */
+                    var otherAddr = getValue($('.order-container #order-addr .addresses #other-addr-input #add-addr'));
+
+                    /** [if: return when otherAddr is empty] */
+                    if (otherAddr == '') {
+                        return;
+                    }
+
+                    var receiver = getValue($('.order-container #order-addr .addresses #other-addr-input #receiver'));
+
+                    /** [if: return when receiver is empty] */
+                    if (receiver == '') {
+                        return;
+                    }
+
+                    var phone = getValue($('.order-container #order-addr .addresses #other-addr-input #phone'));
+
+                    /** [if: return when phone is empty] */
+                    if (phone == '') {
+                        return;
+                    }
+
+                    /** clear all the check attribute of input tags */
+                    var addr_list = $('.order-container #order-addr .addresses input[type="radio"]');
+                    for (var i = 0; i < addr_list.length; i++) {
+                        addr_list[i].removeAttribute('checked');
+                    }
+
+                    /**
+                     * [append div]
+                     */
+                    $('.order-container #order-addr .addresses').append('<div>\
+                        <label>\
+                            <input type="radio" name="addr" checked="checked">\
+                            <span class="address" title="' + otherAddr + '">' + otherAddr + '</span>\
+                            <span class="receiver">\
+                            <span class="name">receiver name: </span>\
+                            <span class="value">' + receiver + '</span>\
+                            </span>\
+                            <span class="phone">\
+                            <span class="name">phone number: </span>\
+                            <span class="value">' + phone + '</span>\
+                            </span>\
+                        </label>\
+                    </div>');
+
+                    /** rebinding the radio change */
+                    /** [unbind] */
+                    $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
+                    /** [radio change] */
+                    $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+
+                    /** hide the map */
+                    $('.order-container #order-addr .addresses #other-addr-input').hide();
+
+                    /** update addr info */
+                    updateCertainAddr();
+                });
+            },
+
+            /**
              * [initData: init cart data]
              * @param  {[type]} data [data from the interface]
              * @return {[type]}      [description]
@@ -1025,155 +1173,19 @@ var customer = {
             .done(function(data) {
                 /** init the data of order */
                 initData(data);
+
+                /** init the data of address */
+                initAddr();
+
+                /** init all events */
+                initEvent();
+
+                /** update cost info */
+                updateCost();
             })
             .fail(function() {
                 console.log('failed to get order data');
             });
-
-        /** update cost info */
-        updateCost();
-
-        /** [change function of changing delivery company ] */
-        $('.order-container #order-details .order-delivery').change(function() {
-            /** clear option */
-            $(this).next().children('select').children('option').remove();
-
-            /** index the item */
-            var i = $(this).parent().attr('item');
-
-            /** index the company item */
-            var k = $(this).children('select').val();
-
-            /** append the new option */
-            var price_options = '';
-            for (var j in delivery_options[0].price_option) {
-                price_options += '<option value="' + delivery_options[k].price_option[j].value + '">' + delivery_options[k].price_option[j].description + '</option>';
-            }
-            $(this).next().children('select').append(price_options);
-
-            $('.order-container #order-details .order-delivery-price').change();
-        });
-
-        /** [delivery price change] */
-        $('.order-container #order-details .order-delivery-price').change(function() {
-            /** @type {[type]} [the selected delivery price] */
-            var selectPrice = parseFloat($(this).children('select').val());
-
-            /** @type {[type]} [cost without delivery price] */
-            var origin_cost = $(this).prev().prev().prev().children('span').html();
-            origin_cost = parseFloat(origin_cost.substring(1, origin_cost.length));
-
-            /** update cost of the item */
-            $(this).next().children('.delivery-price').html('+ $' + selectPrice.toFixed(1));
-
-            /** update cost info */
-            updateCost();
-        });
-
-        /** [change function of quantity changing ] */
-        $('.order-container #order-details .quantity input[type="number"]').change(function(event) {
-            /** check legality when keydown */
-            var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
-            if (regex.test($(this).val())) {
-                if (parseInt($(this).val()) > 99) {
-                    $(this).focus();
-                    $(this).val(99);
-                    alert('you can only enter integer number between 1 and 99');
-                } else {
-                    $(this).attr('value', $(this).val());
-                }
-            } else {
-                $(this).focus();
-                $(this).val(Math.abs(parseInt($(this).val())));
-                alert('you can only enter integer number between 1 and 99');
-            }
-
-            updateCost();
-        });
-
-        /** [radio change] */
-        $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
-
-        /** [click function of other addr] */
-        $('.order-container #order-addr .other').click(function(event) {
-            /* Act on the event */
-            /** initialize the map */
-            $('.order-container #order-addr .addresses #other-addr-input .map').locationpicker({
-                location: {
-                    latitude: 34.123636,
-                    longitude: 108.83636
-                },
-                radius: 10,
-                inputBinding: {
-                    locationNameInput: $('#add-addr')
-                },
-                enableAutocomplete: true
-            });
-
-            /** show the map */
-            $('.order-container #order-addr .addresses #other-addr-input').show();
-        });
-
-        /** [click function of adding address] */
-        $('.order-container #order-addr .addresses #other-addr-input a').click(function(event) {
-            /* Act on the event */
-            var otherAddr = getValue($('.order-container #order-addr .addresses #other-addr-input #add-addr'));
-
-            /** [if: return when otherAddr is empty] */
-            if (otherAddr == '') {
-                return;
-            }
-
-            var receiver = getValue($('.order-container #order-addr .addresses #other-addr-input #receiver'));
-
-            /** [if: return when receiver is empty] */
-            if (receiver == '') {
-                return;
-            }
-
-            var phone = getValue($('.order-container #order-addr .addresses #other-addr-input #phone'));
-
-            /** [if: return when phone is empty] */
-            if (phone == '') {
-                return;
-            }
-
-            /** clear all the check attribute of input tags */
-            var addr_list = $('.order-container #order-addr .addresses input[type="radio"]');
-            for (var i = 0; i < addr_list.length; i++) {
-                addr_list[i].removeAttribute('checked');
-            }
-
-            /**
-             * [append div]
-             */
-            $('.order-container #order-addr .addresses').append('<div>\
-                <label>\
-                    <input type="radio" name="addr" checked="checked">\
-                    <span class="address" title="' + otherAddr + '">' + otherAddr + '</span>\
-                    <span class="receiver">\
-                    <span class="name">receiver name: </span>\
-                    <span class="value">' + receiver + '</span>\
-                    </span>\
-                    <span class="phone">\
-                    <span class="name">phone number: </span>\
-                    <span class="value">' + phone + '</span>\
-                    </span>\
-                </label>\
-            </div>');
-
-            /** rebinding the radio change */
-            /** [unbind] */
-            $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
-            /** [radio change] */
-            $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
-
-            /** hide the map */
-            $('.order-container #order-addr .addresses #other-addr-input').hide();
-
-            /** update addr info */
-            updateCertainAddr();
-        });
     },
 
     initShow: function(oid, item) {
@@ -1235,20 +1247,20 @@ var customer = {
         };
 
         $.ajax({
-            url: 'orderByType',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                type: 'show',
-                oid: oid
-            },
-        })
-        .done(function(data) {
-            initData(data);
-        })
-        .fail(function() {
-            console.log("failed to get order info");
-        });
+                url: 'orderByType',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    type: 'show',
+                    oid: oid
+                },
+            })
+            .done(function(data) {
+                initData(data);
+            })
+            .fail(function() {
+                console.log("failed to get order info");
+            });
     },
 
     initList: function() {
@@ -1347,16 +1359,17 @@ var customer = {
                 },
             })
             .done(function(data) {
+                /** init the data */
                 initData(data);
+
+                /** [click function of delete order] */
+                $('.order-container #order-list .order-item .delete-btn').click(function(event) {
+                    /** remove dom node */
+                    $(this).parent().parent().remove();
+                })
             })
             .fail(function() {
                 console.log("failed to get orders list");
             });
-
-        /** [click function of delete order] */
-        $('.order-container #order-list .order-item .delete-btn').click(function(event) {
-            /** remove dom node */
-            $(this).parent().parent().remove();
-        })
     }
 };

@@ -16,6 +16,7 @@ public class AttrName {
 		}
 		
 		public static final String USER = "s_user";
+		public static final String SHOPID = "shop_id";
 	}
 	
 	public class RequestScope {

@@ -173,6 +173,14 @@
  	<jsp-file>/WEB-INF/customer/order.jsp</jsp-file>
  </servlet>
  <servlet>
+ 	<servlet-name>addproduct</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.AddProductServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>addpicture</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.AddPictureServlet</servlet-class>
+ </servlet>
+ <servlet>
  	<servlet-name>ShopIncomeServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.ShopIncomeServlet</servlet-class>
  </servlet>
@@ -335,6 +343,14 @@
  <servlet-mapping>
  	<servlet-name>OrderJsp</servlet-name>
  	<url-pattern>/viewOrder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>addproduct</servlet-name>
+ 	<url-pattern>/addproduct</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>addpicture</servlet-name>
+ 	<url-pattern>/addpicture</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
  	<servlet-name>ShopIncomeServlet</servlet-name>
