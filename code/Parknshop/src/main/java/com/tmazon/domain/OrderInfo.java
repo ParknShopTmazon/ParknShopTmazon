@@ -2,6 +2,9 @@ package com.tmazon.domain;
 
 public class OrderInfo {
 
+	private Product product;
+	private Delivery delivery;
+	
 	private Integer orderId;
 	private Integer deliveryId;
 	private Integer quantity;
@@ -93,6 +96,18 @@ public class OrderInfo {
 	public String toString() {
 		return "OrderInfo [orderId=" + orderId + ", deliveryId=" + deliveryId + ", quantity=" + quantity
 				+ ", productId=" + productId + "]";
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Delivery getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
 	}
 	
 	

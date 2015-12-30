@@ -5,36 +5,7 @@
 <html lang="en">
 <head>
      <link rel="stylesheet" type="text/css" href="css_shop/style.css">
-     <link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
-     <script type="text/javascript">
-	function checkShopName(){
-		var shopname=document.getElementById("shop_name")
-		var imgstate=document.getElementById("checkshopname_img");
-		var notice=document.getElementById("check_print");
-		if(shopname.value=="")
-		{
-			imgstate.src="images_shop/bad.jpg";
-			imgstate.style.display="inline";
-			notice.innerHTML="cant be null";
-		}
-		else if(1)
-		{
-			imgstate.style.display="inline";
-			notice.innerHTML="gongxi keyong";
-		}
-		else
-		{
-			document.getElementById("checkshopname_img").src="images_shop/bad.jpg";
-			document.getElementById("checkshopname_img").style.display="inline";
-			document.getElementById("check_print").innerHTML="already exist!";
-		}
-	}
-	function getPhoto(){
-		var path=document.getElementById("photo_path").dir.value;
-		alert(path);
-		document.getElementById("shop_photo").src=path;
-	}
-</script>
+     <link rel="stylesheet" type="text/css" href="css_shop/photobox.css">  
 </head>
 
 <body>
@@ -74,7 +45,7 @@
 					<div class="form-lable-left">Shop Photo:</div>
 					<div class="form-shop-img">
 					 
-					
+					  
 				      <input name="file" type="file"  id="photo_path" class="inputfile" value="upload_picture"  onSelect="getPhoto()" />
 				  </div>
 				</div>	
@@ -98,8 +69,7 @@
 						<label style="color: red;">shop name already exists</label>
 					</c:if>
 					<c:if test="${ not empty r_is_shop_register_success }">
-						<label style="color: red;">register success!please waiting for checking!<a
-							href="login" style="color: blue;">click here to log-in</a></label>
+						<label style="color: red;">register success!please waiting for checking!</label>
 					</c:if>
 				</div>		
 			</form>

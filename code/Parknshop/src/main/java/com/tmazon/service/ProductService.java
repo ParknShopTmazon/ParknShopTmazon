@@ -15,4 +15,11 @@ public interface ProductService {
 	
 	public ProductInfo getProductInfo(Integer productId);
 	
+	public boolean insert(Product product);
+	
+	public boolean modify(Product product);
+	
+	//update the product state
+	public boolean delect(Product product);
+	
 }

@@ -1,6 +1,7 @@
 package com.tmazon.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	
@@ -22,6 +23,7 @@ public class Order {
 	private Integer userId;
 	private Integer addressId;
 	
+	private  List<OrderInfo> orderInfos;
 	
 	
 	public Order(Integer orderId, String payType, String status, Date orderTime, Date deliveryTime, Date dealTime,
@@ -36,6 +38,7 @@ public class Order {
 		this.userId = userId;
 		this.addressId = addressId;
 	}
+
 	public Order(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
@@ -155,6 +158,12 @@ public class Order {
 	public String toString() {
 		return "Orders [orderId=" + orderId + ", payType=" + payType + ", status=" + status + ", orderTime=" + orderTime
 				+ ", userId=" + userId + ", addressId=" + addressId + "]";
+	}
+	public List<OrderInfo> getOrderInfos() {
+		return orderInfos;
+	}
+	public void setOrderInfos(List<OrderInfo> orderInfos) {
+		this.orderInfos = orderInfos;
 	}
 	
 	

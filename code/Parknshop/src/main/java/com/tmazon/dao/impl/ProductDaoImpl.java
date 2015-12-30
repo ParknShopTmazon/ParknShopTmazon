@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.ProductDao;
 import com.tmazon.domain.Product;
+import com.tmazon.domain.User;
 import com.tmazon.util.DaoUtil;
 
 public class ProductDaoImpl implements ProductDao{
@@ -57,6 +59,9 @@ public class ProductDaoImpl implements ProductDao{
 			sqlBuilder.append(" AND picture=? ");
 			params.add(product.getPicture());
 		}
+		sqlBuilder.append(" AND status!=? or status is NULL");
+		params.add(product.STATUS_PULL);
+		System.out.println(product.STATUS_PULL);
 		sqlBuilder.append(" order by soldNum  DESC");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
@@ -103,7 +108,17 @@ public class ProductDaoImpl implements ProductDao{
 
 	public boolean insert(Product product) {
 		// TODO Auto-generated method stub
-		return false;
+		String sql = "INSERT INTO user(shopId,name,price,discountPrice,category,stockNum,description,picture) VALUES (?, ?, ?,  ? , ? , ? , ? , ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.insert(sql, new BeanHandler<Product>(Product.class), product.getShopId(), product.getName(), product.getPrice(),product.getDiscountPrice(),product.getCategory(),product.getStockNum(),product.getDescription(),product.getPicture());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public boolean modify(Product product) {
