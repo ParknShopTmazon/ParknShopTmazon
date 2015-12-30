@@ -13,11 +13,16 @@ CREATE TABLE user (
 );
 
 CREATE TABLE address(
+	addressId int AUTO_INCREMENT,
 	userId int NOT NULL,
+	country varchar(50),
 	province varchar(50),
 	city varchar(50),
-	country varchar(50),
-	street varchar(50),
+	description varchar(255),
+	zipcode varchar(50),
+	name varchar(50),
+	phone varchar(50),
+	PRIMARY KEY (addressId),
 	FOREIGN KEY (userId) REFERENCES user(userId)
 );
 
@@ -85,8 +90,10 @@ CREATE TABLE orders (
 	status varchar(50) NOT NULL,
 	orderTime datetime NOT NULL,
 	userId int NOT NULL,
+	addressId int NOT NULL,
 	PRIMARY KEY (orderId),
-	FOREIGN KEY (userId) REFERENCES user(userId)
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (addressId) REFERENCES address(addressId)
 );
 
 CREATE TABLE orderInfo(
@@ -94,6 +101,7 @@ CREATE TABLE orderInfo(
 	deliveryId int NOT NULL,
 	quantity int NOT NULL,
 	productId int NOT NULL,
+	waybill varchar(50) NOT NULL,
 	FOREIGN KEY (productId) REFERENCES product(productId),
 	FOREIGN KEY (orderId) REFERENCES orders(orderId),
 	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)

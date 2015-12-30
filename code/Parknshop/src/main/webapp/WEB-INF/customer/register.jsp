@@ -16,7 +16,7 @@
 		<div class="span4"></div>
 
 		<div class="span4">
-			<h2>Please Regist</h2>
+			<h2>Please Register</h2>
 			<br /> <br />
 			<form class="form-horizontal" action="register" method="post">
 				<div class="control-group">

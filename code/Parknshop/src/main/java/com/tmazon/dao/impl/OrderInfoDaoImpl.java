@@ -22,6 +22,10 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			sqlBuilder.append("AND orderId = ? ");
 			params.add(orderInfo.getOrderId());
 		}
+		if (orderInfo.getWaybill() != null) {
+			sqlBuilder.append("AND waybill = ? ");
+			params.add(orderInfo.getWaybill());
+		}
 		if (orderInfo.getDeliveryId() != null) {
 			sqlBuilder.append("AND deliveryId = ? ");
 			params.add(orderInfo.getDeliveryId());
@@ -50,13 +54,13 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public boolean insert(OrderInfo orderInfo) {
-		String sql = "INSERT INTO orderInfo VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO orderInfo VALUES (?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			runner.insert(sql, new BeanHandler<OrderInfo>(OrderInfo.class), orderInfo.getOrderId(),
-					orderInfo.getDeliveryId(), orderInfo.getQuantity(), orderInfo.getProductId());
+					orderInfo.getDeliveryId(), orderInfo.getQuantity(), orderInfo.getProductId(), orderInfo.getWaybill());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,12 +69,12 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public boolean update(OrderInfo orderInfo) {
-		String sql = "UPDATE orderInfo SET deliveryId = ?,quantity = ? WHERE orderId = ? AND productId = ?";
+		String sql = "UPDATE orderInfo SET deliveryId = ?,quantity = ?,waybill = ? WHERE orderId = ? AND productId = ?";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.update(sql,orderInfo.getDeliveryId(), orderInfo.getProductId(), orderInfo.getOrderId(), orderInfo.getProductId());
+			runner.update(sql,orderInfo.getDeliveryId(), orderInfo.getProductId(), orderInfo.getWaybill(), orderInfo.getOrderId(), orderInfo.getProductId());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
