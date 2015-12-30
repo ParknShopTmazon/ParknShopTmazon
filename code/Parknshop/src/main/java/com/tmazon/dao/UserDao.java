@@ -2,6 +2,7 @@ package com.tmazon.dao;
 
 import java.util.List;
 
+import com.tmazon.domain.Address;
 import com.tmazon.domain.User;
 
 public interface UserDao {
@@ -23,4 +24,13 @@ public interface UserDao {
 	public boolean insertFriend(Integer userId, Integer friendId);
 	
 	public boolean deleteFriend(Integer userId, Integer friendId);
+	
+	public List<Address> selectAddress(User user);
+	
+	public boolean insertAddress(User user, Address address);
+	
+	public boolean updateAddress(User user, Address address);
+	
+	public boolean deleteAddress(User user, Address address);
+	
 }

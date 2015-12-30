@@ -38,6 +38,10 @@ public class OrdersDaoImpl implements OrdersDao {
 			sqlBuilder.append("AND userId = ? ");
 			params.add(order.getUserId());
 		}
+		if (order.getAddressId() != null) {
+			sqlBuilder.append("AND addressId = ? ");
+			params.add(order.getAddressId());
+		}
 
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
@@ -53,13 +57,13 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	public Orders insert(Orders order) {
-		String sql = "INSERT INTO orders VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			Orders orders = runner.insert(sql, new BeanHandler<Orders>(Orders.class), order.getOrderId(), order.getPayType(),
-					order.getStatus(), order.getOrderTime(), order.getUserId());
+					order.getStatus(), order.getOrderTime(), order.getUserId(), order.getAddressId());
 			return orders;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,11 +101,11 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	public List<Orders> findByUser(User user) {
 		
-		return select(new Orders(null, null, null, null, user.getUserId()));
+		return select(new Orders(null, null, null, null, user.getUserId(),null));
 	}
 
 	public List<Orders> findByUserANDstatus(User user, String status) {
-		return select(new Orders(null, null, status, null, user.getUserId()));
+		return select(new Orders(null, null, status, null, user.getUserId(), null));
 	}
 
 }
