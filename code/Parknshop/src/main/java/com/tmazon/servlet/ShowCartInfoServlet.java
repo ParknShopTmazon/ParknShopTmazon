@@ -71,7 +71,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 					item.put("color", "");
 				}
 				
-				item.put("shop_url", "");
+				item.put("shop_url", "./productInfo?pid=" + productId);
 				item.put("shop_pic", product.getPicture());
 				
 				cart.add(item);

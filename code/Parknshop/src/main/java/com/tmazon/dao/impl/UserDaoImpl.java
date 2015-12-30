@@ -83,6 +83,64 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	public List<User> findFriendsById(Integer id) {
+		String sql = "SELECT * FROM user WHERE userId in (SELECT userId FROM friend WHERE friendId = ? UNION SELECT friendId FROM friend WHERE userId = ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<User> firends = runner.query(sql, new BeanListHandler<User>(User.class), id, id);
+			return firends;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	public boolean insertFriend(Integer userId, Integer friendId) {
+		String sql = "INSERT INTO friend VALUES (?, ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, userId, friendId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	public List<User> SearchByName(String name) {
+		String sql = "SELECT * FROM user WHERE name like ?";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<User> result = runner.query(sql, new BeanListHandler<User>(User.class), "%" + name + "%");
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public boolean deleteFriend(Integer userId, Integer friendId) {
+		String sql = "DELETE FROM friend WHERE (userId = ? AND friendId = ?) OR (userId = ? AND friendId = ?)";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, userId, friendId, friendId, userId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	
 
 }

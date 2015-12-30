@@ -23,6 +23,28 @@
  **********************************************************************/
 "use strict";
 
+/** Date format */
+Date.prototype.format = function(format) {
+    var date = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "h+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S+": this.getMilliseconds()
+    };
+    if (/(y+)/i.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (var k in date) {
+        if (new RegExp("(" + k + ")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+        }
+    }
+    return format;
+}
+
 var customer = {
     /**
      * [scrollController: the controller of the scroll]
@@ -136,6 +158,110 @@ var customer = {
             },
 
             /**
+             * [updateFriendList: update the friends list]
+             * @return {[type]} [description]
+             */
+            updateFriendList = function() {
+                $.ajax({
+                    url: 'friends',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {},
+                })
+                .done(function(data) {
+                    if (typeof(data.friends) != 'undefined') {
+                        /** clear all friends first */
+                        for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
+                            $('.dialog #main .friend-list .list ul').children(i).remove();
+                        }
+
+                        /** append */
+                        for (var j in data.friends) {
+                            /** [if: first child] */
+                            if (j == 0) {
+                                $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                            } else {
+                                $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
+                            }
+                        }
+                    } else {
+                        console.log("failed to get friends list");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to get friends list");
+                });
+            },
+
+            /**
+             * [getMessage: get message from the friend]
+             * @param  {[type]} friendName [the name of the friend]
+             * @return {[type]}            [description]
+             */
+            getMessage = function(friendName) {
+                /** date object */
+                var date = new Date();
+                
+                $.ajax({
+                    url: 'messages',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {friendName: friendName},
+                })
+                .done(function(data) {
+                    if (typeof(data.messages) != 'undefined') {
+                        for (var i in data.messages) {
+                            date.setTime(data.messages[i].messageTime.time);
+                            $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+            <p>' + data.messages[i].content + '</p>')
+                        }
+                    } else {
+                        console.log("failed to get message");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to get message");
+                });
+            },
+
+            /**
+             * [searchFriends: search friends by the name]
+             * @param  {[type]} name [the name]
+             * @return {[type]}      [description]
+             */
+            searchFriends = function(name) {
+                $.ajax({
+                    url: 'searchUser',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {name: name},
+                })
+                .done(function(data) {
+                    if (typeof(data.users) != 'undefined') {
+                        /** clear children */
+                        for (var i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
+                            $('.dialog #people-list-main .list ul').children(i).remove();
+                        }
+
+                        /** append */
+                        for (var j in data.users) {
+                            /** [if: first child] */
+                            if (j == 0) {
+                                $('.dialog #people-list-main .list ul').append('<li class="select button">' + data.users[j] + '</li>')
+                            } else {
+                                $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
+                            }
+                        }
+                    } else {
+                        console.log("failed to search friends");
+                    }
+                })
+                .fail(function() {
+                    console.log("failed to search friends");
+                });
+            },
+
+            /**
              * [init: init the animation trigger of the` dialog]
              * @return {[type]} [description]
              */
@@ -191,6 +317,9 @@ var customer = {
         /** [click function of search button on the add friend page] */
         $('.dialog #add-friend-main .search-btn').click(function() {
             showPart('people-list-main');
+
+            /** search friends */
+            searchFriends($('.dialog #add-friend-main .search-box input[type="text"]').val());
         });
 
         /** [click function of certaining to add friends] */
@@ -220,6 +349,12 @@ var customer = {
         }, function() {
             $(this).css('width', '30px');
         })
+
+        /** update friends list */
+        updateFriendList();
+        
+        /** get message from the first friend */
+        getMessage($('.dialog #main .friend-list .list ul .select').html());
     },
 
     /**
@@ -363,11 +498,11 @@ var customer = {
             init = function() {
                 /** update cost info at the beginning */
                 updateCost();
-                
+
                 /** delete shop item */
                 $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
-                	var _this = $(this);
-                	/** store data into database */
+                    var _this = $(this);
+                    /** store data into database */
                     $.getJSON('deleteCart', {
                         sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
@@ -384,13 +519,13 @@ var customer = {
 
                 /** [click function of the pay button] */
                 $('.cart-container #shop-cost .pay .value').click(function() {
-                    window.location.href = "./order.jsp?type=certain";
+                    window.location.href = "./order?type=certain";
                 });
 
                 /** [change function of quantity changing] */
                 $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
                     /* Act on the event */
-                	var _this = $(this);
+                    var _this = $(this);
                     /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
@@ -401,7 +536,7 @@ var customer = {
                         } else {
                             /** store data into database */
                             $.getJSON('updateCart', {
-                                sid: $(this).parent().prev().prev().children('input').attr('sid'),
+                                sid: $(this).attr('sid'),
                                 quantity: $(this).val()
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
@@ -410,7 +545,7 @@ var customer = {
                                 } else {
                                     var error = data.errMsg || '';
                                     alert('failed to modify: ' + error);
-                                    $_this.val(_this.attr('value'));
+                                    _this.val(_this.attr('value'));
                                 }
                             });
                         }
@@ -650,9 +785,6 @@ var customer = {
                 console.log('failed to get order data');
             });
 
-        /** init data of orders */
-        initData(JSON.parse(testData));
-
         /** update cost info */
         updateCost();
 
@@ -808,27 +940,6 @@ var customer = {
 
     initList: function() {
         "use strict";
-        /** Date format */
-        Date.prototype.format = function(format) {
-            var date = {
-                "M+": this.getMonth() + 1,
-                "d+": this.getDate(),
-                "h+": this.getHours(),
-                "m+": this.getMinutes(),
-                "s+": this.getSeconds(),
-                "q+": Math.floor((this.getMonth() + 3) / 3),
-                "S+": this.getMilliseconds()
-            };
-            if (/(y+)/i.test(format)) {
-                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
-            }
-            for (var k in date) {
-                if (new RegExp("(" + k + ")").test(format)) {
-                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
-                }
-            }
-            return format;
-        }
 
         /** date object */
         var date = new Date();

@@ -1,0 +1,92 @@
+/* CSS Document */
+@import url(layout.css);
+@import url(nav.css);
+.text-align-right{text-align:right;}.float-right{float:right;}
+a{text-decoration:none;}
+#info-photo{
+	height:120px;
+	width:120px;
+	text-align:center;
+	display:inline;
+	float:right;
+}
+.block{
+	display:block;
+}
+
+.complete-info{
+	height:800px;
+	font-size:20px;
+	text-align:left;
+	display:block;
+	overflow:hidden;
+	float:left;
+}
+.form-item{
+		clear:both;
+		height: 50px;
+		text-align:left;
+		margin-top:18px;
+}
+.form-item-img{
+	clear:both;
+	height:150px;
+}
+.form-item-textarea{
+	clear:both;
+	height:120px;
+}
+.form-lable-left{
+	float:left;
+	width: 130px;
+	line-height: 1em;
+	font-size: 18px;
+	margin-right: 10px;
+	padding-top:10px;
+	overflow: hidden;
+}
+.form-control-right{
+	float:left;
+	line-height:1em;
+	padding-top:10px;
+	padding: 8px 0;
+}
+.form-shop-img{
+	float:left;
+	padding-top:0px;
+	height: 150px;
+}
+.form-textarea{
+	float:left;
+	height: 120px;
+}
+.form-input-right{
+	padding: 6px 10px;
+	border: 1px solid;
+	outline: 0;
+}
+.textarea{
+	height:120px;
+	width:300px;
+}
+.submit-btn{
+	width:100px;
+	height:36px;
+	font-size:18px;
+}
+.hide{display:none;}
+.color1{background-color:#FFFF99;}
+.color2{background-color:#6699FF;}
+.color3{background-color:#CC6699;}
+.color4{background-color:#FFFFFF;}
+.color5{background-color:#1091E4;}
+.white{background-color:#FFFFFF;}
+.black{background-color:#000000;}
+.fontred{font:red;}
+.height10px{height:10px;}
+.height5px{height:5px;}
+.height2px{height:2px;}
+.outset{border-style:outset;};
+.font1.4{font-size:1.4em;}
+
+
