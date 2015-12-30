@@ -41,6 +41,9 @@ INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `disc
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78784', '7880', 'p4CartTest4', '178', '168', 'Home & Office', '12', '38', 'great', '#');
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78785', '7880', 'p4CartTest5', '122', '98', 'Home & Office', '34', '12', 'ookk', '#');
 
+-- update
+UPDATE `parknshop`.`product` SET `status`='pulloff' WHERE `productId`='78781';
+UPDATE `parknshop`.`product` SET `status`='pulloff' WHERE `productId`='78784';
 
 -- productinfo
 INSERT INTO `parknshop`.`productinfo` (`productId`, `size`, `color`) VALUES(78784,'M','#FFFFFF');
