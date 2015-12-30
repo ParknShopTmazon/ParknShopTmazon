@@ -20,7 +20,7 @@ public class OrdersServiceImpl implements OrdersService {
 	private CartDao cartDao = BasicFactory.getImpl(CartDao.class);
 
 	public List<Orders> getOrder(User user) {
-		return ordersDao.select(new Orders(null, null, null, null, user.getUserId()));
+		return ordersDao.select(new Orders(null, null, null, null, user.getUserId(), null));
 	}
 
 	public boolean addOrder(Orders order, List<OrderInfo> orderInfos) {

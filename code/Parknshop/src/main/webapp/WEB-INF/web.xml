@@ -159,7 +159,10 @@
  	<servlet-name>SearchUserAdminServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.SearchUserAdminServlet</servlet-class>
  </servlet>
-
+ <servlet>
+ 	<servlet-name>OrderServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.OrderServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -299,6 +302,10 @@
  <servlet-mapping>
  	<servlet-name>LeaveMessageServlet</servlet-name>
  	<url-pattern>/leaveMsg</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>OrderServlet</servlet-name>
+ 	<url-pattern>/order</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

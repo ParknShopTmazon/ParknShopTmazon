@@ -18,14 +18,16 @@ public class Orders {
 	private String status;
 	private Date orderTime;
 	private Integer userId;
+	private Integer addressId;
 	
-	public Orders(Integer orderId, String payType, String status, Date orderTime, Integer userId) {
+	public Orders(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
 		this.payType = payType;
 		this.status = status;
 		this.orderTime = orderTime;
 		this.userId = userId;
+		this.addressId = addressId;
 	}
 	public Orders() {
 		super();
@@ -60,10 +62,18 @@ public class Orders {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+	
+	public Integer getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((orderTime == null) ? 0 : orderTime.hashCode());
 		result = prime * result + ((payType == null) ? 0 : payType.hashCode());
@@ -80,6 +90,11 @@ public class Orders {
 		if (getClass() != obj.getClass())
 			return false;
 		Orders other = (Orders) obj;
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
+			return false;
 		if (orderId == null) {
 			if (other.orderId != null)
 				return false;
@@ -110,9 +125,8 @@ public class Orders {
 	@Override
 	public String toString() {
 		return "Orders [orderId=" + orderId + ", payType=" + payType + ", status=" + status + ", orderTime=" + orderTime
-				+ ", userId=" + userId + "]";
+				+ ", userId=" + userId + ", addressId=" + addressId + "]";
 	}
-	
 	
 	
 	
