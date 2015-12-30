@@ -75,7 +75,6 @@ public class OrderServlet extends HttpServlet {
 
 	private void certain(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -94,6 +93,11 @@ public class OrderServlet extends HttpServlet {
 				
 				Delivery delivery = deliveryService.select(new Delivery(orderInfo.getDeliveryId(), null, null, null)).get(0);
 				orderInfo.setDelivery(delivery);
+				
+				//
+				orderInfo.setColor("");
+				orderInfo.setSize("/");
+				orderInfo.setProductUrl("productInfo?pid=" + orderInfo.getProductId());
 			}
 		}
 		

@@ -137,6 +137,4 @@ public class Order {
 		this.orderInfos = orderInfos;
 	}
 	
-	
-	
 }
