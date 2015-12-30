@@ -25,14 +25,6 @@ public class AddressDaoImpl implements AddressDao {
 			sqlBuilder.append("AND addressId=? ");
 			params.add(address.getAddressId());
 		}
-		if (address.getCity() != null) {
-			sqlBuilder.append("AND city=? ");
-			params.add(address.getCity());
-		}
-		if (address.getCountry() != null) {
-			sqlBuilder.append("AND country=? ");
-			params.add(address.getCountry());
-		}
 		if (address.getDescription() != null) {
 			sqlBuilder.append("AND description=? ");
 			params.add(address.getDescription());
@@ -44,10 +36,6 @@ public class AddressDaoImpl implements AddressDao {
 		if (address.getPhone() != null) {
 			sqlBuilder.append("AND phone=? ");
 			params.add(address.getPhone());
-		}
-		if (address.getProvince() != null) {
-			sqlBuilder.append("AND province=? ");
-			params.add(address.getProvince());
 		}
 		if (address.getZipcode() != null) {
 			sqlBuilder.append("AND zipcode=? ");
@@ -69,14 +57,14 @@ public class AddressDaoImpl implements AddressDao {
 
 	public Address insert(Address address) {
 
-		String sql = "INSERT INTO address VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO address VALUES (?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			Address result = runner.insert(sql, new BeanHandler<Address>(Address.class), address.getAddressId(), address.getUserId(),
-					address.getCountry(), address.getProvince(), address.getCity(), address.getDescription(),
-					address.getZipcode(), address.getName(), address.getPhone());
+			Address result = runner.insert(sql, new BeanHandler<Address>(Address.class), address.getAddressId(),
+					address.getUserId(), address.getDescription(), address.getZipcode(), address.getName(),
+					address.getPhone());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();

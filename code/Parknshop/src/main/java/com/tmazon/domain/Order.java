@@ -17,9 +17,25 @@ public class Order {
 	private String payType;
 	private String status;
 	private Date orderTime;
+	private Date deliveryTime;
+	private Date dealTime;
 	private Integer userId;
 	private Integer addressId;
 	
+	
+	
+	public Order(Integer orderId, String payType, String status, Date orderTime, Date deliveryTime, Date dealTime,
+			Integer userId, Integer addressId) {
+		super();
+		this.orderId = orderId;
+		this.payType = payType;
+		this.status = status;
+		this.orderTime = orderTime;
+		this.deliveryTime = deliveryTime;
+		this.dealTime = dealTime;
+		this.userId = userId;
+		this.addressId = addressId;
+	}
 	public Order(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
@@ -55,6 +71,19 @@ public class Order {
 	}
 	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
+	}
+	
+	public Date getDeliveryTime() {
+		return deliveryTime;
+	}
+	public void setDeliveryTime(Date deliveryTime) {
+		this.deliveryTime = deliveryTime;
+	}
+	public Date getDealTime() {
+		return dealTime;
+	}
+	public void setDealTime(Date dealTime) {
+		this.dealTime = dealTime;
 	}
 	public Integer getUserId() {
 		return userId;
