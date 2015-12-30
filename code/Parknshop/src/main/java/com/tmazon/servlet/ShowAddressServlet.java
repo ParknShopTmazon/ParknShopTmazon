@@ -9,15 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.User;
+import com.tmazon.service.AddressService;
 import com.tmazon.util.AttrName;
+import com.tmazon.util.BasicFactory;
 
 import net.sf.json.JSONObject;
 
 public class ShowAddressServlet extends HttpServlet {
+	
+	private AddressService addressService = BasicFactory.getImpl(AddressService.class);
 
 	private static final long serialVersionUID = 1L;
-
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,6 +27,12 @@ public class ShowAddressServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute(AttrName.SessionScope.USER);
 		JSONObject jsonObject = new JSONObject();
+		
+		if(user == null){
+			return;
+		}
+		
+		
 		
 	}
 
