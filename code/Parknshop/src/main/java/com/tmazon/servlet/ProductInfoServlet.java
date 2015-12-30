@@ -1,7 +1,6 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.tmazon.domain.Cart;
 import com.tmazon.domain.Product;
 import com.tmazon.domain.ProductInfo;
 import com.tmazon.domain.Shop;
@@ -23,7 +21,6 @@ import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.ParseUtil;
 
-import net.sf.json.JSONObject;
 
 public class ProductInfoServlet extends HttpServlet {
 
@@ -84,6 +81,15 @@ public class ProductInfoServlet extends HttpServlet {
 				req.setAttribute("isExists", true);
 			}else if(cartService.isExists(user.getUserId(), productId)){
 				req.setAttribute("isExists", true);
+			}
+			if(product.getStatus() == null){
+				req.setAttribute("expired", false);
+			}else {
+				if(product.getStatus().equals(Product.STATUS_PULL)){
+					req.setAttribute("expired", true);
+				}else {
+					req.setAttribute("expired", false);
+				}
 			}
 			
 		}

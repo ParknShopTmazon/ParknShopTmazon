@@ -1,8 +1,9 @@
 package com.tmazon.domain;
 
 import java.util.Date;
+import java.util.List;
 
-public class Orders {
+public class Order {
 	
 	public static final String PAY_TYPE_CASH_ON_DELIVERY = "cash_on_delivery";
 	public static final String PAY_TYPE_ONLINE_PAYMENT = "online_payment";
@@ -17,10 +18,29 @@ public class Orders {
 	private String payType;
 	private String status;
 	private Date orderTime;
+	private Date deliveryTime;
+	private Date dealTime;
 	private Integer userId;
 	private Integer addressId;
 	
-	public Orders(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
+	private  List<OrderInfo> orderInfos;
+	private Address address;
+	
+	
+	public Order(Integer orderId, String payType, String status, Date orderTime, Date deliveryTime, Date dealTime,
+			Integer userId, Integer addressId) {
+		super();
+		this.orderId = orderId;
+		this.payType = payType;
+		this.status = status;
+		this.orderTime = orderTime;
+		this.deliveryTime = deliveryTime;
+		this.dealTime = dealTime;
+		this.userId = userId;
+		this.addressId = addressId;
+	}
+
+	public Order(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
 		this.payType = payType;
@@ -29,7 +49,7 @@ public class Orders {
 		this.userId = userId;
 		this.addressId = addressId;
 	}
-	public Orders() {
+	public Order() {
 		super();
 	}
 	public Integer getOrderId() {
@@ -55,6 +75,19 @@ public class Orders {
 	}
 	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
+	}
+	
+	public Date getDeliveryTime() {
+		return deliveryTime;
+	}
+	public void setDeliveryTime(Date deliveryTime) {
+		this.deliveryTime = deliveryTime;
+	}
+	public Date getDealTime() {
+		return dealTime;
+	}
+	public void setDealTime(Date dealTime) {
+		this.dealTime = dealTime;
 	}
 	public Integer getUserId() {
 		return userId;
@@ -89,7 +122,7 @@ public class Orders {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Orders other = (Orders) obj;
+		Order other = (Order) obj;
 		if (addressId == null) {
 			if (other.addressId != null)
 				return false;
@@ -127,7 +160,20 @@ public class Orders {
 		return "Orders [orderId=" + orderId + ", payType=" + payType + ", status=" + status + ", orderTime=" + orderTime
 				+ ", userId=" + userId + ", addressId=" + addressId + "]";
 	}
-	
+	public List<OrderInfo> getOrderInfos() {
+		return orderInfos;
+	}
+	public void setOrderInfos(List<OrderInfo> orderInfos) {
+		this.orderInfos = orderInfos;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	
 	
 }

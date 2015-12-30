@@ -15,9 +15,6 @@ CREATE TABLE user (
 CREATE TABLE address(
 	addressId int AUTO_INCREMENT,
 	userId int NOT NULL,
-	country varchar(50),
-	province varchar(50),
-	city varchar(50),
 	description varchar(255),
 	zipcode varchar(50),
 	name varchar(50),
@@ -91,6 +88,8 @@ CREATE TABLE orders (
 	payType varchar(50) NOT NULL,
 	status varchar(50) NOT NULL,
 	orderTime datetime NOT NULL,
+	deliveryTime datetime,
+	dealTime datetime,
 	userId int NOT NULL,
 	addressId int NOT NULL,
 	PRIMARY KEY (orderId),
@@ -103,7 +102,7 @@ CREATE TABLE orderInfo(
 	deliveryId int NOT NULL,
 	quantity int NOT NULL,
 	productId int NOT NULL,
-	waybill varchar(50) NOT NULL,
+	waybill varchar(50),
 	FOREIGN KEY (productId) REFERENCES product(productId),
 	FOREIGN KEY (orderId) REFERENCES orders(orderId),
 	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)

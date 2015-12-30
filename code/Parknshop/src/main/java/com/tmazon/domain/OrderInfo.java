@@ -2,18 +2,20 @@ package com.tmazon.domain;
 
 public class OrderInfo {
 
+	private Product product;
+	private Delivery delivery;
+	
 	private Integer orderId;
 	private Integer deliveryId;
 	private Integer quantity;
 	private Integer productId;
 	private String waybill;
-	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String waybill) {
+	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId) {
 		super();
 		this.orderId = orderId;
 		this.deliveryId = deliveryId;
 		this.quantity = quantity;
 		this.productId = productId;
-		this.waybill = waybill;
 	}
 	public OrderInfo() {
 		super();
@@ -93,6 +95,42 @@ public class OrderInfo {
 	public String toString() {
 		return "OrderInfo [orderId=" + orderId + ", deliveryId=" + deliveryId + ", quantity=" + quantity
 				+ ", productId=" + productId + "]";
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Delivery getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+	}
+	
+	
+	private String size;
+	private String color;
+	private String productUrl;
+
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getProductUrl() {
+		return productUrl;
+	}
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
 	}
 	
 	

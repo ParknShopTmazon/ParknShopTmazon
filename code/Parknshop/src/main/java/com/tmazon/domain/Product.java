@@ -12,6 +12,8 @@ public class Product {
 	public static final String CATEGORY_HEALTH = "Health, Fitness & Sports";
 	public static final String CATEGORY_HOME = "Home & Office";
 
+	public static final String STATUS_NULL ="";
+	public static final String STATUS_PULL ="pulloff";
 	
 	private Integer productId;
 	private Integer shopId;
@@ -24,6 +26,8 @@ public class Product {
 	private String description;
 	private String picture;
 	private String status;
+	
+	private Shop shop;
 	
 	public String getStatus() {
 		return status;
@@ -108,6 +112,28 @@ public class Product {
 
 	public Product() {
 	}
+	public Product(Integer productId, Integer shopId, String name, Double price, Double discountPrice, String category,
+			Integer stockNum, Integer soldNum, String description, String picture, String status) {
+		super();
+		this.productId = productId;
+		this.shopId = shopId;
+		this.name = name;
+		this.price = price;
+		this.discountPrice = discountPrice;
+		this.category = category;
+		this.stockNum = stockNum;
+		this.soldNum = soldNum;
+		this.description = description;
+		this.picture = picture;
+		this.status = status;
+	}
+	public Shop getShop() {
+		return shop;
+	}
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
 
+	
 	
 }
