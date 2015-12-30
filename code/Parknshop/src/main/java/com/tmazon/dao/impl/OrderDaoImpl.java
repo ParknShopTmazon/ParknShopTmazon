@@ -8,14 +8,14 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import com.tmazon.dao.OrdersDao;
-import com.tmazon.domain.Orders;
+import com.tmazon.dao.OrderDao;
+import com.tmazon.domain.Order;
 import com.tmazon.domain.User;
 import com.tmazon.util.DaoUtil;
 
-public class OrdersDaoImpl implements OrdersDao {
+public class OrderDaoImpl implements OrderDao {
 
-	public List<Orders> select(Orders order) {
+	public List<Order> select(Order order) {
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM orders WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (order.getOrderId() != null) {
@@ -48,7 +48,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Orders> result = runner.query(sql, new BeanListHandler<Orders>(Orders.class), params.toArray());
+			List<Order> result = runner.query(sql, new BeanListHandler<Order>(Order.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,13 +56,13 @@ public class OrdersDaoImpl implements OrdersDao {
 		}
 	}
 
-	public Orders insert(Orders order) {
+	public Order insert(Order order) {
 		String sql = "INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			Orders orders = runner.insert(sql, new BeanHandler<Orders>(Orders.class), order.getOrderId(), order.getPayType(),
+			Order orders = runner.insert(sql, new BeanHandler<Order>(Order.class), order.getOrderId(), order.getPayType(),
 					order.getStatus(), order.getOrderTime(), order.getUserId(), order.getAddressId());
 			return orders;
 		} catch (SQLException e) {
@@ -71,7 +71,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		}
 	}
 
-	public boolean update(Orders order) {
+	public boolean update(Order order) {
 		String sql = "UPDATE orders SET status = ? WHERE orderId = ?";
 		System.out.println(sql);
 
@@ -85,7 +85,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		}
 	}
 
-	public boolean delete(Orders order) {
+	public boolean delete(Order order) {
 		String sql = "DELETE FROM orders WHERE orderId = ?";
 		System.out.println(sql);
 
@@ -99,13 +99,13 @@ public class OrdersDaoImpl implements OrdersDao {
 		}
 	}
 
-	public List<Orders> findByUser(User user) {
+	public List<Order> findByUser(User user) {
 		
-		return select(new Orders(null, null, null, null, user.getUserId(),null));
+		return select(new Order(null, null, null, null, user.getUserId(),null));
 	}
 
-	public List<Orders> findByUserANDstatus(User user, String status) {
-		return select(new Orders(null, null, status, null, user.getUserId(), null));
+	public List<Order> findByUserANDstatus(User user, String status) {
+		return select(new Order(null, null, status, null, user.getUserId(), null));
 	}
 
 }

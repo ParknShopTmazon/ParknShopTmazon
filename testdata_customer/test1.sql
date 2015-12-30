@@ -2,10 +2,10 @@
 use parknshop;
 
 -- user
--- -- customer  !!!!! NAME:13121302  PASSWORD:13121302 
-insert into user(userId,name,password,role,status) values(13121302,'13121302','13121302','shop_owner','normal');
+-- -- customer  !!!!! NAME:123456  PASSWORD:123456 
+insert into user(userId,name,password,role,status) values(12312,'c123456','c123456','customer','normal');
 -- -- shop_owner
-INSERT INTO `parknshop`.`user` (`userId`, `name`, `password`, `role`, `status`) VALUES (7878, 'cartTestUser', 'cartTest', 'customer', 'normal');
+INSERT INTO `parknshop`.`user` (`userId`, `name`, `password`, `role`, `status`) VALUES (7878, 'cartTestUser', 'cartTest', 'shop_owner', 'normal');
 
 
 -- shop
@@ -23,7 +23,7 @@ insert into category values('Health, Fitness & Sports');
 insert into category values('Home & Office');
 
 
-
+-- product
 insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description) values(7880,'wahaha',3.20,23.21,'Home & Office',34,12,'this is a children milk');
 insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description) values(7880,'computer',4000.20,10000.21,'Computers & Tablets',65,42,'this is a computer');
 insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description) values(7880,'atv',3000.20,230000.21,'TV& Home Theater',343,52,'this is a children milk');
@@ -47,10 +47,29 @@ INSERT INTO `parknshop`.`productinfo` (`productId`, `size`, `color`) VALUES(7878
 INSERT INTO `parknshop`.`productinfo` (`productId`, `size`, `color`) VALUES(78785,'LL','#FF00FF');
 
 -- cart
-INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('13121302', '78781', '3');
-INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('13121302', '78782', '1');
-INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('13121302', '78783', '2');
-INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('13121302', '78784', '1');
-INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('13121302', '78785', '1');
+INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78781', '3');
+INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78782', '1');
+INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78783', '2');
+INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78784', '1');
+INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78785', '1');
+
+-- pic
+UPDATE `parknshop`.`product` SET `picture`='images/product/78781.jpg' WHERE `productId`>'0';
+UPDATE `parknshop`.`product` SET `picture`='images/product/78781.jpg' WHERE `productId`='78781';
+UPDATE `parknshop`.`product` SET `picture`='images/product/78782.jpg' WHERE `productId`='78782';
+UPDATE `parknshop`.`product` SET `picture`='images/product/78783.jpg' WHERE `productId`='78783';
+UPDATE `parknshop`.`product` SET `picture`='images/product/78784.jpg' WHERE `productId`='78784';
+UPDATE `parknshop`.`product` SET `picture`='images/product/78785.jpg' WHERE `productId`='78785';
+
+-- delivery
+INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('1', 'EMS', '10', 'normal');
+INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('2', 'EMS', '12', 'fast');
+INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('3', 'STO', '8', 'normal');
+INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('4', 'STO', '10', 'fast');
+
+-- address
+INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `country`, `province`, `city`, `description`, `zipcode`, `name`, `phone`) VALUES ('1', '12312', 'China', 'Shaanxi', 'XiAn', 'xidian', '710126', 'li', '13000000000');
+INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `country`, `province`, `city`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'China', 'Shaanxi', 'XiAn', 'xibei', '710000', 'wang', '13800000000');
+
 
 
