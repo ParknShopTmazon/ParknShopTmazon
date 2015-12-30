@@ -1,16 +1,53 @@
-<div id="header">
-	<div class="header-div" id="logo-icon"></div>
-	<div class="header-div" id="search-btn" onclick="window.open('searchProduct');"></div>
-	<div class="header-div" id="cart" onclick="window.open('cart');"></div>
-	<div class="header-div" id="myshop" onclick="window.open('myshop')"></div>
-	<c:choose>
-		<c:when test="${ not empty s_user }">
-			<div class="text-btn">${ s_user.name }</div>
-			<div class="text-btn"><a href="logout">Logout</a></div>
-		</c:when>
-		<c:otherwise>
-			<div class="text-btn"><a href="login">Login</a></div>
-			<div class="text-btn"><a href="register">Register</a></div>
-		</c:otherwise>
-	</c:choose>
-</div>
+<!DOCTYPE HTML>
+<html lang="en_us">
+<head>
+<title>Home Page</title>
+	<link rel="stylesheet" type="text/css" href="css_shop/layout.css"/>
+	<link rel="stylesheet" type="text/css" href="css_shop/style.css">
+
+</head>
+<body>
+	<div id="header">
+		<div class="header-display-block">
+			<a href="index.jsp"><input type="image" class="logo" src="images_shop/logo.png"/></a>
+			<div class="userinfo">
+				<a href=""><input type="image" class="icon" src="images_shop/home1.jpg"/><span>&nbsp;HomePage</span></a>
+				<a href=""><input type="image" class="icon" src="images_shop/o.jpg" /><span>&nbsp;MyPage</span></a>
+				<a href=""><input type="image" class="icon" src="images_shop/notice.jpg"/><span>&nbsp;notice</span></a>
+				<a href=""><input type="image" class="icon" src="images_shop/search.png"/><span>&nbsp;set</span></a>
+			</div>	
+		</div>
+		<div class="header-search-block">
+			<form action="" class="searchform" name="searchform" method="get">
+				  <select name="select" class="select">
+				  	<option selected="selected">ALL</option>
+					<option>ShopName</option>
+					<option>ProductName</option>
+				  </select>
+				  <input type="text" class="search" name="search" autocomplete="off"  value="" placeholder="please input shop/product name"/>
+				  <input type="image" class="search-img-box" src="images_shop/search.png" />
+			</form>
+		</div>		
+	</div>
+	<!--div id="line-nav"></div-->
+	<div id="menu">
+		<dl class="side-nav-list">
+			<dd class="home current"><a href=""><strong>My Home</strong></a></dd>
+			<dt class="head-item"><strong>My Shop</strong></dt>
+			<dd>
+				<ul class="item-list">
+					<li class="" ><a href="">ShopList</a></li>
+					<li ><a href="">Advertisement</a></li>
+				</ul>
+			</dd>
+			<dt class="head-item" ><strong>My Order</strong></dt>
+			<dd>
+				 <ul class="item-list" >
+					<li ><a href="">ManageOrder</a></li>
+					<li ><a href="">ViewIncome</a></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+</body>
+</html>

@@ -44,6 +44,7 @@ public class FriendListServlet extends HttpServlet {
 			JSONArray jsonArray = new JSONArray();
 			for (User u : user.getFriends()) {
 				JSONObject j = new JSONObject();
+				j.put("uid", u.getUserId());
 				j.put("name", u.getName());
 				j.put("unread", messageService.getUnreadCount(new Message(null, u.getUserId(), user.getUserId(), null, null, null), false));
 				jsonArray.add(j);

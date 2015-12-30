@@ -51,14 +51,14 @@ public class RegisterNewShopServlet extends HttpServlet{
 //		System.out.println("owner ="+owner);
 		
 		if (name == null || type == null ) {
-			req.getRequestDispatcher("/WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
 			return;
 		}
 		
 		// check if shop exists
 		if (shopService.isShopExist(new Shop(null, name, null, null,null))) {
 			req.setAttribute(AttrName.RequestScope.ERROR_SHOP_EXISTS, true);
-			req.getRequestDispatcher("/WEB-INF/shopowner/RegisterShopPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
 			return;
 		}
 		
@@ -66,7 +66,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		Shop shop = new Shop(null, name, type,Shop.STATUS_CHECKING,owner);
 		boolean success = shopService.register(shop);
 		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
-		req.getRequestDispatcher("/WEB-INF/shopowner/homepage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/shopowner/shop_homepage.jsp").forward(req, resp);
 		
 //		resp.sendRedirect("");
 		
