@@ -76,7 +76,7 @@ public class ShowCartInfoServlet extends HttpServlet {
 					item.put("size", productInfo.getSize());
 					item.put("color", productInfo.getColor());
 				}else {
-					item.put("size", "");
+					item.put("size", "/");
 					item.put("color", "");
 				}
 				
