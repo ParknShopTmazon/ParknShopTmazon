@@ -51,9 +51,7 @@
 		</div>
 	</div>
 	</div>
-		
-	<div id="footer">
-			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
-	</div>
+	<%@ include file="footer.html"%>	
+	
 </body>
 </html>

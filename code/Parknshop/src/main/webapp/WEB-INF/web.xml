@@ -144,24 +144,29 @@
   <servlet-class>com.tmazon.servlet.AddCartServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>AddFriendServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.AddFriendServlet</servlet-class>
+  <servlet-name>AddFriendServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.AddFriendServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>DeleteFriendServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.DeleteFriendServlet</servlet-class>
+  <servlet-name>DeleteFriendServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteFriendServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>LeaveMessageServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.LeaveMessageServlet</servlet-class>
+  <servlet-name>LeaveMessageServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.LeaveMessageServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>SearchUserAdminServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.SearchUserAdminServlet</servlet-class>
+  <servlet-name>SearchUserAdminServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.SearchUserAdminServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>OrderServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.OrderServlet</servlet-class>
+  <servlet-name>OrderServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.OrderServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ShowAddressServlet</servlet-name>
+  <display-name>ShowAddressServlet</display-name>
+  <servlet-class>com.tmazon.servlet.ShowAddressServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -283,7 +288,7 @@
   <servlet-name>SearchUserServlet</servlet-name>
   <url-pattern>/searchUser</url-pattern>
  </servlet-mapping>
-  <servlet-mapping>
+ <servlet-mapping>
   <servlet-name>SearchUserAdminServlet</servlet-name>
   <url-pattern>/searchUserAdmin</url-pattern>
  </servlet-mapping>
@@ -292,20 +297,24 @@
   <url-pattern>/addCart</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>AddFriendServlet</servlet-name>
- 	<url-pattern>/addFriend</url-pattern>
+  <servlet-name>AddFriendServlet</servlet-name>
+  <url-pattern>/addFriend</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>DeleteFriendServlet</servlet-name>
- 	<url-pattern>/deleteFriend</url-pattern>
+  <servlet-name>DeleteFriendServlet</servlet-name>
+  <url-pattern>/deleteFriend</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>LeaveMessageServlet</servlet-name>
- 	<url-pattern>/leaveMsg</url-pattern>
+  <servlet-name>LeaveMessageServlet</servlet-name>
+  <url-pattern>/leaveMsg</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>OrderServlet</servlet-name>
- 	<url-pattern>/order</url-pattern>
+  <servlet-name>OrderServlet</servlet-name>
+  <url-pattern>/orderByType</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ShowAddressServlet</servlet-name>
+  <url-pattern>/showAddress</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

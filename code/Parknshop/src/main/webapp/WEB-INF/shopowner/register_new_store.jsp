@@ -66,7 +66,7 @@
 				<div class="form-item">
 					<div class="form-lable-left">Shop Type</div>
 					<div class="form-control-right">
-						<select name="" class="form-input-right">
+						<select name="type" class="form-input-right" >
 							<option value="MULTIPLE" selected="selected">MULTIPLE</option>
 							<option value="OTHERS">OTHERS</option>
 						</select>
