@@ -71,5 +71,10 @@ INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VA
 INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `country`, `province`, `city`, `description`, `zipcode`, `name`, `phone`) VALUES ('1', '12312', 'China', 'Shaanxi', 'XiAn', 'xidian', '710126', 'li', '13000000000');
 INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `country`, `province`, `city`, `description`, `zipcode`, `name`, `phone`) VALUES ('2', '12312', 'China', 'Shaanxi', 'XiAn', 'xibei', '710000', 'wang', '13800000000');
 
+-- orders
+INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'unpaid', now(), 12312, 1);
 
+-- orderInfo
+INSERT INTO `parknshop`.`orderInfo` VALUES (100, 1, 2, 78781, '50256678700001');
+INSERT INTO `parknshop`.`orderInfo` VALUES (100, 2, 1, 78782, '50256678700002');
 
