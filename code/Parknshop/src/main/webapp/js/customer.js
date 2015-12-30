@@ -1025,6 +1025,9 @@ var customer = {
             .done(function(data) {
                 /** init the data of order */
                 initData(data);
+
+                /** init the data of address */
+                initAddr();
             })
             .fail(function() {
                 console.log('failed to get order data');
