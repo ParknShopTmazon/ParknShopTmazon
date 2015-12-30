@@ -45,6 +45,15 @@ Date.prototype.format = function(format) {
     return format;
 }
 
+String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
+    if (!RegExp.prototype.isPrototypeOf(reallyDo)) {
+        return this.replace(new RegExp(reallyDo, (ignoreCase ? "gi" : "g")), replaceWith);
+    } else {
+        return this.replace(reallyDo, replaceWith);
+    }
+}
+
+
 var customer = {
     /**
      * [scrollController: the controller of the scroll]
@@ -92,9 +101,6 @@ var customer = {
             } else {
                 var ev = (event === undefined) ? window.event : event;
                 keycode = ev.keyCode;
-            }
-            if (keycode === 13) {
-                return false;
             }
         });
     },
@@ -225,7 +231,7 @@ var customer = {
                             for (var i in data.messages) {
                                 date.setTime(data.messages[i].messageTime.time);
                                 $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
-            <p>' + data.messages[i].content + '</p>')
+            <p>' + data.messages[i].content + '</p>');
                             }
                         } else {
                             console.log("failed to get message, but post succeed");
@@ -233,6 +239,44 @@ var customer = {
                     })
                     .fail(function() {
                         console.log("failed to get message");
+                    });
+            },
+
+            /**
+             * [sendMessage: send messages to someone]
+             * @param  {[type]} name    [the name]
+             * @param  {[type]} content [the content you want to send]
+             * @return {[type]}         [description]
+             */
+            sendMessage = function(name, content) {
+                $.ajax({
+                        url: 'leaveMsg',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            friendName: name,
+                            content: content
+                        },
+                    })
+                    .done(function(data) {
+                        if (data == 'success') {
+                            var date = new Date();
+
+                            /** apeend */
+                            $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+                                <p>' + content + '</p>');
+
+                            /** keep in the bottom */
+                            $('.dialog #main #dialog-show').scrollTop(parseFloat(document.getElementById('dialog-show').scrollHeight));
+
+                            /** clear textarea */
+                            $('.dialog #main .dialog-input textarea').val('');
+                        } else {
+                            console.log("failed to send a message, but post succeed");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("failed to send a message");
                     });
             },
 
@@ -329,6 +373,24 @@ var customer = {
             },
 
             /**
+             * [handleSend: the handle function of sending messages]
+             * @return {[type]} [description]
+             */
+            handleSend = function() {
+                if ($('.dialog #main .friend-list .list ul .select').length > 0) {
+                    if ($('.dialog #main .dialog-input textarea').val() == '') {
+                        $('.dialog #main .dialog-input textarea').focus();
+                        $('.dialog #main .dialog-input textarea').attr('placeholder', 'You cannot leave a empty message.');
+                    } else {
+                        var content = $('.dialog #main .dialog-input textarea').val().replaceAll('\n', '<br />');
+                        sendMessage($('.dialog #main .friend-list .list ul .select').html(), content);
+                    }
+                } else {
+                    showPart('notice-del-main');
+                }
+            },
+
+            /**
              * [init: init the animation trigger of the` dialog]
              * @return {[type]} [description]
              */
@@ -350,6 +412,29 @@ var customer = {
             $(this).attr('placeholder', '');
         }).blur(function() {
             $(this).attr('placeholder', 'search...');
+        });
+
+        /** [click function of sending message button] */
+        $('.dialog #main .dialog-input .send-btn').click(function(event) {
+            /* Act on the event */
+            handleSend();
+        });
+
+        /** [keydown function of sending message button] */
+        $(document).on("keydown", function(event) {
+            var userAgent = navigator.userAgent.toLowerCase();
+            var keycode, ctrl;
+            if (userAgent.indexOf('firefox') >= 0 || userAgent.indexOf('ie') >= 0) {
+                keycode = event.which;
+                ctrl = event.ctrlKey;
+            } else {
+                var ev = (event === undefined) ? window.event : event;
+                keycode = ev.keyCode;
+                ctrl = ev.ctrlKey;
+            }
+            if (keycode === 13 && ctrl && document.activeElement.id === "message_textarea") {
+                handleSend();
+            }
         });
 
         /** [click function of choosing people to add] */
