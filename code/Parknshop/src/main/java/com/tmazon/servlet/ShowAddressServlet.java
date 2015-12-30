@@ -40,9 +40,6 @@ public class ShowAddressServlet extends HttpServlet {
 		for(Address address : addresses){
 			JSONObject item = new JSONObject();
 			item.put("a_id", address.getAddressId());
-			item.put("country", address.getCountry());
-			item.put("province", address.getProvince());
-			item.put("city", address.getCity());
 			item.put("description", address.getDescription());
 			item.put("zipcode", address.getZipcode());
 			item.put("name", address.getName());
