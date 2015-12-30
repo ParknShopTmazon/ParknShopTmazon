@@ -76,7 +76,7 @@
 				<div class="item-photo form-item">
 					<div class="form-lable-left">Shop Photo</div>
 					<div class="form-shop-img">
-					  
+					  <input name="image" type="image"  id="shop_photo" class="shop-img-box" src="" alt="no photo no truth" />
 					
 				      <input name="file" type="file"  id="photo_path" class="inputfile" value="upload_picture"  onSelect="getPhoto()" />
 				  </div>
