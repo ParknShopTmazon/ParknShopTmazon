@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home Page</title>
+<link rel="stylesheet" type="text/css" href="css_shop/style.css">
+<link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
+<link rel="stylesheet" type="text/css" href="css_shop/order.css">
+<script type="text/javascript">
+	var m=1;
+	var id="ProductList";
+	function getFocus(a){
+	if(m!=a)
+	{
+		
+		var classVal = document.getElementById(id).getAttribute("class");
+		classVal = classVal.replace("selected","");
+		document.getElementById(id).setAttribute("class",classVal );
+		if(a==1)
+		{
+			m=1;
+			id="ProductList";
+		}
+		else if(a==2)
+		{
+			m=2;
+			id="AddProduct";
+		}
+		else if(a==3)
+		{
+			m=3;
+			id="ModifyProduct";
+		}
+		else if(a==4)
+		{
+			m=4;
+			id="DeleteProduct";
+		}
+		classVal = document.getElementById(id).getAttribute("class");
+		classVal = classVal.concat(" selected");
+		document.getElementById(id).setAttribute("class",classVal );	
+	}
+}		
+</script>
+</head>
+<body>
+	<div id="header">
+		<div class="header-display-block">
+			<a href="index.jsp"><input type="image" class="logo" src="images_shop/logo.png"/></a>
+			<div class="userinfo">
+				<a href=""><input type="image" class="icon" src="images_shop/home1.jpg"/><span>&nbsp;HomePage</span></a>
+				<a href=""><input type="image" class="icon" src="images_shop/o.jpg" /><span>&nbsp;MyHome</span></a>
+				<a href=""><input type="image" class="icon" src="images_shop/notice.jpg"/><span>&nbsp;notice(0)</span></a>
+				<a href=""><input type="image" class="icon" src=""/><span>&nbsp;set</span></a>
+			</div>	
+		</div>
+		<div class="header-search-block">
+			<form action="" class="searchform" name="searchform" method="get">
+			  <select name="select" class="select">
+                <option selected="selected">ALL</option>
+                <option>ShopName</option>
+                <option>ProductName</option>
+              </select>
+			  <input type="text" class="search" name="search" autocomplete="off"  value="" placeholder="请输入商品名称"/>
+			  <input name="image" type="image" class="search-img-box" src="images_shop/搜索.png" />
+			</form>
+		</div>		
+	</div>	
+	<!--div id="line-nav"></div-->
+	<div id="menu">
+		<dl class="side-nav-list">
+			<dd class="home current"><a href=""><strong>My Home</strong></a></dd>
+			<dt class="head-item"><strong>My Shop</strong></dt>
+			<dd>
+				<ul class="item-list">
+					<li class="" ><a href="">ShopList</a></li>
+					<li ><a href="">Advertisement</a></li>
+				</ul>
+			</dd>
+			<dt class="head-item" ><strong>My Order</strong></dt>
+			<dd>
+				 <ul class="item-list" >
+					<li ><a href="">ManageOrder</a></li>
+					<li ><a href="">ViewIncome</a></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+	<div id="content">
+		<div class="content">
+		<div class="height2px color5"></div>
+		<div class="manage-nav">
+			<div class="unit selected" id="ProductList" onClick="getFocus(1)"><span>ProductList</span></div>
+			<div class="unit" id="AddProduct" onClick="getFocus(2)"><span>Add Product</span></div>
+			<div class="unit" id="ModifyProduct" onClick="getFocus(3)"><span>Modify Product</span></div>
+			<div class="unit" id="DeleteProduct" onClick="getFocus(4)"><span>Delete Product</span></div>
+			<div class="fillspace"></div>
+		</div>
+		<div class="productlist">
+			<div class="height5px color5" ></div>
+			<div class="productbox">
+				<div class="product-photo">
+				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
+				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
+				</div>
+				<div class="product-name">
+					<a href=""><strong><span >Name:</span><span class="float-right">product1</span></strong></a>
+				</div>
+				<div class="product-prcie">
+					<strong><span id="">Price:</span><span class="float-right">$:27</span></strong>
+				</div>
+				<div>
+				</div>
+		    </div>
+			<div class="productbox">
+				<div class="product-photo">
+				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
+				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
+				</div>
+				<div class="product-name">
+					<a href=""><strong><span >Name:</span><span class="float-right">product1</span></strong></a>
+				</div>
+				<div class="product-prcie">
+					<strong><span id="">Price:</span><span class="float-right">$:27</span></strong>
+				</div>
+				<div>
+				</div>
+		    </div>
+			<div class="productbox">
+				<div class="product-photo">
+				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
+				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
+				</div>
+				<div class="product-name">
+					<a href=""><strong><span >Name:</span><span class="float-right">product1</span></strong></a>
+				</div>
+				<div class="product-prcie">
+					<strong><span id="">Price:</span><span class="float-right">$:27</span></strong>
+				</div>
+				<div>
+				</div>
+		    </div>
+			<div class="productbox">
+				<div class="product-photo">
+				  <input name="" id="product" type="image" class="selected_ok_img" src="images_shop/ok.jpg" onClick=""/>
+				  <input name="" type="image" class="product-img-box" onClick="" src="images_shop/product1.jpg" alt="no photo no truth" />
+				</div>
+				<div class="product-name">
+					<a href=""><strong><span >Name:</span><span class="float-right">product1</span></strong></a>
+				</div>
+				<div class="product-prcie">
+					<strong><span id="">Price:</span><span class="float-right">$:27</span></strong>
+				</div>
+				<div>
+				</div>
+		    </div>
+	   </div>
+	</div>
+		<div id="innercontent"><button type="button" onClick="myFunction()">通过 AJAX 改变内容</button></div>
+	</div>
+	<div id="footer">
+			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
+	</div>
+	
+</body>
+</html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD:code/Parknshop/src/main/webapp/css_shop/order.css
 
 .order-form{
 	text-align:center;
@@ -93,3 +94,100 @@
 .dropedlist ul li ul li:hover{
 	background-color:#FFFF00;
 }
+=======
+
+.order-form{
+	text-align:center;
+	font-size:14px;
+	overflow:hidden;
+}
+.order-item{
+	background-color:#99CCFF;
+	height:120px;
+	border-bottom:solid 1px;
+}
+.item-form-head{
+	padding-top:10px;
+	font:bold 16px;
+	height:30px;
+}
+.item-form-head-info{
+	float:left;
+	padding-top:10px;
+	width:360px;
+}
+.item-form-head-mum,.item-product-mum{
+	float:left;
+	padding-top:10px;
+	width:80px;
+}
+.item-form-head-totalprice,.item-product-totalprice{
+	float:left;
+	padding-top:10px;
+	width:100px;
+}
+.item-form-head-orderstate,.item-product-orderstate{
+	float:left;
+	padding-top:10px;
+	width:100px;
+}
+.item-form-head-manage,.item-product-manage{
+	float:left;
+	padding-top:10px;
+	width:150px;
+}
+.item-product-id{
+	background-color:#FFFFFF;
+	padding-top:5px;
+	height:20px;
+	text-align:left;
+	margin-right:10px;
+}
+.item-product-photo img{
+	float:left;
+	padding:10px 20px 10px 20px;
+	background-color:#CCCCCC;
+	width:120px;
+	height:70px;;
+}
+
+.item-name-time-shop{
+	padding-top:10px;
+	text-align:left;
+	float:left;
+    width:200px;
+	height:80px;
+}
+.item-name-time-shop .name, .item-name-time-shop .time,.item-name-time-shop .shop{
+	font-size:16px;
+	line-height:1.4em;
+}
+.dropedlist ul,.dropedlist li{
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+}
+.dropedlist ul li ul{
+	display:none;
+}
+.dropedlist ul li{
+	margin:0px 42px;
+	border:1px solid #FFFFFF;
+}
+.dropedlist ul li ul li{
+	display:block;
+	margin:0px 0px;
+	line-height:1.4em;
+	background-color:#FFFFFF;
+	border:1px solid #FFFFFF;
+}
+.dropedlist ul li:hover ul{
+	display:block;
+	border-bottom:1px solid #FFFFFF;
+	border-left:1px solid #FFFFFF;
+	border-right:1px solid #FFFFFF;
+}
+.dropedlist ul li ul li:hover{
+	background-color:#FFFF00;
+}
+>>>>>>> 2d1896c0339ec6e1438546e32188205fe714b485:Front_Page/ShopOwner/Update/CSS/order.css

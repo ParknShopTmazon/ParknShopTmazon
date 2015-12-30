@@ -85,19 +85,18 @@ CREATE TABLE orders (
 	status varchar(50) NOT NULL,
 	orderTime datetime NOT NULL,
 	userId int NOT NULL,
-	deliveryId int NOT NULL,
 	PRIMARY KEY (orderId),
-	FOREIGN KEY (userId) REFERENCES user(userId),
-	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
-	
+	FOREIGN KEY (userId) REFERENCES user(userId)
 );
 
 CREATE TABLE orderInfo(
+	orderId int NOT NULL,
+	deliveryId int NOT NULL,
 	quantity int NOT NULL,
 	productId int NOT NULL,
-	orderId int NOT NULL,
 	FOREIGN KEY (productId) REFERENCES product(productId),
-	FOREIGN KEY (orderId) REFERENCES orders(orderId)
+	FOREIGN KEY (orderId) REFERENCES orders(orderId),
+	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
 );
 
 CREATE TABLE cart (
