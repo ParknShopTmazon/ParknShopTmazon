@@ -82,6 +82,15 @@ public class ProductInfoServlet extends HttpServlet {
 			}else if(cartService.isExists(user.getUserId(), productId)){
 				req.setAttribute("isExists", true);
 			}
+			if(product.getStatus() == null){
+				req.setAttribute("expired", false);
+			}else {
+				if(product.getStatus().equals(Product.STATUS_PULL)){
+					req.setAttribute("expired", true);
+				}else {
+					req.setAttribute("expired", false);
+				}
+			}
 			
 		}
 		
