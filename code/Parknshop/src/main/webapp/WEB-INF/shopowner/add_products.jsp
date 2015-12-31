@@ -22,8 +22,14 @@
 		<br>
 		<br>
 		<div id="container" align="right">
-			<form class="complete-info" action="addproduct" method="post">
+			<form class="complete-info" action="addproduct" method="post" enctype="multipart/form-data">
 				
+				<div class="form-item">
+					<div class="form-lable-left">Picture</div>
+					<div class="form-control-right">
+						<input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg">
+					</div>
+				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Product Name</div>
 					<div class="form-control-right">

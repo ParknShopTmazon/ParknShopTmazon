@@ -52,4 +52,9 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.findAllCategory();
 	}
 
+	public List<Product> selectInLike(Product product) {
+		// TODO Auto-generated method stub
+		return productDao.selectInLike(product);
+	}
+
 }
