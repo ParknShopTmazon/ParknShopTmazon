@@ -38,7 +38,10 @@ public class ShopDaoImpl implements ShopDao {
 			sqlBuilder.append("AND status = ? ");
 			params.add(shop.getStatus());
 		}
-		
+		if(shop.getPicture() != null){
+			sqlBuilder.append("AND picture = ?");
+			params.add(shop.getPicture());
+		}
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
@@ -54,12 +57,12 @@ public class ShopDaoImpl implements ShopDao {
 	}
 
 	public boolean insert(Shop shop) {
-		String sql = "INSERT INTO shop VALUES (?, ?, ?, ?,?)";
+		String sql = "INSERT INTO shop VALUES (?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.insert(sql, new BeanHandler<Shop>(Shop.class), shop.getShopId(), shop.getName(), shop.getType(), shop.getStatus(), shop.getOwner());
+			runner.insert(sql, new BeanHandler<Shop>(Shop.class), shop.getShopId(), shop.getName(), shop.getType(), shop.getStatus(), shop.getOwner(),shop.getPicture());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,7 +83,7 @@ public class ShopDaoImpl implements ShopDao {
 	public Shop findById(Integer id) {
 		
 		
-		List<Shop> list = select(new Shop(id, null, null, null, null));		
+		List<Shop> list = select(new Shop(id, null, null, null, null,null));		
 		if(!list.isEmpty()){
 			return list.get(0);
 		}

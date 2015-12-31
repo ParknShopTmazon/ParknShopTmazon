@@ -24,13 +24,14 @@ public class Shop {
 		this.picture = picture;
 	}
 
-	public Shop(Integer shopId, String name, String type, String status, Integer owner) {
+	public Shop(Integer shopId, String name, String type, String status, Integer owner,String picture) {
 		super();
 		this.shopId = shopId;
 		this.name = name;
 		this.type = type;
 		this.status = status;
 		this.owner = owner;
+		this.picture = picture;
 	}
 
 	public Shop() {
@@ -86,6 +87,7 @@ public class Shop {
 		result = prime * result + ((shopId == null) ? 0 : shopId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		return result;
 	}
 
@@ -126,13 +128,20 @@ public class Shop {
 				return false;
 			}
 		}
+		if(picture == null) {
+			if(other.picture != null) {
+				return false;
+			}else if(!status.equals(other.picture)) {
+				return false;
+			}
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Shop [shopId=" + shopId + ", name=" + name + ", type=" + type + ", owner=" + owner + ", status="
-				+ status + "]";
+				+ status + ", picture=" + picture + "]";
 	}
 
 }
