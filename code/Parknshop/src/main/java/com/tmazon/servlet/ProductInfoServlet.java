@@ -83,7 +83,6 @@ public class ProductInfoServlet extends HttpServlet {
 				req.setAttribute("productInfo", productInfo);
 			}
 			Shop shop = shopService.findById(product.getShopId());
-			System.out.println("##############" + product.getShopId());
 			req.setAttribute("shop", shop);
 			if(existsFlag){
 				req.setAttribute("isExists", true);

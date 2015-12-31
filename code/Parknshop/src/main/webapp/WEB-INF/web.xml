@@ -169,24 +169,34 @@
   <servlet-class>com.tmazon.servlet.ShowAddressServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>OrderJsp</servlet-name>
- 	<jsp-file>/WEB-INF/customer/order.jsp</jsp-file>
+  <servlet-name>OrderJsp</servlet-name>
+  <jsp-file>/WEB-INF/customer/order.jsp</jsp-file>
  </servlet>
  <servlet>
- 	<servlet-name>addproduct</servlet-name>
- 	<servlet-class>com.tmazon.servlet.AddProductServlet</servlet-class>
+  <servlet-name>addproduct</servlet-name>
+  <servlet-class>com.tmazon.servlet.AddProductServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>ShopIncomeServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.ShopIncomeServlet</servlet-class>
+  <servlet-name>ShopIncomeServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ShopIncomeServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>ShopOrderServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.ShopOrderServlet</servlet-class>
+  <servlet-name>ShopOrderServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ShopOrderServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>SelectedShopServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.SelectedShopServlet</servlet-class>
+  <servlet-name>SelectedShopServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.SelectedShopServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AddOrderServlet</servlet-name>
+  <display-name>AddOrderServlet</display-name>
+  <servlet-class>com.tmazon.servlet.AddOrderServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AddAddressServlet</servlet-name>
+  <display-name>AddAddressServlet</display-name>
+  <servlet-class>com.tmazon.servlet.AddAddressServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -337,24 +347,32 @@
   <url-pattern>/showAddress</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>OrderJsp</servlet-name>
- 	<url-pattern>/viewOrder</url-pattern>
+  <servlet-name>OrderJsp</servlet-name>
+  <url-pattern>/viewOrder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>addproduct</servlet-name>
- 	<url-pattern>/addproduct</url-pattern>
+  <servlet-name>addproduct</servlet-name>
+  <url-pattern>/addproduct</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>ShopIncomeServlet</servlet-name>
- 	<url-pattern>/shopincome</url-pattern>
+  <servlet-name>ShopIncomeServlet</servlet-name>
+  <url-pattern>/shopincome</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>ShopOrderServlet</servlet-name>
- 	<url-pattern>/shoporder</url-pattern>
+  <servlet-name>ShopOrderServlet</servlet-name>
+  <url-pattern>/shoporder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>SelectedShopServlet</servlet-name>
- 	<url-pattern>/selectedshop</url-pattern>
+  <servlet-name>SelectedShopServlet</servlet-name>
+  <url-pattern>/selectedshop</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AddOrderServlet</servlet-name>
+  <url-pattern>/addOrder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AddAddressServlet</servlet-name>
+  <url-pattern>/addAddress</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>
