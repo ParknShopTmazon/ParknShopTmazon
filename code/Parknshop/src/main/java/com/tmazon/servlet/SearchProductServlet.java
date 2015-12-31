@@ -38,7 +38,7 @@ public class SearchProductServlet extends HttpServlet {
 			System.out.println(category);
 		}
 		product.setName(name);
-		List<Product> productList = productService.select(product);
+		List<Product> productList = productService.selectInLike(product);
 		if(productList==null||productList.isEmpty()){
 			req.setAttribute("num", 0);
 		}else{

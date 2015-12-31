@@ -21,5 +21,10 @@ public class AddressServiceImpl implements AddressService {
 	public Address insertAddress(Address address) {
 		return addressDao.insert(address);
 	}
+
+	public Address findById(Integer id) {
+		List<Address> addresses = addressDao.select(new Address(id, null, null, null, null, null));
+		return (addresses != null && !addresses.isEmpty())? addresses.get(0) : null;
+	}
 	
 }

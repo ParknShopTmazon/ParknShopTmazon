@@ -54,4 +54,8 @@ public class OrderServiceImpl implements OrderService {
 		return (orders != null && !orders.isEmpty()) ? orders.get(0) : null;
 	}
 
+	public boolean changeStatus(Order order) {
+		return ordersDao.update(order);
+	}
+
 }

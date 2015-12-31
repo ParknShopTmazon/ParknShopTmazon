@@ -10,8 +10,8 @@
   <listener-class>com.tmazon.listener.MySessionListener</listener-class>
  </listener>
  <servlet>
-  <servlet-name>IndexJsp</servlet-name>
-  <jsp-file>/WEB-INF/customer/index.jsp</jsp-file>
+  <servlet-name>IndexServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.IndexServlet</servlet-class>
  </servlet>
  <servlet>
   <servlet-name>RegisterShopPageServlet</servlet-name>
@@ -173,12 +173,20 @@
  	<jsp-file>/WEB-INF/customer/order.jsp</jsp-file>
  </servlet>
  <servlet>
+ 	<servlet-name>addproduct</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.AddProductServlet</servlet-class>
+ </servlet>
+ <servlet>
  	<servlet-name>ShopIncomeServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.ShopIncomeServlet</servlet-class>
  </servlet>
  <servlet>
  	<servlet-name>ShopOrderServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.ShopOrderServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>SelectedShopServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.SelectedShopServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -213,7 +221,7 @@
   <url-pattern>/order</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>IndexJsp</servlet-name>
+  <servlet-name>IndexServlet</servlet-name>
   <url-pattern>/index</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
@@ -333,12 +341,20 @@
  	<url-pattern>/viewOrder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
+ 	<servlet-name>addproduct</servlet-name>
+ 	<url-pattern>/addproduct</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
  	<servlet-name>ShopIncomeServlet</servlet-name>
  	<url-pattern>/shopincome</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
  	<servlet-name>ShopOrderServlet</servlet-name>
  	<url-pattern>/shoporder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>SelectedShopServlet</servlet-name>
+ 	<url-pattern>/selectedshop</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

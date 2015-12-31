@@ -11,14 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.tmazon.domain.Address;
 import com.tmazon.domain.Delivery;
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.Product;
+import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
+import com.tmazon.service.AddressService;
 import com.tmazon.service.DeliveryService;
 import com.tmazon.service.OrderService;
 import com.tmazon.service.ProductService;
+import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.ParseUtil;
@@ -33,6 +37,8 @@ public class OrderServlet extends HttpServlet {
 	private OrderService orderService = BasicFactory.getImpl(OrderService.class);
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	private DeliveryService deliveryService = BasicFactory.getImpl(DeliveryService.class);
+	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
+	private AddressService addressService = BasicFactory.getImpl(AddressService.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -78,6 +84,9 @@ public class OrderServlet extends HttpServlet {
 			return;
 		}
 		
+		Address address = addressService.findById(order.getAddressId());
+		order.setAddress(address);
+		
 		List<OrderInfo> orderInfos = orderService.getOrderInfo(orderId);
 		order.setOrderInfos(orderInfos);
 		for (OrderInfo orderInfo : orderInfos) {
@@ -87,6 +96,9 @@ public class OrderServlet extends HttpServlet {
 			
 			Delivery delivery = deliveryService.select(new Delivery(orderInfo.getDeliveryId(), null, null, null)).get(0);
 			orderInfo.setDelivery(delivery);
+			
+			Shop shop = shopService.findById(orderInfo.getProduct().getShopId());
+			orderInfo.getProduct().setShop(shop);
 			
 			//
 			orderInfo.setColor("");

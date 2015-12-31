@@ -27,6 +27,8 @@ public class Product {
 	private String picture;
 	private String status;
 	
+	private Shop shop;
+	
 	public String getStatus() {
 		return status;
 	}
@@ -124,6 +126,12 @@ public class Product {
 		this.description = description;
 		this.picture = picture;
 		this.status = status;
+	}
+	public Shop getShop() {
+		return shop;
+	}
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 
 	

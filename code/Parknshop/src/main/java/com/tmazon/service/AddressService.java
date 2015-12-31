@@ -11,4 +11,5 @@ public interface AddressService {
 	
 	public Address insertAddress(Address address);
 	
+	public Address findById(Integer id);
 }
