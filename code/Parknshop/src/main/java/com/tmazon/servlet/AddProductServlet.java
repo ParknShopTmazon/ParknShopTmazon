@@ -23,6 +23,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.tmazon.domain.Product;
+import com.tmazon.domain.User;
 import com.tmazon.service.ProductService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
@@ -35,12 +36,12 @@ public class AddProductServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-//		HttpSession session = req.getSession(true);
-//		String user = (String) session.getAttribute(AttrName.SessionScope.USER);
-//		if(user==null){
-//			resp.sendRedirect("login");
-//			return;
-//		}
+		HttpSession session = req.getSession(true);
+		User user = (User) session.getAttribute(AttrName.SessionScope.USER);
+		if(user==null){
+			resp.sendRedirect("login");
+			return;
+		}
 		req.getSession().setAttribute(AttrName.SessionScope.SHOPID, "7880");
 		req.getRequestDispatcher("/WEB-INF/shopowner/add_products.jsp").forward(req, resp);
 	}
@@ -117,7 +118,7 @@ public class AddProductServlet extends HttpServlet{
 		System.out.println("file: "+file+"  product_name: "+productName+"  product_names: ");
 		System.out.println(shopId);
 		if(shopId==null||"".trim().equals(shopId)){
-			req.getRequestDispatcher("/WEB-INF/shopowner/myshop.jsp").forward(req, resp);
+			resp.sendRedirect("myshop");;
 			return;
 		}
 		
@@ -146,7 +147,7 @@ public class AddProductServlet extends HttpServlet{
 		boolean insert = productService.insert(product);
 		req.setAttribute("img", product.getPicture());
 		if(insert==true){
-			req.getRequestDispatcher("productlist").forward(req, resp);
+			resp.sendRedirect("productlist");
 			return;
 		}else{
 			resp.sendRedirect("addproduct");

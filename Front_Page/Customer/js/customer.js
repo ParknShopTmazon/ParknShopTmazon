@@ -806,7 +806,7 @@ var customer = {
      */
     initCertain: function() {
         "use strict";
-        var cost;
+        var cost, cart, delivery_options, address_id = null;
         /**
          * [updateCost: update cost info]
          * @return {[type]} [description]
@@ -868,6 +868,9 @@ var customer = {
                 }
                 /** set checked */
                 $(this).attr('checked', 'checked');
+
+                address_id = $(this).attr('aid');
+
                 /** update addr info */
                 updateCertainAddr();
             },
@@ -937,10 +940,56 @@ var customer = {
 
             /**
              * [addAddr: add an addr option]
-             * @return {[type]} [description]
+             * @param {[type]} addr     [the description of the addr]
+             * @param {[type]} receiver [the receiver name]
+             * @param {[type]} phone    [the phone number]
              */
-            addAddr = function() {
+            addAddr = function(addr, receiver, phone) {
+                $.ajax({
+                        url: 'addAddress',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            description: addr,
+                            zipcode: '',
+                            name: receiver,
+                            phone: phone
+                        },
+                    })
+                    .done(function() {
+                        /**
+                         * [append div]
+                         */
+                        $('.order-container #order-addr .addresses').append('<div>\
+                                <label>\
+                                    <input type="radio" name="addr" checked="checked">\
+                                    <span class="address" title="' + addr + '">' + addr + '</span>\
+                                    <span class="receiver">\
+                                    <span class="name">receiver name: </span>\
+                                    <span class="value">' + receiver + '</span>\
+                                    </span>\
+                                    <span class="phone">\
+                                    <span class="name">phone number: </span>\
+                                    <span class="value">' + phone + '</span>\
+                                    </span>\
+                                </label>\
+                            </div>');
 
+                        /** rebinding the radio change */
+                        /** [unbind] */
+                        $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
+                        /** [radio change] */
+                        $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+
+                        /** hide the map */
+                        $('.order-container #order-addr .addresses #other-addr-input').hide();
+
+                        /** update addr info */
+                        updateCertainAddr();
+                    })
+                    .fail(function() {
+                        console.log("failed to add an addr");
+                    });
             },
 
             /**
@@ -962,7 +1011,7 @@ var customer = {
                     /** append the new option */
                     var price_options = '';
                     for (var j in delivery_options[0].price_option) {
-                        price_options += '<option value="' + delivery_options[k].price_option[j].value + '">' + delivery_options[k].price_option[j].description + '</option>';
+                        price_options += '<option value="' + delivery_options[k].price_option[j].value + '" delivery_id="' + delivery_options[k].price_option[j].delivery_id + '">' + delivery_options[k].price_option[j].description + '</option>';
                     }
                     $(this).next().children('select').append(price_options);
 
@@ -983,19 +1032,38 @@ var customer = {
 
                     /** update cost info */
                     updateCost();
+
+                    /** update delivery_id */
+                    var index = $(this).children('select')[0].selectedIndex;
+                    $(this).parent()[0].setAttribute('delivery_id', $(this).children('select').children('option')[index].getAttribute('delivery_id'))
                 });
 
                 /** [change function of quantity changing ] */
                 $('.order-container #order-details .quantity input[type="number"]').change(function(event) {
                     /** check legality when keydown */
+                    var _this = $(this);
+                    /** check legality when keydown */
                     var regex = new RegExp("^[0-9]*[1-9][0-9]*$");
                     if (regex.test($(this).val())) {
-                        if (parseInt($(this).val()) > 99) {
+                        if (parseInt($(this).val()) > parseInt($(this).attr('max_quantity'))) {
                             $(this).focus();
-                            $(this).val(99);
-                            alert('you can only enter integer number between 1 and 99');
+                            $(this).val($(this).attr('max_quantity'));
+                            alert('the product is limited for sale');
                         } else {
-                            $(this).attr('value', $(this).val());
+                            /** store data into database */
+                            $.getJSON('updateCart', {
+                                sid: $(this).attr('sid'),
+                                quantity: $(this).val()
+                            }, function(data, textStatus) {
+                                /*optional stuff to do after success */
+                                if (typeof(data.result) != 'undefined' && data.result == 'true') {
+                                    _this.attr('value', _this.val());
+                                } else {
+                                    var error = data.errMsg || '';
+                                    alert('failed to modify: ' + error);
+                                    _this.val(_this.attr('value'));
+                                }
+                            });
                         }
                     } else {
                         $(this).focus();
@@ -1059,35 +1127,34 @@ var customer = {
                         addr_list[i].removeAttribute('checked');
                     }
 
-                    /**
-                     * [append div]
-                     */
-                    $('.order-container #order-addr .addresses').append('<div>\
-                        <label>\
-                            <input type="radio" name="addr" checked="checked">\
-                            <span class="address" title="' + otherAddr + '">' + otherAddr + '</span>\
-                            <span class="receiver">\
-                            <span class="name">receiver name: </span>\
-                            <span class="value">' + receiver + '</span>\
-                            </span>\
-                            <span class="phone">\
-                            <span class="name">phone number: </span>\
-                            <span class="value">' + phone + '</span>\
-                            </span>\
-                        </label>\
-                    </div>');
+                    addAddr(addr, receiver, phone);
+                });
 
-                    /** rebinding the radio change */
-                    /** [unbind] */
-                    $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
-                    /** [radio change] */
-                    $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+                /** [click function of submitting the order] */
+                $('.order-container #final-order .box .submit-btn').click(function(event) {
+                    /* Act on the event */
+                    var productLists = $('.order-container #order-details .order-item');
 
-                    /** hide the map */
-                    $('.order-container #order-addr .addresses #other-addr-input').hide();
+                    var orders = [];
 
-                    /** update addr info */
-                    updateCertainAddr();
+                    for (var i = 0; i < productLists.length; i++) {
+                        orders[i] = {
+                            product_id: productLists[i].getAttribute('sid'),
+                            delivery_id: productLists[i].getAttribute('delivery_id')
+                        };
+                    }
+
+                    if (address_id == null) {
+                        alert('please add an address for your own first');
+                        $('.order-container #order-addr .other').click();
+                    } else {
+                        $.getJSON('addOrder', {
+                            address_id: address_id,
+                            options: orders
+                        }, function(json, textStatus) {
+                            /*optional stuff to do after success */
+                        });
+                    }
                 });
             },
 
@@ -1098,9 +1165,9 @@ var customer = {
              */
             initData = function(data) {
                 /** parse */
-                var cart = data.cart,
-                    delivery_options = data.delivery_options,
-                    origin_cost = 0,
+                cart = data.cart;
+                delivery_options = data.delivery_options;
+                var origin_cost = 0,
                     right_cost = 0;
 
                 for (var i in cart) {
@@ -1121,11 +1188,11 @@ var customer = {
                     /** generate options of the first company */
                     var price_options = '';
                     for (var j in delivery_options[0].price_option) {
-                        price_options += '<option value="' + delivery_options[0].price_option[j].value + '">' + delivery_options[0].price_option[j].description + '</option>';
+                        price_options += '<option value="' + delivery_options[0].price_option[j].value + '" delivery_id="' + delivery_options[0].price_option[j].delivery_id + '">' + delivery_options[0].price_option[j].description + '</option>';
                     }
 
                     /** append list item */
-                    $('.order-container #order-details').append('<div class="order-item" item="' + i + '">\
+                    $('.order-container #order-details').append('<div class="order-item" item="' + i + '" sid="' + cart[i].sid + '" delivery_id="' + delivery_options[0].price_option[0].delivery_id + '">\
                         <div class="pic-container">\
                             <a href="' + cart[i].shop_url + '" target="_blank">\
                                 <div class="over">\
@@ -1143,7 +1210,7 @@ var customer = {
                             <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
                         </div>\
                         <div class="quantity">\
-                            <input type="number" name="quantity" min="1" value="' + cart[i].quantity + '">\
+                            <input type="number" sid="' + cart[i].sid + '" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
                         </div>\
                         <div class="order-delivery">\
                             <select item="' + i + '">\
