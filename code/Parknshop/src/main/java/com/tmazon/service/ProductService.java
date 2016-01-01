@@ -9,6 +9,8 @@ public interface ProductService {
 
 	public List<Product> select(Product product );
 	
+	public List<Product> selectInLike(Product product );
+	
 	public Product getProductById(Integer id);
 	
 	public ProductInfo getProductInfo(Product product);

@@ -8,6 +8,8 @@ public interface ProductDao {
 
 	public List<Product> select(Product product);
 	
+	public List<Product> selectInLike(Product product);
+	
 	public Product findByName(String name);
 	
 	public Product findById(Integer id);

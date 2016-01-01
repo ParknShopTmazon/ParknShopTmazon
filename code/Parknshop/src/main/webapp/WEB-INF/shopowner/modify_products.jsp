@@ -14,32 +14,40 @@
 		<div class="height2px color5"></div>
 		<div class="manage-nav">
 			<div class="unit" id="ProductList" onClick="window.open('productlist')"><span>ProductList</span></div>
-			<div class="unit selected" id="AddProduct" onClick="window.open('addproduct')"><span>Add Product</span></div>
-			<div class="unit" id="ModifyProduct" onClick="window.open('modifyproduct')"><span>Modify Product</span></div>
+			<div class="unit" id="AddProduct" onClick="window.open('addproduct')"><span>Add Product</span></div>
+			<div class="unit selected" id="ModifyProduct" onClick="window.open('modifyproduct')"><span>Modify Product</span></div>
 			<div class="unit" id="DeleteProduct" onClick="window.open('deleteproduct')"><span>Delete Product</span></div>
 			<div class="fillspace"></div>
 		</div>
 		<br>
 		<br>
 		<div id="container" align="right">
-			<form class="complete-info" action="addproduct" method="post" enctype="multipart/form-data">
+			<form class="complete-info" action="modifyproduct" method="post" enctype="multipart/form-data">
 				
+				<input type="hidden" name="product_id" value="${product_id }">
+				<div class="form-item-photo">
+					<div class="form-lable-left">Product Photo</div>
+					 <div class="form-shop-img">
+						<img alt="no photo" src="${image}" width="100" height="80">
+				  </div>
+				</div>	
 				<div class="form-item">
-					<div class="form-lable-left">Picture</div>
-					<div class="form-control-right">
-						<input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg">
-					</div>
-				</div>
+					<div class="form-lable-left">Upload Photo</div>
+					 <div class="form-control-right">
+					    <input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg">
+				  </div>
+				</div>	
 				<div class="form-item">
 					<div class="form-lable-left">Product Name</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="product_name" name="product_name" type="text" maxlength="20";>
+						<input class="form-input-right" id="product_name" value="${productName}" name="product_name" type="text" maxlength="20" business="productName" require="true";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Category</div>
 					<div class="form-control-right">
 						<select name="category" >
+							<option value="null"></option>
 			   				<option value="TV& Home Theater">TV& Home Theater</option>
 			   				<option value="Computers & Tablets" >Computers & Tablets</option>
 			   				<option value="Cell Phones" >Cell Phones</option>
@@ -55,19 +63,25 @@
 				<div class="form-item">
 					<div class="form-lable-left">Product Price</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="price" name="price" type="text" maxlength="18";>
+						<input class="form-input-right" id="price" value="${pirce}" name="price" type="text" maxlength="18";>
+					</div>
+				</div>
+				<div class="form-item">
+					<div class="form-lable-left">Product Discount Price</div>
+					<div class="form-control-right">
+						<input class="form-input-right" id="price" value="${discount_pirce}" name="discountprice" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Stock Number</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="stock_num" name="stock_num" type="text" maxlength="18";>
+						<input class="form-input-right" id="stock_num" name="stock_num" value="${stockNum}" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item-textarea">
 					<div class="form-lable-left">description</div>
 					<div class="form-textarea" >
-						<textarea class="textarea" name="description"></textarea>
+						<textarea class="textarea" name="description" >${description}</textarea>
 					</div>
 				</div>
 				<div class="form-item">
