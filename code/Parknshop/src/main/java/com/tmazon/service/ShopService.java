@@ -10,4 +10,6 @@ public interface ShopService {
 	
 	public boolean isShopExist(Shop shop);
 	
+	public boolean insert(Shop shop);
+	
 }
