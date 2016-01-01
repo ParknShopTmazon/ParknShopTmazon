@@ -9,7 +9,10 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.OrderInfoDao;
+import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
+import com.tmazon.domain.Product;
+import com.tmazon.domain.Shop;
 import com.tmazon.util.DaoUtil;
 
 public class OrderInfoDaoImpl implements OrderInfoDao {
@@ -93,6 +96,29 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	public List<Order> getOrderByShopId(Integer shopId) {
+		StringBuilder sqlBuilder = new StringBuilder("select * from product,orderinfo,orders where shopId = ? AND orderinfo.productId = product.productId AND orders.orderId = orderinfo.orderId group by orders.orderId");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if (shopId != null) {
+			params.add(shopId);
+		}else {
+			return null;
+		}
+
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<Order> result = runner.query(sql, new BeanListHandler<Order>(Order.class),
+					params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
