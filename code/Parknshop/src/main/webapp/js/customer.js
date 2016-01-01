@@ -937,10 +937,56 @@ var customer = {
 
             /**
              * [addAddr: add an addr option]
-             * @return {[type]} [description]
+             * @param {[type]} addr     [the description of the addr]
+             * @param {[type]} receiver [the receiver name]
+             * @param {[type]} phone    [the phone number]
              */
-            addAddr = function() {
+            addAddr = function(addr, receiver, phone) {
+                $.ajax({
+                        url: 'addAddress',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            description: addr,
+                            zipcode: '',
+                            name: receiver,
+                            phone: phone
+                        },
+                    })
+                    .done(function() {
+                        /**
+                         * [append div]
+                         */
+                        $('.order-container #order-addr .addresses').append('<div>\
+                                <label>\
+                                    <input type="radio" name="addr" checked="checked">\
+                                    <span class="address" title="' + addr + '">' + addr + '</span>\
+                                    <span class="receiver">\
+                                    <span class="name">receiver name: </span>\
+                                    <span class="value">' + receiver + '</span>\
+                                    </span>\
+                                    <span class="phone">\
+                                    <span class="name">phone number: </span>\
+                                    <span class="value">' + phone + '</span>\
+                                    </span>\
+                                </label>\
+                            </div>');
 
+                        /** rebinding the radio change */
+                        /** [unbind] */
+                        $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
+                        /** [radio change] */
+                        $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+
+                        /** hide the map */
+                        $('.order-container #order-addr .addresses #other-addr-input').hide();
+
+                        /** update addr info */
+                        updateCertainAddr();
+                    })
+                    .fail(function() {
+                        console.log("failed to add an addr");
+                    });
             },
 
             /**
@@ -1059,35 +1105,7 @@ var customer = {
                         addr_list[i].removeAttribute('checked');
                     }
 
-                    /**
-                     * [append div]
-                     */
-                    $('.order-container #order-addr .addresses').append('<div>\
-                        <label>\
-                            <input type="radio" name="addr" checked="checked">\
-                            <span class="address" title="' + otherAddr + '">' + otherAddr + '</span>\
-                            <span class="receiver">\
-                            <span class="name">receiver name: </span>\
-                            <span class="value">' + receiver + '</span>\
-                            </span>\
-                            <span class="phone">\
-                            <span class="name">phone number: </span>\
-                            <span class="value">' + phone + '</span>\
-                            </span>\
-                        </label>\
-                    </div>');
-
-                    /** rebinding the radio change */
-                    /** [unbind] */
-                    $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
-                    /** [radio change] */
-                    $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
-
-                    /** hide the map */
-                    $('.order-container #order-addr .addresses #other-addr-input').hide();
-
-                    /** update addr info */
-                    updateCertainAddr();
+                    addAddr(addr, receiver, phone);
                 });
             },
 
