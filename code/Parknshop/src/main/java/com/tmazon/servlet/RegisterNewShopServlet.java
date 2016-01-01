@@ -160,57 +160,5 @@ public class RegisterNewShopServlet extends HttpServlet{
 			
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-////		System.out.println("###################");
-//		
-//		// check parameters
-//		String name = req.getParameter("name");
-//		String type = req.getParameter("type");
-//		Integer owner = null;
-//		
-////		System.out.println(name + " ####### " + type);
-//		
-//		User onlineUser = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
-//		
-//		if(onlineUser == null){
-//			resp.sendRedirect("login");
-//			return;
-//		}
-//		owner = onlineUser.getUserId();
-////		System.out.println("owner ="+owner);
-//		
-//		if (name == null || type == null ) {
-//			req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
-//			return;
-//		}
-//		
-//		// check if shop exists
-//		if (shopService.isShopExist(new Shop(null, name, null, null,null,null))) {
-//			req.setAttribute(AttrName.RequestScope.ERROR_SHOP_EXISTS, true);
-//			req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
-//			return;
-//		}
-//		
-//		// register
-//		
-//		Shop shop = new Shop(null, name, type,Shop.STATUS_CHECKING,owner,"images_shop/fish.jpg");
-//		boolean success = shopService.register(shop);
-//		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
-//		req.getRequestDispatcher("/WEB-INF/shopowner/shop_homepage.jsp").forward(req, resp);
-//		
-////		resp.sendRedirect("");
-		   
-		
 	}
 }

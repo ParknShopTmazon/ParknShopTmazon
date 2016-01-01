@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.domain.Order;
 import com.tmazon.domain.Shop;
@@ -37,13 +35,13 @@ public class ShopOrderServlet extends HttpServlet {
 		StringBuilder sqlBuilder = new StringBuilder("select * from orders where orderId=");
 		List<Order> orderList = new ArrayList<Order>();
 		
-		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
-	    
+//		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+//	    
 //		try {
-//			Integer orderIds[]= runner.query(sqlShopId, );
+//			Integer orderIds[]= runner.query(sqlShopId, new BeanListHandler<Integer>(Integer.class), params);
 //			for(int i=0;i<orderIds.length;i++){
 //				sqlBuilder.append(orderIds[i]).toString();
-//				Order order = runner.
+//				Order order = runner.query
 //				orderList.
 //				
 //			}
