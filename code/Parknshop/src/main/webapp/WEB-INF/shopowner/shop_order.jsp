@@ -41,7 +41,37 @@
 				<div class="item-form-head-manage"><span>Manage</span></div>
 			</div>
 			
-			
+			<c:forEach var="product" items="${productList}" >
+				
+				<div class="order-item ">
+				<div class="item-product-id"><span>Order ID:${order.orderId}</span></div>
+				<div class="item-product-photo"><img src=${order.picture}></div>
+				<div class="item-name-time-shop">
+					<div class="name"><a href="">productname1</a></div>
+					<div class="time"><span>Date:&nbsp;${order.orderTime}</span></div>
+					<div class="shop"><a href="">seller info</a></div>
+				</div>	
+				<div class="item-product-mum"><span>${order.quantity }</span></div>
+				<div class="item-product-totalprice"><span>$32</span></div>
+				<div class="item-product-orderstate"><span>xxxxx</span></div>
+				<div class="item-product-manage dropedlist">
+					<ul>
+						<li>Manage
+							<ul>
+								<li>delete</li>
+								<li>what</li>
+							</ul>
+						</li>
+					</ul>	
+				</div>
+			  </div>
+					<div class="span3">
+						<a href="./productInfo?pid=${ product.productId }" ><img src="${ product.picture }" height="" width=""></a>
+						<h4>${ product.price } dollar</h4>
+						<h4>${ product.name }</h4>
+					</div>
+				
+			</c:forEach>
 			
 			<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:<a href="">13121217</a></span></div>
