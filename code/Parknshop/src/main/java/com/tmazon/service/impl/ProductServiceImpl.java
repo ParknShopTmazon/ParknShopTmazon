@@ -43,15 +43,18 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.modify(product);
 	}
 
-	public boolean delect(Product product) {
+	public boolean delete(Product product) {
 		// TODO Auto-generated method stub
-		return productDao.delect(product);
+		return productDao.delete(product);
 	}
 
 	public String[] findAllCategory() {
 		return productDao.findAllCategory();
 	}
 
+	public Product findOnSellById(Integer id){
+		return productDao.findOnSellById(id);
+	}
 	public List<Product> selectInLike(Product product) {
 		// TODO Auto-generated method stub
 		return productDao.selectInLike(product);

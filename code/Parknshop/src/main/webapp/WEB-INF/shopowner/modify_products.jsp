@@ -63,13 +63,13 @@
 				<div class="form-item">
 					<div class="form-lable-left">Product Price</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="price" value="${pirce}" name="price" type="text" maxlength="18";>
+						<input class="form-input-right" id="price" value="${price}" name="price" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Product Discount Price</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="price" value="${discount_pirce}" name="discountprice" type="text" maxlength="18";>
+						<input class="form-input-right" id="discount_price" value="${discount_price}" name="discount_price" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item">

@@ -19,7 +19,9 @@ public interface ProductDao {
 	public boolean modify(Product product);
 	
 	//update the product state
-	public boolean delect(Product product);
+	public boolean delete(Product product);
 	
 	public String[] findAllCategory();
+	
+	public Product findOnSellById(Integer id);
 }
