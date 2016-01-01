@@ -115,10 +115,6 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		try {
 			List<Order> result = runner.query(sql, new BeanListHandler<Order>(Order.class),
 					params.toArray());
-			System.out.println("#######################################################################");
-			for(Order order : result){
-				System.out.println(order.toString());
-			}
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
