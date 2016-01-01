@@ -31,6 +31,7 @@
 				<option>Near one year</option>
 			</select>
 		</div>
+		
 		<div class="order-form">
 			<div class="order-item item-form-head">
 				<div class="item-form-head-info"><span>Order Information</span></div>
@@ -39,6 +40,9 @@
 				<div class="item-form-head-orderstate"><span>State</span></div>
 				<div class="item-form-head-manage"><span>Manage</span></div>
 			</div>
+			
+			
+			
 			<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:<a href="">13121217</a></span></div>
 				<div class="item-product-photo"><img src="images_shop/fish.jpg"></div>
