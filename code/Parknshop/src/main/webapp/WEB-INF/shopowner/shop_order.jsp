@@ -41,10 +41,11 @@
 				<div class="item-form-head-manage"><span>Manage</span></div>
 			</div>
 			
-			<c:forEach var="product" items="${productList}" >
+			<c:forEach var="order" items="${orders}" >
 				
 				<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:${order.orderId}</span></div>
+				
 				<div class="item-product-photo"><img src=${order.picture}></div>
 				<div class="item-name-time-shop">
 					<div class="name"><a href="">productname1</a></div>
