@@ -43,6 +43,18 @@ public class AddProductServlet extends HttpServlet{
 			return;
 		}
 		req.getSession().setAttribute(AttrName.SessionScope.SHOPID, "7880");
+		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
+		int shop = -1;
+		try {
+			shop=Integer.parseInt(shopId);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(shop==-1){
+			resp.sendRedirect("myshop");
+			return;
+		}
 		req.getRequestDispatcher("/WEB-INF/shopowner/add_products.jsp").forward(req, resp);
 	}
 	
