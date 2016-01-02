@@ -12,7 +12,7 @@ public class Product {
 	public static final String CATEGORY_HEALTH = "Health, Fitness & Sports";
 	public static final String CATEGORY_HOME = "Home & Office";
 
-	public static final String STATUS_NULL ="";
+	public static final String STATUS_ONSELL ="onsell";
 	public static final String STATUS_PULL ="pulloff";
 	
 	private Integer productId;
