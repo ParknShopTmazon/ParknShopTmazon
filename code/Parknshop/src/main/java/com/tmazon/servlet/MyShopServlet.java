@@ -28,6 +28,7 @@ public class MyShopServlet extends HttpServlet {
 	    if(loginUser == null){
 	    	resp.sendRedirect("login");
 	    }else{
+	    	
 	    	req.getRequestDispatcher("/WEB-INF/shopowner/myshop.jsp").forward(req, resp);
 	    }
 	    

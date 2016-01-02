@@ -175,5 +175,11 @@ public class Order {
 		this.address = address;
 	}
 	
+	public List<OrderInfo> getOrderInfo(){
+		return orderInfos;
+	}
 	
+	public void setOrderInfo(List<OrderInfo> orderInfos){
+		this.orderInfos = orderInfos;
+	}
 }
