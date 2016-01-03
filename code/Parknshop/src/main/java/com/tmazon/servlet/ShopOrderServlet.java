@@ -33,31 +33,36 @@ public class ShopOrderServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Integer shopId = (Integer) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
-	
+//		Integer shopId = (Integer) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
+		Integer shopId =1;
 		StringBuilder sqlBuilder1 = new StringBuilder("select orders.orderId,payType,orders.status,orderTime,deliveryTime,dealTime,userId,addressId "
 				+ "from product,orderInfo,orders where product.productId=orderInfo.productId "
-				+ "and orders.orderId=orderInfo.orderId and shopId=1");
+				+ "and orders.orderId=orderInfo.orderId and shopId=");
 		
-		StringBuilder sqlBuilder2 = new StringBuilder("select orders.orderId,deliveryId,quantity,orderInfo.productId,waybill "
+		StringBuilder sqlBuilder2 = new StringBuilder("select orderInfo.orderId,orderInfo.deliveryId,orderInfo.quantity,orderInfo.productId,orderInfo.waybill "
 				+ "from product,orderInfo,orders where product.productId=orderInfo.productId "
-				+ "and orders.orderId=orderInfo.orderId and shopId=1;");
+				+ "and orders.orderId=orderInfo.orderId and shopId=");
 		
+		String endSql = " group by orders.orderId;";
 		
 //		String sqlByShopId1 = sqlBuilder1.append(shopId).append(";").toString();
 		
-		String sqlByShopId1 = sqlBuilder1.toString();
-		String sqlByShopId2 = sqlBuilder2.toString();
+		String sqlByShopId1 = sqlBuilder1.append(shopId).append(endSql).toString();
+		String sqlByShopId2 = sqlBuilder2.append(shopId).toString();
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 	    
 		try {
 			List<Order> orders= runner.query(sqlByShopId1, new BeanListHandler<Order>(Order.class));
-			List<OrderInfo> orderInfos= runner.query(sqlByShopId1, new BeanListHandler<OrderInfo>(OrderInfo.class));
+			List<OrderInfo> orderInfos= runner.query(sqlByShopId2, new BeanListHandler<OrderInfo>(OrderInfo.class));
 			
 			System.out.println("#################");
 			System.out.println(orders.size());
 			for(int i=0;i<orders.size();i++){
 				System.out.println(orders.get(i).toString());
+			}
+			
+			for(int i=0;i<orderInfos.size();i++){
+				System.out.println(orderInfos.get(i).toString());
 			}
 			
 			for(int i=0;i<orders.size();i++){
@@ -68,8 +73,9 @@ public class ShopOrderServlet extends HttpServlet {
 					}
 				}
 				orders.get(i).setOrderInfo(orderInfoById);
-				System.out.println(orders.get(i).toString());
 				System.out.println(orders.get(i).getOrderInfo().size());
+				System.out.println(orders.get(i).toString());
+				
 			}
 			
 		} catch (SQLException e) {
