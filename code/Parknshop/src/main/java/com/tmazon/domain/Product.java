@@ -133,6 +133,13 @@ public class Product {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", shopId=" + shopId + ", name=" + name + ", price=" + price
+				+ ", discountPrice=" + discountPrice + ", category=" + category + ", stockNum=" + stockNum
+				+ ", soldNum=" + soldNum + ", description=" + description + ", picture=" + picture + ", status="
+				+ status + ", shop=" + shop + "]";
+	}
 
 	
 	

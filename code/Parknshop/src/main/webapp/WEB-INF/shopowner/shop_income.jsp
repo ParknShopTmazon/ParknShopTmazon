@@ -46,6 +46,19 @@
 				<div class="item-product-totalprice"><span>$32</span></div>
 				<div class="item-product-orderstate"><span>XXXXX</span></div>
 				<div class="item-product-manage"><span>view</span></div>
+				
+				
+			</div>
+			<div class="order-item ">
+				
+				<div class="item-product-photo"><img src="images_shop/fish.jpg"></div>
+				<div class="item-name-time-shop"><a href="">good fish</a><br/><span>Trade Date:&nbsp;2015-13-54</span></div>
+				<div class="item-product-mum"><span>1</span></div>
+				<div class="item-product-totalprice"><span>$32</span></div>
+				<div class="item-product-orderstate"><span>XXXXX</span></div>
+				<div class="item-product-manage"><span>view</span></div>
+				
+				
 			</div>
 			<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:<a href="">13121218</a></span></div>

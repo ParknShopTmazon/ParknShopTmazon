@@ -122,4 +122,28 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		}
 	}
 
+	public List<OrderInfo> getOrderInfosByshop(Integer shopId) {
+		
+		StringBuilder sqlBuilder = new StringBuilder("select * from product,orderinfo where shopId = ? AND orderinfo.productId = product.productId");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if (shopId != null) {
+			params.add(shopId);
+		}else {
+			return null;
+		}
+
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<OrderInfo> result = runner.query(sql, new BeanListHandler<OrderInfo>(OrderInfo.class),
+					params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

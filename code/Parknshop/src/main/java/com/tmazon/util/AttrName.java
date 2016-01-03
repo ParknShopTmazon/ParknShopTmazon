@@ -31,6 +31,7 @@ public class AttrName {
 		public static final String IS_SHOP_REGISTER_SUCCESS = "r_is_shop_register_success";
 		
 		public static final String CATEGORIES = "r_categories";
+		public static final String PRODUCTS = "r_products";
 	}
 	
 	public class CartServiceImplMapGet {

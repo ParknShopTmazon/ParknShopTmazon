@@ -193,6 +193,16 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	public User findById(Integer id) {
+		List<User> list = select(new User(id, null, null, null, null));
+		
+		if(list.isEmpty())
+			return null;
+		else {
+			return list.get(0);
+		}
+	}
+
 	
 
 	

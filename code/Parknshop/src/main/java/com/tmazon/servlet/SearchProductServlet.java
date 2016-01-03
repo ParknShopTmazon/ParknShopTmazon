@@ -27,17 +27,12 @@ public class SearchProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");
 		String category = req.getParameter("type");
-		if((name==null||"".trim().equals(name))&&(category==null||"".trim().equals(category))){
-			req.setAttribute("num", 0);
-			req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp").forward(req, resp);
-			return;
+		if ("".equals(category)) {
+			category = null;
 		}
-		Product product  =new Product();
-		if(!(category==null||"".trim().equals(category))){
-			product.setCategory(category);
-			System.out.println(category);
-		}
-		product.setName(name);
+		
+		Product product  =new Product(null, null, name, null, null, category, null, null, null, null);
+		
 		List<Product> productList = productService.selectInLike(product);
 		if(productList==null||productList.isEmpty()){
 			req.setAttribute("num", 0);
