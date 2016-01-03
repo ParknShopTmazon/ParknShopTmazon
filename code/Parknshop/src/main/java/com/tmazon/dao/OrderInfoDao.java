@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
+import com.tmazon.domain.Shop;
 
 
 public interface OrderInfoDao {
@@ -11,6 +12,8 @@ public interface OrderInfoDao {
 	public List<OrderInfo> select(OrderInfo orderInfo);
 	
 	public List<Order> getOrderByShopId(Integer shopId);
+	
+	public List<OrderInfo> getOrderInfosByshop(Integer shopId);
 	
 	public boolean insert(OrderInfo orderInfo);
 	
