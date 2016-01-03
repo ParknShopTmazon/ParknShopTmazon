@@ -29,11 +29,14 @@ public class OrderServiceImpl implements OrderService {
 
 		order.setOrderTime(new Date());
 		order.setStatus(Order.STATUS_UNPAID);
+		order.setPayType(Order.PAY_TYPE_ONLINE_PAYMENT);
 
 		order = ordersDao.insert(order);
 
 		for (OrderInfo orderInfo : orderInfos) {
 			orderInfo.setOrderId(order.getOrderId());
+			Cart cart = cartDao.findByPKId(order.getUserId(), orderInfo.getProductId());
+			orderInfo.setQuantity(cart.getQuantity());
 			if (orderInfoDao.insert(orderInfo)) {
 				cartDao.delete(new Cart(order.getUserId(), orderInfo.getProductId(), null));
 			} else {
