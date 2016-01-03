@@ -50,7 +50,44 @@ public class UserDaoImpl implements UserDao {
 			return null;
 		}
 	}
-
+	
+	public List<User> search(User user){
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM user WHERE 1=1 ");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if (user.getUserId() != null) {
+			sqlBuilder.append("AND userId=? ");
+			params.add(user.getUserId());
+		}
+		if (user.getName() != null) {
+			sqlBuilder.append("AND name like \"%"+user.getName()+"%\"");
+			//params.add(user.getName());
+		}
+		if (user.getPassword() != null) {
+			sqlBuilder.append("AND password=? ");
+			params.add(user.getPassword());
+		}
+		if (user.getRole() != null) {
+			sqlBuilder.append("AND role=? ");
+			params.add(user.getRole());
+		}
+		if (user.getStatus() != null) {
+			sqlBuilder.append("AND status=? ");
+			params.add(user.getStatus());
+		}
+		
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<User> result = runner.query(sql, new BeanListHandler<User>(User.class), params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public boolean insert(User user) {
 		String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
 		System.out.println(sql);
@@ -65,15 +102,30 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
-	public boolean update(User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(String name,String status) {
+		String sql = "UPDATE user SET status = ? WHERE name = ?";
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql,status,name);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
-	public boolean delete(User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(String name) {
+		String sql="DELETE FROM user WHERE name = ?";
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql,name);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
+
 
 	public User findByName(String name) {
 		List<User> list = select(new User(null, name, null, null, null));
