@@ -14,7 +14,6 @@
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 		<script type="text/javascript">
 		
-		
 		</script>
 	</head>
 	<body>
@@ -74,7 +73,6 @@
 					</p>
 				</div>
 		</form>
- <!--		<form method="post" action="updateUTableServlet">   --> 
 				<div class="grid_16">
 					<table  >
 						<thead>
@@ -86,11 +84,31 @@
 							</tr>
 						</thead>
 						<tfoot>
+						
 							<tr>
-								<td colspan="5" class="pagination">
-									<span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 million</a>
-								</td>
+							
+								<td colspan="2" rowspan="1" class="pagination">
+								  
+							<form method="post" action="searchUserAdmin">
+									<input type="submit"  value="<<"></input>
+									<input type="hidden" name="next" value="-1"/>
+									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
+									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
+									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
+							</form>	
+								
+									<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
+								
+							<form method="post" action="searchUserAdmin">
+									<input type="submit"   value=">>"></input>
+									<input type="hidden" name="next" value="1"/>
+									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
+									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
+									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
+							</form>
+							
 							</tr>
+						
 						</tfoot>
 						<tbody>
 						<%-- show the user list --%>
@@ -144,7 +162,7 @@
 			</div>
 		
 		<div id="foot">
-			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
+			 Welcome to PARKnSHOP. 
 		</div>
 	</body>
 </html>

@@ -97,8 +97,7 @@
 		</div>
 	</div>
 
-	<div id="foot">Copyright&reg; 2015-2015 PARKnSHOP All Rights
-		Reserved.</div>
+	<div id="foot"> Welcome to PARKnSHOP. </div>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
 		$(document)

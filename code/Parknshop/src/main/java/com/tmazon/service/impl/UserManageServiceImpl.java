@@ -6,6 +6,7 @@ import com.tmazon.dao.UserDao;
 import com.tmazon.domain.User;
 import com.tmazon.service.UserManageService;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.Page;
 
 public class UserManageServiceImpl implements UserManageService{
 	
@@ -21,5 +22,12 @@ public class UserManageServiceImpl implements UserManageService{
 
 	public boolean delete(String name) {
 		return userDao.delete(name);
+	}
+	public Page<User> page(User user,int curPage , int next)
+	{
+		List<User> userList = search(user);
+		Page<User> userPage = new Page<User>();
+		userPage.page(userList,curPage,next);
+		return userPage;
 	}
 }

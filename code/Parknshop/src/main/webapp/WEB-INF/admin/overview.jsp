@@ -247,7 +247,7 @@
 				</div>
 			</div>
 		<div id="foot">
-			Copyright&reg;  2015-2015 PARKnSHOP All Rights Reserved.
+			 Welcome to PARKnSHOP.
 		</div>
 	</body>
 </html>
