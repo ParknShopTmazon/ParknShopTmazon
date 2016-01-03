@@ -81,3 +81,12 @@ INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'unpaid', now(),
 INSERT INTO `parknshop`.`orderInfo` VALUES (100, 1, 2, 78781, '50256678700001');
 INSERT INTO `parknshop`.`orderInfo` VALUES (100, 2, 1, 78782, '50256678700002');
 
+INSERT INTO `parknshop`.`orders` (`orderId`, `payType`, `status`, `orderTime`, `userId`, `addressId`) VALUES ('1', 'online_payment', 'unpaid', '2015-1-1', '12312', '1');
+INSERT INTO `parknshop`.`orders` (`orderId`, `payType`, `status`, `orderTime`, `userId`, `addressId`) VALUES ('2', 'online_payment', 'unpaid', '2015-1-1', '12312', '1');
+
+INSERT INTO `parknshop`.`orderinfo` (`orderId`, `deliveryId`, `quantity`, `productId`) VALUES ('1', '1', '2', '78781');
+INSERT INTO `parknshop`.`orderinfo` (`orderId`, `deliveryId`, `quantity`, `productId`) VALUES ('1', '1', '3', '78782');
+INSERT INTO `parknshop`.`orderinfo` (`orderId`, `deliveryId`, `quantity`, `productId`) VALUES ('2', '2', '2', '78781');
+INSERT INTO `parknshop`.`orderinfo` (`orderId`, `deliveryId`, `quantity`, `productId`) VALUES ('2', '1', '3', '78783');
+
+

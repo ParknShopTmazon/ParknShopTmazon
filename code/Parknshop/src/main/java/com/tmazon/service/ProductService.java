@@ -9,6 +9,8 @@ public interface ProductService {
 
 	public List<Product> select(Product product );
 	
+	public List<Product> selectInLike(Product product );
+	
 	public Product getProductById(Integer id);
 	
 	public ProductInfo getProductInfo(Product product);
@@ -20,6 +22,10 @@ public interface ProductService {
 	public boolean modify(Product product);
 	
 	//update the product state
-	public boolean delect(Product product);
+	public boolean delete(Product product);
+	
+	public String[] findAllCategory();
+	
+	public Product findOnSellById(Integer id);
 	
 }

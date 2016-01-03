@@ -1101,6 +1101,9 @@ s {
 
 .order-container #order-details .order-item .order-origin-price {
     margin-left: 15%;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .order-container #order-details .order-item .order-origin-price s {

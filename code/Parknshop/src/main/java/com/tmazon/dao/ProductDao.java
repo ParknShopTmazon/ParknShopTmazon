@@ -8,6 +8,8 @@ public interface ProductDao {
 
 	public List<Product> select(Product product);
 	
+	public List<Product> selectInLike(Product product);
+	
 	public Product findByName(String name);
 	
 	public Product findById(Integer id);
@@ -17,5 +19,9 @@ public interface ProductDao {
 	public boolean modify(Product product);
 	
 	//update the product state
-	public boolean delect(Product product);
+	public boolean delete(Product product);
+	
+	public String[] findAllCategory();
+	
+	public Product findOnSellById(Integer id);
 }

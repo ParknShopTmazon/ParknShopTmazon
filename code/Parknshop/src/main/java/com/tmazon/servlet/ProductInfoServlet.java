@@ -37,7 +37,10 @@ public class ProductInfoServlet extends HttpServlet {
 		User user = (User) session.getAttribute(AttrName.SessionScope.USER);
 		if(user != null){
 			req.setAttribute("user", user);
+			req.setAttribute("isLogin", true);
 		}
+		
+		
 		
 		@SuppressWarnings("unchecked")
 		Map<String, String[]> params = req.getParameterMap();
@@ -56,19 +59,23 @@ public class ProductInfoServlet extends HttpServlet {
 		
 		int productId = ParseUtil.String2Integer(productIdString, null);
 		
+		
 		boolean existsFlag = false;
 		String[] quantityStrings = params.get("quantity");
-		if(quantityStrings != null){
-			String quantityString = new String();
-			quantityString = quantityStrings[0];
-			if(quantityString != null){
-				int quantity = ParseUtil.String2Integer(quantityString, 1);
-				if(quantity != 0)
-					existsFlag = cartService.addProduct(user.getUserId(), productId, quantity);
+		Product product = productService.getProductById(productId);
+		if(product != null && user != null){
+			if(quantityStrings != null){
+				String quantityString = new String();
+				quantityString = quantityStrings[0];
+				if(quantityString != null){
+					int quantity = ParseUtil.String2Integer(quantityString, 1);
+					if(quantity != 0)
+						existsFlag = cartService.addProduct(user.getUserId(), productId, quantity);
+				}
 			}
 		}
 		
-		Product product = productService.getProductById(productId);
+		
 		if(product != null){
 			req.setAttribute("product", product);
 			ProductInfo productInfo = productService.getProductInfo(productId);
@@ -79,8 +86,12 @@ public class ProductInfoServlet extends HttpServlet {
 			req.setAttribute("shop", shop);
 			if(existsFlag){
 				req.setAttribute("isExists", true);
-			}else if(cartService.isExists(user.getUserId(), productId)){
-				req.setAttribute("isExists", true);
+			}else if(user != null){
+				if(cartService.isExists(user.getUserId(), productId)){
+					req.setAttribute("isExists", true);
+				}else {
+					req.setAttribute("isExists", false);
+				}
 			}
 			if(product.getStatus() == null){
 				req.setAttribute("expired", false);
@@ -93,6 +104,7 @@ public class ProductInfoServlet extends HttpServlet {
 			}
 			
 		}
+		
 		
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/product_information.jsp");
 		requestDispatcher.forward(req, resp);
