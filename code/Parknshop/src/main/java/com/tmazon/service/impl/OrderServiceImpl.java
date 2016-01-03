@@ -61,4 +61,8 @@ public class OrderServiceImpl implements OrderService {
 		return ordersDao.update(order);
 	}
 
+	public List<OrderInfo> getOrderInfosByshop(Integer shopId) {
+		return orderInfoDao.getOrderInfosByshop(shopId);
+	}
+
 }

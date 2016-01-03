@@ -42,43 +42,30 @@
 			</div>
 		</div>	
 		
-		<c:forEach var="item" varStatus="status" items="${ orderList }">
-			
-			${ item[3] }
-			
-		</c:forEach>
-		
-		
-			<c:forEach var="order" items="${orderList}" >
+			<c:forEach var="orderInfo" items="${orderInfoList}" >
 				
 				<div class="order-item ">
-				   <div class="item-product-id"><span>Order ID:${order}</span></div>
-				   <div class="time"><span>Date:&nbsp;${order[2]}</span></div>
-				   <div class="item-product-orderstate"><span>${order[1]}</span></div>
-				</div>
-				<c:forEach var="orderInfo" items="${order[3]}"></c:forEach>
-				   <div class="order-item ">
-					
-						<div class="item-product-photo"><img src=${orderInfo[5] }></div>
-						<div class="item-name-time-shop">
-							<div class="name">${orderInfo[2] }</div>
-							
-							<div class="shop"><a href="">seller info</a></div>
-						</div>	
-						<div class="item-product-totalprice"><span>${orderInfo[3] }</span></div>
-						<div class="item-product-mum"><span>${orderInfo[1] }</span></div>
-						
-						<div class="item-product-manage dropedlist">
+				<div class="item-product-id"><span>Order ID:${orderInfo.orderId }</span></div>
+				<div class="item-product-photo"><img src=${orderInfo.product.picture }></div>
+				<div class="item-name-time-shop">
+					<div class="name">${orderInfo.product.name }</div>
+					<div class="time"><span>Date:&nbsp;${orderInfo.order.orderTime }</span></div>
+					<div class="shop">${orderInfo.product.shopId }</div>
+				</div>	
+				<div class="item-product-totalprice"><span>${orderInfo.product.price }</span></div>
+				<div class="item-product-mum"><span>${orderInfo.quantity }</span></div>
+				<div class="item-product-orderstate"><span>${orderInfo.order.status }</span></div>
+				<div class="item-product-manage dropedlist">
+					<ul>
+						<li>Manage
 							<ul>
-								<li>Manage
-									<ul>
-										<li>delete</li>
-										<li>change status</li>
-									</ul>
-								</li>
-							</ul>	
-						</div>
-			      </div>
+								<li>delete</li>
+								<li>upset</li>
+							</ul>
+						</li>
+					</ul>	
+				</div>
+			</div>
 		  </c:forEach>
 
 		
