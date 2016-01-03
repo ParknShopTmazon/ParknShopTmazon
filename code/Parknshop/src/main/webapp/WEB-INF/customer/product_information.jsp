@@ -12,20 +12,34 @@
 
 </script>
 </head>
-<div class="container-fluid">
+<body>
 	<%@ include file="header.html"%>
 	<div class="row-fluid">
-		<div class="span12">
-			<div class="row-fluid">
 				<div class="span4">
 					<img src="${ product.picture }">
 				</div>
-				<div class="span8">
+				<div class="span4">
 					<p>
 						Introduction of products
 					</p>
 					<table class="table">
 						<thead>
+							<tr>
+								<th>
+									shop owner:
+								</th>
+								<th>
+									<a href="#" >${ shopOwnerName }</a>
+									<c:choose>
+										<c:when test="${ ownerOnline }">
+											[online]
+										</c:when>
+										<c:otherwise>
+											[offline]
+										</c:otherwise>
+									</c:choose>
+								</th>								
+							</tr>
 							<tr>
 								<th>
 									price:
@@ -86,11 +100,8 @@
 						<a href="/Parknshop/login"><button class="btn-warning">Login</button></a>
 					</c:if>
 				</div>
-			</div>
-		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span12">
 			<h3>
 				Product introduction 
 			</h3>
@@ -98,9 +109,7 @@
 				${ product.description }
 			</p>
 		</div>
-	</div>
 	<div class="row-fluid">
-		<div class="span12">
 			<table class="table">
 				<thead>
 					<tr>
@@ -137,7 +146,6 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
 	</div>
 	<%@ include file="footer.html"%>
-</div>
+</body>

@@ -17,6 +17,7 @@ import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
 import com.tmazon.service.ProductService;
 import com.tmazon.service.ShopService;
+import com.tmazon.service.UserService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.ParseUtil;
@@ -29,6 +30,7 @@ public class ProductInfoServlet extends HttpServlet {
 	private CartService cartService = BasicFactory.getImpl(CartService.class);
 	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
+	private UserService userService = BasicFactory.getImpl(UserService.class);
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -101,6 +103,19 @@ public class ProductInfoServlet extends HttpServlet {
 				}else {
 					req.setAttribute("expired", false);
 				}
+			}
+			
+			User shopOwner = userService.findById(shop.getOwner());
+			
+			req.setAttribute("shopOwnerId", shopOwner.getUserId());
+			req.setAttribute("shopOwnerName", shopOwner.getName());
+			
+			@SuppressWarnings("unchecked")
+			Map<String, HttpSession> users = (Map<String, HttpSession>) req
+					.getSession().getServletContext()
+					.getAttribute(AttrName.ApplicationScope.ONLINE_USERS);
+			if (users.containsKey(shopOwner.getName())) {
+				req.setAttribute("ownerOnline", true);
 			}
 			
 		}

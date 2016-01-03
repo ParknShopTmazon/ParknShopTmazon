@@ -154,7 +154,7 @@
 								<div class="row-fluid">
 							</c:if>
 								<div class="span3">
-									<a href="./productInfo?pid=${ product.productId }" ><img src="${ product.picture }" height="" width=""></a>
+									<a href="./productInfo?pid=${ product.productId }" target="_black" ><img src="${ product.picture }" height="" width=""></a>
 									<h4>${ product.price } dollar</h4>
 									<h4>${ product.name }</h4>
 								</div>

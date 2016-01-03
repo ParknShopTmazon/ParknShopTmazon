@@ -19,4 +19,6 @@ public interface UserService {
 	public List<User> searchUsersByName(String name);
 	
 	public boolean deleteFriend(User user, User friend);
+	
+	public User findById(Integer id);
 }

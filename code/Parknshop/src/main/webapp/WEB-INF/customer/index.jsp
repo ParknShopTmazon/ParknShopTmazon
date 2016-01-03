@@ -18,82 +18,52 @@
 	<c:if test="${ not empty s_user }">
 		<%@ include file="dialog.html"%>
 	</c:if>
-	
+
 	<div class="row-fluid">
 		<div class="span3" align="center">
-			<h2>
-			Product Type
-			</h2>
+			<h2>Product Type</h2>
 			<ul>
-			
+				<li><a href="index">All</a></li>
 				<c:forEach var="category" items="${ r_categories }">
-					<li>
-					
-						<a href="#">${ category }</a>
-					
-					</li>
+					<li><a href="index?category=${ category }">${ category }</a></li>
 				</c:forEach>
 			</ul>
 		</div>
 		<div class="span9">
 			<div class="row-fluid">
-				<div class="span12">
-					<h3>
-						Top 10 Products
-					</h3>
+				<div class="span9">
+					<h3>Top 10 Products</h3>
+				</div>
+				<div class="span3">
+					<h3><a href="searchProduct">more</a></h3>
 				</div>
 			</div>
 			<div class="row-fluid">
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>1</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>2</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>3</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>4</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>5</h4>
-				</div>
-				<div class="span2">
-				</div>
+				<c:if test="${ empty r_products }">no product</c:if>
+				<c:forEach var="product" varStatus="status" begin="0" end="4"
+					items="${ r_products }">
+					<div class="span2">
+						<a href="productInfo?pid=${ product.productId }" target="_black"><img src="${ product.picture }" ></a>
+						<h4>${ product.name }</h4>
+					</div>
+				</c:forEach>
+
+				<div class="span2"></div>
 			</div>
 			<div class="row-fluid">
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>6</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>7</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>8</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>9</h4>
-				</div>
-				<div class="span2">
-					<img src = "1.jpg">
-					<h4>10</h4>
-				</div>
-				<div class="span2">
-				</div>
+				<c:forEach var="product" varStatus="status" begin="5" end="9"
+					items="${ r_products }">
+					<div class="span2">
+						<a href="productInfo?pid=${ product.productId }" target="_black"><img src="${ product.picture }"></a>
+						<h4>${ product.name }</h4>
+					</div>
+				</c:forEach>
+
+				<div class="span2"></div>
 			</div>
 		</div>
 	</div>
-	
+
 	<%@ include file="footer.html"%>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="js/customer.js"></script>

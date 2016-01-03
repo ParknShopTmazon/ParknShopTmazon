@@ -1,11 +1,13 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -37,6 +39,11 @@ public class FriendListServlet extends HttpServlet {
 			return;
 		}
 		
+		@SuppressWarnings("unchecked")
+		Map<String, HttpSession> users = (Map<String, HttpSession>) req
+				.getSession().getServletContext()
+				.getAttribute(AttrName.ApplicationScope.ONLINE_USERS);
+		
 		userService.getFriends(user);
 		
 		JSONObject jsonObject = new JSONObject();
@@ -47,6 +54,7 @@ public class FriendListServlet extends HttpServlet {
 				j.put("uid", u.getUserId());
 				j.put("name", u.getName());
 				j.put("unread", messageService.getUnreadCount(new Message(null, u.getUserId(), user.getUserId(), null, null, null), false));
+				j.put("online", users.containsKey(u.getName())? "T" : "F");
 				jsonArray.add(j);
 			}
 			jsonObject.put("friends", jsonArray);

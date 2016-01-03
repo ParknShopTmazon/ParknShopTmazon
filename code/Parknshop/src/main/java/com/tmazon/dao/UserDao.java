@@ -24,4 +24,6 @@ public interface UserDao {
 	
 	public boolean deleteFriend(Integer userId, Integer friendId);
 	
+	public User findById(Integer id);
+	
 }
