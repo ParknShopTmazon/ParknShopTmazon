@@ -65,14 +65,23 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	public Order insert(Order order) {
-		String sql = "INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO orders(payType,status,orderTime,userId,addressId) VALUES (?, ?, ?, ?, ?)";
 		System.out.println(sql);
+		
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(order.getPayType());
+		params.add(order.getStatus());
+		params.add(order.getOrderTime());
+		params.add(order.getUserId());
+		params.add(order.getAddressId());
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			Order orders = runner.insert(sql, new BeanHandler<Order>(Order.class), order.getOrderId(), order.getPayType(),
-					order.getStatus(), order.getOrderTime(), order.getUserId(), order.getAddressId());
-			return orders;
+			runner.insert(sql, new BeanHandler<Order>(Order.class),params.toArray());
+			List<Order> result = select(order);
+			if(result.isEmpty())
+				return null;
+			return result.get(0);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

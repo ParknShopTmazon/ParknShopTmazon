@@ -153,7 +153,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		boolean insert = shopService.insert(shop);
 		req.setAttribute("img", shop.getPicture());
 		if(insert==true){
-			req.getRequestDispatcher("/WEB-INF/shopowner/shop_homepage.jsp").forward(req, resp);
+			req.getRequestDispatcher("myshop").forward(req, resp);
 			return;
 		}else{
 			resp.sendRedirect("registernewshop");

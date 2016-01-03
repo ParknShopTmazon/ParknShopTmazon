@@ -909,6 +909,7 @@ var customer = {
                             /** [if: choose the first item] */
                             if (i == 0) {
                                 checked = 'checked="checked"';
+                                address_id = data.addresses[i].a_id;
                             } else {
                                 checked = '';
                             }

@@ -40,108 +40,48 @@
 				<div class="item-form-head-orderstate"><span>State</span></div>
 				<div class="item-form-head-manage"><span>Manage</span></div>
 			</div>
-			
-			<c:forEach var="product" items="${productList}" >
+		</div>	
+		
+		
+			<c:forEach var="order" items="${orders}" >
 				
 				<div class="order-item ">
 				<div class="item-product-id"><span>Order ID:${order.orderId}</span></div>
-				<div class="item-product-photo"><img src=${order.picture}></div>
-				<div class="item-name-time-shop">
+				
+				
+				    
+				   <div class="item-product-photo"><img src=></div>  
+				    <div class="item-name-time-shop">
 					<div class="name"><a href="">productname1</a></div>
 					<div class="time"><span>Date:&nbsp;${order.orderTime}</span></div>
-					<div class="shop"><a href="">seller info</a></div>
-				</div>	
-				<div class="item-product-mum"><span>${order.quantity }</span></div>
-				<div class="item-product-totalprice"><span>$32</span></div>
-				<div class="item-product-orderstate"><span>xxxxx</span></div>
-				<div class="item-product-manage dropedlist">
-					<ul>
-						<li>Manage
-							<ul>
-								<li>delete</li>
-								<li>what</li>
-							</ul>
-						</li>
-					</ul>	
-				</div>
-			  </div>
-					<div class="span3">
-						<a href="./productInfo?pid=${ product.productId }" ><img src="${ product.picture }" height="" width=""></a>
-						<h4>${ product.price } dollar</h4>
-						<h4>${ product.name }</h4>
-					</div>
-				
-			</c:forEach>
-			
-			<div class="order-item ">
-				<div class="item-product-id"><span>Order ID:<a href="">13121217</a></span></div>
-				<div class="item-product-photo"><img src="images_shop/fish.jpg"></div>
-				<div class="item-name-time-shop">
-					<div class="name"><a href="">productname1</a></div>
-					<div class="time"><span>Date:&nbsp;2015-13-54</span></div>
-					<div class="shop"><a href="">seller info</a></div>
-				</div>	
-				<div class="item-product-mum"><span>1</span></div>
-				<div class="item-product-totalprice"><span>$32</span></div>
-				<div class="item-product-orderstate"><span>xxxxx</span></div>
-				<div class="item-product-manage dropedlist">
-					<ul>
-						<li>Manage
-							<ul>
-								<li>delete</li>
-								<li>what</li>
-							</ul>
-						</li>
-					</ul>	
-				</div>
-			</div>
-			<div class="order-item ">
-				<div class="item-product-id"><span>Order ID:<a href="">13121216</a></span></div>
-				<div class="item-product-photo"><img src="images_shop/hehe.jpg"></div>
-				<div class="item-name-time-shop">
-					<div class="name"><a href="">productname2</a></div>
-					<div class="time"><span>Date:&nbsp;2015-13-34</span></div>
-					<div class="shop"><a href="">seller info</a></div>
-				</div>	
-				<div class="item-product-mum"><span>1</span></div>
-				<div class="item-product-totalprice"><span>$32</span></div>
-				<div class="item-product-orderstate"><span>xxxxx</span></div>
-				<div class="item-product-manage dropedlist">
-					<ul>
-						<li>Manage
-							<ul>
-								<li>delete</li>
-								<li>upset</li>
-							</ul>
-						</li>
-					</ul>	
-				</div>
-			</div>
-			<div class="order-item ">
-					<div class="item-product-id"><span>Order ID:<a href="">13121215</a></span></div>
-					<div class="item-product-photo"><img src="images_shop/hehe.jpg"></div>
-					<div class="item-name-time-shop">
-						<div class="name"><a href="">productname2</a></div>
-						<div class="time"><span>Date:&nbsp;2015-13-34</span></div>
-						<div class="shop"><a href="">seller info</a></div>
-					</div>	
-					<div class="item-product-mum"><span>2</span></div>
-					<div class="item-product-totalprice"><span>$64</span></div>
-					<div class="item-product-orderstate"><span>xxxxx</span></div>
+					<div class="shop">${order.status}</div>
+				    </div>	
+<%-- 				    <c:forEach var="orderInfo" items="${order.orderInfos}"> --%>
+<%-- 					<div class="item-product-mum"><span>${orderInfo.quantity }</span></div> --%>
+<%-- 					</c:forEach> --%>
+					<div class="item-product-totalprice"><span>$32</span></div>
+					<div class="item-product-orderstate"><span>${order.status}</span></div>
 					<div class="item-product-manage dropedlist">
 						<ul>
 							<li>Manage
 								<ul>
 									<li>delete</li>
-									<li>upset</li>
+									<li>what</li>
 								</ul>
 							</li>
 						</ul>	
 					</div>
-			</div>
-		</div>
+				
+				
+			  </div>
+		  </c:forEach>
+
+		
+		
+		
 	</div>
 	</div>
+	
 	<%@ include file="footer.html"%>
 </body>
 </html>
