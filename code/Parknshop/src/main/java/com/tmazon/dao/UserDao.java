@@ -8,11 +8,13 @@ public interface UserDao {
 
 	public List<User> select(User user);
 	
+	public List<User> search(User user);
+	
 	public boolean insert(User user);
 	
-	public boolean update(User user);
+	public boolean update(String name,String status);
 	
-	public boolean delete(User user);
+	public boolean delete(String name);
 	
 	public User findByName(String name);
 	

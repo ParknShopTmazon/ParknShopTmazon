@@ -94,7 +94,7 @@
  </servlet>
  <servlet>
   <servlet-name>userJsp</servlet-name>
-  <jsp-file>/WEB-INF/admin/user.jsp</jsp-file>
+  <jsp-file>/WEB-INF/admin/userManagement.jsp</jsp-file>
  </servlet>
  <servlet>
   <servlet-name>DisagreeServlet</servlet-name>
@@ -205,6 +205,12 @@
  <servlet>
  	<servlet-name>DeleteProductServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.DeleteProductServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>UpdateUTableServlet</servlet-name>
+ 	<display-name>UpdateUTableServlet</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.UpdateUTableServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -389,6 +395,10 @@
   <servlet-mapping>
  	<servlet-name>DeleteProductServlet</servlet-name>
  	<url-pattern>/deleteproduct</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>UpdateUTableServlet</servlet-name>
+ 	<url-pattern>/updateUTableServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>
