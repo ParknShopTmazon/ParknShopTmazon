@@ -26,6 +26,7 @@ body {
     width: 100%;
     position: relative;
     overflow-y: scroll;
+    color: #000;
 }
 
 
@@ -292,6 +293,32 @@ s {
     padding: 15px;
     box-sizing: border-box;
     font-size: 1.2em;
+    font-family: monospace;
+	border-color: rgb(169, 169, 169);
+	-webkit-appearance: textarea;
+	background-color: white;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	-webkit-rtl-ordering: logical;
+	-webkit-user-select: text;
+	flex-direction: column;
+	resize: auto;
+	cursor: auto;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	margin: 0em;
+	color: initial;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+	-webkit-writing-mode: horizontal-tb;
 }
 
 .dialog #main .dialog-input .send-btn {
@@ -1499,8 +1526,11 @@ s {
 }
 
 .order-container #order-list .order-item .price p {
-    text-align: right;
-    width: 201px;
+	text-align: right;
+	width: 270px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .order-container #order-list .order-item .price .shop-price {
