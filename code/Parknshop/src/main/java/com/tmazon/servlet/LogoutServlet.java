@@ -24,8 +24,7 @@ public class LogoutServlet extends HttpServlet {
 			session.invalidate();
 		}
 		
-		String url = req.getHeader("Referer");
-		resp.sendRedirect(url);
+		resp.sendRedirect("index");
 	}
 
 }
