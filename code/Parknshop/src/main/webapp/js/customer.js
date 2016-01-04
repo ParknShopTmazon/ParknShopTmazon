@@ -233,10 +233,10 @@ var customer = {
         /**
          * [getMessage: get message from the friend]
          * @param  {[type]} friendName [the name of the friend]
-         * @param  {[type]} comet       [the name of the friend]
+         * @param  {[type]} isComet       [the name of the friend]
          * @return {[type]}            [description]
          */
-        function getMessage(friendName, comet) {
+        function getMessage(friendName, isComet) {
             const cometObj = comet('messages');
             const postData = {
                 friendName: friendName
