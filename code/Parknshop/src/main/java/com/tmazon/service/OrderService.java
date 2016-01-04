@@ -14,7 +14,7 @@ public interface OrderService {
 	
 	public List<OrderInfo> getOrderInfosByshop(Integer shopId);
 	
-	public boolean addOrder(Order order, List<OrderInfo> orderInfos);
+	public Order addOrder(Order order, List<OrderInfo> orderInfos);
 	
 	public Order findById(Integer id);
 	
