@@ -49,12 +49,12 @@ public class ModifyProductServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		if(id==-1){
-			resp.sendRedirect("productlist");
+			resp.sendRedirect("selectedshop");
 			return;
 		}
 		Product product = productService.findOnSellById(id);
 		if(product==null||product.getProductId()==null||product.getProductId()!=id){
-			resp.sendRedirect("productlist");
+			resp.sendRedirect("selectedshop");
 			return;
 		}
 		int shop = -1;
@@ -182,6 +182,6 @@ req.setCharacterEncoding("utf-8");
 		if(modify==true){
 			System.out.println("ÐÞ¸Ä³É¹¦");
 		}
-		resp.sendRedirect("productlist");
+		resp.sendRedirect("selectedshop");
 	}
 }

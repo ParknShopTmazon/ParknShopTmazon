@@ -214,7 +214,15 @@
  </servlet>
  <servlet>
  	<servlet-name>DeleteOrderServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.DeleteOrderServlet</servlet-class>
+ 	<servlet-class>com.tmazon.servlet.DeleteProductServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>UpdateOrderConditionServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.UpdateOrderConditionServlet</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>DeleteShopOrderServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.DeleteShopOrderServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -406,7 +414,15 @@
  </servlet-mapping>
  <servlet-mapping>
  	<servlet-name>DeleteOrderServlet</servlet-name>
- 	<url-pattern>/deleteOrder</url-pattern>
+ 	<url-pattern>/deleteorder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>UpdateOrderConditionServlet</servlet-name>
+ 	<url-pattern>/updateordercondition</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>DeleteShopOrderServlet</servlet-name>
+ 	<url-pattern>/deleteshoporder</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

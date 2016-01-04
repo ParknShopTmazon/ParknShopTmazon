@@ -66,9 +66,12 @@ public class AddOrderServlet extends HttpServlet {
 		order.setAddressId(addressId);
 		order.setUserId(user.getUserId());
 		
-		if(orderService.addOrder(order, orderInfos)){
+		order = orderService.addOrder(order, orderInfos);
+		
+		if(order != null){
 			jsonObject.put("result", true + "");
 			jsonObject.put("errMsg", "");
+			jsonObject.put("orderId", order.getOrderId());
 		}else {
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Failed!");
