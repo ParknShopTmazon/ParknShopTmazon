@@ -201,6 +201,64 @@ public class ProductDaoImpl implements ProductDao{
 			return null;
 		}
 	}
+	
+	public List<Product> selectOnSell(Product product) {
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product WHERE 1=1 ");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if (product.getProductId() != null) {
+			sqlBuilder.append("AND productId = ? ");
+			params.add(product.getProductId());
+		}
+		if (product.getShopId() != null) {
+			sqlBuilder.append("AND shopId = ? ");
+			params.add(product.getShopId());
+		}
+		if (product.getName() != null) {
+			sqlBuilder.append("AND name = ? ");
+			params.add(product.getName());
+		}
+		if (product.getPrice() != null) {
+			sqlBuilder.append("AND price = ? ");
+			params.add(product.getPrice());
+		}
+		if (product.getDiscountPrice() != null) {
+			sqlBuilder.append("AND discountPrice = ? ");
+			params.add(product.getDiscountPrice());
+		}
+		if (product.getCategory() != null) {
+			sqlBuilder.append("AND category = ? ");
+			params.add(product.getCategory());
+		}
+		if (product.getStockNum() != null) {
+			sqlBuilder.append("AND stockNum = ? ");
+			params.add(product.getStockNum());
+		}
+		if(product.getSoldNum()!=null){
+			sqlBuilder.append(" AND soldNum=? ");
+			params.add(product.getSoldNum());
+		}
+		if(product.getDescription()!=null){
+			sqlBuilder.append(" AND description=? ");
+			params.add(product.getDescription());
+		}
+		if(product.getPicture()!=null){
+			sqlBuilder.append(" AND picture=? ");
+			params.add(product.getPicture());
+		}
+		sqlBuilder.append(" AND ( status!=? or status is null)");
+		params.add(product.STATUS_PULL);
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<Product> result = runner.query(sql, new BeanListHandler<Product>(Product.class), params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public List<Product> selectInLike(Product product) {
 		// TODO Auto-generated method stub

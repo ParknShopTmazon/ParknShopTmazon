@@ -24,4 +24,6 @@ public interface ProductDao {
 	public String[] findAllCategory();
 	
 	public Product findOnSellById(Integer id);
+	
+	public List<Product> selectOnSell(Product product);
 }
