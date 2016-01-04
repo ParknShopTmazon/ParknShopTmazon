@@ -1217,12 +1217,17 @@ var customer = {
                         alert('please add an address for your own first');
                         $('.order-container #order-addr .other').click();
                     } else {
-                        $.getJSON('addOrder', {
-                            address_id: address_id,
-                            options: orders
-                        }, function(json, textStatus) {
-                            /*optional stuff to do after success */
-                        });
+                    	if (orders.length === 0) {
+                    		alert('you have no produts');
+                    	} else {
+                    		$.getJSON('addOrder', {
+                                address_id: address_id,
+                                options: orders
+                            }, function(data, textStatus) {
+                                /*optional stuff to do after success */
+                            	window.location.href = '?type=pay&oid=' + data.order_id;
+                            });
+                    	}
                     }
                 });
             },
@@ -1343,9 +1348,11 @@ var customer = {
 
             $('.order-container #order-info').append('<div class="shop-info">\
                 <div class="pic-container">\
-                    <div class="over">\
-                        <div class="link-btn"></div>\
-                    </div>\
+            		<a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
+	                    <div class="over">\
+	                        <div class="link-btn"></div>\
+	                    </div>\
+	                </a>\
                     <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
                 </div>\
                 <div class="info">\
@@ -1411,7 +1418,7 @@ var customer = {
             const operations = {
                 unpaid: {
                     name: 'Paid',
-                    url: '#'
+                    type: 'pay'
                 }
             };
             
@@ -1471,7 +1478,7 @@ var customer = {
                                 <p class="name">track where the shop is</p>\
                             </div>\
                         </div>\
-                        <div class="handle-btn button" onclick="window.open(\'' + operations[data[i].status].url + '\');">' + operations[data[i].status].name + '</div>\
+                        <div class="handle-btn button" onclick="window.open(\'?type=' + operations[data[i].status].type + '&oid=' + data[i].orderId + '\');">' + operations[data[i].status].name + '</div>\
                     </div>';
                 }
 
@@ -1504,15 +1511,18 @@ var customer = {
 
                 /** [click function of delete order] */
                 $('.order-container #order-list .order-item .delete-btn').click(function(event) {
-                    $.getJSON('deleteOrder', {
+                	const _this = $(this);
+                	
+                	$.getJSON('deleteOrder', {
                         oid: $(this).prev().prev().children('.value').html()
                     }, function(data, textStatus) {
+                    	console.log(data.success);
                         /*optional stuff to do after success */
                         if (!data.success) {
                         	alert('failed to delete a order which state is not `unpaid`');
                         } else {
                         	/** remove dom node */
-                            $(this).parent().parent().remove();
+                            _this.parent().parent().remove();
                         }
                     });
                 })
@@ -1520,5 +1530,32 @@ var customer = {
             .fail(function() {
                 console.log("failed to get orders list");
             });
+    },
+    
+    /**
+     * [initPay: init the page page of order]
+     * @return {[type]} [description]
+     */
+    initPay: function(oid) {
+    	$('.order-container #pay-btn').click(function() {
+    		$.getJSON('payOrder', {
+                oid: oid
+            }, function(data, textStatus) {
+                /*optional stuff to do after success */
+                if (!data.success) {
+                	$('.order-container #pay-btn').css({
+            			'border': '2px solid #666',
+            			'background-color': '#fff',
+            			'color': '#eee'
+            		});
+            		
+            		$('.order-container #pay-btn').removeClass('button');
+            		
+            		$('.order-container #pay-btn').unbind('click');
+                } else {
+                	alert('Ooops, failed to pay');
+                }
+            });
+    	});
     }
 };
