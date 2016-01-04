@@ -38,46 +38,20 @@
 				<div class="item-form-head-orderstate"><span>State</span></div>
 				<div class="item-product-manage"><span>Remark</span></div>
 			</div>
-			<div class="order-item ">
-				<div class="item-product-id"><span>Order ID:<a href="">13121217</a></span></div>
-				<div class="item-product-photo"><img src="images_shop/fish.jpg"></div>
-				<div class="item-name-time-shop"><a href="">good fish</a><br/><span>Trade Date:&nbsp;2015-13-54</span></div>
-				<div class="item-product-mum"><span>1</span></div>
-				<div class="item-product-totalprice"><span>$32</span></div>
-				<div class="item-product-orderstate"><span>XXXXX</span></div>
-				<div class="item-product-manage"><span>view</span></div>
-				
-				
-			</div>
-			<div class="order-item ">
-				
-				<div class="item-product-photo"><img src="images_shop/fish.jpg"></div>
-				<div class="item-name-time-shop"><a href="">good fish</a><br/><span>Trade Date:&nbsp;2015-13-54</span></div>
-				<div class="item-product-mum"><span>1</span></div>
-				<div class="item-product-totalprice"><span>$32</span></div>
-				<div class="item-product-orderstate"><span>XXXXX</span></div>
-				<div class="item-product-manage"><span>view</span></div>
-				
-				
-			</div>
-			<div class="order-item ">
-				<div class="item-product-id"><span>Order ID:<a href="">13121218</a></span></div>
-				<div class="item-product-photo"><img src="images_shop/hehe.jpg"></div>
-				<div class="item-name-time-shop"><a href="">China MM</a><br/><span>Trade Date:&nbsp;2015-13-54</span></div>
-				<div class="item-product-mum"><span>1</span></div>
-				<div class="item-product-totalprice"><span>$39</span></div>
-				<div class="item-product-orderstate"><span>XXXXX</span></div>
-				<div class="item-product-manage"><span>view</span></div>
-			</div>
-			<div class="order-item ">
-				<div class="item-product-id"><span>Order ID:<a href="">13121219</a></span></div>
-				<div class="item-product-photo"><img src="images_shop/hehe.jpg"></div>
-				<div class="item-name-time-shop"><a href="">China MM</a><br/><span>Trade Date:&nbsp;2015-13-54</span></div>
-				<div class="item-product-mum"><span>1</span></div>
-				<div class="item-product-totalprice"><span>$39</span></div>
-				<div class="item-product-orderstate"><span>State</span></div>
-				<div class="item-product-manage"><span>view</span></div>
-			</div>
+			
+			<c:forEach var="orderInfo" items="${orderInfoList}" >
+				<div class="order-item ">
+					<div class="item-product-id"><span>Order ID:${orderInfo.orderId}</span></div>
+					<div class="item-product-photo"><img src=${orderInfo.product.picture }></div>
+					<div class="item-name-time-shop">${orderInfo.product.name }<br/><span>Trade Date:&nbsp;${orderInfo.order.orderTime }</span></div>
+					<div class="item-product-mum"><span>${orderInfo.quantity }</span></div>
+					<div class="item-product-totalprice"><span>${orderInfo.product.price }</span></div>
+					<div class="item-product-orderstate"><span>${orderInfo.order.status }</span></div>
+					<div class="item-product-manage"><span>view</span></div>
+				</div>
+			</c:forEach>
+			
+			
 		</div>
 		</div>
 	</div>
