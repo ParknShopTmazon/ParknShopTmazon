@@ -19,8 +19,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderInfoDao orderInfoDao = BasicFactory.getImpl(OrderInfoDao.class);
 	private CartDao cartDao = BasicFactory.getImpl(CartDao.class);
 
-	public List<Order> getOrder(User user) {
-		return ordersDao.select(new Order(null, null, null, null, user.getUserId(), null));
+	public List<Order> getOrder(User user, Boolean deleted) {
+		return ordersDao.select(new Order(null, null, null, null, user.getUserId(), null), deleted);
 	}
 
 	public Order addOrder(Order order, List<OrderInfo> orderInfos) {
@@ -57,11 +57,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public Order findById(Integer id) {
-		List<Order> orders = ordersDao.select(new Order(id, null, null, null, null, null));
+		List<Order> orders = ordersDao.select(new Order(id, null, null, null, null, null), null);
 		return (orders != null && !orders.isEmpty()) ? orders.get(0) : null;
 	}
 
-	public boolean changeStatus(Order order) {
+	public boolean changeStatus(Order order, String newStatus) {
+		order.setStatus(newStatus);
 		return ordersDao.update(order);
 	}
 

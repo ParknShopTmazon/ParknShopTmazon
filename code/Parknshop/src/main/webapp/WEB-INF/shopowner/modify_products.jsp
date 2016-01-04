@@ -13,7 +13,7 @@
 	<div class="content">
 		<div class="height2px color5"></div>
 		<div class="manage-nav">
-			<div class="unit" id="ProductList" onClick="window.open('productlist')"><span>ProductList</span></div>
+			<div class="unit" id="ProductList" onClick="window.open('selectedshop')"><span>ProductList</span></div>
 			<div class="unit" id="AddProduct" onClick="window.open('addproduct')"><span>Add Product</span></div>
 			<div class="unit selected" id="ModifyProduct" onClick="window.open('modifyproduct')"><span>Modify Product</span></div>
 			<div class="unit" id="DeleteProduct" onClick="window.open('deleteproduct')"><span>Delete Product</span></div>

@@ -8,7 +8,7 @@ import com.tmazon.domain.User;
 
 public interface OrderService {
 
-	public List<Order> getOrder(User user);
+	public List<Order> getOrder(User user, Boolean deleted);
 	
 	public List<OrderInfo> getOrderInfo(Integer orderId);
 	
@@ -18,6 +18,6 @@ public interface OrderService {
 	
 	public Order findById(Integer id);
 	
-	public boolean changeStatus(Order order);
+	public boolean changeStatus(Order order, String newStatus);
 	
 }

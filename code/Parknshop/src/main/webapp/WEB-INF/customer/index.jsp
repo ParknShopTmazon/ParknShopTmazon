@@ -9,9 +9,9 @@
 <meta http-equiv="cache-control" content="no-cache, must-revalidate">
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57GMT">
 <title>parknshop</title>
-<link rel="stylesheet" type="text/css" href="css/customer.css">
 <link href="css/bootstrap-combined.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/customer.css">
 </head>
 <body>
 	<%@ include file="header.html"%>
