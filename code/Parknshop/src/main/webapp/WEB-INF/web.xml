@@ -213,7 +213,7 @@
  </servlet>
  <servlet>
   <servlet-name>DeleteOrderServlet</servlet-name>
-  <servlet-class>com.tmazon.servlet.DeleteProductServlet</servlet-class>
+  <servlet-class>com.tmazon.servlet.DeleteOrderServlet</servlet-class>
  </servlet>
  <servlet>
   <servlet-name>UpdateOrderConditionServlet</servlet-name>
@@ -418,7 +418,7 @@
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>DeleteOrderServlet</servlet-name>
-  <url-pattern>/deleteorder</url-pattern>
+  <url-pattern>/deleteOrder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>UpdateOrderConditionServlet</servlet-name>
