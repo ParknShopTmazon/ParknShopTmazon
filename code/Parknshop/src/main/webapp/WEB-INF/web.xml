@@ -219,8 +219,7 @@
  <servlet>
  	<servlet-name>UpdateOrderConditionServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.UpdateOrderConditionServlet</servlet-class>
- </servlet>
- <servlet-mapping>
+ </servlet> <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
   <url-pattern>/user</url-pattern>
  </servlet-mapping>
@@ -415,8 +414,7 @@
  <servlet-mapping>
  	<servlet-name>UpdateOrderConditionServlet</servlet-name>
  	<url-pattern>/updateordercondition</url-pattern>
- </servlet-mapping>
- <welcome-file-list>
+ </servlet-mapping> <welcome-file-list>
   <welcome-file>index</welcome-file>
  </welcome-file-list>
 </web-app>

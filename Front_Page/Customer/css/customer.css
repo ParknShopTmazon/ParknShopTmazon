@@ -1,4 +1,4 @@
-ï»¿* {
+* {
     margin: 0;
 }
 
@@ -18,7 +18,7 @@ html {
 
 body {
     margin: 0;
-    font-family: "Ping Hei", "å†¬é’é»‘ä½“", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "å¾®è½¯é›…é»‘";
+    font-family: "Ping Hei", "¶¬ÇàºÚÌå", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "Î¢ÈíÑÅºÚ";
     font-size: 1em;
     min-height: 100%;
     height: auto !important;
@@ -194,6 +194,7 @@ s {
 
 .dialog .list ul {
     padding: 5px 0;
+    margin: 0;
 }
 
 .dialog .list ul > li {
@@ -312,6 +313,7 @@ s {
     font-size: 0.8em;
     color: #b27100;
     line-height: 0.8em;
+    margin: 0;
 }
 
 .dialog #main .friend-list {
@@ -353,6 +355,10 @@ s {
     margin: 0;
 }
 
+.dialog #main .dialog-show .right {
+	float: right;
+}
+
 
 /*************************************************
          *
@@ -365,6 +371,7 @@ s {
     background: #ce8300;
     border: 1px solid #b27100;
     margin-top: 15px;
+    height: 30px;
 }
 
 .dialog #add-friend-main .search-box .search-btn {
@@ -1114,6 +1121,7 @@ s {
     width: 200px;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .order-container #order-details .order-item .order-origin-price s {
@@ -1339,7 +1347,7 @@ s {
     border-radius: 4px;
     border: 2px solid #B27100;
     background-color: #ce8300;
-    margin: 30% auto 0 23%;
+    margin: 320px auto 0 23%;
     font-size: 2.5em;
     cursor: pointer;
 }
@@ -1526,6 +1534,8 @@ s {
     float: none;
 }
 
+
+
 .order-container #order-list .order-item .handle-btn {
     width: 90px;
     height: 40px;
@@ -1535,4 +1545,31 @@ s {
     background-color: #ffa200;
     cursor: pointer;
     font-size: 1.2em;
+}
+
+/**************************************************
+         *
+         * Order List
+         *
+         *****************************************/
+
+.order-container #pay-info {
+	text-align: center;
+	color: #ffa200;
+	font-size: 5em;
+	margin-top: 200px;
+}
+
+.order-container #pay-btn {
+	border-radius: 4px;
+	border: 2px solid #B27100;
+	background-color: #ce8300;
+	margin-top: 120px;
+	font-size: 2.5em;
+	cursor: pointer;
+	width: 20%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	margin: 120px auto 100px;
 }

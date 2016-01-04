@@ -118,7 +118,7 @@ public class OrderServlet extends HttpServlet {
 		
 		User user = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
 		
-		List<Order> orders = orderService.getOrder(user);
+		List<Order> orders = orderService.getOrder(user, false);
 		for (Order order : orders) {
 			
 			List<OrderInfo> orderInfos = orderService.getOrderInfo(order.getOrderId());

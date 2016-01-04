@@ -15,7 +15,7 @@ import com.tmazon.util.DaoUtil;
 
 public class OrderDaoImpl implements OrderDao {
 
-	public List<Order> select(Order order) {
+	public List<Order> select(Order order, Boolean deleted) {
 		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM orders WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (order.getOrderId() != null) {
@@ -33,6 +33,13 @@ public class OrderDaoImpl implements OrderDao {
 		if (order.getStatus() != null) {
 			sqlBuilder.append("AND status = ? ");
 			params.add(order.getStatus());
+		} 
+		if (deleted != null){
+			if (deleted) {
+				sqlBuilder.append("AND status = '" + Order.STATUS_DELETED +  "' ");
+			} else {
+				sqlBuilder.append("AND status <> '" + Order.STATUS_DELETED +  "' ");
+			}
 		}
 		if (order.getUserId() != null) {
 			sqlBuilder.append("AND userId = ? ");
@@ -78,7 +85,7 @@ public class OrderDaoImpl implements OrderDao {
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			runner.insert(sql, new BeanHandler<Order>(Order.class),params.toArray());
-			List<Order> result = select(order);
+			List<Order> result = select(order, null);
 			if(result.isEmpty())
 				return null;
 			return result.get(0);
@@ -118,14 +125,14 @@ public class OrderDaoImpl implements OrderDao {
 
 	public List<Order> findByUser(User user) {
 		
-		return select(new Order(null, null, null, null, user.getUserId(),null));
+		return select(new Order(null, null, null, null, user.getUserId(),null), null);
 	}
 
 	public List<Order> findByUserANDstatus(User user, String status) {
-		return select(new Order(null, null, status, null, user.getUserId(), null));
+		return select(new Order(null, null, status, null, user.getUserId(), null), null);
 	}
 
 	public List<Order> findByOrderId(Integer orderId){
-		return select(new Order(orderId,null,null,null,null,null));
+		return select(new Order(orderId,null,null,null,null,null), null);
 	}
 }

@@ -27,6 +27,9 @@
 		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("comment")) {%>
 				<%@ include file="order_comment.html"%>
 		<%	} %>
+		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("pay")) {%>
+				<%@ include file="order_pay.html"%>
+		<%	} %>
 		<%	if (type != null && type.equals("certain")) {%>
 				<%@ include file="order_certain.html"%>
 		<%	} %>
