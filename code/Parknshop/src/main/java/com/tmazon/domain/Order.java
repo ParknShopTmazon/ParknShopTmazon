@@ -13,6 +13,7 @@ public class Order {
 	public static final String STATUS_ON_DELIVERY = "on_delivery";
 	public static final String STATUS_ON_DELIVERY_AND_UNPAID = "on_delivery_AND_unpaid";
 	public static final String STATUS_CONFIRM_RECEIPT = "confirm_receipt";
+	public static final String STATUS_DELETED = "deleted";
 
 	private Integer orderId;
 	private String payType;
