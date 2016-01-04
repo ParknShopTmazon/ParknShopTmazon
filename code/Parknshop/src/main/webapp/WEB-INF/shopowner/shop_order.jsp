@@ -60,7 +60,7 @@
 						<li>Manage
 							<ul>
 								<li><a href="deleteshoporder">delete</a></li>
-								<li><a href="updateordercondition">update</a></li>
+								<li><a href="updateordercondition?orderId=${orderInfo.orderId}">update</a></li>
 							</ul>
 						</li>
 					</ul>	

@@ -3,6 +3,7 @@ package com.tmazon.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -42,10 +43,10 @@ public class ShopOrderServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String shopIdStr=(String) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
+        Integer shopId =Integer.parseInt(shopIdStr);
 		
-//		Integer shopId =Integer.parseInt(req.getParameter("shopId"));
 		
-		Integer shopId =1;
 		System.out.println(shopId);
 		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shopId);
 		for (OrderInfo info :orderInfos) {
@@ -54,7 +55,12 @@ public class ShopOrderServlet extends HttpServlet {
 			info.setDelivery(deliveryService.select(new Delivery(info.getDeliveryId(), null, null, null)).get(0));
 		}
 		
-		
+		orderInfos.sort(new Comparator<OrderInfo>() {
+
+			public int compare(OrderInfo o1, OrderInfo o2) {
+				return o2.getOrder().getOrderTime().compareTo(o1.getOrder().getOrderTime());
+			}
+		});
 		
 		req.setAttribute("orderInfoList", orderInfos);
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_order.jsp").forward(req, resp);
