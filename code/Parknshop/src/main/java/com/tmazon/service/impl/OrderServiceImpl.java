@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 		return ordersDao.select(new Order(null, null, null, null, user.getUserId(), null));
 	}
 
-	public boolean addOrder(Order order, List<OrderInfo> orderInfos) {
+	public Order addOrder(Order order, List<OrderInfo> orderInfos) {
 
 		boolean flag = true;
 
@@ -44,8 +44,12 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 
-		return flag;
-
+		if(flag){
+			return null;
+		}else {
+			return order;
+		}
+		
 	}
 
 	public List<OrderInfo> getOrderInfo(Integer orderId) {
