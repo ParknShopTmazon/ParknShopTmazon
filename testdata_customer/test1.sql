@@ -35,7 +35,7 @@ insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,de
 insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description) values(7880,'health',3.20,23.21,'Health, Fitness & Sports',34,12,'this is a children milk');
 
 -- product
-INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78781', '7880', 'p4CartTest1', '32', '28', 'Audio', '400', '200', 'nice', '#');
+INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`，status) VALUES ('78781', '7880', 'p4CartTest1', '32', '28', 'Audio', '400', '200', 'nice', '#');
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78782', '7880', 'p4CartTest2', '12', '3', 'Audio', '12', '88', 'nice', '#');
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78783', '7880', 'p4CartTest3', '34', '22', 'Audio', '56', '44', 'ok', '#');
 INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`) VALUES ('78784', '7880', 'p4CartTest4', '178', '168', 'Home & Office', '12', '38', 'great', '#');
