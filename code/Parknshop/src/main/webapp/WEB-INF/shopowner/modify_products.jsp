@@ -22,7 +22,7 @@
 		<br>
 		<br>
 		<div id="container" align="right">
-			<form class="complete-info" action="modifyproduct" method="post" enctype="multipart/form-data">
+			<form class="complete-info" action="modifyproduct" name="formen" method="post" enctype="multipart/form-data">
 				
 				<input type="hidden" name="product_id" value="${product_id }">
 				<div class="form-item-photo">
@@ -34,7 +34,10 @@
 				<div class="form-item">
 					<div class="form-lable-left">Upload Photo</div>
 					 <div class="form-control-right">
-					    <input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg">
+					 	<input type="file" name="file" id="file" style="display:none" accept="image/bmp,image/png,image/jpeg" onChange="document.formen.path.value=this.value"> 
+					 	<input name="path" readonly> 
+					 	<input type="button" value="Browse" onclick="document.formen.file.click()"> 
+<!-- 					    <input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg"> -->
 				  </div>
 				</div>	
 				<div class="form-item">
