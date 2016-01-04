@@ -190,7 +190,7 @@ var customer = {
 
                     /** append */
                     if (typeof(data.friends) != 'undefined') {
-                    	for (let j = 0; j < data.friends.length; j++) {
+                        for (let j = 0; j < data.friends.length; j++) {
                             updateArrays.push(0);
                             /** [if: first child] */
                             if (j == 0) {
@@ -211,9 +211,9 @@ var customer = {
                                     $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
                                 }
                             }
-                        }   
-                    	
-                    	/** [click function of choosing friends] */
+                        }
+
+                        /** [click function of choosing friends] */
                         $('.dialog #main .friend-list .list ul > li').click(function() {
                             /** [remove the original selected item] */
                             $(this).parent().children('li').each(function() {
@@ -227,7 +227,7 @@ var customer = {
                             $(this).children('span').remove();
                         });
                     }
-                    
+
                 })
                 .fail(function() {
                     console.log("failed to get friends list");
@@ -253,26 +253,26 @@ var customer = {
                 })
                 .done(function(data) {
                     if (typeof(data.messages) != 'undefined') {
-                        $('.dialog #main .dialog-show').children('p').remove(); 
+                        $('.dialog #main .dialog-show').children('p').remove();
                         for (let i = 0; i < data.messages.length; i++) {
                             /** date object */
                             let date = new Date();
                             let isRight = '';
                             let userName = friendName;
-                            
+
                             date.setTime(data.messages[i].messageTime.time);
-                            
+
                             if (data.userId !== data.messages[i].friendId) {
-                            	isRight = 'right';
-                            	userName = 'me';
+                                isRight = 'right';
+                                userName = 'me';
                             }
-                            
+
                             $('.dialog #main .dialog-show').append('<p class="time ' + isRight + '">' + userName + ': ' + date.format('yyyy-MM-dd hh:mm') + '</p>\
                             <p class="' + isRight + '">' + data.messages[i].content + '</p>');
                         }
 
                         updateArrays[friendName] = data.messages.length;
-                        
+
                         /** keep in the bottom */
                         $('.dialog #main #dialog-show').scrollTop(parseFloat(document.getElementById('dialog-show').scrollHeight));
                     } else {
@@ -280,9 +280,9 @@ var customer = {
                     }
 
                     if (isComet) {
-                    	const cometObj = Object.create(Comet);
+                        const cometObj = Object.create(Comet);
                         cometObj.init('messages');
-                    	cometObj.subscribe(postData, function() {
+                        cometObj.subscribe(postData, function() {
                             const $list = $('.dialog .list ul').children('li');
                             $list.each(function() {
                                 if ($(this).html() === friendName) {
@@ -368,7 +368,7 @@ var customer = {
                                 $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
                             }
                         }
-                        
+
                         /** [click function of choosing people to add] */
                         $('.dialog #people-list-main .list ul > li').click(function() {
                             /** [remove the original selected item] */
@@ -407,7 +407,7 @@ var customer = {
                     } else {
                         updateFriendList(name);
                         alert('you have added this as a friend');
-                        console.log("failed to add the friend, but post succeed"); 
+                        console.log("failed to add the friend, but post succeed");
                     }
                     showPart('main');
                 })
@@ -439,7 +439,7 @@ var customer = {
                         console.log("failed to delete the friend, but post succeed");
                     }
                     showPart('main');
-                    
+
                     /** clear the message area */
                     $('.dialog #main .dialog-show').children('p').remove();
                 })
@@ -582,7 +582,7 @@ var customer = {
 
         /** update friends list */
         updateFriendList();
-        
+
         /** init all events */
         initEvent();
     },
@@ -991,10 +991,10 @@ var customer = {
                             </label>\
                         </div>');
                         }
-                        
+
                         /** [radio change] */
                         $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
-                        
+
                         /** update addr info */
                         updateCertainAddr();
                     })
@@ -1023,9 +1023,9 @@ var customer = {
                     })
                     .done(function(data) {
                         if (data.result === 'false') {
-                        	alert('failed to add a new addr');
+                            alert('failed to add a new addr');
                         } else {
-                        	/**
+                            /**
                              * [append div]
                              */
                             $('.order-container #order-addr .addresses').prepend('<div>\
@@ -1054,7 +1054,7 @@ var customer = {
 
                             /** update addr info */
                             updateCertainAddr();
-                            
+
                             /** update address_id */
                             address_id = data.addressId;
                         }
@@ -1217,17 +1217,17 @@ var customer = {
                         alert('please add an address for your own first');
                         $('.order-container #order-addr .other').click();
                     } else {
-                    	if (orders.length === 0) {
-                    		alert('you have no produts');
-                    	} else {
-                    		$.getJSON('addOrder', {
+                        if (orders.length === 0) {
+                            alert('you have no produts');
+                        } else {
+                            $.getJSON('addOrder', {
                                 address_id: address_id,
                                 options: orders
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
-                            	window.location.href = '?type=pay&oid=' + data.order_id;
+                                window.location.href = '?type=pay&oid=' + data.order_id;
                             });
-                    	}
+                        }
                     }
                 });
             },
@@ -1348,11 +1348,11 @@ var customer = {
 
             $('.order-container #order-info').append('<div class="shop-info">\
                 <div class="pic-container">\
-            		<a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
-	                    <div class="over">\
-	                        <div class="link-btn"></div>\
-	                    </div>\
-	                </a>\
+                    <a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
+                        <div class="over">\
+                            <div class="link-btn"></div>\
+                        </div>\
+                    </a>\
                     <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
                 </div>\
                 <div class="info">\
@@ -1421,9 +1421,9 @@ var customer = {
                     type: 'pay'
                 }
             };
-            
+
             const detailsType = {
-            	unpaid: 'show'	
+                unpaid: 'show'
             }
 
             /** [for: append] */
@@ -1511,17 +1511,17 @@ var customer = {
 
                 /** [click function of delete order] */
                 $('.order-container #order-list .order-item .delete-btn').click(function(event) {
-                	const _this = $(this);
-                	
-                	$.getJSON('deleteOrder', {
+                    const _this = $(this);
+
+                    $.getJSON('deleteOrder', {
                         oid: $(this).prev().prev().children('.value').html()
                     }, function(data, textStatus) {
-                    	console.log(data.success);
+                        console.log(data.success);
                         /*optional stuff to do after success */
                         if (!data.success) {
-                        	alert('failed to delete a order which state is not `unpaid`');
+                            alert('failed to delete a order which state is not `unpaid`');
                         } else {
-                        	/** remove dom node */
+                            /** remove dom node */
                             _this.parent().parent().remove();
                         }
                     });
@@ -1531,31 +1531,31 @@ var customer = {
                 console.log("failed to get orders list");
             });
     },
-    
+
     /**
      * [initPay: init the page page of order]
      * @return {[type]} [description]
      */
     initPay: function(oid) {
-    	$('.order-container #pay-btn').click(function() {
-    		$.getJSON('payOrder', {
+        $('.order-container #pay-btn').click(function() {
+            $.getJSON('payOrder', {
                 oid: oid
             }, function(data, textStatus) {
                 /*optional stuff to do after success */
                 if (!data.success) {
-                	$('.order-container #pay-btn').css({
-            			'border': '2px solid #666',
-            			'background-color': '#fff',
-            			'color': '#eee'
-            		});
-            		
-            		$('.order-container #pay-btn').removeClass('button');
-            		
-            		$('.order-container #pay-btn').unbind('click');
+                    $('.order-container #pay-btn').css({
+                        'border': '2px solid #666',
+                        'background-color': '#fff',
+                        'color': '#eee'
+                    });
+
+                    $('.order-container #pay-btn').removeClass('button');
+
+                    $('.order-container #pay-btn').unbind('click');
                 } else {
-                	alert('Ooops, failed to pay');
+                    alert('Ooops, failed to pay');
                 }
             });
-    	});
+        });
     }
 };
