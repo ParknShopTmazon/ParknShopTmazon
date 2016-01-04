@@ -14,6 +14,9 @@
 </head>
 <body>
 	<%@ include file="header.html"%>
+	<c:if test="${ not empty s_user }">
+		<%@ include file="dialog.html"%>
+	</c:if>
 	<div class="row-fluid">
 				<div class="span4">
 					<img src="${ product.picture }">
@@ -148,4 +151,11 @@
 			</table>
 	</div>
 	<%@ include file="footer.html"%>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/customer.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			customer.init();
+		});
+	</script>
 </body>

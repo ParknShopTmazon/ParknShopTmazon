@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import com.tmazon.domain.Message;
 import com.tmazon.domain.User;
 import com.tmazon.service.MessageService;
@@ -47,7 +49,9 @@ public class LeaveMessageServlet extends HttpServlet {
 		
 		// leave message
 		boolean result = messageService.createMessage(new Message(null, user.getUserId(), friend.getUserId(), content, null, true));
-		resp.getWriter().write(result ? "success" : "failed");
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("success", result);
+		resp.getWriter().write(jsonObject.toString());
 	}
 	
 	@Override

@@ -17,6 +17,7 @@ public class AttrName {
 		
 		public static final String USER = "s_user";
 		public static final String SHOPID = "shop_id";
+		public static final String LOGIN_REFERER = "s_login_referer";
 	}
 	
 	public class RequestScope {
