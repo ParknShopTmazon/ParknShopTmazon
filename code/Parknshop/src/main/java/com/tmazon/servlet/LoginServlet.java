@@ -100,7 +100,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		String url = (String) req.getSession().getAttribute(AttrName.SessionScope.LOGIN_REFERER);
-		if (url == null || url.equals("login")) {
+		if (url == null || url.endsWith("login") || url.endsWith("register")) {
 			url = "index";
 		}
 		resp.sendRedirect(url);
