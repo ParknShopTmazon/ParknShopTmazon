@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -97,6 +98,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 				String fileName = UUID.randomUUID().toString()
 						+ item.getName().substring(item.getName().lastIndexOf("."));
 				File saveFile = new File(file, fileName);
+				System.out.println(saveFile.getAbsolutePath());
 
 				InputStream is = item.getInputStream();
 				FileOutputStream os = new FileOutputStream(saveFile);

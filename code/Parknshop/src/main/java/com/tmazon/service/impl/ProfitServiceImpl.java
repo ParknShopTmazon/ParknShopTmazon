@@ -21,6 +21,7 @@ public class ProfitServiceImpl implements ProfitService {
 		ProfitDao pd=new ProfitDaoImpl();
 		int pro=0;
 		List<Profit> l=pd.getList();
+		if(l==null) return 0;
 		for(Profit p:l){
 			pro+=p.getQuantity()*p.getPrice()*Rate.getRate();
 		}

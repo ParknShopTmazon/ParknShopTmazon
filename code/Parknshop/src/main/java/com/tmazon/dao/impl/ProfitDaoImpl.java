@@ -22,8 +22,8 @@ public class ProfitDaoImpl implements ProfitDao {
 	 * */
 	public List<Profit> getList() {
 		String sql="SELECT productId,price,quantity"+" FROM orderinfo oi,delivery d,orders o"
-				       +" WHERE	o.orderId=oi.orderId AND o.deliveryId=d.deliveryId"
-				       + "   AND o.status='complete'";
+				       +" WHERE	o.orderId=oi.orderId AND oi.deliveryId=d.deliveryId"
+				       + "   AND o.status='paid'";
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			list=runner.query(sql,new BeanListHandler<Profit>(Profit.class));
