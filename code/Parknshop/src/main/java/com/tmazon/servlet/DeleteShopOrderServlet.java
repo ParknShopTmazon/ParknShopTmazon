@@ -12,14 +12,12 @@ public class DeleteShopOrderServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req, resp);
+		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		resp.sendRedirect("shoporder");
-//		req.getRequestDispatcher("shoporder").forward(req, resp);
-		return;
+		doPost(req, resp);
 	}
 }
