@@ -1234,7 +1234,7 @@ var customer = {
                                 options: orders
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
-                                window.location.href = '?type=pay&oid=' + data.order_id;
+                            	window.location.href = '?type=pay&oid=' + data.oid;
                             });
                         }
                     }
@@ -1427,13 +1427,19 @@ var customer = {
             const operations = {
                 unpaid: {
                     name: 'Pay',
-                    type: 'pay'
+                    nextType: 'pay'
+                },
+                paid: {
+                	name: 'Comment',
+                	nextType: 'comment'
                 }
+            	
             };
 
             const detailsType = {
-                unpaid: 'show'
-            }
+                unpaid: 'show',
+                paid: 'comment'
+            };
 
             /** [for: append] */
             for (let i = 0; i < data.length; i++) {
@@ -1487,7 +1493,7 @@ var customer = {
                                 <p class="name">track where the shop is</p>\
                             </div>\
                         </div>\
-                        <div class="handle-btn button" onclick="window.open(\'?type=' + operations[data[i].status].type + '&oid=' + data[i].orderId + '\');">' + operations[data[i].status].name + '</div>\
+                        <div class="handle-btn button" onclick="location.href = \'?type=' + operations[data[i].status].nextType + '&oid=' + data[i].orderId + '\';">' + operations[data[i].status].name + '</div>\
                     </div>';
                 }
 
@@ -1554,7 +1560,7 @@ var customer = {
                 if (!data.success) {
                     $('.order-container #pay-btn').css({
                         'border': '2px solid #666',
-                        'background-color': '#fff',
+                        'background-color': '#aaa',
                         'color': '#eee'
                     });
 
