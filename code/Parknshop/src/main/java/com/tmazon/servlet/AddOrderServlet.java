@@ -71,7 +71,7 @@ public class AddOrderServlet extends HttpServlet {
 		if(order != null){
 			jsonObject.put("result", true + "");
 			jsonObject.put("errMsg", "");
-			jsonObject.put("orderId", order.getOrderId());
+			jsonObject.put("oid", order.getOrderId());
 		}else {
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Failed!");
