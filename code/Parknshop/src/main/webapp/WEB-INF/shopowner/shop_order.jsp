@@ -59,7 +59,7 @@
 					<ul>
 						<li>Manage
 							<ul>
-								<li><a href="deleteorder">delete</a></li>
+								<li><a href="deleteshoporder">delete</a></li>
 								<li><a href="updateordercondition">update</a></li>
 							</ul>
 						</li>
