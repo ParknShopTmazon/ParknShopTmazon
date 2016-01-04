@@ -3,14 +3,14 @@
  * [comet: the class of comet]
  * @type {Object}
  */
-class comet {
+const Comet = {
     /**
      * [release: release memory]
      * @return {[type]} [description]
      */
-    release() {
+    release: function() {
         clearTimeout(this._timeout);
-    }
+    },
 
     /**
      * [subscribe: a method to storing post data and callback function]
@@ -18,23 +18,23 @@ class comet {
      * @param  {Function} callback [callback function]
      * @return {[type]}            [description]
      */
-    subscribe(postData, callback) {
+    subscribe: function(postData, callback) {
         "use strict";
         this._subscribed = postData;
         this._subscribed['sleepTime'] = this._sleepTime;
         this._subscribed['count'] = this._count;
         this._callback = callback;
         return this;
-    }
+    },
 
     /**
-     * [constructor: the constructor of the class]
+     * [init: the constructor of the class]
      * @param  {[type]} baseurl   [the url you want to post to]
      * @param  {[type]} sleepTime [optional]
      * @param  {[type]} count     [optional]
      * @return {[type]}           [description]
      */
-    constructor(baseurl, sleepTime, count) {
+    init: function(baseurl, sleepTime, count) {
         "use strict";
         sleepTime = sleepTime || 2000;
         count = count || 1;
@@ -65,7 +65,7 @@ class comet {
          * [_baseurl: the url which you want to post to]
          * @type {String}
          */
-        this._baseurl = '';
+        this._baseurl = baseurl;
 
         /**
          * [callback: an object for storing the callback function]
@@ -91,37 +91,43 @@ class comet {
          */
         this._refresh = function() {
             "use strict";
+            const _this = this;
             this._timeout = setTimeout(function() {
                 console.log('refresh to run');
-                this.run()
+                _this.run(_this._len);
             }, this._sleepTime);
         };
-    }
-
+    },
+    
     /**
      * [run: run the ajax]
      * @param  {[type]}   len [the compared len]
      * @return {[type]}       [description]
      */
-    run(len) {
+    run: function(len) {
         "use strict";
-        $.getJSON(comet._baseurl, comet._subscribed, function(data) {
+        const _this = this;
+        
+        this._len = len;
+        
+        $.getJSON(this._baseurl, this._subscribed, function(data) {
             /** you can modify as you like in this part to 
              *  judge which conditions are the trigger point
              */
             if (data.messages.length === len) {
-                this._refresh();
+                _this._refresh();
             } else {
-                this._callback();
+            	_this._callback();
+            	_this._refresh();
             }
         });
-    }
+    },
 
     /**
      * [publish: for test]
      * @return {[type]} [description]
      */
-    publish() {
+    publish: function() {
         this._callback();
     }
 };

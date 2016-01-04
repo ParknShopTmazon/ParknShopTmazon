@@ -143,15 +143,6 @@ var customer = {
         let updateArrays = [];
 
         /**
-         * [changeTitle: set the title of the dialog when choosing a person]
-         * @param  {[type]} title [the title you want to set]
-         * @return {[type]}       [description]
-         */
-        function changeTitle(title) {
-            $('.dialog #main  h2 > strong').html(title);
-        }
-
-        /**
          * [showPart: show the part and hide others]
          * @param  {[type]} part [the part you want to show]
          * @return {[type]}      [description]
@@ -183,23 +174,23 @@ var customer = {
                     data: {},
                 })
                 .done(function(data) {
+                    /** clear all friends first */
+                    for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
+                        $('.dialog #main .friend-list .list ul').children(i).remove();
+                    }
+
+                    /**
+                     * [for: release all comet objects, and clear all numbers]
+                     */
+                    for (let i = 0; i < cometArrays.length; i++) {
+                        cometArrays[i].release();
+                    }
+                    cometArrays = [];
+                    updateArrays = [];
+
+                    /** append */
                     if (typeof(data.friends) != 'undefined') {
-                        /** clear all friends first */
-                        for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
-                            $('.dialog #main .friend-list .list ul').children(i).remove();
-                        }
-
-                        /**
-                         * [for: release all comet objects, and clear all numbers]
-                         */
-                        for (let i = 0; i < cometArrays.length; i++) {
-                            cometArrays[i].release();
-                        }
-                        cometArrays.length = 0;
-                        updateArrays.length = 0;
-
-                        /** append */
-                        for (let j = 0; j < data.friends.length; j++) {
+                    	for (let j = 0; j < data.friends.length; j++) {
                             updateArrays.push(0);
                             /** [if: first child] */
                             if (j == 0) {
@@ -220,10 +211,23 @@ var customer = {
                                     $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
                                 }
                             }
-                        }
-                    } else {
-                        console.log("failed to get friends list, but post succeed");
+                        }   
+                    	
+                    	/** [click function of choosing friends] */
+                        $('.dialog #main .friend-list .list ul > li').click(function() {
+                            /** [remove the original selected item] */
+                            $(this).parent().children('li').each(function() {
+                                $(this).removeClass('select');
+                            });
+
+                            /** [set the new selected item] */
+                            $(this).addClass('select');
+                            getMessage($(this).html(), false);
+                            $('#friendNameBlock').html($(this).html());
+                            $(this).children('span').remove();
+                        });
                     }
+                    
                 })
                 .fail(function() {
                     console.log("failed to get friends list");
@@ -237,7 +241,6 @@ var customer = {
          * @return {[type]}            [description]
          */
         function getMessage(friendName, isComet) {
-            const cometObj = comet('messages');
             const postData = {
                 friendName: friendName
             };
@@ -250,23 +253,36 @@ var customer = {
                 })
                 .done(function(data) {
                     if (typeof(data.messages) != 'undefined') {
-                        $('.dialog #main .dialog-show').children('p').remove();
+                        $('.dialog #main .dialog-show').children('p').remove(); 
                         for (let i = 0; i < data.messages.length; i++) {
                             /** date object */
                             let date = new Date();
+                            let isRight = '';
+                            let userName = friendName;
+                            
                             date.setTime(data.messages[i].messageTime.time);
-
-                            $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
-                            <p>' + data.messages[i].content + '</p>');
+                            
+                            if (data.userId !== data.messages[i].friendId) {
+                            	isRight = 'right';
+                            	userName = 'me';
+                            }
+                            
+                            $('.dialog #main .dialog-show').append('<p class="time ' + isRight + '">' + userName + ': ' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+                            <p class="' + isRight + '">' + data.messages[i].content + '</p>');
                         }
 
                         updateArrays[friendName] = data.messages.length;
+                        
+                        /** keep in the bottom */
+                        $('.dialog #main #dialog-show').scrollTop(parseFloat(document.getElementById('dialog-show').scrollHeight));
                     } else {
                         console.log("failed to get message, but post succeed");
                     }
 
-                    if (comet) {
-                        comet.subscribe(postData, function() {
+                    if (isComet) {
+                    	const cometObj = Object.create(Comet);
+                        cometObj.init('messages');
+                    	cometObj.subscribe(postData, function() {
                             const $list = $('.dialog .list ul').children('li');
                             $list.each(function() {
                                 if ($(this).html() === friendName) {
@@ -301,12 +317,12 @@ var customer = {
                     },
                 })
                 .done(function(data) {
-                    if (data == 'success') {
+                    if (data.success) {
                         let date = new Date();
 
                         /** apeend */
-                        $('.dialog #main .dialog-show').append('<p class="time">' + date.format('yyyy-MM-dd hh:mm') + '</p>\
-                                <p>' + content + '</p>');
+                        $('.dialog #main .dialog-show').append('<p class="time right">me: ' + date.format('yyyy-MM-dd hh:mm') + '</p>\
+                                <p class="right">' + content + '</p>');
 
                         /** keep in the bottom */
                         $('.dialog #main #dialog-show').scrollTop(parseFloat(document.getElementById('dialog-show').scrollHeight));
@@ -352,6 +368,17 @@ var customer = {
                                 $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
                             }
                         }
+                        
+                        /** [click function of choosing people to add] */
+                        $('.dialog #people-list-main .list ul > li').click(function() {
+                            /** [remove the original selected item] */
+                            $(this).parent().children('li').each(function() {
+                                $(this).removeClass('select');
+                            });
+
+                            /** [set the new selected item] */
+                            $(this).addClass('select');
+                        });
                     } else {
                         console.log("failed to search friends, but post succeed");
                     }
@@ -375,12 +402,14 @@ var customer = {
                     },
                 })
                 .done(function(data) {
-                    if (data == 'success') {
+                    if (data.success) {
                         updateFriendList(name);
                     } else {
                         updateFriendList(name);
-                        console.log("failed to add the friend, but post succeed");
+                        alert('you have added this as a friend');
+                        console.log("failed to add the friend, but post succeed"); 
                     }
+                    showPart('main');
                 })
                 .fail(function() {
                     console.log("failed to add the friend");
@@ -402,12 +431,17 @@ var customer = {
                     },
                 })
                 .done(function(data) {
-                    if (data == 'success') {
+                    if (data.success) {
                         updateFriendList();
                     } else {
                         updateFriendList();
+                        alert('failed to delete your friend');
                         console.log("failed to delete the friend, but post succeed");
                     }
+                    showPart('main');
+                    
+                    /** clear the message area */
+                    $('.dialog #main .dialog-show').children('p').remove();
                 })
                 .fail(function() {
                     console.log("failed to delete the friend");
@@ -478,32 +512,6 @@ var customer = {
                 }
             });
 
-            /** [click function of choosing people to add] */
-            $('.dialog #people-list-main .list ul > li').click(function() {
-                /** [remove the original selected item] */
-                $(this).parent().children('li').each(function() {
-                    $(this).removeClass('select');
-                });
-
-                /** [set the new selected item] */
-                $(this).addClass('select');
-            });
-
-            /** [click function of choosing friends] */
-            $('.dialog #main .friend-list .list ul > li').click(function() {
-                /** [remove the original selected item] */
-                $(this).parent().children('li').each(function() {
-                    $(this).removeClass('select');
-                });
-
-                /** [set the new selected item] */
-                $(this).addClass('select');
-                changeTitle($(this).html());
-                getMessage($(this).html(), false);
-
-                $(this).children('span').remove();
-            });
-
             /** [click function of add friend button] */
             $('.dialog #main .bottom-buttons .add-friend-btn').click(function() {
                 showPart('add-friend-main');
@@ -572,11 +580,11 @@ var customer = {
         /** show main first */
         showPart('main');
 
-        /** init all events */
-        initEvent();
-
         /** update friends list */
         updateFriendList();
+        
+        /** init all events */
+        initEvent();
     },
 
     /**
@@ -740,7 +748,7 @@ var customer = {
                     var _this = $(this);
                     /** store data into database */
                     $.getJSON('deleteCart', {
-                        sid: $(this).parent().prev().prev().children('.value').children('input').attr('sid')
+                        sid: $(this).parent().prev().prev().prev().children('.value').children('input').attr('sid')
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
                         if (typeof(data.result) != 'undefined' && data.result == 'true') {
@@ -968,28 +976,31 @@ var customer = {
                             }
 
                             /** append div */
-                            $('.order-container #order-addr .addresses').append('<div>\
+                            $('.order-container #order-addr .addresses').prepend('<div>\
                             <label>\
                                 <input type="radio" aid="' + data.addresses[i].a_id + '" name="addr" ' + checked + '>\
                                 <span class="address" title="' + data.addresses[i].description + '"> ' + data.addresses[i].description + '</span>\
                                 <span class="receiver">\
                                 <span class="name">receiver name: </span>\
-                                <span class="value">' + data.addresses[i].description.name + '</span>\
+                                <span class="value">' + data.addresses[i].name + '</span>\
                                 </span>\
                                 <span class="phone">\
                                 <span class="name">phone number: </span>\
-                                <span class="value">' + data.addresses[i].description.phone + '</span>\
+                                <span class="value">' + data.addresses[i].phone + '</span>\
                                 </span>\
                             </label>\
                         </div>');
                         }
+                        
+                        /** [radio change] */
+                        $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+                        
+                        /** update addr info */
+                        updateCertainAddr();
                     })
                     .fail(function() {
                         console.log("failed to get addr options");
                     });
-
-                /** update addr info */
-                updateCertainAddr();
             },
 
             /**
@@ -1005,41 +1016,48 @@ var customer = {
                         dataType: 'json',
                         data: {
                             description: addr,
-                            zipcode: '',
+                            zipcode: '000000',
                             name: receiver,
                             phone: phone
                         },
                     })
-                    .done(function() {
-                        /**
-                         * [append div]
-                         */
-                        $('.order-container #order-addr .addresses').append('<div>\
-                                <label>\
-                                    <input type="radio" name="addr" checked="checked">\
-                                    <span class="address" title="' + addr + '">' + addr + '</span>\
-                                    <span class="receiver">\
-                                    <span class="name">receiver name: </span>\
-                                    <span class="value">' + receiver + '</span>\
-                                    </span>\
-                                    <span class="phone">\
-                                    <span class="name">phone number: </span>\
-                                    <span class="value">' + phone + '</span>\
-                                    </span>\
-                                </label>\
-                            </div>');
+                    .done(function(data) {
+                        if (data.result === 'false') {
+                        	alert('failed to add a new addr');
+                        } else {
+                        	/**
+                             * [append div]
+                             */
+                            $('.order-container #order-addr .addresses').prepend('<div>\
+                                    <label>\
+                                        <input type="radio" name="addr" checked="checked">\
+                                        <span class="address" title="' + addr + '">' + addr + '</span>\
+                                        <span class="receiver">\
+                                        <span class="name">receiver name: </span>\
+                                        <span class="value">' + receiver + '</span>\
+                                        </span>\
+                                        <span class="phone">\
+                                        <span class="name">phone number: </span>\
+                                        <span class="value">' + phone + '</span>\
+                                        </span>\
+                                    </label>\
+                                </div>');
 
-                        /** rebinding the radio change */
-                        /** [unbind] */
-                        $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
-                        /** [radio change] */
-                        $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
+                            /** rebinding the radio change */
+                            /** [unbind] */
+                            $('.order-container #order-addr .addresses input[type="radio"]').unbind('change');
+                            /** [radio change] */
+                            $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
 
-                        /** hide the map */
-                        $('.order-container #order-addr .addresses #other-addr-input').hide();
+                            /** hide the map */
+                            $('.order-container #order-addr .addresses #other-addr-input').hide();
 
-                        /** update addr info */
-                        updateCertainAddr();
+                            /** update addr info */
+                            updateCertainAddr();
+                            
+                            /** update address_id */
+                            address_id = data.addressId;
+                        }
                     })
                     .fail(function() {
                         console.log("failed to add an addr");
@@ -1128,9 +1146,6 @@ var customer = {
                     updateCost();
                 });
 
-                /** [radio change] */
-                $('.order-container #order-addr .addresses input[type="radio"]').change(changeRadio);
-
                 /** [click function of other addr] */
                 $('.order-container #order-addr .other').click(function(event) {
                     /* Act on the event */
@@ -1181,7 +1196,7 @@ var customer = {
                         addr_list[i].removeAttribute('checked');
                     }
 
-                    addAddr(addr, receiver, phone);
+                    addAddr(otherAddr, receiver, phone);
                 });
 
                 /** [click function of submitting the order] */
@@ -1202,12 +1217,17 @@ var customer = {
                         alert('please add an address for your own first');
                         $('.order-container #order-addr .other').click();
                     } else {
-                        $.getJSON('addOrder', {
-                            address_id: address_id,
-                            options: orders
-                        }, function(json, textStatus) {
-                            /*optional stuff to do after success */
-                        });
+                    	if (orders.length === 0) {
+                    		alert('you have no produts');
+                    	} else {
+                    		$.getJSON('addOrder', {
+                                address_id: address_id,
+                                options: orders
+                            }, function(data, textStatus) {
+                                /*optional stuff to do after success */
+                            	window.location.href = '?type=pay&oid=' + data.order_id;
+                            });
+                    	}
                     }
                 });
             },
@@ -1328,9 +1348,11 @@ var customer = {
 
             $('.order-container #order-info').append('<div class="shop-info">\
                 <div class="pic-container">\
-                    <div class="over">\
-                        <div class="link-btn"></div>\
-                    </div>\
+            		<a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
+	                    <div class="over">\
+	                        <div class="link-btn"></div>\
+	                    </div>\
+	                </a>\
                     <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
                 </div>\
                 <div class="info">\
@@ -1393,25 +1415,29 @@ var customer = {
          */
         var initData = function(data) {
             /** @type {Object} [operations of different statuses] */
-            var operations = {
+            const operations = {
                 unpaid: {
                     name: 'Paid',
-                    url: '#'
+                    type: 'pay'
                 }
             };
+            
+            const detailsType = {
+            	unpaid: 'show'	
+            }
 
             /** [for: append] */
-            for (var i in data) {
+            for (let i = 0; i < data.length; i++) {
                 /** date object */
-                var date = new Date();
+                let date = new Date();
 
                 /** loop to get shop item for this order */
-                var shopItem = '';
+                let shopItem = '';
 
                 /** order time */
                 date.setTime(data[i].orderTime.time);
 
-                for (var j in data[i].orderInfos) {
+                for (let j = 0; j < data[i].orderInfos.length; j++) {
                     shopItem += '<div class="shop-item">\
                         <div class="pic-container">\
                             <a href="' + data[i].orderInfos[j].productUrl + '" target="_blank">\
@@ -1446,13 +1472,13 @@ var customer = {
                             <div class="delivery-status">\
                                 <p class="value">' + data[i].status + '</p>\
                                 <p class="name">delivery status</p>\
-                                <p><a class="value" href="order?type=show&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
+                                <p><a class="value" href="order?type=' + detailsType[data[i].status] + '&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
                                 <p class="name">more details</p>\
                                 <p><a class="value" href="#">track the delivery</a></p>\
                                 <p class="name">track where the shop is</p>\
                             </div>\
                         </div>\
-                        <div class="handle-btn button" onclick="window.open(\'' + operations[data[i].status].url + '\');">' + operations[data[i].status].name + '</div>\
+                        <div class="handle-btn button" onclick="window.open(\'?type=' + operations[data[i].status].type + '&oid=' + data[i].orderId + '\');">' + operations[data[i].status].name + '</div>\
                     </div>';
                 }
 
@@ -1485,12 +1511,51 @@ var customer = {
 
                 /** [click function of delete order] */
                 $('.order-container #order-list .order-item .delete-btn').click(function(event) {
-                    /** remove dom node */
-                    $(this).parent().parent().remove();
+                	const _this = $(this);
+                	
+                	$.getJSON('deleteOrder', {
+                        oid: $(this).prev().prev().children('.value').html()
+                    }, function(data, textStatus) {
+                    	console.log(data.success);
+                        /*optional stuff to do after success */
+                        if (!data.success) {
+                        	alert('failed to delete a order which state is not `unpaid`');
+                        } else {
+                        	/** remove dom node */
+                            _this.parent().parent().remove();
+                        }
+                    });
                 })
             })
             .fail(function() {
                 console.log("failed to get orders list");
             });
+    },
+    
+    /**
+     * [initPay: init the page page of order]
+     * @return {[type]} [description]
+     */
+    initPay: function(oid) {
+    	$('.order-container #pay-btn').click(function() {
+    		$.getJSON('payOrder', {
+                oid: oid
+            }, function(data, textStatus) {
+                /*optional stuff to do after success */
+                if (!data.success) {
+                	$('.order-container #pay-btn').css({
+            			'border': '2px solid #666',
+            			'background-color': '#fff',
+            			'color': '#eee'
+            		});
+            		
+            		$('.order-container #pay-btn').removeClass('button');
+            		
+            		$('.order-container #pay-btn').unbind('click');
+                } else {
+                	alert('Ooops, failed to pay');
+                }
+            });
+    	});
     }
 };
