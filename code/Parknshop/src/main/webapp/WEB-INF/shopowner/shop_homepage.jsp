@@ -62,9 +62,11 @@
 		    <br/>
 			<c:forEach var="product" items="${product_list}" >
 	          <div class="shopbox">				
-				<a href="selectedshop?shopId=${shop.shopId}" class="shopphoto"><img src="${ product.picture }"  class="shop-img-box" alt="no p no t"></a>
+				<a href="./productInfo?pid=${ product.productId }" class="shopphoto"><img src="${ product.picture }"  class="shop-img-box" alt="no p no t"></a>
 				<div><a class="shopname" href=""><span id="">${ product.name }</span></a></div>
 				<div>${product.price}</div>
+				<a href="modifyproduct?product_id=${product.productId}">modify</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="deleteproduct?product_id=${product.productId}">delete</a>
 		      </div>
 	       </c:forEach>
 	      

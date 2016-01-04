@@ -42,7 +42,6 @@ public class AddProductServlet extends HttpServlet{
 			resp.sendRedirect("login");
 			return;
 		}
-		req.getSession().setAttribute(AttrName.SessionScope.SHOPID, "7880");
 		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
 		int shop = -1;
 		try {
