@@ -71,8 +71,9 @@ public class AddAddressServlet extends HttpServlet {
 		String phone = params.get("phone")[0];
 		
 		Address address = new Address(null, user.getUserId(), description, zipcode, name, phone);
+		address = addressService.insertAddress(address);
 		
-		if(addressService.insertAddress(address) == null){
+		if(address == null){
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Failed,please try it again!");
 			resp.getWriter().write(jsonObject.toString());
@@ -80,6 +81,7 @@ public class AddAddressServlet extends HttpServlet {
 		}else {
 			jsonObject.put("result", true + "");
 			jsonObject.put("errMsg", "");
+			jsonObject.put("addressId", address.getAddressId());
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}

@@ -42,7 +42,11 @@ public class ShopOrderServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
+//		Integer shopId =Integer.parseInt(req.getParameter("shopId"));
+		
 		Integer shopId =1;
+		System.out.println(shopId);
 		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shopId);
 		for (OrderInfo info :orderInfos) {
 			info.setOrder(orderService.findById(info.getOrderId()));
