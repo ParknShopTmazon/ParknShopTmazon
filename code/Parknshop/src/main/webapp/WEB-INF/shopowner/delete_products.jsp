@@ -59,10 +59,11 @@
 					<div class="form-lable-left"></div>
 					<div class="form-control-right">
 						<input type="submit" value="delete" class="submit-btn" >
-						<button name="cancel" onclick="window.open('selectedshop')" class="submit-btn">cancel</button>
+						<button  name="cancel" type="button" onclick="window.open('selectedshop')" class="submit-btn">cancel</button>
 					</div>
 				</div>			
 			</form>
+			
 	   </div>
 	</div>
 	
