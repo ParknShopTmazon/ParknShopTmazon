@@ -7,7 +7,7 @@ import com.tmazon.domain.User;
 
 public interface OrderDao {
 
-	public List<Order> select(Order order);
+	public List<Order> select(Order order, Boolean deleted);
 
 	public Order insert(Order order);
 
