@@ -123,6 +123,8 @@ var customer = {
             'notice-add-main': 'people-list-main',
             'notice-del-main': 'main'
         };
+        
+        const scrollController = this.scrollController;
 
         /**
          * [lastStep: to store the last operation]
@@ -166,7 +168,7 @@ var customer = {
         function updateFriendList(name) {
             /** name is null by default */
             name = name || null;
-
+            
             $.ajax({
                     url: 'friends',
                     type: 'POST',
@@ -194,10 +196,7 @@ var customer = {
                             updateArrays.push(0);
                             /** [if: first child] */
                             if (j == 0) {
-                                $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
-
-                                /** get the message of choosen name */
-                                getMessage(data.friends[j].name, true);
+                                $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');               
                                 
                                 $('#friendNameBlock').html(data.friends[j].name);
                             } else {
@@ -206,15 +205,15 @@ var customer = {
                                     $('.dialog #main .friend-list .list ul').children(0).removeClass('select');
 
                                     $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
-
-                                    /** get the message of choosen name */
-                                    getMessage(data.friends[j].name, true);
                                     
                                     $('#friendNameBlock').html(data.friends[j].name);
                                 } else {
                                     $('.dialog #main .friend-list .list ul').append('<li class="button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
                                 }
                             }
+                            
+                            /** get the message of choosen name */
+                            getMessage(data.friends[j].name, true);
                         }
 
                         /** [click function of choosing friends] */
@@ -226,9 +225,11 @@ var customer = {
 
                             /** [set the new selected item] */
                             $(this).addClass('select');
-                            getMessage($(this).html(), false);
+                            getMessage($(this).html().replace('<span></span>', ''), false);
                             $('#friendNameBlock').html($(this).html());
                             $(this).children('span').remove();
+                                 
+                            scrollController.enableScroll($(document.body));
                         });
                     }
 
@@ -245,7 +246,7 @@ var customer = {
          * @return {[type]}            [description]
          */
         function getMessage(friendName, isComet) {
-            const postData = {
+            let postData = {
                 friendName: friendName
             };
 
@@ -284,7 +285,7 @@ var customer = {
                     }
 
                     if (isComet) {
-                        const cometObj = Object.create(Comet);
+                        let cometObj = Object.create(Comet);
                         cometObj.init('messages');
                         cometObj.subscribe(postData, function() {
                             const $list = $('.dialog .list ul').children('li');
