@@ -108,15 +108,17 @@ const Comet = {
         "use strict";
         const _this = this;
         
-        this._len = len;
+        _this._len = len;
+        
         
         $.getJSON(this._baseurl, this._subscribed, function(data) {
             /** you can modify as you like in this part to 
              *  judge which conditions are the trigger point
              */
-            if (data.messages.length === len) {
+            if (data.messages.length === _this._len) {
                 _this._refresh();
             } else {
+            	_this._len = data.messages.length;
             	_this._callback();
             	_this._refresh();
             }
