@@ -202,6 +202,16 @@ s {
     line-height: 1.4em;
     cursor: pointer;
     padding: 0 15px;
+    position: relative;
+}
+
+.dialog .list ul > li > span {
+    position: absolute;
+    top: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #a10000;
 }
 
 .dialog .list ul .select {
