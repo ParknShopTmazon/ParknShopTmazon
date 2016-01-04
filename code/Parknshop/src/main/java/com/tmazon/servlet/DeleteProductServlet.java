@@ -87,7 +87,7 @@ public class DeleteProductServlet extends HttpServlet{
 		
 		
 		
-		
+		System.out.println("**************************");
 		String productId = req.getParameter("product_id");
 		int id=-1;
 		try {
