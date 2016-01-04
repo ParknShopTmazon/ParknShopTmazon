@@ -90,3 +90,10 @@ INSERT INTO `parknshop`.`orderinfo` (`orderId`, `deliveryId`, `quantity`, `produ
 INSERT INTO `parknshop`.`orderinfo` (`orderId`, `deliveryId`, `quantity`, `productId`) VALUES ('2', '1', '3', '78783');
 
 
+-- friend
+INSERT INTO `parknshop`.`friend` VALUES (12312, 7878);
+
+-- message
+
+INSERT INTO `parknshop`.`message` VALUES (100, 12312, 7878, 'hello?', 0, now());
+INSERT INTO `parknshop`.`message` VALUES (101, 7878, 12312, 'hello', 1, now());
