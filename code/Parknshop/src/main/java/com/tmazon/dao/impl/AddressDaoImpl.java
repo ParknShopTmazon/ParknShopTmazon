@@ -62,10 +62,14 @@ public class AddressDaoImpl implements AddressDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			Address result = runner.insert(sql, new BeanHandler<Address>(Address.class), address.getAddressId(),
+			runner.insert(sql, new BeanHandler<Address>(Address.class), address.getAddressId(),
 					address.getUserId(), address.getDescription(), address.getZipcode(), address.getName(),
 					address.getPhone());
-			return result;
+			List<Address> results = select(address);
+			if(results.isEmpty())
+				return null;
+			else
+				return results.get(0);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

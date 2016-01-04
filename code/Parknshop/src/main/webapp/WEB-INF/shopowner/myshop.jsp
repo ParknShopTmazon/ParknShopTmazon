@@ -16,7 +16,8 @@
 	   
 	      <c:forEach var="shop" items="${shopList}" >
 	          <div class="shopbox">
-				<div class="shopphoto" onclick="window.open('selectedshop')"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></div>
+<%-- 				<div class="shopphoto" onclick="window.open('selectedshop')"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></div> --%>
+				<a href="productlist?shopid=${shop.shopId}" class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
 				<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
 				<div>${shop.status}</div>
 		      </div>
