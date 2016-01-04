@@ -52,8 +52,7 @@ public class SelectedShopServlet extends HttpServlet {
 		}
 		Product product = new Product();
 		product.setShopId(id);
-		product.setStatus(Product.STATUS_ONSELL);
-		ArrayList<Product> productList = (ArrayList<Product>) productService.select(product);
+		ArrayList<Product> productList = (ArrayList<Product>) productService.selectOnSell(product);
 		req.setAttribute("product_list",productList );
 		req.setAttribute("num",productList.size());
 //			Product product = new Product(null,1,null,null,null,null,null,null,null,null,null);

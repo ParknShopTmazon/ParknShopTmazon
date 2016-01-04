@@ -60,4 +60,7 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.selectInLike(product);
 	}
 
+	public List<Product> selectOnSell(Product product){
+		return productDao.selectOnSell(product);
+	}
 }

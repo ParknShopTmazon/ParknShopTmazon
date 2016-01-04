@@ -31,7 +31,9 @@ public class OrderServiceImpl implements OrderService {
 		order.setStatus(Order.STATUS_UNPAID);
 		order.setPayType(Order.PAY_TYPE_ONLINE_PAYMENT);
 
+		
 		order = ordersDao.insert(order);
+		
 
 		for (OrderInfo orderInfo : orderInfos) {
 			orderInfo.setOrderId(order.getOrderId());
