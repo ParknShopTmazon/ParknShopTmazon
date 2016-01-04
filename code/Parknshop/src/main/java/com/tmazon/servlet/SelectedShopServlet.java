@@ -20,41 +20,48 @@ public class SelectedShopServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String shopId=req.getParameter("shopId");
 		User user = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
 		if(user == null){
 			resp.sendRedirect("login");
 			return;
 		}
-		req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
+		String shopId=req.getParameter("shopId");
+		System.out.println("*******************"+shopId);
+		if(!(shopId==null||"".trim().equals(shopId))){
+			System.out.println("sdsdsdsddssdsddssd"+shopId);
+			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
+		}
 		doPost(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		System.out.println("this is post************");
 		String shopId=(String) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
-//		shopId = "1";
+		int id =-1;
 		try {
-			Product product = new Product(null,Integer.parseInt(shopId),null,null,null,null,null,null,null,null,null);
-			ArrayList<Product> productList = (ArrayList<Product>) productService.select(product);
-			req.setAttribute("product_list",productList );
-			req.setAttribute("num",productList.size());
-//			for(Product temp : productList){
-//				System.out.println(temp.getName());
-//			}
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			id=Integer.parseInt(shopId);
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(id==-1){
+			resp.sendRedirect("myshop");
+			return;
+		}
+		Product product = new Product();
+		product.setShopId(id);
+		product.setStatus(Product.STATUS_ONSELL);
+		ArrayList<Product> productList = (ArrayList<Product>) productService.select(product);
+		req.setAttribute("product_list",productList );
+		req.setAttribute("num",productList.size());
 //			Product product = new Product(null,1,null,null,null,null,null,null,null,null,null);
 //			ArrayList<Product> productList = (ArrayList<Product>) productService.select(product);
 //			for(Product temp : productList){
 //				System.out.println(temp.getName());
 //			}
-			req.getRequestDispatcher("/WEB-INF/shopowner/myshop.jsp").forward(req, resp);
-			return;
-			
-			
-		}
+
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_homepage.jsp").forward(req, resp);
 		return;
 	}

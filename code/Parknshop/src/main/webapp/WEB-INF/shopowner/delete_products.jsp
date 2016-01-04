@@ -58,7 +58,7 @@
 				<div class="form-item">
 					<div class="form-lable-left"></div>
 					<div class="form-control-right">
-						<input type="submit" value="next" class="submit-btn" >
+						<input type="submit" value="delete" class="submit-btn" >
 						<button name="cancel" onclick="window.open('productlist')" class="submit-btn">cancel</button>
 					</div>
 				</div>			
