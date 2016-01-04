@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import com.tmazon.domain.User;
 import com.tmazon.service.UserService;
 import com.tmazon.util.AttrName;
@@ -42,7 +44,9 @@ public class DeleteFriendServlet extends HttpServlet {
 		}
 		
 		boolean result = userService.deleteFriend(user, friend);
-		resp.getWriter().write(result ? "success" : "failed");
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("success", result);
+		resp.getWriter().write(jsonObject.toString());
 	}
 	
 	@Override
