@@ -34,6 +34,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 	
+		req.getSession().setAttribute(AttrName.SessionScope.LOGIN_REFERER, req.getHeader("Referer"));
+		
 		req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
 				resp);
 	}
@@ -96,6 +98,8 @@ public class LoginServlet extends HttpServlet {
 			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req, resp);;
 			return ;
 		}
-		resp.sendRedirect("index");
+		
+		String url = (String) req.getSession().getAttribute(AttrName.SessionScope.LOGIN_REFERER);
+		resp.sendRedirect(url);
 	}
 }

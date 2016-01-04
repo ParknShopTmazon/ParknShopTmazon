@@ -1,16 +1,17 @@
 <div id="header">
-	<div class="header-div" id="logo-icon" onclick="window.open('index');"></div>
-	<div class="header-div" id="search-btn" onclick="window.open('searchProduct');"></div>
+	<a class="header-div" id="logo-icon" href="index"></a>
+	<a class="header-div" id="search-btn" href="searchProduct"></a>
 	<c:if test="${ not empty s_user }">
-		<div class="header-div" id="cart" onclick="window.open('cart');"></div>
+		<a class="header-div" id="cart" href="cart"></a>
 	</c:if>
 	<c:if test="${ s_user.role eq 'shop_owner' }">
-		<div class="header-div" id="myshop" onclick="window.open('myshop')"></div>
+		<a class="header-div" id="myshop" href="myshop"></a>
 	</c:if>
 	
 	<c:choose>
 		<c:when test="${ not empty s_user }">
 			<div class="text-btn">${ s_user.name }</div>
+			<div class="text-btn"><a href="viewOrder?type=list">Orders</a></div>
 			<div class="text-btn"><a href="logout">Logout</a></div>
 		</c:when>
 		<c:otherwise>
