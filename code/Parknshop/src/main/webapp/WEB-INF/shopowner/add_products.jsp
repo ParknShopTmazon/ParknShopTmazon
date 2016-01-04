@@ -76,7 +76,7 @@
 				<div class="form-item">
 					<div class="form-lable-left"></div>
 					<div class="form-control-right">
-						<input type="submit" value="next" class="submit-btn" >
+						<input type="submit" value="submit" class="submit-btn" >
 					</div>
 				</div>			
 			</form>
