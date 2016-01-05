@@ -40,42 +40,43 @@
 					<a href="index?category=${ category }"><li>${ category }</li></a>
 				</c:forEach>
 			</ul>
+			<div class="products-btn"></div>
 		</div>
 		<div class="shops">
 			<div class="page-title">
 			    <span class="parknshop">PARKnSHOP</span>
 			    <span class="main-title">Top 10 Products</span>
+			    <span class="more"><a href="searchProduct">more</a></span>
 			</div>
-			<div class="row-fluid">
-				<div class="span9">
-					<h3>Top 10 Products</h3>
-				</div>
-				<div class="span3">
-					<h3><a href="searchProduct">more</a></h3>
-				</div>
-			</div>
-			<div class="row-fluid">
+			<div class="shop-lists">
 				<c:if test="${ empty r_products }">no product</c:if>
 				<c:forEach var="product" varStatus="status" begin="0" end="4"
 					items="${ r_products }">
-					<div class="span2">
-						<a href="productInfo?pid=${ product.productId }" target="_black"><img src="${ product.picture }" ></a>
-						<h4>${ product.name }</h4>
+					<div class="pic-container">
+					    <a href="productInfo?pid=${ product.productId }" target="_blank">
+					        <div class="over">
+					            <div class="link-btn"></div>
+					            <div class="product-name">${ product.name }</div>
+					            <div class="product-price">$${ product.price }</div>
+					        </div>
+					    </a>
+					    <div class="shop" style="background-image: url('${ product.picture }');"></div>
 					</div>
 				</c:forEach>
-
-				<div class="span2"></div>
-			</div>
-			<div class="row-fluid">
 				<c:forEach var="product" varStatus="status" begin="5" end="9"
-					items="${ r_products }">
-					<div class="span2">
-						<a href="productInfo?pid=${ product.productId }" target="_black"><img src="${ product.picture }"></a>
-						<h4>${ product.name }</h4>
-					</div>
+						items="${ r_products }">
+					
+						<div class="pic-container">
+						    <a href="productInfo?pid=${ product.productId }" target="_blank">
+						        <div class="over">
+						            <div class="link-btn"></div>
+						            <div class="product-name">${ product.name }</div>
+						            <div class="product-price">$ ${ product.price }</div>
+						        </div>
+						    </a>
+						    <div class="shop" style="background-image: url('${ product.picture }');"></div>
+						</div>
 				</c:forEach>
-
-				<div class="span2"></div>
 			</div>
 		</div>
 	</div>

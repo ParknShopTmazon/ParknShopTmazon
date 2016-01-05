@@ -116,6 +116,20 @@ var customer = {
             autoplay: 5000,
             autoplayDisableOnInteraction: false
         });
+        
+        $('.index-container .categories .products-btn').click(function() {
+        	let backgroundImage;
+        	let $left = $(this).parent().css('left');
+        	$left = $left === '0px' ? '-300px' : '0px';
+        	backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
+        	$(this).parent().css({
+        		'left': $left
+        	});
+        	
+        	$(this).css({
+        		'background-image': backgroundImage
+        	});
+        });
     },
 
     /**
