@@ -11,8 +11,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.tmazon.dao.OrderInfoDao;
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
-import com.tmazon.domain.Product;
-import com.tmazon.domain.Shop;
 import com.tmazon.util.DaoUtil;
 
 public class OrderInfoDaoImpl implements OrderInfoDao {
