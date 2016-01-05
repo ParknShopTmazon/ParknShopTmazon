@@ -1,10 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.Order;
-import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.User;
 import com.tmazon.service.OrderService;
 import com.tmazon.util.AttrName;
@@ -22,7 +18,7 @@ import com.tmazon.util.ParseUtil;
 
 import net.sf.json.JSONObject;
 
-public class AddOrderServlet extends HttpServlet {
+public class PayOrderServlet extends HttpServlet {
 	
 	private OrderService orderService = BasicFactory.getImpl(OrderService.class);
 
@@ -30,7 +26,6 @@ public class AddOrderServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute(AttrName.SessionScope.USER);
 		JSONObject jsonObject = new JSONObject();
@@ -44,35 +39,41 @@ public class AddOrderServlet extends HttpServlet {
 		
 		@SuppressWarnings("unchecked")
 		Map<String, String[]> params = req.getParameterMap();
-		Order order = new Order();
 		
-		Set<String> keys = params.keySet();
-		int dataSize = (keys.size() - 1) /2;
-		
-		String addressString = params.get("address_id")[0];
-		
-		int addressId = ParseUtil.String2Integer(addressString, null);
-		
-		List<OrderInfo> orderInfos = new ArrayList<OrderInfo>();
-		for(int i = 0; i < dataSize; i++){
-			OrderInfo orderInfo = new OrderInfo();
-			int productId = ParseUtil.String2Integer(params.get("options[" + i + "][product_id]")[0], null);
-			int deliveryId = ParseUtil.String2Integer(params.get("options[" + i + "][delivery_id]")[0], null);
-			orderInfo.setProductId(productId);
-			orderInfo.setDeliveryId(deliveryId);
-			orderInfos.add(orderInfo);
+		String[] oidStrings = params.get("oid");
+		if(oidStrings == null){
+			jsonObject.put("result", false + "");
+			jsonObject.put("errMsg", "Cannot get order, please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
+		String orderString = oidStrings[0];
+		if(orderString == null){
+			jsonObject.put("result", false + "");
+			jsonObject.put("errMsg", "Cannot get order, please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
 		}
 		
-		order.setAddressId(addressId);
-		order.setUserId(user.getUserId());
+		int orderId = ParseUtil.String2Integer(orderString, null);
+		Order order = orderService.findById(orderId);
+		if(order == null){
+			jsonObject.put("result", false + "");
+			jsonObject.put("errMsg", "Cannot get order, please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
 		
-		order = orderService.addOrder(order, orderInfos);
+		if(!order.getUserId().equals(user.getUserId())){
+			jsonObject.put("result", false + "");
+			jsonObject.put("errMsg", "You don't have this order!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
 		
-		if(order != null){
+		if(orderService.changeStatus(order, Order.STATUS_PAID)){
 			jsonObject.put("result", true + "");
 			jsonObject.put("errMsg", "");
-			jsonObject.put("oid", order.getOrderId());
-			jsonObject.put("orderid", order.getOrderId());
 		}else {
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Failed!");

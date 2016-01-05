@@ -16,7 +16,7 @@
 		<div id="shopinfo">
 			<h2>&nbsp;&nbsp;Please Register</h2>
 			
-			<form class="complete-info" id="form1" action="registernewshop" method="post" enctype="multipart/form-data">
+			<form class="complete-info" id="form1" name="formen" action="registernewshop" method="post" enctype="multipart/form-data">
 				
 				<div class="form-item">
 					<div class="form-lable-left">&nbsp;Shop Name:</div>
@@ -46,8 +46,10 @@
 					<div class="form-lable-left">Shop Photo:</div>
 					<div class="form-shop-img">
 					 
-					  
-				      <input name="file" type="file"  id="photo_path" class="inputfile" value="upload_picture"  onSelect="getPhoto()" accept="image/bmp,image/png,image/jpeg"/>
+					 <input type="file" name="file" id="file" style="display:none" onChange="document.formen.path.value=this.value"> 
+					 <input name="path" readonly> 
+					 <input type="button" value="Browse" onclick="document.formen.file.click()">  
+<!-- 				      <input name="file" type="file"  id="photo_path" class="inputfile" value="upload_picture"  onSelect="getPhoto()" accept="image/bmp,image/png,image/jpeg"/> -->
 				  </div>
 				</div>	
 					  

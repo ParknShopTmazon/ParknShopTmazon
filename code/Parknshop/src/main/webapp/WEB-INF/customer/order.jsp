@@ -29,6 +29,7 @@
 		<%	} %>
 		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("pay")) {%>
 				<%@ include file="order_pay.html"%>
+				<input type="hidden" id="oid" value="<%=order_id%>">
 		<%	} %>
 		<%	if (type != null && type.equals("certain")) {%>
 				<%@ include file="order_certain.html"%>

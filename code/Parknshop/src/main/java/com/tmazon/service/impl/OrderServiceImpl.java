@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 		return ordersDao.select(new Order(null, null, null, null, user.getUserId(), null), deleted);
 	}
 
-	public boolean addOrder(Order order, List<OrderInfo> orderInfos) {
+	public Order addOrder(Order order, List<OrderInfo> orderInfos) {
 
 		boolean flag = true;
 
@@ -31,7 +31,9 @@ public class OrderServiceImpl implements OrderService {
 		order.setStatus(Order.STATUS_UNPAID);
 		order.setPayType(Order.PAY_TYPE_ONLINE_PAYMENT);
 
+		
 		order = ordersDao.insert(order);
+		
 
 		for (OrderInfo orderInfo : orderInfos) {
 			orderInfo.setOrderId(order.getOrderId());
@@ -44,8 +46,12 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 
-		return flag;
-
+		if(flag){
+			return order;
+		}else {
+			return null;
+		}
+		
 	}
 
 	public List<OrderInfo> getOrderInfo(Integer orderId) {

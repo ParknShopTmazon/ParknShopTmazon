@@ -59,8 +59,8 @@
 					<ul>
 						<li>Manage
 							<ul>
-								<li>delete</li>
-								<li>upset</li>
+								<li><a href="deleteshoporder">delete</a></li>
+								<li><a href="updateordercondition?orderId=${orderInfo.orderId}">update</a></li>
 							</ul>
 						</li>
 					</ul>	

@@ -47,16 +47,16 @@ public class DeleteProductServlet extends HttpServlet{
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			resp.sendRedirect("productlist");
+			resp.sendRedirect("selectedshop");
 			return;
 		}
 		if(id==0){
-			resp.sendRedirect("productlist");
+			resp.sendRedirect("selectedshop");
 			return;
 		}
 		Product product = productService.findOnSellById(id);
 		if(product==null||product.getProductId()==null||product.getProductId()!=id){
-			resp.sendRedirect("productlist");
+			resp.sendRedirect("selectedshop");
 			return;
 		}
 		int shop = -1;
@@ -87,7 +87,7 @@ public class DeleteProductServlet extends HttpServlet{
 		
 		
 		
-		
+		System.out.println("**************************");
 		String productId = req.getParameter("product_id");
 		int id=-1;
 		try {
@@ -97,7 +97,7 @@ public class DeleteProductServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		if(id==-1){
-			resp.sendRedirect("productlist");
+			resp.sendRedirect("selectedshop");
 			return;
 		}
 		Product product =new Product();
@@ -106,6 +106,6 @@ public class DeleteProductServlet extends HttpServlet{
 		if(modify==true){
 			System.out.println("ÐÞ¸Ä³É¹¦");
 		}
-		resp.sendRedirect("productlist");
+		resp.sendRedirect("selectedshop");
 	}
 }

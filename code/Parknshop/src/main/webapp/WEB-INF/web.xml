@@ -199,22 +199,34 @@
   <servlet-class>com.tmazon.servlet.AddAddressServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>ModifyProductServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.ModifyProductServlet</servlet-class>
+  <servlet-name>ModifyProductServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ModifyProductServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>DeleteProductServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.DeleteProductServlet</servlet-class>
+  <servlet-name>DeleteProductServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteProductServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>UpdateUTableServlet</servlet-name>
- 	<display-name>UpdateUTableServlet</display-name>
- 	<description></description>
- 	<servlet-class>com.tmazon.servlet.UpdateUTableServlet</servlet-class>
+  <servlet-name>UpdateUTableServlet</servlet-name>
+  <display-name>UpdateUTableServlet</display-name>
+  <servlet-class>com.tmazon.servlet.UpdateUTableServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>DeleteOrderServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.DeleteOrderServlet</servlet-class>
+  <servlet-name>DeleteOrderServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteOrderServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdateOrderConditionServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.UpdateOrderConditionServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>DeleteShopOrderServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteShopOrderServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>PayOrderServlet</servlet-name>
+  <display-name>PayOrderServlet</display-name>
+  <servlet-class>com.tmazon.servlet.PayOrderServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -393,20 +405,32 @@
   <url-pattern>/addAddress</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>ModifyProductServlet</servlet-name>
- 	<url-pattern>/modifyproduct</url-pattern>
- </servlet-mapping>
-  <servlet-mapping>
- 	<servlet-name>DeleteProductServlet</servlet-name>
- 	<url-pattern>/deleteproduct</url-pattern>
+  <servlet-name>ModifyProductServlet</servlet-name>
+  <url-pattern>/modifyproduct</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>UpdateUTableServlet</servlet-name>
- 	<url-pattern>/updateUTableServlet</url-pattern>
+  <servlet-name>DeleteProductServlet</servlet-name>
+  <url-pattern>/deleteproduct</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>DeleteOrderServlet</servlet-name>
- 	<url-pattern>/deleteOrder</url-pattern>
+  <servlet-name>UpdateUTableServlet</servlet-name>
+  <url-pattern>/updateUTableServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeleteOrderServlet</servlet-name>
+  <url-pattern>/deleteOrder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdateOrderConditionServlet</servlet-name>
+  <url-pattern>/updateordercondition</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeleteShopOrderServlet</servlet-name>
+  <url-pattern>/deleteshoporder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>PayOrderServlet</servlet-name>
+  <url-pattern>/payOrder</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

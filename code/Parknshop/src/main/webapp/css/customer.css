@@ -1507,6 +1507,9 @@ s {
 
 .order-container #order-list .order-item .origin-price p {
     width: 122px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .order-container #order-list .order-item .size .name,
@@ -1567,7 +1570,7 @@ s {
 
 
 .order-container #order-list .order-item .handle-btn {
-    width: 90px;
+    width: 150px;
     height: 40px;
     line-height: 40px;
     text-align: center;
