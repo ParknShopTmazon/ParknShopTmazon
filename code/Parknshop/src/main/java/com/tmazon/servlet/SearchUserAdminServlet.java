@@ -54,7 +54,7 @@ public class SearchUserAdminServlet extends HttpServlet{
 		{
 			role = null;
 		}
-		if(nextStr == null || curPageStr==null)
+		if(nextStr == null || curPageStr==null || nextStr.equals("") || curPageStr.equals(""))
 		{
 			curPage = 1;
 			next = 0;
