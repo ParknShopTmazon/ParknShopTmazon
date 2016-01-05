@@ -62,78 +62,50 @@
 						<span class="value">${ product.stockNum }</span>
 					</div>
 				</div>
+				<div class="main">Buy</div>
+				<c:if test="${ isLogin }">
+					<c:if test="${ not expired }">
+						<form>
+							<input type="hidden" name="pid" value="${ product.productId }" />
+							<c:if test="${ not isExists }">
+								<div class="info-items">
+									<span class="name">Quantity</span>
+									<span class="value"><input name="quantity" type="number" min="1" value="1"/></span>
+								</div>
+								<button class="btn-warning">Add to cart</button> 	
+							</c:if>
+							<c:if test="${ isExists }">
+								<button class="btn-warning btn-disabled" disabled>Already in cart</button>
+							</c:if>
+						</form>
+					</c:if>
+					<c:if test="${ expired }">
+						<button class="btn-warning btn-disabled" disabled>Expired</button>
+					</c:if>
+				</c:if>
+				<c:if test="${ not isLogin }">
+					<a href="/Parknshop/login"><button class="btn-warning">Login</button></a>
+				</c:if>	
 			</div>
-		</div>
-					<c:if test="${ isLogin }">
-						<c:if test="${ not expired }">
-							<form>
-								<fieldset>
-									 <input type="hidden" name="pid" value="${ product.productId }" />
-									 <c:if test="${ not isExists }">
-										 <input name="quantity" type="text" value="1"/> 
-										 <span id="quantity" class="help-block">Quantity</span>
-										 <button class="btn-warning">Add to cart</button> 	
-									</c:if>
-									<c:if test="${ isExists }">
-										 <span class="help-block">Already in cart</span>
-									</c:if>
-								</fieldset>
-							</form>
-						</c:if>
-						<c:if test="${ expired }">
-							<p><span style="color:red;">Expired</span></p>
-						</c:if>
-					</c:if>
-					<c:if test="${ not isLogin }">
-						<a href="/Parknshop/login"><button class="btn-warning">Login</button></a>
-					</c:if>
+			<div class="main">Product introduction</div>
+			<div class="description">${ product.description }</div>
+			<div class="main">Product Comments</div>
+			<div class="comments">
+				<div class="comment-items">
+					<div>
+						<p class="value">user1</p>
+						<p class="name">User Name</p>
+					</div>
+					<div>
+						<p class="value">shop: <span>5.0</span></p>
+						<p class="value">product: <span>4.0</span></p>
+						<p class="value">delivery: <span>3.0</span></p>
+						<p class="name">Comment</p>
+					</div>
 				</div>
-	</div>
-	<div class="row-fluid">
-			<h3>
-				Product introduction 
-			</h3>
-			<p>
-				${ product.description }
-			</p>
+				<div class="pan"></div>
+			</div>	
 		</div>
-	<div class="row-fluid">
-			<table class="table">
-				<thead>
-					<tr>
-						<h3>
-							Product comments
-						</h3>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							1
-						</td>					
-					</tr>
-					<tr>
-						<td>
-							1
-						</td>						
-					</tr>
-					<tr>
-						<td>
-							2
-						</td>						
-					</tr>
-					<tr>
-						<td>
-							3
-						</td>					
-					</tr>
-					<tr>
-						<td>
-							4
-						</td>
-					</tr>
-				</tbody>
-			</table>
 	</div>
 	<%@ include file="footer.html"%>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>

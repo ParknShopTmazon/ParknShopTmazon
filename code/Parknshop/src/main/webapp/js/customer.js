@@ -1493,10 +1493,6 @@ var customer = {
                             <p class="value">' + data[i].orderInfos[j].quantity + '</p>\
                             <p class="name">quantity</p>\
                         </div>\
-                        <div class="size">\
-                            <p class="value">' + data[i].orderInfos[j].size + '</p>\
-                            <p class="name">size</p>\
-                        </div>\
                         <div class="price">\
                             <p class="shop-price">\
                                 $' + (parseInt(data[i].orderInfos[j].quantity) * parseFloat(data[i].orderInfos[j].product.discountPrice) + parseFloat(data[i].orderInfos[j].delivery.price)) + '\
