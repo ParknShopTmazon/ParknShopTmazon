@@ -11,7 +11,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.ProductDao;
 import com.tmazon.domain.Product;
-import com.tmazon.util.AttrName;
 import com.tmazon.util.DaoUtil;
 
 public class ProductDaoImpl implements ProductDao{
@@ -246,7 +245,7 @@ public class ProductDaoImpl implements ProductDao{
 			params.add(product.getPicture());
 		}
 		sqlBuilder.append(" AND ( status!=? or status is null)");
-		params.add(product.STATUS_PULL);
+		params.add(Product.STATUS_PULL);
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
