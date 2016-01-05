@@ -5,19 +5,19 @@
 <html lang="en">
 <head>
 <title>register</title>
-<link href="css/bootstrap-combined.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/customer.css">
 
 </head>
 <body>
 	<%@ include file="header.html"%>
-	<div class="row-fluid">
-		<div class="span4"></div>
-
-		<div class="span4">
-			<h2>Please Register</h2>
-			<br /> <br />
+	<div class="register-container">
+		<div class="page-title">
+		    <span class="back-btn button"></span>
+		    <span class="parknshop">PARKnSHOP</span>
+		    <span class="main-title">Register</span>
+		</div>
+		<div class="register-area">
 			<form class="form-horizontal" action="register" method="post">
 				<div class="control-group">
 					<label class="control-label" for="input1">USERNAME</label>
@@ -38,40 +38,6 @@
 						<input id="input3" type="password" />
 					</div>
 				</div>
-
-				<!-- 
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">SEX</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" />
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">BIRTHDAY</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" />
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">TELEPHONE</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" />
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">ADDRESS</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" />
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">EMAIL</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" />
-					</div>
-				</div>
-				 -->
-
 				<div class="control-group">
 					<div class="controls">
 						<!-- <label class="checkbox"><input type="checkbox" />
@@ -105,8 +71,14 @@
 			</form>
 
 		</div>
-		<div class="span4"></div>
 	</div>
 	<%@ include file="footer.html"%>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/customer.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			customer.init();
+		});
+	</script>
 </body>
 </html>

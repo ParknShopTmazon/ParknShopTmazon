@@ -1,48 +1,35 @@
-<!DOCTYPE HTML>
-<html lang="en_us">
-<head>
-<title></title>
-	<link rel="stylesheet" type="text/css" href="css_shop/layout.css"/>
-	<link rel="stylesheet" type="text/css" href="css_shop/style.css">
-
-</head>
-<body>
-	<div id="header">
-		<div class="header-display-block">
-			<a href="index.jsp"><input type="image" class="logo" src="images_shop/logo.png"/></a>
-			<div class="userinfo">
-				<a href="myshop"><input type="image" class="icon" src="images_shop/home1.jpg"/><span>&nbsp;HomePage</span></a>
-				<a href=""><input type="image" class="icon" src="images_shop/o.jpg" /><span>&nbsp;MyPage</span></a>
-				<a href=""><input type="image" class="icon" src="images_shop/notice.jpg"/><span>&nbsp;notice</span></a>
-				<a href="logout"><input type="image" class="icon" src="images_shop/logout.png"/><span>&nbsp;logout</span></a>
-			</div>	
-		</div>
-		<div class="header-search-block">
-			<form action="" class="searchform" name="searchform" method="get">
-				  <select name="select" class="select">
-				  	<option selected="selected">ALL</option>
-					<option>ShopName</option>
-					<option>ProductName</option>
-				  </select>
-				  <input type="text" class="search" name="search" autocomplete="off"  value="" placeholder="please input shop/product name"/>
-				  <input type="image" class="search-img-box" src="images_shop/search.png" />
-			</form>
-		</div>		
-	</div>
-	<!--div id="line-nav"></div-->
-	<div id="menu">
-		<dl class="side-nav-list">
-			<dd class="home current"><strong>My Home</strong></dd>
-			<dt class="head-item"><strong><a href="myshop">My Shop</a></strong></dt>
-			<dd>
-				<ul class="item-list">
-					<li class="" ><a href="myshop">ShopList</a></li>
-					<li >ManageShop</li>
-				</ul>
-			</dd>
-			<dt class="head-item" ><strong>My Order</strong></dt>
-			
-		</dl>
-	</div>
-</body>
-</html>
+<div id="header">
+	<a class="header-div" id="logo-icon" href="index"></a>
+	<c:choose>
+		<c:when test="${ not empty s_user }">
+			<a href="cart"><div class="text-btn">Cart</div></a>
+			<a href="logout"><div class="text-btn">Logout</div></a>
+		</c:when>
+	</c:choose>
+	<div class="header-search-block">
+		<form action="" class="searchform" name="searchform" method="get">
+			  <select name="select" class="select">
+			  	<option selected="selected">ALL</option>
+				<option>ShopName</option>
+				<option>ProductName</option>
+			  </select>
+			  <input type="text" class="search" name="search" autocomplete="off"  value="" placeholder="please input shop/product name"/>
+			  <input type="image" class="search-img-box" src="images/search-btn-white.png" />
+		</form>
+	</div>		
+</div>
+<!--div id="line-nav"></div-->
+<div id="menu">
+	<dl class="side-nav-list">
+		<dd class="home current"><strong>My Home</strong></dd>
+		<dt class="head-item"><strong><a href="myshop">My Shop</a></strong></dt>
+		<dd>
+			<ul class="item-list">
+				<li class="" ><a href="myshop">ShopList</a></li>
+				<li >ManageShop</li>
+			</ul>
+		</dd>
+		<dt class="head-item" ><strong>My Order</strong></dt>
+		
+	</dl>
+</div>

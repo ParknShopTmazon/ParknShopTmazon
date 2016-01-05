@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <%@ include file="header.html"%>
+    <%@ include file="header2.html"%>
 
 	<div id="container">
 		<div id="shopinfo">
