@@ -1,3 +1,29 @@
+* {
+    margin: 0;
+}
+
+
+/**
+ * html
+ */
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Ping Hei", "冬青黑体", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "微软雅黑";
+    font-size: 1em;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+    color: #000;
+}
+
 #header,
 #footer {
     width: 100%;
@@ -160,6 +186,7 @@
     width: 300px;
     padding-left: 5px;
 }
+
 
 /*********************************************************************************
  *

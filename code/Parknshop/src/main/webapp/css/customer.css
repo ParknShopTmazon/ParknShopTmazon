@@ -235,7 +235,7 @@ s {
 
 .index-container .categories ul li {
     list-style: none;
-    padding: 25px 0;
+    padding: 10px 0;
     transition: background-color 0.8s;
 }
 

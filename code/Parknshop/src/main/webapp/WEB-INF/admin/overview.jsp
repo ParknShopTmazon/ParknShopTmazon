@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
     <%
     	String path=request.getContextPath();
-    
-    
-    
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -34,15 +31,8 @@
 		<!--[if IE]><![endif]><![endif]-->
 	</head>
 	<body>
-		<ul id="navigation">
-			<li><img src="css/logo.png"></li>
-			<li><span class="active">Overview</span></li>
-			<li><a href="user">User Management</a></li>
-			<li><a href="shopApply">Shop-Apply Management</a></li>
-			<li><a href="advertisement">Advertisement Management</a></li>
-			<li><a href="other">Other</a></li>
-		</ul>
-
+		<%@ include file="header.html"%>
+		<div class="overview-container">
 			<div id="content" class="container_16 clearfix">
 				<div class="grid_5">
 					<div class="box">
@@ -246,8 +236,7 @@
 					</div>
 				</div>
 			</div>
-		<div id="foot">
-			 Welcome to PARKnSHOP.
 		</div>
+		<%@ include file="footer.html"%>
 	</body>
 </html>

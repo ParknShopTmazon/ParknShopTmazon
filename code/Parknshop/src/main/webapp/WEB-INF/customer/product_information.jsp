@@ -72,7 +72,12 @@
 									<span class="name">Quantity</span>
 									<span class="value"><input name="quantity" type="number" id="add-to-cart" min="1" max_quantity="${ product.stockNum }" value="1"/></span>
 								</div>
-								<button class="btn-warning">Add to cart</button> 	
+								<c:if test="${ s_user.role ne 'admin' }">
+									<button class="btn-warning">Add to cart</button>
+								</c:if>
+								<c:if test="${ s_user.role eq 'admin' }">
+									<button class="btn-warning btn-disabled" disabled>Admin</button>
+								</c:if>
 							</c:if>
 							<c:if test="${ isExists }">
 								<button class="btn-warning btn-disabled" disabled>Already in cart</button>
