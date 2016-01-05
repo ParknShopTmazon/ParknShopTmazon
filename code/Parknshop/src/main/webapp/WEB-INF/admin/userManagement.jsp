@@ -12,9 +12,6 @@
 		<!--<link rel="stylesheet" href="css/fluid.css" type="text/css" media="screen" charset="utf-8" />-->
 		<link rel="stylesheet" href="css/template.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
-		<script type="text/javascript">
-		
-		</script>
 	</head>
 	<body>
 		
@@ -90,21 +87,19 @@
 								<td colspan="2" rowspan="1" class="pagination">
 								  
 							<form method="post" action="searchUserAdmin">
-									<input type="submit"  value="<<"></input>
-									<input type="hidden" name="next" value="-1"/>
+									<input id="prev-btn" type="submit"  value="<<"></input>
 									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
 									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
 									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
-							</form>	
 								
 									<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
 								
-							<form method="post" action="searchUserAdmin">
-									<input type="submit"   value=">>"></input>
-									<input type="hidden" name="next" value="1"/>
+									<input id="next-btn" type="submit" value=">>"></input>
+									
 									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
 									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
 									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
+									<input type="hidden" id="next-val" name="next" value="1"/>
 							</form>
 							
 							</tr>
@@ -164,5 +159,14 @@
 		<div id="foot">
 			 Welcome to PARKnSHOP. 
 		</div>
+	<script type="text/javascript">
+		document.getElementById('next-btn').addEventListener('click', function() {
+			document.getElementById('next-val').setAttribute('value', 1);
+		});
+		
+		document.getElementById('prev-btn').addEventListener('click', function() {
+			document.getElementById('next-val').setAttribute('value', -1);
+		});
+	</script>
 	</body>
 </html>

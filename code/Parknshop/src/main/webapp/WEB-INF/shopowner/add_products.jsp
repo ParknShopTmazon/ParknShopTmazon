@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
 </head>
 <body>
-	<%@ include file="header.html"%>
+	<%@ include file="header2.html"%>
 	<div class="content">
 		<div class="height2px color5"></div>
 		<div class="manage-nav">

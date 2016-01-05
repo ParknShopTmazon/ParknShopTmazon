@@ -5,8 +5,6 @@
 <html lang="en">
 <head>
 <title>product information</title>
-<link href="css/bootstrap-combined.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/customer.css">
 <script text="text/javascript">
 
@@ -17,68 +15,55 @@
 	<c:if test="${ not empty s_user }">
 		<%@ include file="dialog.html"%>
 	</c:if>
-	<div class="row-fluid">
-				<div class="span4">
-					<img src="${ product.picture }">
+	<div class="product-container">
+		<div class="page-title">
+		    <span class="back-btn button"></span>
+		    <span class="parknshop">PARKnSHOP</span>
+		    <span class="main-title">Login</span>
+		</div>
+		<div class="product-area">
+			<div class="product-picture">
+				<img src="${ product.picture }">
+			</div>
+			<div class="product-info">
+				<div class="main">Introduction of products</div>
+				<div class="infos">
+					<div class="info-items">
+						<span class="name">Shop Owner</span>
+						<span class="value">
+							<!-- <a href="#" >${ shopOwnerName }</a> -->
+							${ shopOwnerName }
+							<span class="line">
+								<c:choose>
+									<c:when test="${ ownerOnline }">
+										[online]
+									</c:when>
+									<c:otherwise>
+										[offline]
+									</c:otherwise>
+								</c:choose>
+							</span>
+						</span>
+					</div>
+					<div class="info-items">
+						<span class="name">Original Price</span>
+						<span class="value"><s>$${ product.price }</s></span>
+					</div>
+					<div class="info-items">
+						<span class="name">Price</span>
+						<span class="value">$${ product.discountPrice }</span>
+					</div>
+					<div class="info-items">
+						<span class="name">Sales Volume</span>
+						<span class="value">${ product.soldNum }</span>
+					</div>
+					<div class="info-items">
+						<span class="name">Remaining</span>
+						<span class="value">${ product.stockNum }</span>
+					</div>
 				</div>
-				<div class="span4">
-					<p>
-						Introduction of products
-					</p>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>
-									shop owner:
-								</th>
-								<th>
-									<a href="#" >${ shopOwnerName }</a>
-									<c:choose>
-										<c:when test="${ ownerOnline }">
-											[online]
-										</c:when>
-										<c:otherwise>
-											[offline]
-										</c:otherwise>
-									</c:choose>
-								</th>								
-							</tr>
-							<tr>
-								<th>
-									price:
-								</th>
-								<th>
-									${ product.price }
-								</th>								
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									discount price:
-								</td>
-								<td>
-									${ product.discountPrice }
-								</td>								
-							</tr>
-							<tr>
-								<td>
-									Sales volume
-								</td>
-								<td>
-									${ product.soldNum }
-								</td>								
-							</tr>
-							<tr>
-								<td>
-									remaining
-								</td>
-								<td>
-									${ product.stockNum }
-								</td>								
-							</tr>
-						</tbody>
-					</table>
+			</div>
+		</div>
 					<c:if test="${ isLogin }">
 						<c:if test="${ not expired }">
 							<form>

@@ -47,11 +47,19 @@ public class Page<T> {
 				lastIndex = (curIndex+pageSize) > Items.size()? Items.size():curIndex+pageSize;
 				System.out.println("nextPage<=0:"+nextPage);
 			}
-			else if(nextPage>= this.MAX_PAGE)
+			else if(nextPage >= this.MAX_PAGE)
 			{
-				this.curPage = MAX_PAGE;
+				this.curPage = this.MAX_PAGE;
 				lastIndex = Items.size();
-				curIndex =  (Items.size()-pageSize) < 0 ? 0 : Items.size()-pageSize; 
+				int l = Items.size()%pageSize;
+				if(l == 0)
+				{
+					curIndex = Items.size() - pageSize;
+				}
+				else
+				{
+					curIndex =  Items.size()-Items.size()%pageSize; 
+				}
 				System.out.println("nextPage>=MAX:"+nextPage);
 			}
 			else
