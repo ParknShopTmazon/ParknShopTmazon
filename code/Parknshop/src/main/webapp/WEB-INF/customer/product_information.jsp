@@ -70,7 +70,7 @@
 							<c:if test="${ not isExists }">
 								<div class="info-items">
 									<span class="name">Quantity</span>
-									<span class="value"><input name="quantity" type="number" min="1" value="1"/></span>
+									<span class="value"><input name="quantity" type="number" id="add-to-cart" min="1" max_quantity="${ product.stockNum }" value="1"/></span>
 								</div>
 								<button class="btn-warning">Add to cart</button> 	
 							</c:if>
@@ -89,14 +89,19 @@
 			</div>
 			<div class="main">Product introduction</div>
 			<div class="description">${ product.description }</div>
-			<div class="main">Product Comments</div>
+			<div class="main">Product Comments
+				<span>
+					<span class="averageName">Average</span>	
+					<span class="averageValue"></span>
+				</span>
+			</div>
 			<div class="comments">
 				<div class="comment-items">
 					<div>
 						<p class="value">user1</p>
 						<p class="name">User Name</p>
 					</div>
-					<div>
+					<div class="comment-part">
 						<p class="value">shop: <span>5.0</span></p>
 						<p class="value">product: <span>4.0</span></p>
 						<p class="value">delivery: <span>3.0</span></p>
@@ -104,6 +109,18 @@
 					</div>
 				</div>
 				<div class="pan"></div>
+				<div class="comment-items">
+					<div>
+						<p class="value">user2</p>
+						<p class="name">User Name</p>
+					</div>
+					<div class="comment-part">
+						<p class="value">shop: <span>4.0</span></p>
+						<p class="value">product: <span>4.0</span></p>
+						<p class="value">delivery: <span>5.0</span></p>
+						<p class="name">Comment</p>
+					</div>
+				</div>
 			</div>	
 		</div>
 	</div>
@@ -113,6 +130,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			customer.init();
+			customer.initProductInfo();
 		});
 	</script>
 </body>

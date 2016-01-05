@@ -101,6 +101,10 @@ var customer = {
                 var ev = (event === undefined) ? window.event : event;
                 keycode = ev.keyCode;
             }
+
+            if (keycode === 13 && document.activeElement.id === "add-to-cart") {
+                return false;
+            }
         });
     },
 
@@ -1588,6 +1592,44 @@ var customer = {
                     alert('Ooops, failed to pay');
                 }
             });
+        });
+    },
+
+    /**
+     * [initProductInfo: init the product info]
+     * @return {[type]} [description]
+     */
+    initProductInfo: function() {
+        const $scores = $('.product-container .product-area .comments .comment-items .value > span');
+
+        let scores = 0;
+        let i = 0;
+        
+        $scores.each(function() {
+            i++;
+            scores += parseFloat($(this).html());
+        });
+
+        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1)); 
+
+        $('.product-container .product-info .info-items .value input[type="number"]').change(function() {
+            /* Act on the event */
+            const _this = $(this);
+            /** check legality when keydown */
+            const regex = new RegExp("^[0-9]*[1-9][0-9]*$");
+            if (regex.test($(this).val())) {
+                if (parseInt($(this).val()) > parseInt($(this).attr('max_quantity'))) {
+                    $(this).focus();
+                    $(this).val($(this).attr('max_quantity'));
+                    alert('the product is limited for sale');
+                } else {
+                    /** do nothing */
+                }
+            } else {
+                $(this).focus();
+                $(this).val(Math.abs(parseInt($(this).val())));
+                alert('you can only enter integer number between 1 and 99');
+            }
         });
     }
 };

@@ -368,23 +368,36 @@ s {
     width: 100%;
 }
 
+.product-container .product-area .main > span {
+    float: right;
+}
+
+.product-container .product-area .main > span .averageName {
+    font-size: 0.8em;
+    color: #000;
+}
+
 .product-container .product-area .description {
     text-indent: 2em;
 }
 
 .product-container .product-area .comments .comment-items {
     height: 100px;
+    padding: 0 10%;
 }
 
 .product-container .product-area .comments .comment-items > div {
     display: inline-block;
-    width: 10%;
     text-align: right;
-    margin-right: 20%;
+}
+
+.product-container .product-area .comments .comment-items .comment-part {
+    float: right;
 }
 
 .product-container .product-area .comments .comment-items .name {
     font-size: 0.8em;
+    margin-top: 5px;
     color: #e0e0e0;
 }
 
@@ -398,7 +411,7 @@ s {
 
 .product-container .product-area .comments .pan {
     padding: 5px 0;
-    margin: 0 3%;
+    margin: 0 10%;
     border-top: 1px solid #e0e0e0;
 }
 
