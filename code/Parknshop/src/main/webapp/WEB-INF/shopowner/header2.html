@@ -2,7 +2,7 @@
 	<a class="header-div" id="logo-icon" href="index"></a>
 	<c:choose>
 		<c:when test="${ not empty s_user }">
-			<a href="cart"><div class="text-btn">Cart</div></a>
+			<div class="user-item">${ s_user.name }</div>
 			<a href="logout"><div class="text-btn">Logout</div></a>
 		</c:when>
 	</c:choose>
