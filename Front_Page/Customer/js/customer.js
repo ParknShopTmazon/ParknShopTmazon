@@ -104,6 +104,20 @@ var customer = {
         });
     },
 
+    initIndex: function() {
+        "use strict";
+        const swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            spaceBetween: 0,
+            loop: true,
+            autoplay: 3000,
+            autoplayDisableOnInteraction: false
+        });
+    },
+
     /**
      * [initDialog: init the part, dialog]
      * @return {[type]} [description]
@@ -1537,6 +1551,7 @@ var customer = {
      * @return {[type]} [description]
      */
     initPay: function(oid) {
+        "use strict";
         $('.order-container #pay-btn').click(function() {
             $.getJSON('payOrder', {
                 oid: oid
