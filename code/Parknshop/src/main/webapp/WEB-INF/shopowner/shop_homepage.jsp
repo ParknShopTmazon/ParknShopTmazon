@@ -46,7 +46,7 @@
 </script>
 </head>
 <body>
-    <%@ include file="header.html"%>
+    <%@ include file="header2.html"%>
 	
 	<div class="content">
 		

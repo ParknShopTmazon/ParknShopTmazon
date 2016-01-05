@@ -30,7 +30,6 @@
 			<div id="shopname" onclick="window.open('registershoppage')">more info</div>	
 		</div>
 	</div>
-	</div>
 	<%@ include file="footer.html"%>	
 	
 </body>

@@ -9,67 +9,86 @@
 <meta http-equiv="cache-control" content="no-cache, must-revalidate">
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57GMT">
 <title>parknshop</title>
-<link href="css/bootstrap-combined.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/customer.css">
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
 </head>
 <body>
 	<%@ include file="header.html"%>
 	<c:if test="${ not empty s_user }">
 		<%@ include file="dialog.html"%>
 	</c:if>
+	<div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+            	<div class="swiper-banner" style="background-image: url(./images/1380961451846.jpg);"></div>
+            </div>
+            <div class="swiper-slide">
+				<div class="swiper-banner" style="background-image: url(./images/6630096896932174829.jpg);"></div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
 
-	<div class="row-fluid">
-		<div class="span3" align="center">
+	<div class="index-container">
+		<div class="categories" align="center">
 			<h2>Product Type</h2>
 			<ul>
-				<li><a href="index">All</a></li>
+				<a href="index"><li>All</li></a>
 				<c:forEach var="category" items="${ r_categories }">
-					<li><a href="index?category=${ category }">${ category }</a></li>
+					<a href="index?category=${ category }"><li>${ category }</li></a>
 				</c:forEach>
 			</ul>
+			<div class="products-btn"></div>
 		</div>
-		<div class="span9">
-			<div class="row-fluid">
-				<div class="span9">
-					<h3>Top 10 Products</h3>
-				</div>
-				<div class="span3">
-					<h3><a href="searchProduct">more</a></h3>
-				</div>
+		<div class="shops">
+			<div class="page-title">
+			    <span class="parknshop">PARKnSHOP</span>
+			    <span class="main-title">Top 10 Products</span>
+			    <span class="more"><a href="searchProduct">more</a></span>
 			</div>
-			<div class="row-fluid">
+			<div class="shop-lists">
 				<c:if test="${ empty r_products }">no product</c:if>
 				<c:forEach var="product" varStatus="status" begin="0" end="4"
 					items="${ r_products }">
-					<div class="span2">
-						<a href="productInfo?pid=${ product.productId }" target="_black"><img src="${ product.picture }" ></a>
-						<h4>${ product.name }</h4>
+					<div class="pic-container">
+					    <a href="productInfo?pid=${ product.productId }" target="_blank">
+					        <div class="over">
+					            <div class="link-btn"></div>
+					            <div class="product-name">${ product.name }</div>
+					            <div class="product-price">$${ product.price }</div>
+					        </div>
+					    </a>
+					    <div class="shop" style="background-image: url('${ product.picture }');"></div>
 					</div>
 				</c:forEach>
-
-				<div class="span2"></div>
-			</div>
-			<div class="row-fluid">
 				<c:forEach var="product" varStatus="status" begin="5" end="9"
-					items="${ r_products }">
-					<div class="span2">
-						<a href="productInfo?pid=${ product.productId }" target="_black"><img src="${ product.picture }"></a>
-						<h4>${ product.name }</h4>
-					</div>
+						items="${ r_products }">
+					
+						<div class="pic-container">
+						    <a href="productInfo?pid=${ product.productId }" target="_blank">
+						        <div class="over">
+						            <div class="link-btn"></div>
+						            <div class="product-name">${ product.name }</div>
+						            <div class="product-price">$ ${ product.price }</div>
+						        </div>
+						    </a>
+						    <div class="shop" style="background-image: url('${ product.picture }');"></div>
+						</div>
 				</c:forEach>
-
-				<div class="span2"></div>
 			</div>
 		</div>
 	</div>
 
 	<%@ include file="footer.html"%>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
 	<script type="text/javascript" src="js/customer.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			customer.init();
+			customer.initIndex();
 		});
 	</script>
 </body>
