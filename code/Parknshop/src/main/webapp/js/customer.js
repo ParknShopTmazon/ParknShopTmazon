@@ -17,7 +17,7 @@
  *                     file is a javascript file to control all the 
  *                     interaction of customers. 
  *      - Create Time: Dec 9, 2015
- *      - Update Time: Dec 21, 2015 
+ *      - Update Time: Jan 6, 2015 
  *
  *
  **********************************************************************/
@@ -120,19 +120,19 @@ var customer = {
             autoplay: 5000,
             autoplayDisableOnInteraction: false
         });
-        
+
         $('.index-container .categories .products-btn').click(function() {
-        	let backgroundImage;
-        	let $left = $(this).parent().css('left');
-        	$left = $left === '0px' ? '-300px' : '0px';
-        	backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
-        	$(this).parent().css({
-        		'left': $left
-        	});
-        	
-        	$(this).css({
-        		'background-image': backgroundImage
-        	});
+            let backgroundImage;
+            let $left = $(this).parent().css('left');
+            $left = $left === '0px' ? '-300px' : '0px';
+            backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
+            $(this).parent().css({
+                'left': $left
+            });
+
+            $(this).css({
+                'background-image': backgroundImage
+            });
         });
     },
 
@@ -505,7 +505,7 @@ var customer = {
         function init() {
             const dlgtrigger = document.querySelector('[data-dialog]');
             if (dlgtrigger) {
-            	const somedialog = document.getElementById(dlgtrigger.getAttribute('data-dialog'));
+                const somedialog = document.getElementById(dlgtrigger.getAttribute('data-dialog'));
                 let dlg = new DialogFx(somedialog);
                 dlgtrigger.addEventListener('click', dlg.toggle.bind(dlg));
             }
@@ -1464,7 +1464,6 @@ var customer = {
 
     initList: function() {
         "use strict";
-
         /**
          * [initData: init the data of orders list]
          * @return {[type]} [description]
@@ -1480,8 +1479,8 @@ var customer = {
                     nextType: 'pay'
                 },
                 paid: {
-                	name: 'Deal',
-                	nextType: '#'
+                    name: 'Deal',
+                    nextType: 'deal'
                 }
             };
 
@@ -1598,31 +1597,119 @@ var customer = {
      */
     initPay: function(oid) {
         "use strict";
-        if ($('#productId').val() === 'null') {
-            $('.order-container #pay-info').html('Pay the order');
-        } else {
-            $('.order-container #pay-info').html('Pay the product');
-        }
-
-        $('.order-container #pay-btn').click(function() {
-            $.getJSON('payOrder', {
-                oid: oid,
-                productId: $('#productId').val()
-            }, function(data, textStatus) {
-                /*optional stuff to do after success */
-                if (!data.success) {
+        /** check whether pay or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            if (productId === 'null') {
+                let i;
+                for (i = 0; i < data.orderInfos.length; i++) {
+                    if (data.orderInfos[i].status !== 'paid') {
+                        break;
+                    }
+                }
+                if (i === data.orderInfos.length) {
+                    $('.order-container #pay-info').html('You have paid the order');
                     $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+                    return;
+                }
+            } else {
+                for (let i = 0; i < data.orderInfos.length; i++) {
+                    if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
+                        $('.order-container #pay-info').html('You have paid the order');
+                        $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+                        return;
+                    }
+                }
+            }
+
+            $('.order-container #pay-info').html('Pay the product');
+            $('.order-container #pay-btn').click(function() {
+                $.getJSON('payOrder', {
+                    oid: oid,
+                    productId: $('#productId').val()
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (data.result) {
+                        $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #pay-btn').removeClass('button');
+
+                        $('.order-container #pay-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to pay');
+                    }
+                });
+            });
+        });
+    },
+
+    /**
+     * [initDeal: init the deal page]
+     * @param  {[type]} oid       [the order id]
+     * @param  {[type]} productId [the product id]
+     * @return {[type]}           [description]
+     */
+    initDeal: function(oid, productId) {
+        "use strict";
+        /** check whether deal or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            $('.order-container #deal-info').html('Are you sure to deal?');
+            for (let i = 0; i < data.orderInfos.length; i++) {
+                if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'deal') {
+                    $('.order-container #deal-info').html('You have already dealed');
+                    $('.order-container #deal-btn').css({
                         'border': '2px solid #e0e0e0',
                         'background-color': '#f0f0f0',
                         'color': '#e0e0e0'
                     });
-
-                    $('.order-container #pay-btn').removeClass('button');
-
-                    $('.order-container #pay-btn').unbind('click');
-                } else {
-                    alert('Ooops, failed to pay');
+                    return;
+                } else if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
+                    $('.order-container #deal-info').html('Are you sure to deal before the products have been sent?');
                 }
+            }
+         
+            $('.order-container #deal-btn').click(function() {
+                $.getJSON('changeOrderInfo', {
+                    oid: oid,
+                    pid: $('#productId').val(),
+                    newStatus: 'confirm_receipt'
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (data.success) {
+                        $('.order-container #deal-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #deal-btn').removeClass('button');
+
+                        $('.order-container #deal-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to deal');
+                    }
+                });
             });
         });
     },
@@ -1636,13 +1723,13 @@ var customer = {
 
         let scores = 0;
         let i = 0;
-        
+
         $scores.each(function() {
             i++;
             scores += parseFloat($(this).html());
         });
 
-        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1)); 
+        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1));
 
         $('.product-container .product-info .info-items .value input[type="number"]').change(function() {
             /* Act on the event */
