@@ -220,10 +220,6 @@
   <servlet-class>com.tmazon.servlet.UpdateOrderConditionServlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>DeleteShopOrderServlet</servlet-name>
-  <servlet-class>com.tmazon.servlet.DeleteShopOrderServlet</servlet-class>
- </servlet>
- <servlet>
   <servlet-name>PayOrderServlet</servlet-name>
   <display-name>PayOrderServlet</display-name>
   <servlet-class>com.tmazon.servlet.PayOrderServlet</servlet-class>
@@ -423,10 +419,6 @@
  <servlet-mapping>
   <servlet-name>UpdateOrderConditionServlet</servlet-name>
   <url-pattern>/updateordercondition</url-pattern>
- </servlet-mapping>
- <servlet-mapping>
-  <servlet-name>DeleteShopOrderServlet</servlet-name>
-  <url-pattern>/deleteshoporder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>PayOrderServlet</servlet-name>

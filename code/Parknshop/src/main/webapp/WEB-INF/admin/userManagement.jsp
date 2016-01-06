@@ -14,151 +14,139 @@
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 	</head>
 	<body>
-		
-		
-		
-		<ul id="navigation">
-			<li><img src="css/logo.png"></li>
-			<li><a href="overview">Overview</a></li>
-			<li><span class="active">User Management</span></li>
-			<li><a href="shopApply">Shop-Apply Management</a></li>
-			<li><a href="advertisement">Advertisement Management</a></li>
-			<li><a href="other">Other</a></li>
-		</ul>
-		<form method="post" action="searchUserAdmin">
-			<div id="content" class="container_16 clearfix">
-				<div class="grid_4">
-					<p>
-						<label>UserName:<small></small></label>
-						<input name="UserName"  type="text" value="${sessionScope.searchInfo.name }" />
-					</p>
-				</div>
-				<div class="grid_5">
-					<p>
-						<label>Role:</label>
-						
-						<select name="select_role" 
-								id ="select_role">
-							<c:if test="${sessionScope.searchInfo.role eq '' || sessionScope.searchInfo.role eq null }">
-							<option value="" selected="selected">---------</option>
-							<option value="shop_owner">ShopOwner</option>
-							<option value="customer">Customer</option>
-							</c:if>
-							<c:if test="${sessionScope.searchInfo.role eq 'shop_owner' }">
-							<option value="" >---------</option>
-							<option value="shop_owner" selected="selected">ShopOwner</option>
-							<option value="customer">Customer</option>
-							</c:if>
-							<c:if test="${sessionScope.searchInfo.role eq 'customer' }">
-							<option value="" >---------</option>
-							<option value="shop_owner" >ShopOwner</option>
-							<option value="customer" selected="selected">Customer</option>
-							</c:if>
-						</select>
-					</p>
-				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input   type="submit" value="Search" />
-					</p>
-				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input type="reset" value="Reset" />
-					</p>
-				</div>
-		</form>
-				<div class="grid_16">
-					<table  >
-						<thead>
-							<tr>
-								<th align="left">UserName</th>
-								<th align="left">UserPassword</th>
-								<th align="left">UserRole</th>
-								<th colspan="3" width="10%">Actions</th>
-							</tr>
-						</thead>
-						<tfoot>
-						
-							<tr>
+		<%@ include file="header.html"%>
+		<div class="user-container">
+			<form method="post" action="searchUserAdmin">
+				<div id="content" class="container_16 clearfix">
+					<div class="grid_4">
+						<p>
+							<label>UserName:<small></small></label>
+							<input name="UserName"  type="text" value="${sessionScope.searchInfo.name }" />
+						</p>
+					</div>
+					<div class="grid_5">
+						<p>
+							<label>Role:</label>
 							
-								<td colspan="2" rowspan="1" class="pagination">
-								  
-							<form method="post" action="searchUserAdmin">
-									<input id="prev-btn" type="submit"  value="<<"></input>
-									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
-									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
-									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
-								
-									<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
-								
-									<input id="next-btn" type="submit" value=">>"></input>
-									
-									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
-									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
-									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
-									<input type="hidden" id="next-val" name="next" value="1"/>
-							</form>
-							
-							</tr>
-						
-						</tfoot>
-						<tbody>
-						<%-- show the user list --%>
+							<select name="select_role" 
+									id ="select_role">
+								<c:if test="${sessionScope.searchInfo.role eq '' || sessionScope.searchInfo.role eq null }">
+								<option value="" selected="selected">---------</option>
+								<option value="shop_owner">ShopOwner</option>
+								<option value="customer">Customer</option>
+								</c:if>
+								<c:if test="${sessionScope.searchInfo.role eq 'shop_owner' }">
+								<option value="" >---------</option>
+								<option value="shop_owner" selected="selected">ShopOwner</option>
+								<option value="customer">Customer</option>
+								</c:if>
+								<c:if test="${sessionScope.searchInfo.role eq 'customer' }">
+								<option value="" >---------</option>
+								<option value="shop_owner" >ShopOwner</option>
+								<option value="customer" selected="selected">Customer</option>
+								</c:if>
+							</select>
+						</p>
+					</div>
+					<div class="grid_2">
+						<p>
+							<label>&nbsp;</label>
+							<input   type="submit" value="Search" />
+						</p>
+					</div>
+					<div class="grid_2">
+						<p>
+							<label>&nbsp;</label>
+							<input type="reset" value="Reset" />
+						</p>
+					</div>
+			</form>
+			<div class="grid_16">
+				<table  >
+					<thead>
+						<tr>
+							<th align="left">UserName</th>
+							<th align="left">UserPassword</th>
+							<th align="left">UserRole</th>
+							<th colspan="3" width="10%">Actions</th>
+						</tr>
+					</thead>
+					<tfoot>
 					
-						<c:forEach items="${sessionScope.userList}" var="user" >
-							<tr>
-								<td align="left">${ user.name }</td>
-								<td align="left">${ user.password }</td>
-								<td align="left">${ user.role }</td>
-							
-								
-								<c:choose>
-									<c:when test="${user.role eq 'admin' }">
-									<td></td>
-									<td></td>
-									</c:when>
-									<c:when test="${user.status eq 'normal' }">
-									<form method="post" action="updateUTableServlet"> 	
-										<td>
-										<input type="hidden" name="status" value="delete"/>
-										<input type="hidden" name="user_name" value="${user.name}"/>
-										<input type="submit" value="  Delete  " ></input></td>
-									</form>
-									<form method="post" action="updateUTableServlet"> 
-										
-										<td>
-										<input type="hidden" name="status" value="black"/>
-										<input type="hidden" name="user_name" value="${user.name}"/>
-										<input  type="submit" value="BlackList"></input></td>	
-									</form>
-									</c:when>
-									<c:otherwise>
-									<form method="post" action="updateUTableServlet"> 
-										<td>
-										<input type="hidden" name="status" value="normal"/>
-										<input type="hidden" name="user_name" value="${user.name}"/>
-											<input type="submit" value="Activate">
-											</input>
-										
-										</td>
-									</form>
-									</c:otherwise>
-								</c:choose>
-							</tr>
+						<tr>
 						
-						</c:forEach>
+							<td colspan="2" rowspan="1" class="pagination">
+							  
+						<form method="post" action="searchUserAdmin">
+								<input id="prev-btn" type="submit"  value="<<"></input>
+								<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
+								<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
+								<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
 							
-						</tbody>
-					</table>
-				</div>
+								<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
+							
+								<input id="next-btn" type="submit" value=">>"></input>
+								
+								<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
+								<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
+								<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
+								<input type="hidden" id="next-val" name="next" value="1"/>
+						</form>
+						
+						</tr>
+					
+					</tfoot>
+					<tbody>
+					<%-- show the user list --%>
+				
+					<c:forEach items="${sessionScope.userList}" var="user" >
+						<tr>
+							<td align="left">${ user.name }</td>
+							<td align="left">${ user.password }</td>
+							<td align="left">${ user.role }</td>
+						
+							
+							<c:choose>
+								<c:when test="${user.role eq 'admin' }">
+								<td></td>
+								<td></td>
+								</c:when>
+								<c:when test="${user.status eq 'normal' }">
+								<form method="post" action="updateUTableServlet"> 	
+									<td>
+									<input type="hidden" name="status" value="delete"/>
+									<input type="hidden" name="user_name" value="${user.name}"/>
+									<input type="submit" value="  Delete  " ></input></td>
+								</form>
+								<form method="post" action="updateUTableServlet"> 
+									
+									<td>
+									<input type="hidden" name="status" value="black"/>
+									<input type="hidden" name="user_name" value="${user.name}"/>
+									<input  type="submit" value="BlackList"></input></td>	
+								</form>
+								</c:when>
+								<c:otherwise>
+								<form method="post" action="updateUTableServlet"> 
+									<td>
+									<input type="hidden" name="status" value="normal"/>
+									<input type="hidden" name="user_name" value="${user.name}"/>
+										<input type="submit" value="Activate">
+										</input>
+									
+									</td>
+								</form>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+					
+					</c:forEach>
+						
+					</tbody>
+				</table>
 			</div>
-		
-		<div id="foot">
-			 Welcome to PARKnSHOP. 
 		</div>
+		<%@ include file="footer.html"%>
 	<script type="text/javascript">
 		document.getElementById('next-btn').addEventListener('click', function() {
 			document.getElementById('next-val').setAttribute('value', 1);

@@ -1,6 +1,3 @@
-body {
-	background:#F7F4E9 url(body.png) repeat-x top center;
-}
 small {
 	color:#888
 }
@@ -11,7 +8,7 @@ th,#navigation,.active,input[type=submit],.pagination a:hover,.date td a:hover {
 }
 
 select, textarea, input, td, #content{
-	background:#fff url(gradient.png) repeat-x 0 -28px
+	background:#fff url(gradient.png) repeat-x 0 -28px;
 }
 
 #foot {
@@ -78,4 +75,11 @@ a.delete {
 
 .glow-sortable-dropindicator {
 	background:#eee
+}
+
+.overview-container,
+.user-container,
+.shop-apply-container,
+.ad-container {
+	padding: 95px 0 97px;
 }
