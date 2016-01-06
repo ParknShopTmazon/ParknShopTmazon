@@ -1,3 +1,25 @@
+/***********************************************************************
+ *                                                                   _
+ *       _____  _                           ____  _                 |_|
+ *      |  _  |/ \   ____  ____ __ ___     / ___\/ \   __   _  ____  _
+ *      | |_| || |  / __ \/ __ \\ '_  \ _ / /    | |___\ \ | |/ __ \| |
+ *      |  _  || |__. ___/. ___/| | | ||_|\ \___ |  _  | |_| |. ___/| |
+ *      |_/ \_|\___/\____|\____||_| |_|    \____/|_| |_|_____|\____||_| 
+ *                                                                      
+ *      ================================================================
+ *                 More than a coder, More than a designer              
+ *      ================================================================
+ *
+ *
+ *      - Document: customer.css
+ *      - Author: aleen42
+ *      - Description: the css style sheets of customer
+ *      - Create Time: Dec 9, 2015
+ *      - Update Time: Jan 6 2015 
+ *
+ *
+ **********************************************************************/
+
 * {
     margin: 0;
 }
@@ -1463,12 +1485,12 @@ s {
     white-space: nowrap;
 }
 
-.order-container #order-details .order-item .shop-price {
-    font-size: 2.7em;
-}
-
 .order-container #order-details .order-item .order-price > p {
     text-align: right;
+}
+
+.order-container #order-details .order-item .shop-price {
+    font-size: 2.7em;
 }
 
 .order-container #order-details .order-item .delivery-price {
@@ -1888,14 +1910,16 @@ s {
          *
          *****************************************/
 
-.order-container #pay-info {
+.order-container #pay-info,
+.order-container #deal-info {
     text-align: center;
     color: #ffa200;
     font-size: 5em;
     margin-top: 200px;
 }
 
-.order-container #pay-btn {
+.order-container #pay-btn,
+.order-container #deal-btn {
     border-radius: 4px;
     border: 2px solid #B27100;
     background-color: #ce8300;
