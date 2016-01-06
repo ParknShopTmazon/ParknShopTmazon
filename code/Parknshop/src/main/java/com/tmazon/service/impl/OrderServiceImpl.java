@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 
 	public boolean changeOrderinfoStatus(OrderInfo orderInfo, String newStatus) {
 		orderInfo.setStatus(newStatus);
-		return orderInfoDao.changeStatus(orderInfo);
+		return orderInfoDao.updateStatus(orderInfo);
 	}
 
 	public OrderInfo getOrderInfoByPK(Integer orderId, Integer productId) {

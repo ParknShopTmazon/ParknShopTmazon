@@ -160,8 +160,8 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.update(sql, orderInfo.getStatus(),orderInfo.getOrderId(),orderInfo.getProduct());
-			return true;
+			int row = runner.update(sql, orderInfo.getStatus(),orderInfo.getOrderId(),orderInfo.getProduct());
+			return row > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
