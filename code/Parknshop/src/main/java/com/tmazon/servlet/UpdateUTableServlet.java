@@ -5,10 +5,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.User;
 import com.tmazon.service.UserManageService;
 import com.tmazon.service.UserService;
+import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 
 /**
@@ -25,6 +27,7 @@ public class UpdateUTableServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		
 		//get user name and status
 		String user_name = request.getParameter("user_name");

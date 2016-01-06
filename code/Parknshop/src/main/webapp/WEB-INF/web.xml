@@ -228,6 +228,12 @@
   <display-name>PayOrderServlet</display-name>
   <servlet-class>com.tmazon.servlet.PayOrderServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>overviewAdminServlet</servlet-name>
+ 	<display-name>overviewAdminServlet</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.overviewAdminServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -431,6 +437,10 @@
  <servlet-mapping>
   <servlet-name>PayOrderServlet</servlet-name>
   <url-pattern>/payOrder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>overviewAdminServlet</servlet-name>
+ 	<url-pattern>/overviewAdminServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

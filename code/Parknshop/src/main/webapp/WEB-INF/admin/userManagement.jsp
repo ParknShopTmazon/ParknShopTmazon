@@ -54,12 +54,6 @@
 							<input   type="submit" value="Search" />
 						</p>
 					</div>
-					<div class="grid_2">
-						<p>
-							<label>&nbsp;</label>
-							<input type="reset" value="Reset" />
-						</p>
-					</div>
 			</form>
 			<div class="grid_16">
 				<table  >
