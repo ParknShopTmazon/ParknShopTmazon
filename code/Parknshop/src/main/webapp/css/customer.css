@@ -199,7 +199,7 @@ s {
     color: #fff;
     text-align: center;
     width: 300px;
-    left: 0;
+    left: -300px;
     transition: left 0.6s;
     -webkit-transition: left 0.6s;
     transition-timing-function: ease-in-out;
@@ -209,7 +209,7 @@ s {
 .index-container .categories .products-btn {
     height: 100px;
     width: 30px;
-    background-image: url(./../images/products-btn.png);
+    background-image: url(./../images/products-btn-close.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -259,6 +259,7 @@ s {
 
 .index-container .shops .pic-container {
     width: 30%;
+    height: 200px;
     display: inline-block;
     margin: 0 15px 15px 0;
 }
@@ -320,6 +321,7 @@ s {
 
 .search-container .results .pic-container {
     width: 30%;
+    height: 200px;
     display: inline-block;
     margin: 0 15px 15px 0;
 }
@@ -463,6 +465,7 @@ s {
     border: 1px solid #f0f0f0;
     background-color: #e0e0e0;
 }
+
 
 /*************************************************
      *
@@ -1435,7 +1438,7 @@ s {
 }
 
 .order-container #order-details .order-item .order-origin-price {
-    margin-left: 15%;
+    margin-left: 9%;
     width: 200px;
     overflow: hidden;
     white-space: nowrap;
@@ -1454,6 +1457,10 @@ s {
 .order-container #order-details .order-item .order-price {
     right: 0;
     position: absolute;
+    width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .order-container #order-details .order-item .shop-price {
@@ -1790,15 +1797,18 @@ s {
 }
 
 .order-container #order-list .order-item .origin-price .origin {
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .order-container #order-list .order-item .origin-price .current {
-    font-size: 1.6em;
+    font-size: 1.1em;
 }
 
 .order-container #order-list .order-item .origin-price p {
-    width: 80px;
+    width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .order-container #order-list .order-item .size .name,
@@ -1826,7 +1836,7 @@ s {
 }
 
 .order-container #order-list .order-item .price .shop-price {
-    font-size: 3em;
+    font-size: 2em;
     color: #ffa200;
     text-align: right;
 }

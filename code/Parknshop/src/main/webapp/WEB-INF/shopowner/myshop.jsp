@@ -17,9 +17,25 @@
 	      <c:forEach var="shop" items="${shopList}" >
 	          <div class="shopbox">
 <%-- 				<div class="shopphoto" onclick="window.open('selectedshop')"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></div> --%>
+				<c:if test="${shop.status=='success'}">
 				<a href="selectedshop?shopId=${shop.shopId}" class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
 				<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
+				<a href="modifyshop?shopId=${shop.shopId}">modify</a>
+				</c:if>
+				
+				<c:if test="${shop.status=='checking'}">
+				<a href=" " class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
+				<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
 				<div>${shop.status}</div>
+				</c:if>
+				
+				<c:if test="${shop.status=='fail'}">
+				<a href=" " class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
+				<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
+				<div>${shop.status}</div>
+				<a href="deleteshop?shopId=${shop.shopId}">delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="modifyshop?shopId=${shop.shopId}">modify</a>
+				</c:if>
 		      </div>
 	      </c:forEach>
 	   
