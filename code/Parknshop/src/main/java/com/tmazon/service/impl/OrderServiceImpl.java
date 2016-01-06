@@ -41,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
 			Cart cart = cartDao.findByPKId(order.getUserId(),
 					orderInfo.getProductId());
 			orderInfo.setQuantity(cart.getQuantity());
+			orderInfo.setStatus(OrderInfo.STATUS_UNPAID);
 			if (orderInfoDao.insert(orderInfo)) {
 				cartDao.delete(new Cart(order.getUserId(), orderInfo
 						.getProductId(), null));
@@ -77,6 +78,20 @@ public class OrderServiceImpl implements OrderService {
 		return orderInfoDao.getOrderInfosByshop(shopId);
 	}
 
+	public boolean changeOrderinfoStatus(OrderInfo orderInfo, String newStatus) {
+		orderInfo.setStatus(newStatus);
+		return orderInfoDao.changeStatus(orderInfo);
+	}
+
+	public OrderInfo getOrderInfoByPK(Integer orderId, Integer productId) {
+		List<OrderInfo> orderInfos = orderInfoDao.select(new OrderInfo(orderId, null, null, productId, null));
+		if(orderInfos.isEmpty()){
+			return null;
+		}else {
+			return orderInfos.get(0);
+		}
+	}
+	
 	public boolean changeStatus(OrderInfo orderInfo, String newStatus,
 			String role) {
 		

@@ -22,6 +22,10 @@ public interface OrderService {
 	
 	public boolean changeStatus(Order order, String newStatus);
 	
+	public boolean changeOrderinfoStatus(OrderInfo orderInfo, String newStatus);
+	
+	public OrderInfo getOrderInfoByPK(Integer orderId, Integer productId);
+	
 	public boolean changeStatus(OrderInfo orderInfo, String newStatus, String role);
 	
 }

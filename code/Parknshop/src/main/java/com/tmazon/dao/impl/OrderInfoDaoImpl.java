@@ -81,7 +81,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			runner.update(sql, orderInfo.getDeliveryId(),
-					orderInfo.getProductId(), orderInfo.getWaybill(),
+					orderInfo.getQuantity(), orderInfo.getWaybill(),
 					orderInfo.getOrderId(), orderInfo.getProductId());
 			return true;
 		} catch (SQLException e) {
@@ -154,6 +154,20 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		}
 	}
 
+	public boolean changeStatus(OrderInfo orderInfo) {
+		String sql = "UPDATE orderInfo SET status = ? WHERE orderId = ? AND productId = ?";
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, orderInfo.getStatus(),orderInfo.getOrderId(),orderInfo.getProduct());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public boolean updateStatus(OrderInfo orderInfo) {
 		String sql = "UPDATE orderInfo SET status = ? WHERE orderId = ? AND productId = ?";
 		System.out.println(sql);
