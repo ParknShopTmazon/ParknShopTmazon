@@ -21,4 +21,6 @@ public interface OrderInfoDao {
 	
 	public boolean delete(OrderInfo orderInfo);
 	
+	public boolean changeStatus(OrderInfo orderInfo);
+	
 }

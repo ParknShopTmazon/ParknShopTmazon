@@ -37,6 +37,18 @@ public class CommentDaoImpl implements CommentDao {
 			sqlBuilder.append("AND productId = ? ");
 			params.add(comment.getProductId());
 		}
+		if (comment.getShopScore() != null) {
+			sqlBuilder.append("AND shopScore = ? ");
+			params.add(comment.getShopScore());
+		}
+		if (comment.getProductScore() != null) {
+			sqlBuilder.append("AND productScore = ? ");
+			params.add(comment.getProductScore());
+		}
+		if (comment.getDeliveryScore() != null) {
+			sqlBuilder.append("AND deliveryScore = ? ");
+			params.add(comment.getDeliveryScore());
+		}
 		if (comment.getReplyId() != null) {
 			sqlBuilder.append("AND replyId = ? ");
 			params.add(comment.getReplyId());
@@ -56,7 +68,7 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	public List<Comment> findByProductId(Integer productId) {
-		return select(new Comment(null, null, productId, null, null, null));
+		return select(new Comment(null, null, productId, null, null));
 	}
 
 	public Comment insert(Comment comment) {
