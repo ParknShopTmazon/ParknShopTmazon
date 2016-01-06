@@ -71,7 +71,9 @@ public class PayOrderServlet extends HttpServlet {
 			return;
 		}
 		
-		if(orderService.changeStatus(order, Order.STATUS_PAID)){
+		// TODO pay
+		
+		if(orderService.changeStatus(order, Order.STATUS_NORMAL)){
 			jsonObject.put("result", true + "");
 			jsonObject.put("errMsg", "");
 		}else {

@@ -48,9 +48,11 @@ public class DeleteOrderServlet extends HttpServlet {
 		}
 		
 		// check order status
-		if (!Order.STATUS_UNPAID.equals(order.getStatus())) {
+		if (!Order.STATUS_NORMAL.equals(order.getStatus())) {
 			return;
 		}
+		
+		// TODO check order info status
 		
 		// delete order
 		boolean result = orderService.changeStatus(order, Order.STATUS_DELETED);

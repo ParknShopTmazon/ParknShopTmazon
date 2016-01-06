@@ -49,14 +49,6 @@ public class OrderDaoImpl implements OrderDao {
 			sqlBuilder.append("AND addressId = ? ");
 			params.add(order.getAddressId());
 		}
-		if (order.getDealTime() != null) {
-			sqlBuilder.append("AND dealTime = ? ");
-			params.add(order.getDealTime());
-		}
-		if (order.getDeliveryTime() != null) {
-			sqlBuilder.append("AND deliveryTime = ? ");
-			params.add(order.getDeliveryTime());
-		}
 
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
