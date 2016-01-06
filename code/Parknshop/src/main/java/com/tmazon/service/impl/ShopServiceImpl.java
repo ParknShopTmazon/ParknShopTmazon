@@ -36,4 +36,9 @@ public class ShopServiceImpl implements ShopService {
 		
 		return shopDao.delete(shop);
 	}
+	
+	public boolean update(Shop shop){
+		return shopDao.update(shop);
+	}
+	
 }

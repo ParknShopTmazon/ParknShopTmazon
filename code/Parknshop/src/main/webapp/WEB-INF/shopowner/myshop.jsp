@@ -20,7 +20,7 @@
 				<c:if test="${shop.status=='success'}">
 				<a href="selectedshop?shopId=${shop.shopId}" class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
 				<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
-				<div><a class="shopname" href="modifshop?shopId=${shop.shopId}"><span id="">modify</span></a></div>
+				<a href="modifyshop?shopId=${shop.shopId}">modify</a>
 				</c:if>
 				
 				<c:if test="${shop.status=='checking'}">
