@@ -120,19 +120,19 @@ var customer = {
             autoplay: 5000,
             autoplayDisableOnInteraction: false
         });
-        
+
         $('.index-container .categories .products-btn').click(function() {
-        	let backgroundImage;
-        	let $left = $(this).parent().css('left');
-        	$left = $left === '0px' ? '-300px' : '0px';
-        	backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
-        	$(this).parent().css({
-        		'left': $left
-        	});
-        	
-        	$(this).css({
-        		'background-image': backgroundImage
-        	});
+            let backgroundImage;
+            let $left = $(this).parent().css('left');
+            $left = $left === '0px' ? '-300px' : '0px';
+            backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
+            $(this).parent().css({
+                'left': $left
+            });
+
+            $(this).css({
+                'background-image': backgroundImage
+            });
         });
     },
 
@@ -505,7 +505,7 @@ var customer = {
         function init() {
             const dlgtrigger = document.querySelector('[data-dialog]');
             if (dlgtrigger) {
-            	const somedialog = document.getElementById(dlgtrigger.getAttribute('data-dialog'));
+                const somedialog = document.getElementById(dlgtrigger.getAttribute('data-dialog'));
                 let dlg = new DialogFx(somedialog);
                 dlgtrigger.addEventListener('click', dlg.toggle.bind(dlg));
             }
@@ -1480,8 +1480,8 @@ var customer = {
                     nextType: 'pay'
                 },
                 paid: {
-                	name: 'Deal',
-                	nextType: '#'
+                    name: 'Deal',
+                    nextType: '#'
                 }
             };
 
@@ -1598,31 +1598,64 @@ var customer = {
      */
     initPay: function(oid) {
         "use strict";
-        if ($('#productId').val() === 'null') {
-            $('.order-container #pay-info').html('Pay the order');
-        } else {
-            $('.order-container #pay-info').html('Pay the product');
-        }
-
-        $('.order-container #pay-btn').click(function() {
-            $.getJSON('payOrder', {
-                oid: oid,
-                productId: $('#productId').val()
-            }, function(data, textStatus) {
-                /*optional stuff to do after success */
-                if (!data.success) {
-                    $('.order-container #pay-btn').css({
-                        'border': '2px solid #e0e0e0',
-                        'background-color': '#f0f0f0',
-                        'color': '#e0e0e0'
-                    });
-
-                    $('.order-container #pay-btn').removeClass('button');
-
-                    $('.order-container #pay-btn').unbind('click');
-                } else {
-                    alert('Ooops, failed to pay');
+        /** check whether pay or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            if (productId === 'null') {
+                let i;
+                for (i = 0; i < data.orderInfos.length; i++) {
+                    if (data.orderInfos[i].status !== 'paid') {
+                        break;
+                    }
                 }
+                if (i === data.orderInfos.length) {
+                    $('.order-container #pay-info').html('You have paid the order');
+                    $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+                    return;
+                }
+            } else {
+                for (let i = 0; i < data.orderInfos.length; i++) {
+                    if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
+                        $('.order-container #pay-info').html('You have paid the order');
+                        $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+                        return;
+                    }
+                }
+            }
+
+            $('.order-container #pay-info').html('Pay the product');
+            $('.order-container #pay-btn').click(function() {
+                $.getJSON('payOrder', {
+                    oid: oid,
+                    productId: $('#productId').val()
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (!data.success) {
+                        $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #pay-btn').removeClass('button');
+
+                        $('.order-container #pay-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to pay');
+                    }
+                });
             });
         });
     },
@@ -1636,13 +1669,13 @@ var customer = {
 
         let scores = 0;
         let i = 0;
-        
+
         $scores.each(function() {
             i++;
             scores += parseFloat($(this).html());
         });
 
-        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1)); 
+        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1));
 
         $('.product-container .product-info .info-items .value input[type="number"]').change(function() {
             /* Act on the event */
