@@ -9,6 +9,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.tmazon.dao.ShopDao;
+import com.tmazon.domain.Product;
 import com.tmazon.domain.Shop;
 import com.tmazon.util.DaoUtil;
 
@@ -71,13 +72,52 @@ public class ShopDaoImpl implements ShopDao {
 	}
 
 	public boolean update(Shop shop) {
-		// TODO Auto-generated method stub
-		return false;
+
+		
+		StringBuilder sqlBuilder = new StringBuilder("update shop set ");
+		
+		ArrayList<Object> params = new ArrayList<Object>();
+		
+		if (shop.getName() != null) {
+			sqlBuilder.append(" name = ? , ");
+			params.add(shop.getName());
+		}
+		if (shop.getType() != null) {
+			sqlBuilder.append(" type = ? , ");
+			params.add(shop.getType());
+		}
+		if(shop.getPicture()!=null){
+			sqlBuilder.append(" picture=? ");
+			params.add(shop.getPicture());
+		}
+		sqlBuilder.append(" where shopId=?");
+		System.out.println("update shopId="+shop.getShopId());
+		params.add(shop.getShopId());
+		String sql = sqlBuilder.toString();
+        System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.insert(sql, new BeanListHandler<Shop>(Shop.class), params.toArray());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public boolean delete(Shop shop) {
-		// TODO Auto-generated method stub
-		return false;
+
+		String sql = "DELETE FROM shop WHERE shopId = ?";
+		System.out.println(sql);
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, shop.getShopId());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public Shop findById(Integer id) {
