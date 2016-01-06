@@ -80,6 +80,7 @@ a.delete {
 .overview-container,
 .user-container,
 .shop-apply-container,
-.ad-container {
+.ad-container,
+.other-container {
 	padding: 95px 0 97px;
 }
