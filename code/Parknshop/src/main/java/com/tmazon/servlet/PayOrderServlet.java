@@ -87,11 +87,12 @@ public class PayOrderServlet extends HttpServlet {
 			return;
 		}
 		
+		
 		// TODO pay
 		if(productIdString.equals("null")){
 			List<OrderInfo> orderInfos = orderService.getOrderInfo(order.getOrderId());
 			for(OrderInfo orderInfo : orderInfos){
-				if(orderService.changeOrderinfoStatus(orderInfo, OrderInfo.STATUS_PAID)){
+				if(orderService.changeStatus(orderInfo, OrderInfo.STATUS_PAID, User.ROLE_ADMIN)){
 					jsonObject.put("result", true + "");
 					jsonObject.put("errMsg", "");
 				}else {
@@ -110,7 +111,7 @@ public class PayOrderServlet extends HttpServlet {
 				resp.getWriter().write(jsonObject.toString());
 				return;
 			}else {
-				if(orderService.changeOrderinfoStatus(orderInfo, OrderInfo.STATUS_PAID)){
+				if(orderService.changeStatus(orderInfo, OrderInfo.STATUS_PAID, User.ROLE_ADMIN)){
 					jsonObject.put("result", true + "");
 					jsonObject.put("errMsg", "");
 				}else {
