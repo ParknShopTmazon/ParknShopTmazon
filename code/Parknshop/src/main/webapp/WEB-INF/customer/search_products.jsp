@@ -11,6 +11,9 @@
 </head>
 <body>
 	<%@ include file="header.html"%>
+	<c:if test="${ not empty s_user }">
+		<%@ include file="dialog.html"%>
+	</c:if>
 	<div class="search-container">
 		<div class="page-title">
 			<span class="back-btn button"></span>
@@ -153,7 +156,7 @@
 					        <div class="over">
 					            <div class="link-btn"></div>
 					            <div class="product-name">${ product.name }</div>
-					            <div class="product-price">$ ${ product.price }</div>
+					            <div class="product-price">$ ${ product.discountPrice }</div>
 					        </div>
 					    </a>
 					    <div class="shop" style="background-image: url('${ product.picture }');"></div>
@@ -163,5 +166,12 @@
 		</div>
 	</div>
 	<%@ include file="footer.html"%>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/customer.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			customer.init();
+		});
+	</script>
 </body>
 </html>

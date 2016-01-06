@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
 		boolean flag = true;
 
 		order.setOrderTime(new Date());
-		order.setStatus(Order.STATUS_UNPAID);
+		order.setStatus(Order.STATUS_NORMAL);
 		order.setPayType(Order.PAY_TYPE_ONLINE_PAYMENT);
 
 		
@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public List<OrderInfo> getOrderInfo(Integer orderId) {
-		return orderInfoDao.select(new OrderInfo(orderId, null, null, null));
+		return orderInfoDao.select(new OrderInfo(orderId, null, null, null, null));
 	}
 
 	public Order findById(Integer id) {

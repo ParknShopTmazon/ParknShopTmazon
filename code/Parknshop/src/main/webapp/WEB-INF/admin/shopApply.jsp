@@ -16,88 +16,78 @@
 	media="screen" charset="utf-8" />
 </head>
 <body>
+	<%@ include file="header.html"%>
+	<div class="shop-apply-container">
+		<div id="content" class="container_16 clearfix">
+			<div class="grid_4">
+				<p>
+					<label>Shop_ID</label> <input type="text" value="all" />
+				</p>
+			</div>
+			<div class="grid_5">
+				<p>
+					<label>Name</label> <input type="text" value="all" />
+				</p>
+			</div>
+			<div class="grid_5">
+				<p>
+					<label>Type</label> <input type="text" value="all" />
+				</p>
+			</div>
+			<div class="grid_2">
+				<p>
+					<label>&nbsp;</label> <input type="submit" value="Search" />
+				</p>
+			</div>
 
+			<div class="grid_16">
+				<table>
+					<thead>
+						<tr>
+							<th>Shop_ID</th>
+							<th>Name</th>
+							<th>Type</th>
+							<th colspan="3" width="10%">Actions</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<td colspan="5" class="pagination"><span
+								class="active curved">1</span><a href="#" class="curved">2</a><a
+								href="#" class="curved">3</a><a href="#" class="curved">4</a> ...
+								<a href="#" class="curved">10 million</a></td>
+						</tr>
+					</tfoot>
+					<tbody>
 
+						<%
+							if (session.getAttribute("apply") != null) {
+								List<Shop> ls = (List<Shop>) session.getAttribute("apply");
+								if (ls.size() > 0) {
+									for (Shop s : ls) {
+						%>
+						<tr>
+							<td><%=s.getShopId()%></td>
+							<td><%=s.getName()%></td>
+							<td><%=s.getType()%></td>
+							<td><a href="javascript: void(0);" class="delete"
+								type="agree">agree</a></td>
+							<td><a href="javascript: void(0);" class="delete"
+								type="disagree">disagree</a></td>
+						</tr>
 
-	<ul id="navigation">
-		<li><img src="css/logo.png"></li>
-		<li><a href="overview">Overview</a></li>
-		<li><a href="user">User Management</a></li>
-		<li><span class="active">Shop-Apply Management</span></li>
-		<li><a href="advertisement">Advertisement Management</a></li>
-		<li><a href="other">Other</a></li>
-	</ul>
-
-
-	<div id="content" class="container_16 clearfix">
-		<div class="grid_4">
-			<p>
-				<label>Shop_ID</label> <input type="text" value="all" />
-			</p>
-		</div>
-		<div class="grid_5">
-			<p>
-				<label>Name</label> <input type="text" value="all" />
-			</p>
-		</div>
-		<div class="grid_5">
-			<p>
-				<label>Type</label> <input type="text" value="all" />
-			</p>
-		</div>
-		<div class="grid_2">
-			<p>
-				<label>&nbsp;</label> <input type="submit" value="Search" />
-			</p>
-		</div>
-
-		<div class="grid_16">
-			<table>
-				<thead>
-					<tr>
-						<th>Shop_ID</th>
-						<th>Name</th>
-						<th>Type</th>
-						<th colspan="3" width="10%">Actions</th>
-					</tr>
-				</thead>
-				<tfoot>
-					<tr>
-						<td colspan="5" class="pagination"><span
-							class="active curved">1</span><a href="#" class="curved">2</a><a
-							href="#" class="curved">3</a><a href="#" class="curved">4</a> ...
-							<a href="#" class="curved">10 million</a></td>
-					</tr>
-				</tfoot>
-				<tbody>
-
-					<%
-						if (session.getAttribute("apply") != null) {
-							List<Shop> ls = (List<Shop>) session.getAttribute("apply");
-							if (ls.size() > 0) {
-								for (Shop s : ls) {
-					%>
-					<tr>
-						<td><%=s.getShopId()%></td>
-						<td><%=s.getName()%></td>
-						<td><%=s.getType()%></td>
-						<td><a href="javascript: void(0);" class="delete"
-							type="agree">agree</a></td>
-						<td><a href="javascript: void(0);" class="delete"
-							type="disagree">disagree</a></td>
-					</tr>
-
-					<%
-						}
+						<%
 							}
-						}
-					%>
-				</tbody>
-			</table>
+								}
+							}
+						%>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
-	<div id="foot"> Welcome to PARKnSHOP. </div>
+	<%@ include file="footer.html"%>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
 		$(document)

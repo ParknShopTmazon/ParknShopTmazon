@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/endPart.css">
 <div id="header">
 	<a class="header-div" id="logo-icon" href="index"></a>
 	<c:choose>
@@ -6,8 +7,15 @@
 			<c:if test="${ s_user.role eq 'shop_owner' }">
 				<a href="myshop"><div class="text-btn">My shop</div></a>
 			</c:if>
-			<a href="viewOrder?type=list"><div class="text-btn">Orders</div></a>
-			<a href="cart"><div class="text-btn">Cart</div></a>
+			
+			<c:if test="${ s_user.role ne 'admin' }">
+				<a href="cart"><div class="text-btn">Cart</div></a>
+				<a href="viewOrder?type=list"><div class="text-btn">Orders</div></a>
+			</c:if>
+			<c:if test="${ s_user.role eq 'admin' }">
+				<a href="overview"><div class="text-btn">Back Stage</div></a>
+			</c:if>
+			
 			<a href="logout"><div class="text-btn">Logout</div></a>
 			
 		</c:when>
