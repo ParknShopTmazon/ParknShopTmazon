@@ -73,21 +73,25 @@ public class ShopDaoImpl implements ShopDao {
 
 	public boolean update(Shop shop) {
 
-		
-		StringBuilder sqlBuilder = new StringBuilder("update shop set ");
+		StringBuilder sqlBuilder = new StringBuilder("update shop set status=? ");
 		
 		ArrayList<Object> params = new ArrayList<Object>();
-		
+        if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
+			params.add(Shop.STATUS_SUCCESS);
+        }else{
+			params.add(Shop.STATUS_CHECKING);
+		}
+        
 		if (shop.getName() != null) {
-			sqlBuilder.append(" name = ? , ");
+			sqlBuilder.append(" ,name = ? ");
 			params.add(shop.getName());
 		}
 		if (shop.getType() != null) {
-			sqlBuilder.append(" type = ? , ");
+			sqlBuilder.append(" ,type = ? ");
 			params.add(shop.getType());
 		}
 		if(shop.getPicture()!=null){
-			sqlBuilder.append(" picture=? ");
+			sqlBuilder.append(" ,picture=? ");
 			params.add(shop.getPicture());
 		}
 		sqlBuilder.append(" where shopId=?");

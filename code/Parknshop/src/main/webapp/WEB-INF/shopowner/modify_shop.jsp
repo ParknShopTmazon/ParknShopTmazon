@@ -19,6 +19,12 @@
 			<form class="complete-info" id="form1" name="formen" action="modifyshop" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="product_id" value="${shopId }">
 				<div class="form-item">
+					<div class="form-lable-left">&nbsp;Shop Status:${status}</div>
+					<div class="form-control-right">
+						<input class="form-input" id="shop_name" name="name" type="text" value="${status}" maxlength="20" business="trueName" require="true";>
+					</div>
+				</div>
+				<div class="form-item">
 					<div class="form-lable-left">&nbsp;Shop Name:</div>
 					<div class="form-control-right">
 						<input class="form-input" id="shop_name" name="name" type="text" value="${name}" maxlength="20" business="trueName" require="true";>
