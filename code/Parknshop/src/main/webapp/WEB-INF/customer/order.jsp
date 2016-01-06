@@ -33,6 +33,14 @@
 				<input type="hidden" id="productId" value="<%=productId%>">
 				<input type="hidden" id="oid" value="<%=order_id%>">
 		<%	} %>
+		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("deal")) {%>
+				<% String productId = request.getParameter("productId"); %>
+				<% if (productId != null && !productId.equals("")) {%>
+					<%@ include file="order_deal.html"%>
+					<input type="hidden" id="productId" value="<%=productId%>">
+					<input type="hidden" id="oid" value="<%=order_id%>">
+				<%}%>
+		<%	} %>
 		<%	if (type != null && type.equals("certain")) {%>
 				<%@ include file="order_certain.html"%>
 		<%	} %>

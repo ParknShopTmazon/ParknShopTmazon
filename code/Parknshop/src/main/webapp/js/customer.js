@@ -17,7 +17,7 @@
  *                     file is a javascript file to control all the 
  *                     interaction of customers. 
  *      - Create Time: Dec 9, 2015
- *      - Update Time: Dec 21, 2015 
+ *      - Update Time: Jan 6, 2015 
  *
  *
  **********************************************************************/
@@ -1464,7 +1464,6 @@ var customer = {
 
     initList: function() {
         "use strict";
-
         /**
          * [initData: init the data of orders list]
          * @return {[type]} [description]
@@ -1481,7 +1480,7 @@ var customer = {
                 },
                 paid: {
                     name: 'Deal',
-                    nextType: '#'
+                    nextType: 'deal'
                 }
             };
 
@@ -1642,7 +1641,7 @@ var customer = {
                     productId: $('#productId').val()
                 }, function(data, textStatus) {
                     /*optional stuff to do after success */
-                    if (!data.success) {
+                    if (data.result) {
                         $('.order-container #pay-btn').css({
                             'border': '2px solid #e0e0e0',
                             'background-color': '#f0f0f0',
@@ -1654,6 +1653,61 @@ var customer = {
                         $('.order-container #pay-btn').unbind('click');
                     } else {
                         alert('Ooops, failed to pay');
+                    }
+                });
+            });
+        });
+    },
+
+    /**
+     * [initDeal: init the deal page]
+     * @param  {[type]} oid       [the order id]
+     * @param  {[type]} productId [the product id]
+     * @return {[type]}           [description]
+     */
+    initDeal: function(oid, productId) {
+        "use strict";
+        /** check whether deal or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            $('.order-container #deal-info').html('Are you sure to deal?');
+            for (let i = 0; i < data.orderInfos.length; i++) {
+                if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'deal') {
+                    $('.order-container #deal-info').html('You have already dealed');
+                    $('.order-container #deal-btn').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
+                } else if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
+                    $('.order-container #deal-info').html('Are you sure to deal before the products have been sent?');
+                }
+            }
+         
+            $('.order-container #deal-btn').click(function() {
+                $.getJSON('changeOrderInfo', {
+                    oid: oid,
+                    pid: $('#productId').val(),
+                    newStatus: 'confirm_receipt'
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (data.success) {
+                        $('.order-container #deal-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #deal-btn').removeClass('button');
+
+                        $('.order-container #deal-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to deal');
                     }
                 });
             });
