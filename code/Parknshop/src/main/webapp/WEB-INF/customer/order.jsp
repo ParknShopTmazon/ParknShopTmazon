@@ -29,8 +29,8 @@
 		<%	} %>
 		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("pay")) {%>
 				<%@ include file="order_pay.html"%>
-				<% String item = request.getParameter("item"); %>
-				<input type="hidden" id="item_num" value="<%=item%>">
+				<% String productId = request.getParameter("productId"); %>
+				<input type="hidden" id="productId" value="<%=productId%>">
 				<input type="hidden" id="oid" value="<%=order_id%>">
 		<%	} %>
 		<%	if (type != null && type.equals("certain")) {%>
