@@ -3,13 +3,36 @@ package com.tmazon.domain;
 import java.util.Date;
 
 public class Comment {
+	
+	
+	public static final int SCORE_MIN = 1;
+	public static final int SCORE_MAX = 5;
 
 	private Integer commentId;
 	private Integer userId;
 	private Integer productId;
 	private String content;
 	private Date commentTime;
+	private Integer shopScore;
+	private Integer productScore;
+	private Integer deliveryScore;
 	private Integer replyId;
+	public Comment(Integer commentId, Integer userId, Integer productId, String content, Date commentTime,
+			Integer shopScore, Integer productScore, Integer deliveryScore, Integer replyId) {
+		super();
+		this.commentId = commentId;
+		this.userId = userId;
+		this.productId = productId;
+		this.content = content;
+		this.commentTime = commentTime;
+		this.shopScore = shopScore;
+		this.productScore = productScore;
+		this.deliveryScore = deliveryScore;
+		this.replyId = replyId;
+	}
+	
+	
+	
 	public Comment(Integer commentId, Integer userId, Integer productId, String content, Date commentTime,
 			Integer replyId) {
 		super();
@@ -20,6 +43,20 @@ public class Comment {
 		this.commentTime = commentTime;
 		this.replyId = replyId;
 	}
+
+
+
+	public Comment(Integer commentId, Integer userId, Integer productId, String content, Date commentTime) {
+		super();
+		this.commentId = commentId;
+		this.userId = userId;
+		this.productId = productId;
+		this.content = content;
+		this.commentTime = commentTime;
+	}
+
+
+
 	public Comment() {
 		super();
 	}
@@ -58,6 +95,25 @@ public class Comment {
 	}
 	public void setReplyId(Integer replyId) {
 		this.replyId = replyId;
+	}
+	
+	public Integer getShopScore() {
+		return shopScore;
+	}
+	public void setShopScore(Integer shopScore) {
+		this.shopScore = shopScore;
+	}
+	public Integer getProductScore() {
+		return productScore;
+	}
+	public void setProductScore(Integer productScore) {
+		this.productScore = productScore;
+	}
+	public Integer getDeliveryScore() {
+		return deliveryScore;
+	}
+	public void setDeliveryScore(Integer deliveryScore) {
+		this.deliveryScore = deliveryScore;
 	}
 	@Override
 	public int hashCode() {

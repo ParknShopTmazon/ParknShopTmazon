@@ -31,4 +31,14 @@ public class ShopServiceImpl implements ShopService {
 		// TODO Auto-generated method stub
 		return shopDao.insert(shop);
 	}
+
+	public boolean delete(Shop shop) {
+		
+		return shopDao.delete(shop);
+	}
+	
+	public boolean update(Shop shop){
+		return shopDao.update(shop);
+	}
+	
 }

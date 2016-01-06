@@ -220,19 +220,26 @@
   <servlet-class>com.tmazon.servlet.UpdateOrderConditionServlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>DeleteShopOrderServlet</servlet-name>
-  <servlet-class>com.tmazon.servlet.DeleteShopOrderServlet</servlet-class>
- </servlet>
- <servlet>
   <servlet-name>PayOrderServlet</servlet-name>
   <display-name>PayOrderServlet</display-name>
   <servlet-class>com.tmazon.servlet.PayOrderServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>overviewAdminServlet</servlet-name>
- 	<display-name>overviewAdminServlet</display-name>
- 	<description></description>
- 	<servlet-class>com.tmazon.servlet.overviewAdminServlet</servlet-class>
+  <servlet-name>ChangeOrderInfoStatusServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ChangeOrderInfoStatusServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>DeleteShopServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteShopServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ModifyShopServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ModifyShopServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CommentServlet</servlet-name>
+  <display-name>CommentServlet</display-name>
+  <servlet-class>com.tmazon.servlet.CommentServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>userJsp</servlet-name>
@@ -431,16 +438,24 @@
   <url-pattern>/updateordercondition</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>DeleteShopOrderServlet</servlet-name>
-  <url-pattern>/deleteshoporder</url-pattern>
- </servlet-mapping>
- <servlet-mapping>
   <servlet-name>PayOrderServlet</servlet-name>
   <url-pattern>/payOrder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
- 	<servlet-name>overviewAdminServlet</servlet-name>
- 	<url-pattern>/overviewAdminServlet</url-pattern>
+  <servlet-name>ChangeOrderInfoStatusServlet</servlet-name>
+  <url-pattern>/changeOrderInfo</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeleteShopServlet</servlet-name>
+  <url-pattern>/deleteshop</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ModifyShopServlet</servlet-name>
+  <url-pattern>/modifyshop</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CommentServlet</servlet-name>
+  <url-pattern>/comment</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

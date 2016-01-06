@@ -1,7 +1,16 @@
 package com.tmazon.domain;
 
+import java.util.Date;
+
 public class OrderInfo {
 
+	public static final String STATUS_UNPAID = "unpaid";
+	public static final String STATUS_PAID = "paid";
+	public static final String STATUS_ON_DELIVERY = "on_delivery";
+	public static final String STATUS_ON_DELIVERY_AND_UNPAID = "on_delivery_AND_unpaid";
+	public static final String STATUS_CONFIRM_RECEIPT = "confirm_receipt";
+	public static final String STATUS_DELETED = "deleted";
+	
 	private Product product;
 	private Delivery delivery;
 	
@@ -10,13 +19,42 @@ public class OrderInfo {
 	private Integer quantity;
 	private Integer productId;
 	private String waybill;
-	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId) {
+	private Date deliveryTime;
+	private Date dealTime;
+	private String status;
+	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String status) {
 		super();
 		this.orderId = orderId;
 		this.deliveryId = deliveryId;
 		this.quantity = quantity;
 		this.productId = productId;
+		this.status = status;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getDeliveryTime() {
+		return deliveryTime;
+	}
+
+	public void setDeliveryTime(Date deliveryTime) {
+		this.deliveryTime = deliveryTime;
+	}
+
+	public Date getDealTime() {
+		return dealTime;
+	}
+
+	public void setDealTime(Date dealTime) {
+		this.dealTime = dealTime;
+	}
+
 	public OrderInfo() {
 		super();
 	}
@@ -135,6 +173,7 @@ public class OrderInfo {
 	
 	
 	private Order order;
+	
 	public Order getOrder() {
 		return order;
 	}

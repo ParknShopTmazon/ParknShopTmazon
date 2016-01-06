@@ -17,7 +17,7 @@
  *                     file is a javascript file to control all the 
  *                     interaction of customers. 
  *      - Create Time: Dec 9, 2015
- *      - Update Time: Dec 21, 2015 
+ *      - Update Time: Jan 6, 2015 
  *
  *
  **********************************************************************/
@@ -120,19 +120,19 @@ var customer = {
             autoplay: 5000,
             autoplayDisableOnInteraction: false
         });
-        
+
         $('.index-container .categories .products-btn').click(function() {
-        	let backgroundImage;
-        	let $left = $(this).parent().css('left');
-        	$left = $left === '0px' ? '-300px' : '0px';
-        	backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
-        	$(this).parent().css({
-        		'left': $left
-        	});
-        	
-        	$(this).css({
-        		'background-image': backgroundImage
-        	});
+            let backgroundImage;
+            let $left = $(this).parent().css('left');
+            $left = $left === '0px' ? '-300px' : '0px';
+            backgroundImage = $left === '0px' ? 'url(./images/products-btn.png)' : 'url(./images/products-btn-close.png)'
+            $(this).parent().css({
+                'left': $left
+            });
+
+            $(this).css({
+                'background-image': backgroundImage
+            });
         });
     },
 
@@ -505,7 +505,7 @@ var customer = {
         function init() {
             const dlgtrigger = document.querySelector('[data-dialog]');
             if (dlgtrigger) {
-            	const somedialog = document.getElementById(dlgtrigger.getAttribute('data-dialog'));
+                const somedialog = document.getElementById(dlgtrigger.getAttribute('data-dialog'));
                 let dlg = new DialogFx(somedialog);
                 dlgtrigger.addEventListener('click', dlg.toggle.bind(dlg));
             }
@@ -867,31 +867,54 @@ var customer = {
 
     /**
      * [initComment: init the comment page of order]
-     * @return {[type]} [description]
+     * @param  {[type]} oid       [the order id]
+     * @param  {[type]} productId [the product id]
+     * @return {[type]}           [description]
      */
-    initComment: function() {
+    initComment: function(oid, productId) {
         "use strict";
         /** init the rate system */
         this.initRate();
 
-        /** post */
-        $('.order-container #order-info .comment-submit').click(function() {
-            $.ajax({
-                    url: '',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {},
-                })
-                .done(function() {
-                    /** init the data of order */
-                    initData(data);
-                })
-                .fail(function() {
-                    // console.log("error");
-                })
-                .always(function() {
-                    console.log("complete to comment");
+        /** check whether pay or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            for (let i = 0; i < data.orderInfos.length; i++) {
+                if (data.orderInfos[i].productId == productId && data.orderInfos[i].status !== 'deal') {
+                    $('.order-container #order-info .comment-submit').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
+                }
+            }
+
+            $('.order-container #order-info .comment-submit').click(function() {
+                $.getJSON('payOrder', {
+                    oid: oid,
+                    productId: $('#productId').val()
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (data.success) {
+                        $('.order-container #order-info .comment-submit').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #pay-btn').removeClass('button');
+
+                        $('.order-container #pay-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to comment');
+                    }
                 });
+            });
         });
     },
 
@@ -920,6 +943,7 @@ var customer = {
                     var deliveryPriceItem = delivery_price[i].textContent;
                     priceItem = parseInt(quantity[i].value) * parseFloat(priceItem.substring(priceItem.indexOf('$') + 1, priceItem.length)) + parseFloat(deliveryPriceItem.substring(deliveryPriceItem.indexOf('$') + 1, deliveryPriceItem.length));
 
+                    list[i].setAttribute('title', '$' + priceItem.toFixed(2));
                     list[i].innerHTML = '$' + priceItem.toFixed(2);
 
                     cost += priceItem;
@@ -1259,7 +1283,7 @@ var customer = {
                                 options: orders
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
-                                window.location.href = '?type=pay&oid=' + data.order_id;
+                                window.location.href = '?type=pay&oid=' + data.oid;
                             });
                         }
                     }
@@ -1315,7 +1339,7 @@ var customer = {
                             <span class="color" style="background-color: ' + cart[i].color + ';"></span>\
                         </div>\
                         <div class="order-origin-price">\
-                            <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
+                            <s title="$' + cart[i].origin_price + '">$' + cart[i].origin_price + '</s><span title="$' + cart[i].price + '">$' + cart[i].price + '</span>\
                         </div>\
                         <div class="quantity">\
                             <input type="number" sid="' + cart[i].sid + '" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
@@ -1331,7 +1355,7 @@ var customer = {
                             </select>\
                         </div>\
                         <div class="order-price">\
-                            <p class="shop-price">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
+                            <p class="shop-price" title="$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
                             <p class="delivery-price">+ $' + delivery_options[0].price_option[0].value + '</p>\
                         </div>\
                     </div>');
@@ -1370,9 +1394,32 @@ var customer = {
          * @param  {[type]} data [description]
          * @return {[type]}      [description]
          */
-        var initData = function(data) {
+        const initData = function(data) {
+            const operations = {
+                '': {
+                    name: '',
+                    nextStep: '',
+                    disabled: 'disabled'
+                },
+                unpaid: {
+                    name: 'Pay',
+                    nextStep: 'pay',
+                    disabled: ''
+                },
+                paid: {
+                    name: 'Wait',
+                    nextStep: '',
+                    disabled: 'disabled'
+                },
+                on_delivery: {
+                    name: 'Deal',
+                    nextStep: 'deal',
+                    disabled: ''
+                }
+            };
+
             /** @type {Date} [date object] */
-            var date = new Date();
+            let date = new Date();
             date.setTime(data.orderTime.time);
 
             /** item should not be greater than the actual quantity */
@@ -1418,9 +1465,17 @@ var customer = {
             </div>\
             <div class="shop-status">\
                 <span class="name">status</span>\
-                <span class="value">' + data.status + '</span>\
+                <span class="value">' + data.orderInfos[item].status + '</span>\
             </div>\
-            <div class="shop-deliver">' + data.orderInfos[item].delivery.company + '</div>');
+            <div class="shop-deliver">' + data.orderInfos[item].delivery.company + '</div>\
+            <div class="shop-confirm button ' + operations[data.orderInfos[item].status].disabled + '">' + operations[data.orderInfos[item].status].name + '</div>');
+
+            if (operations[data.orderInfos[item].status].disabled !== 'disabled') {
+                $('.order-container #order-info .shop-confirm').click(function(event) {
+                    /* Act on the event */
+                    window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&productId=' + data.orderInfos[item].productId;
+                });
+            }
         };
 
         $.ajax({
@@ -1442,7 +1497,6 @@ var customer = {
 
     initList: function() {
         "use strict";
-
         /**
          * [initData: init the data of orders list]
          * @return {[type]} [description]
@@ -1452,17 +1506,25 @@ var customer = {
             const operations = {
                 unpaid: {
                     name: 'Pay',
-                    nextType: 'pay'
+                    nextType: 'pay',
+                    disabled: ''
                 },
                 paid: {
-                	name: 'Deal',
-                	nextType: '#'
+                    name: 'Wait',
+                    nextType: '',
+                    disabled: 'disabled'
+                },
+                on_delivery: {
+                    name: 'Deal',
+                    nextType: 'deal',
+                    disabled: ''
                 }
             };
 
             const detailsType = {
                 unpaid: 'show',
-                paid: '#'
+                paid: 'show',
+                on_delivery: 'show'
             }
 
             /** [for: append] */
@@ -1473,10 +1535,18 @@ var customer = {
                 /** loop to get shop item for this order */
                 let shopItem = '';
 
+                /** the click url */
+                let clickUrl = ''
+
                 /** order time */
                 date.setTime(data[i].orderTime.time);
 
                 for (let j = 0; j < data[i].orderInfos.length; j++) {
+                    clickUrl = '';
+                    if (operations[data[i].orderInfos[j].status].disabled !== 'disabled') {
+                        /* Act on the event */
+                        clickUrl = '?type=' + operations[data[i].orderInfos[j].status].nextType + '&oid=' + data[i].orderId + '&productId=' + data[i].orderInfos[j].productId;
+                    }
                     shopItem += '<div class="shop-item">\
                         <div class="pic-container">\
                             <a href="' + data[i].orderInfos[j].productUrl + '" target="_blank">\
@@ -1489,9 +1559,9 @@ var customer = {
                         <div class="color" style="background-color: ' + data[i].orderInfos[j].color + '"></div>\
                         <div class="origin-price">\
                             <p class="origin">\
-                                <s>$' + data[i].orderInfos[j].product.price + '</s>\
+                                <s title="$' + data[i].orderInfos[j].product.price + '">$' + data[i].orderInfos[j].product.price + '</s>\
                             </p>\
-                            <p class="current">$' + data[i].orderInfos[j].product.discountPrice + '</p>\
+                            <p class="current" title="$' + data[i].orderInfos[j].product.discountPrice + '">$' + data[i].orderInfos[j].product.discountPrice + '</p>\
                         </div>\
                         <div class="quantity">\
                             <p class="value">' + data[i].orderInfos[j].quantity + '</p>\
@@ -1505,16 +1575,16 @@ var customer = {
                         </div>\
                         <div class="info">\
                             <div class="delivery-status">\
-                                <p class="value">' + data[i].status + '</p>\
+                                <p class="value">' + data[i].orderInfos[j].status + '</p>\
                                 <p class="name">delivery status</p>\
-                                <p><a class="value" href="order?type=' + detailsType[data[i].status] + '&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
+                                <p><a class="value" href="viewOrder?type=' + detailsType[data[i].orderInfos[j].status] + '&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
                                 <p class="name">more details</p>\
                                 <p><a class="value" href="#">track the delivery</a></p>\
                                 <p class="name">track where the shop is</p>\
                             </div>\
                         </div>\
-                        <div class="handle-btn button" onclick="window.open(\'?type=' + operations[data[i].status].nextType + '&oid=' + data[i].orderId + '\');">' + operations[data[i].status].name + '</div>\
-                    </div>';
+                        <div class="handle-btn button ' + operations[data[i].orderInfos[j].status].disabled + '" onclick="window.location.href=\'' + clickUrl + '\'">' + operations[data[i].orderInfos[j].status].name + '</div>\
+                    </div>';  
                 }
 
                 $('.order-container #order-list').append('<div class="order-item">\
@@ -1573,24 +1643,125 @@ var customer = {
      */
     initPay: function(oid) {
         "use strict";
-        $('.order-container #pay-btn').click(function() {
-            $.getJSON('payOrder', {
-                oid: oid
-            }, function(data, textStatus) {
-                /*optional stuff to do after success */
-                if (!data.success) {
-                    $('.order-container #pay-btn').css({
-                        'border': '2px solid #666',
-                        'background-color': '#fff',
-                        'color': '#eee'
-                    });
-
-                    $('.order-container #pay-btn').removeClass('button');
-
-                    $('.order-container #pay-btn').unbind('click');
-                } else {
-                    alert('Ooops, failed to pay');
+        /** check whether pay or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            if (productId === 'null') {
+                let i;
+                for (i = 0; i < data.orderInfos.length; i++) {
+                    if (data.orderInfos[i].status !== 'paid') {
+                        break;
+                    }
                 }
+                if (i === data.orderInfos.length) {
+                    $('.order-container #pay-info').html('You have paid the order');
+                    $('.order-container #pay-btn').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
+                }
+            } else {
+                for (let i = 0; i < data.orderInfos.length; i++) {
+                    if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
+                        $('.order-container #pay-info').html('You have paid the order');
+                        $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+                        return;
+                    }
+                }
+            }
+
+            $('.order-container #pay-info').html('Pay the product');
+            $('.order-container #pay-btn').click(function() {
+                $.getJSON('payOrder', {
+                    oid: oid,
+                    productId: $('#productId').val()
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (data.result) {
+                        $('.order-container #pay-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #pay-btn').removeClass('button');
+
+                        $('.order-container #pay-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to pay');
+                    }
+                });
+            });
+        });
+    },
+
+    /**
+     * [initDeal: init the deal page]
+     * @param  {[type]} oid       [the order id]
+     * @param  {[type]} productId [the product id]
+     * @return {[type]}           [description]
+     */
+    initDeal: function(oid, productId) {
+        "use strict";
+        /** check whether deal or not */
+        $.getJSON('orderByType', {
+            type: 'show',
+            oid: oid
+        }, function(data, textStatus) {
+            /*optional stuff to do after success */
+            const productId = $('#productId').val();
+            for (let i = 0; i < data.orderInfos.length; i++) {
+                if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'deal') {
+                    $('.order-container #deal-info').html('You have already dealed');
+                    $('.order-container #deal-btn').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
+                } else if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
+                    $('.order-container #deal-info').html('You cannot deal before the product have been sent');
+                    $('.order-container #deal-btn').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
+                }
+            }
+
+            $('.order-container #deal-info').html('Are you sure to deal?');
+            $('.order-container #deal-btn').click(function() {
+                $.getJSON('changeOrderInfo', {
+                    oid: oid,
+                    pid: $('#productId').val(),
+                    newStatus: 'confirm_receipt'
+                }, function(data, textStatus) {
+                    /*optional stuff to do after success */
+                    if (data.success) {
+                        $('.order-container #deal-btn').css({
+                            'border': '2px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                        $('.order-container #deal-btn').removeClass('button');
+
+                        $('.order-container #deal-btn').unbind('click');
+                    } else {
+                        alert('Ooops, failed to deal');
+                    }
+                });
             });
         });
     },
@@ -1604,13 +1775,13 @@ var customer = {
 
         let scores = 0;
         let i = 0;
-        
+
         $scores.each(function() {
             i++;
             scores += parseFloat($(this).html());
         });
 
-        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1)); 
+        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1));
 
         $('.product-container .product-info .info-items .value input[type="number"]').change(function() {
             /* Act on the event */

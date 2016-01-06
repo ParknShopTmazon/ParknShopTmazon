@@ -4,14 +4,14 @@
     <span class="main-title">Pay</span>
 </div>
 <form action="">
-    <div id="pay-info"></div>
-	<div id="pay-btn" class="button">Pay</div>
+    <div id="deal-info"></div>
+	<div id="deal-btn" class="button">Deal</div>
 </form>
 <script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="./js/customer.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     customer.init();
-    customer.initPay($('#oid').val());
+    customer.initDeal($('#oid').val(), $('#productId').val());
 });
 </script>

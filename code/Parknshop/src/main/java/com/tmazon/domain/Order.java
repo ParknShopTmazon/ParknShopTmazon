@@ -8,39 +8,19 @@ public class Order {
 	public static final String PAY_TYPE_CASH_ON_DELIVERY = "cash_on_delivery";
 	public static final String PAY_TYPE_ONLINE_PAYMENT = "online_payment";
 	
-	public static final String STATUS_UNPAID = "unpaid";
-	public static final String STATUS_PAID = "paid";
-	public static final String STATUS_ON_DELIVERY = "on_delivery";
-	public static final String STATUS_ON_DELIVERY_AND_UNPAID = "on_delivery_AND_unpaid";
-	public static final String STATUS_CONFIRM_RECEIPT = "confirm_receipt";
+	public static final String STATUS_NORMAL = "normal";
 	public static final String STATUS_DELETED = "deleted";
 
 	private Integer orderId;
 	private String payType;
 	private String status;
 	private Date orderTime;
-	private Date deliveryTime;
-	private Date dealTime;
 	private Integer userId;
 	private Integer addressId;
 	
 	private  List<OrderInfo> orderInfos;
 	private Address address;
 	
-	
-	public Order(Integer orderId, String payType, String status, Date orderTime, Date deliveryTime, Date dealTime,
-			Integer userId, Integer addressId) {
-		super();
-		this.orderId = orderId;
-		this.payType = payType;
-		this.status = status;
-		this.orderTime = orderTime;
-		this.deliveryTime = deliveryTime;
-		this.dealTime = dealTime;
-		this.userId = userId;
-		this.addressId = addressId;
-	}
-
 	public Order(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
@@ -78,18 +58,6 @@ public class Order {
 		this.orderTime = orderTime;
 	}
 	
-	public Date getDeliveryTime() {
-		return deliveryTime;
-	}
-	public void setDeliveryTime(Date deliveryTime) {
-		this.deliveryTime = deliveryTime;
-	}
-	public Date getDealTime() {
-		return dealTime;
-	}
-	public void setDealTime(Date dealTime) {
-		this.dealTime = dealTime;
-	}
 	public Integer getUserId() {
 		return userId;
 	}
