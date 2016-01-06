@@ -1260,7 +1260,7 @@ var customer = {
                                 options: orders
                             }, function(data, textStatus) {
                                 /*optional stuff to do after success */
-                                window.location.href = '?type=pay&oid=' + data.order_id;
+                                window.location.href = '?type=pay&oid=' + data.oid;
                             });
                         }
                     }
@@ -1612,9 +1612,9 @@ var customer = {
                 /*optional stuff to do after success */
                 if (!data.success) {
                     $('.order-container #pay-btn').css({
-                        'border': '2px solid #666',
-                        'background-color': '#fff',
-                        'color': '#eee'
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
                     });
 
                     $('.order-container #pay-btn').removeClass('button');
