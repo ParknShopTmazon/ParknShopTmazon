@@ -76,8 +76,17 @@ public class ShopDaoImpl implements ShopDao {
 	}
 
 	public boolean delete(Shop shop) {
-		// TODO Auto-generated method stub
-		return false;
+
+		String sql = "DELETE FROM shop WHERE shopId = ?";
+		System.out.println(sql);
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			runner.update(sql, shop.getShopId());
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public Shop findById(Integer id) {

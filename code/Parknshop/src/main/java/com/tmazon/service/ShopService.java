@@ -12,4 +12,6 @@ public interface ShopService {
 	
 	public boolean insert(Shop shop);
 	
+	public boolean delete(Shop shop);
+	
 }
