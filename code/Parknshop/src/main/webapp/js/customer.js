@@ -920,6 +920,7 @@ var customer = {
                     var deliveryPriceItem = delivery_price[i].textContent;
                     priceItem = parseInt(quantity[i].value) * parseFloat(priceItem.substring(priceItem.indexOf('$') + 1, priceItem.length)) + parseFloat(deliveryPriceItem.substring(deliveryPriceItem.indexOf('$') + 1, deliveryPriceItem.length));
 
+                    list[i].setAttribute('title', '$' + priceItem.toFixed(2));
                     list[i].innerHTML = '$' + priceItem.toFixed(2);
 
                     cost += priceItem;
@@ -1315,7 +1316,7 @@ var customer = {
                             <span class="color" style="background-color: ' + cart[i].color + ';"></span>\
                         </div>\
                         <div class="order-origin-price">\
-                            <s>$' + cart[i].origin_price + '</s><span>$' + cart[i].price + '</span>\
+                            <s title="$' + cart[i].origin_price + '">$' + cart[i].origin_price + '</s><span title="$' + cart[i].price + '">$' + cart[i].price + '</span>\
                         </div>\
                         <div class="quantity">\
                             <input type="number" sid="' + cart[i].sid + '" min="1" max_quantity="' + cart[i].stock + '" value="' + cart[i].quantity + '">\
@@ -1331,7 +1332,7 @@ var customer = {
                             </select>\
                         </div>\
                         <div class="order-price">\
-                            <p class="shop-price">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
+                            <p class="shop-price" title="$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '">$' + (parseInt(cart[i].quantity) * parseFloat(cart[i].price) + parseFloat(delivery_options[0].price_option[0].value)).toFixed(1) + '</p>\
                             <p class="delivery-price">+ $' + delivery_options[0].price_option[0].value + '</p>\
                         </div>\
                     </div>');
@@ -1370,9 +1371,24 @@ var customer = {
          * @param  {[type]} data [description]
          * @return {[type]}      [description]
          */
-        var initData = function(data) {
+        const initData = function(data) {
+            const operations = {
+                '': {
+                    name: '',
+                    nextStep: ''
+                },
+                unpaid: {
+                    name: 'Pay',
+                    nextStep: 'pay'
+                },
+                paid: {
+                    name: 'Deal',
+                    nextStep: 'deal'
+                }
+            };
+
             /** @type {Date} [date object] */
-            var date = new Date();
+            let date = new Date();
             date.setTime(data.orderTime.time);
 
             /** item should not be greater than the actual quantity */
@@ -1418,9 +1434,15 @@ var customer = {
             </div>\
             <div class="shop-status">\
                 <span class="name">status</span>\
-                <span class="value">' + data.status + '</span>\
+                <span class="value">' + data.orderInfos[item].status + '</span>\
             </div>\
-            <div class="shop-deliver">' + data.orderInfos[item].delivery.company + '</div>');
+            <div class="shop-deliver">' + data.orderInfos[item].delivery.company + '</div>\
+            <div class="shop-confirm button">' + operations[data.orderInfos[item].status].name + '</div>');
+
+            $('.order-container #order-info .shop-confirm').click(function(event) {
+                /* Act on the event */
+                window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&productId=' + data.orderInfos[item].productId;
+            });
         };
 
         $.ajax({
@@ -1450,6 +1472,9 @@ var customer = {
         var initData = function(data) {
             /** @type {Object} [operations of different statuses] */
             const operations = {
+                '': {
+
+                },
                 unpaid: {
                     name: 'Pay',
                     nextType: 'pay'
@@ -1462,7 +1487,7 @@ var customer = {
 
             const detailsType = {
                 unpaid: 'show',
-                paid: '#'
+                paid: 'show'
             }
 
             /** [for: append] */
@@ -1489,9 +1514,9 @@ var customer = {
                         <div class="color" style="background-color: ' + data[i].orderInfos[j].color + '"></div>\
                         <div class="origin-price">\
                             <p class="origin">\
-                                <s>$' + data[i].orderInfos[j].product.price + '</s>\
+                                <s title="$' + data[i].orderInfos[j].product.price + '">$' + data[i].orderInfos[j].product.price + '</s>\
                             </p>\
-                            <p class="current">$' + data[i].orderInfos[j].product.discountPrice + '</p>\
+                            <p class="current" title="$' + data[i].orderInfos[j].product.discountPrice + '">$' + data[i].orderInfos[j].product.discountPrice + '</p>\
                         </div>\
                         <div class="quantity">\
                             <p class="value">' + data[i].orderInfos[j].quantity + '</p>\
@@ -1505,15 +1530,15 @@ var customer = {
                         </div>\
                         <div class="info">\
                             <div class="delivery-status">\
-                                <p class="value">' + data[i].status + '</p>\
+                                <p class="value">' + data[i].orderInfos[j].status + '</p>\
                                 <p class="name">delivery status</p>\
-                                <p><a class="value" href="order?type=' + detailsType[data[i].status] + '&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
+                                <p><a class="value" href="viewOrder?type=' + detailsType[data[i].orderInfos[j].status] + '&oid=' + data[i].orderId + '&item=' + j + '">details</a></p>\
                                 <p class="name">more details</p>\
                                 <p><a class="value" href="#">track the delivery</a></p>\
                                 <p class="name">track where the shop is</p>\
                             </div>\
                         </div>\
-                        <div class="handle-btn button" onclick="window.open(\'?type=' + operations[data[i].status].nextType + '&oid=' + data[i].orderId + '\');">' + operations[data[i].status].name + '</div>\
+                        <div class="handle-btn button" onclick="window.location.href=\'?type=' + operations[data[i].orderInfos[j].status].nextType + '&oid=' + data[i].orderId + '&productId=' + data[i].orderInfos[j].productId + '\';">' + operations[data[i].orderInfos[j].status].name + '</div>\
                     </div>';
                 }
 
@@ -1573,9 +1598,16 @@ var customer = {
      */
     initPay: function(oid) {
         "use strict";
+        if ($('#productId').val() === 'null') {
+            $('.order-container #pay-info').html('Pay the order');
+        } else {
+            $('.order-container #pay-info').html('Pay the product');
+        }
+
         $('.order-container #pay-btn').click(function() {
             $.getJSON('payOrder', {
-                oid: oid
+                oid: oid,
+                productId: $('#productId').val()
             }, function(data, textStatus) {
                 /*optional stuff to do after success */
                 if (!data.success) {

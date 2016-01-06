@@ -154,4 +154,18 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		}
 	}
 
+	public boolean updateStatus(OrderInfo orderInfo) {
+		String sql = "UPDATE orderInfo SET status = ? WHERE orderId = ? AND productId = ?";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			int rows = runner.update(sql, orderInfo.getStatus(), orderInfo.getOrderId(), orderInfo.getProductId());
+			return rows > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }

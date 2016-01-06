@@ -225,6 +225,10 @@
   <servlet-class>com.tmazon.servlet.PayOrderServlet</servlet-class>
  </servlet>
  <servlet>
+ 	<servlet-name>ChangeOrderInfoStatusServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.ChangeOrderInfoStatusServlet</servlet-class>
+ </servlet>
+ <servlet>
  	<servlet-name>DeleteShopServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.DeleteShopServlet</servlet-class>
  </servlet>
@@ -431,6 +435,10 @@
  <servlet-mapping>
   <servlet-name>PayOrderServlet</servlet-name>
   <url-pattern>/payOrder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ChangeOrderInfoStatusServlet</servlet-name>
+ 	<url-pattern>/changeOrderInfo</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
  	<servlet-name>DeleteShopServlet</servlet-name>
