@@ -12,6 +12,8 @@ public interface OrderService {
 	
 	public List<OrderInfo> getOrderInfo(Integer orderId);
 	
+	public OrderInfo getOrderInfo(Integer orderId, Integer productId);
+	
 	public List<OrderInfo> getOrderInfosByshop(Integer shopId);
 	
 	public Order addOrder(Order order, List<OrderInfo> orderInfos);
@@ -23,5 +25,7 @@ public interface OrderService {
 	public boolean changeOrderinfoStatus(OrderInfo orderInfo, String newStatus);
 	
 	public OrderInfo getOrderInfoByPK(Integer orderId, Integer productId);
+	
+	public boolean changeStatus(OrderInfo orderInfo, String newStatus, String role);
 	
 }

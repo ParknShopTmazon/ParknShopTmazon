@@ -1441,7 +1441,7 @@ var customer = {
 
             $('.order-container #order-info .shop-confirm').click(function(event) {
                 /* Act on the event */
-                window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&item=' + item;
+                window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&productId=' + data.orderInfos[item].productId;
             });
         };
 
@@ -1538,7 +1538,7 @@ var customer = {
                                 <p class="name">track where the shop is</p>\
                             </div>\
                         </div>\
-                        <div class="handle-btn button" onclick="window.location.href=\'?type=' + operations[data[i].orderInfos[j].status].nextType + '&oid=' + data[i].orderId + '&item=' + j + '\';">' + operations[data[i].orderInfos[j].status].name + '</div>\
+                        <div class="handle-btn button" onclick="window.location.href=\'?type=' + operations[data[i].orderInfos[j].status].nextType + '&oid=' + data[i].orderId + '&productId=' + data[i].orderInfos[j].productId + '\';">' + operations[data[i].orderInfos[j].status].name + '</div>\
                     </div>';
                 }
 
@@ -1598,7 +1598,7 @@ var customer = {
      */
     initPay: function(oid) {
         "use strict";
-        if ($('#item_num').val() === 'null') {
+        if ($('#productId').val() === 'null') {
             $('.order-container #pay-info').html('Pay the order');
         } else {
             $('.order-container #pay-info').html('Pay the product');
@@ -1606,7 +1606,8 @@ var customer = {
 
         $('.order-container #pay-btn').click(function() {
             $.getJSON('payOrder', {
-                oid: oid
+                oid: oid,
+                productId: $('#productId').val()
             }, function(data, textStatus) {
                 /*optional stuff to do after success */
                 if (!data.success) {
