@@ -492,6 +492,11 @@ input {
     color: #e0e0e0 !important;
 }
 
+.product-container .product-info .product-name {
+    font-size: 1.5em !important;
+    color: #ffa200;
+}
+
 
 /*************************************************
      *
