@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<%@ include file="header2.html"%>
+	<%@ include file="header.html"%>
 	<div class="shop-container">
 		<div id="shoplist">
 			<c:forEach var="shop" items="${shopList}" >
