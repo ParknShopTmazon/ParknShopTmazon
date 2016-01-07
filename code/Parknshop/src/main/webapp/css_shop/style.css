@@ -108,12 +108,6 @@ a {
     width: 300px;
 }
 
-.submit-btn {
-    width: 100px;
-    height: 36px;
-    font-size: 18px;
-}
-
 .hide {
     display: none;
 }
@@ -482,4 +476,28 @@ a {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
+}
+
+.delete-shop-container .delete-btn,
+.delete-shop-container .cancel-btn {
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 32px;
+    text-align: center;
+    outline: none;
+    vertical-align: top;
+	height: 36px;
+	width: 100px;
+}
+
+.delete-shop-container .delete-btn {
+	border: 1px solid #B27100;
+    background-color: #ce8300;
+}
+
+.delete-shop-container .cancel-btn {
+	border: 1px solid #999;
+    color: #999;
+    background-color: transparent;
 }

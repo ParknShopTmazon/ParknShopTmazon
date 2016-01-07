@@ -49,8 +49,8 @@
 				<div class="form-item">
 					<div class="form-lable-left"></div>
 					<div class="form-control-right">
-						<input type="submit" value="delete" class="submit-btn" >
-						<button  name="cancel" type="button" onclick="window.open('myshop')" class="submit-btn">cancel</button>
+						<input type="submit" value="delete" class="submit-btn delete-btn button" >
+						<button  name="cancel" type="button" onclick="window.location.href='myshop';" class="submit-btn cancel-btn button">cancel</button>
 					</div>
 				</div>	
 			</form>
