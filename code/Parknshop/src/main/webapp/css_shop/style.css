@@ -116,6 +116,11 @@ a{text-decoration:none;}
 .height10px{height:10px;}
 .height5px{height:5px;}
 .height2px{height:2px;}
-.outset{border-style:outset;};
+.outset{border-style:outset;}
 .font1.4{font-size:1.4em;}
 .nofloat{clear:both;}
+
+#menu, 
+.shop-container {
+	padding: 95px 0 97px;
+}

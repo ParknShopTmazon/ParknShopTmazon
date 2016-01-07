@@ -1411,7 +1411,7 @@ var customer = {
                     nextStep: '',
                     disabled: 'disabled'
                 },
-                on_delivery: {
+                delivering: {
                     name: 'Deal',
                     nextStep: 'deal',
                     disabled: ''
@@ -1420,11 +1420,27 @@ var customer = {
 
             /** @type {Date} [date object] */
             let date = new Date();
-            date.setTime(data.orderTime.time);
+            let deliveryTime = new Date();
+            let dealTime = new Date();
 
             /** item should not be greater than the actual quantity */
             if (item >= data.orderInfos.length) {
                 return;
+            }
+
+            date.setTime(data.orderTime.time);
+            if (data.orderInfos[item].deliveryTime) {
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime);
+                deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                deliveryTime = '/';
+            }
+
+            if (data.orderInfos[item].dealTime) {
+                dealTime.setTime(data.orderInfos[item].dealTime);
+                dealTime = dealTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                dealTime = '/';
             }
 
             $('.order-container #order-info').append('<div class="shop-info">\
@@ -1455,11 +1471,11 @@ var customer = {
                     </div>\
                     <div class="item">\
                         <span class="name">Delivery Time</span>\
-                        <span class="value"></span>\
+                        <span class="value">' + deliveryTime + '</span>\
                     </div>\
                     <div class="item">\
                         <span class="name">Deal Time</span>\
-                        <span class="value"></span>\
+                        <span class="value">' + dealTime + '</span>\
                     </div>\
                 </div>\
             </div>\
@@ -1514,7 +1530,7 @@ var customer = {
                     nextType: '',
                     disabled: 'disabled'
                 },
-                on_delivery: {
+                delivering: {
                     name: 'Deal',
                     nextType: 'deal',
                     disabled: ''
@@ -1524,7 +1540,7 @@ var customer = {
             const detailsType = {
                 unpaid: 'show',
                 paid: 'show',
-                on_delivery: 'show'
+                delivering: 'show'
             }
 
             /** [for: append] */
@@ -1653,12 +1669,13 @@ var customer = {
             if (productId === 'null') {
                 let i;
                 for (i = 0; i < data.orderInfos.length; i++) {
-                    if (data.orderInfos[i].status !== 'paid') {
+                    if (data.orderInfos[i].status !== 'unpaid') {
                         break;
                     }
                 }
-                if (i === data.orderInfos.length) {
-                    $('.order-container #pay-info').html('You have paid the order');
+
+                if (i !== data.orderInfos.length) {
+                    $('.order-container #pay-info').html('You cannot pay the order');
                     $('.order-container #pay-btn').css({
                         'border': '2px solid #e0e0e0',
                         'background-color': '#f0f0f0',
@@ -1668,8 +1685,8 @@ var customer = {
                 }
             } else {
                 for (let i = 0; i < data.orderInfos.length; i++) {
-                    if (data.orderInfos[i].productId == productId && data.orderInfos[i].status === 'paid') {
-                        $('.order-container #pay-info').html('You have paid the order');
+                    if (data.orderInfos[i].productId == productId && data.orderInfos[i].status !== 'unpaid') {
+                        $('.order-container #pay-info').html('You cannot pay the order');
                         $('.order-container #pay-btn').css({
                             'border': '2px solid #e0e0e0',
                             'background-color': '#f0f0f0',
