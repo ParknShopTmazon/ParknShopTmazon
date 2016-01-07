@@ -49,7 +49,7 @@
 		                <div class="order-ctime">
 		                    <span class="value">${orderInfo.order.orderTime }</span>
 		                </div>
-		                <div class="delete-btn button"></div>
+		                <!-- <div class="delete-btn button"></div> -->
 		            </div>
 		            <div class="shop-item">
 		                <div class="pic-container">
