@@ -12,6 +12,10 @@ CREATE TABLE user (
 	UNIQUE (name)
 );
 
+CREATE TABLE rate(
+	rate varchar(10) NOT NULL
+);
+
 CREATE TABLE address(
 	addressId int AUTO_INCREMENT,
 	userId int NOT NULL,
@@ -89,6 +93,7 @@ CREATE TABLE orders (
 	status varchar(50) NOT NULL,
 	orderTime datetime NOT NULL,
 	userId int NOT NULL,
+	rate varchar(10) NOT NULL,
 	addressId int NOT NULL,
 	PRIMARY KEY (orderId),
 	FOREIGN KEY (userId) REFERENCES user(userId),

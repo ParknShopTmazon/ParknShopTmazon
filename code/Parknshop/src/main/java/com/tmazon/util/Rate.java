@@ -1,7 +1,7 @@
 package com.tmazon.util;
-//税率工具类
+//绋庣巼宸ュ叿绫�
 public class Rate {
-	private static int rate=5;//默认税率为0.05
+	private static int rate=5;//榛樿绋庣巼涓�0.05
 
 	public static int getRate() {
 		return rate;
