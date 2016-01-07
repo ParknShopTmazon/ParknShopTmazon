@@ -55,7 +55,7 @@
 					<div class="form-item-textarea">
 						<div class="form-lable-left">Description:</div>
 						<div class="form-textarea">
-							<textarea class="textarea"></textarea>
+							<textarea class="textarea" required></textarea>
 							<button type="submit" class="btn-warning">submit</button>
 						</div>
 					</div>
