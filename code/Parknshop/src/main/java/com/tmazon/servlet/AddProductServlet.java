@@ -23,8 +23,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.tmazon.domain.Product;
+import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
 import com.tmazon.service.ProductService;
+import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.IOUtil;
@@ -32,7 +34,7 @@ import com.tmazon.util.IOUtil;
 public class AddProductServlet extends HttpServlet{
 
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
-
+	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
@@ -43,14 +45,14 @@ public class AddProductServlet extends HttpServlet{
 			return;
 		}
 		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
-		int shop = -1;
+		Shop shop=null;
 		try {
-			shop=Integer.parseInt(shopId);
+			shop =shopService.findById(Integer.parseInt(shopId));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(shop==-1){
+		if(shop==null||!Shop.STATUS_SUCCESS.equals(shop.getStatus())){
 			resp.sendRedirect("myshop");
 			return;
 		}
@@ -60,13 +62,12 @@ public class AddProductServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8"); 
-		
 		String contextPath = getServletContext().getRealPath(File.separator+"images_shop"+File.separator);
 		String uploadPath =File.separator+ "upload"+File.separator;
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;

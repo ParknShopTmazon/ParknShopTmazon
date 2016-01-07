@@ -61,6 +61,12 @@
 	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "delivery"}'></div>	
 	        	</span>
             </div>
+            <div class="comment-area">
+                <span class="name"><strong>comment</strong></span>
+                <span>
+                    <textarea></textarea>
+                </span>
+            </div>
         </div>
         <div class="comment-submit button">Submit</div>
     </div>
@@ -71,6 +77,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
     customer.init();
-    customer.initComment();
+    customer.initComment(oid, productId);
 });
 </script>

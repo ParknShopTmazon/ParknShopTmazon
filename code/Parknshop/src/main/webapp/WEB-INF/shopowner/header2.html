@@ -1,13 +1,15 @@
 <link rel="stylesheet" type="text/css" href="css/endPart.css">
 <div id="header">
-	<a class="header-div" id="logo-icon" href="index"></a>
-	<c:choose>
-		<c:when test="${ not empty s_user }">
-			<div class="user-item">${ s_user.name }</div>
-			<a href="logout"><div class="text-btn">Logout</div></a>
-		</c:when>
-	</c:choose>
-	<div class="header-search-block">
+    <a class="header-div" id="logo-icon" href="index"></a>
+    <c:choose>
+        <c:when test="${ not empty s_user }">
+            <div class="user-item">${ s_user.name }</div>
+            <a href="logout">
+                <div class="text-btn">Logout</div>
+            </a>
+        </c:when>
+    </c:choose>
+    <!-- <div class="header-search-block">
 		<form action="" class="searchform" name="searchform" method="get">
 			  <select name="select" class="select">
 			  	<option selected="selected">ALL</option>
@@ -17,20 +19,33 @@
 			  <input type="text" class="search" name="search" autocomplete="off"  value="" placeholder="please input shop/product name"/>
 			  <input type="image" class="search-img-box" src="images/search-btn-white.png" />
 		</form>
-	</div>		
+	</div> -->
 </div>
 <!--div id="line-nav"></div-->
 <div id="menu">
-	<dl class="side-nav-list">
-		<dd class="home current"><strong>My Home</strong></dd>
-		<dt class="head-item"><strong><a href="myshop">My Shop</a></strong></dt>
-		<dd>
-			<ul class="item-list">
-				<li class="" ><a href="myshop">ShopList</a></li>
-				<li >ManageShop</li>
-			</ul>
-		</dd>
-		<dt class="head-item" ><strong>My Order</strong></dt>
-		
-	</dl>
+    <dl class="side-nav-list">
+        <dt class="head-item"><h2>My Shops</h2></dt>
+        <dd>
+            <ul class="item-list">
+                <a href="myshop"><li id="shops-list" class="active">Shops List</li></a>
+                <a href="registershoppage"><li id="add-shops" class="active">Add Shops</li></a>
+                <li id="manage-shops">Manage Shops</li>
+            </ul>
+        </dd>
+        <dt class="head-item"><h2>My Orders</h2></dt>
+        <dd>
+            <ul class="item-list">
+                <a href="shoporder"><li id="manage-orders" class="active">Manage Orders</li></a>
+            </ul>
+        </dd>
+    </dl>
+    <div class="menu-btn"></div>
 </div>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/shopowner.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		shopOwner.init();
+		shopOwner.initMenu();
+	});
+</script>

@@ -40,6 +40,7 @@ public class ModifyProductServlet extends HttpServlet{
 			resp.sendRedirect("login");
 			return;
 		}
+		System.out.println("#############");
 		String productId = req.getParameter("product_id");
 		int id =-1;
 		try {
@@ -48,16 +49,19 @@ public class ModifyProductServlet extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("#############1");
 		if(id==-1){
 			resp.sendRedirect("selectedshop");
 			return;
 		}
+		System.out.println("#############2");
 		Product product = productService.findOnSellById(id);
 		if(product==null||product.getProductId()==null||product.getProductId()!=id){
 			resp.sendRedirect("selectedshop");
 			return;
 		}
 		int shop = -1;
+		System.out.println("#############3");
 		try {
 			shop=Integer.parseInt(shopId);
 		} catch (NumberFormatException e) {
@@ -68,6 +72,7 @@ public class ModifyProductServlet extends HttpServlet{
 			resp.sendRedirect("myshop");
 			return;
 		}
+		System.out.println("#############4");
 		req.setAttribute("product_id", product.getProductId());
 		req.setAttribute("image", product.getPicture());
 		req.setAttribute("productName", product.getName());
@@ -88,7 +93,7 @@ req.setCharacterEncoding("utf-8");
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;

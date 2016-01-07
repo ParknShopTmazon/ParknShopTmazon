@@ -155,8 +155,8 @@
 					    <a href="productInfo?pid=${ product.productId }" target="_blank">
 					        <div class="over">
 					            <div class="link-btn"></div>
-					            <div class="product-name">${ product.name }</div>
-					            <div class="product-price">$ ${ product.discountPrice }</div>
+					            <div class="product-name">name:${ product.name } &nbsp;&nbsp;&nbsp;shop:${product.shop.name }</div>
+					            <div class="product-price">price:$ ${ product.discountPrice }</div>
 					        </div>
 					    </a>
 					    <div class="shop" style="background-image: url('${ product.picture }');"></div>

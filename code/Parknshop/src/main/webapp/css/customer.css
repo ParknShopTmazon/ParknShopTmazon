@@ -1,3 +1,25 @@
+/***********************************************************************
+ *                                                                   _
+ *       _____  _                           ____  _                 |_|
+ *      |  _  |/ \   ____  ____ __ ___     / ___\/ \   __   _  ____  _
+ *      | |_| || |  / __ \/ __ \\ '_  \ _ / /    | |___\ \ | |/ __ \| |
+ *      |  _  || |__. ___/. ___/| | | ||_|\ \___ |  _  | |_| |. ___/| |
+ *      |_/ \_|\___/\____|\____||_| |_|    \____/|_| |_|_____|\____||_| 
+ *                                                                      
+ *      ================================================================
+ *                 More than a coder, More than a designer              
+ *      ================================================================
+ *
+ *
+ *      - Document: customer.css
+ *      - Author: aleen42
+ *      - Description: the css style sheets of customer
+ *      - Create Time: Dec 9, 2015
+ *      - Update Time: Jan 6 2015 
+ *
+ *
+ **********************************************************************/
+
 * {
     margin: 0;
 }
@@ -36,6 +58,10 @@ body {
 
 s {
     color: #ccc;
+}
+
+input {
+    outline-color: #ffa200;
 }
 
 
@@ -462,8 +488,9 @@ s {
 }
 
 .product-container .product-info .btn-disabled {
-    border: 1px solid #f0f0f0;
-    background-color: #e0e0e0;
+    border: 1px solid #e0e0e0 !important;
+    background-color: #f0f0f0 !important;
+    color: #e0e0e0 !important;
 }
 
 
@@ -672,32 +699,6 @@ s {
     padding: 15px;
     box-sizing: border-box;
     font-size: 1.2em;
-    font-family: monospace;
-    border-color: rgb(169, 169, 169);
-    -webkit-appearance: textarea;
-    background-color: white;
-    border-image-source: initial;
-    border-image-slice: initial;
-    border-image-width: initial;
-    border-image-outset: initial;
-    border-image-repeat: initial;
-    -webkit-rtl-ordering: logical;
-    -webkit-user-select: text;
-    flex-direction: column;
-    resize: auto;
-    cursor: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    margin: 0em;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    -webkit-writing-mode: horizontal-tb;
 }
 
 .dialog #main .dialog-input .send-btn {
@@ -1463,12 +1464,12 @@ s {
     white-space: nowrap;
 }
 
-.order-container #order-details .order-item .shop-price {
-    font-size: 2.7em;
-}
-
 .order-container #order-details .order-item .order-price > p {
     text-align: right;
+}
+
+.order-container #order-details .order-item .shop-price {
+    font-size: 2.7em;
 }
 
 .order-container #order-details .order-item .delivery-price {
@@ -1636,14 +1637,27 @@ s {
     position: absolute;
     text-align: center;
     line-height: 80px;
-    margin: 10% auto 0 18%;
+    margin: 3% auto 0 18%;
 }
 
 .order-container #order-info .shop-rate .shop,
 .order-container #order-info .shop-rate .product,
-.order-container #order-info .shop-rate .delivery {
+.order-container #order-info .shop-rate .delivery,
+.order-container #order-info .shop-rate .comment-area {
     height: 29px;
     margin-bottom: 10px;
+}
+
+.order-container #order-info .shop-rate .comment-area textarea {
+    width: 60%;
+    height: 100px;
+    resize: none;
+    outline: none;
+    display: inline-block;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    float: right;
 }
 
 .order-container #order-info .shop-rate .name {
@@ -1669,6 +1683,12 @@ s {
 .order-container #order-info .shop-status .value {
     float: right;
     font-size: 1.8em;
+}
+
+.order-container #order-info .disabled {
+    border: 2px solid #e0e0e0 !important;
+    background-color: #f0f0f0 !important;
+    color: #e0e0e0 !important;
 }
 
 .order-container #order-info .shop-confirm,
@@ -1881,6 +1901,12 @@ s {
     font-size: 1.2em;
 }
 
+.order-container #order-list .order-item .disabled {
+    border: 1px solid #e0e0e0 !important;
+    background-color: #f0f0f0 !important;
+    color: #e0e0e0 !important;
+}
+
 
 /**************************************************
          *
@@ -1888,14 +1914,16 @@ s {
          *
          *****************************************/
 
-.order-container #pay-info {
+.order-container #pay-info,
+.order-container #deal-info {
     text-align: center;
     color: #ffa200;
     font-size: 5em;
     margin-top: 200px;
 }
 
-.order-container #pay-btn {
+.order-container #pay-btn,
+.order-container #deal-btn {
     border-radius: 4px;
     border: 2px solid #B27100;
     background-color: #ce8300;

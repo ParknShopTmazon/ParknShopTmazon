@@ -6,6 +6,5 @@ Tomzon Online Shopping  Systemis developed to help the seller and customer compl
 ./code/Parknshop/* 项目结构（由此处导入Eclipse）
 ./code/Parknshop/src/main/java  java的源代码
 ./code/Parknshop/src/main/webapp 浏览器的界面代码（css/js/images等）
-./parknshop 参考项目（其他人的项目）
 ./testdata_admin admin的测试数据
 ./testdata_customer customer的测试数据

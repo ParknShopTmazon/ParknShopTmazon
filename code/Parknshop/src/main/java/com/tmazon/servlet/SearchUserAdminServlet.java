@@ -7,11 +7,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.User;
 import com.tmazon.service.UserManageService;
 import com.tmazon.service.UserService;
+import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.CheckAdmin;
 import com.tmazon.util.Page;
 
 public class SearchUserAdminServlet extends HttpServlet{
@@ -24,6 +27,13 @@ public class SearchUserAdminServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//if the user is online or offline?
+		if(!CheckAdmin.isAdminOnline(req))
+		{
+			resp.sendRedirect("login");
+		}
+		
 		//get the parameter from the input
 		String option = (String)req.getAttribute("option");
 		String userName,role;
@@ -35,14 +45,17 @@ public class SearchUserAdminServlet extends HttpServlet{
 		{
 			userName = (String) req.getAttribute("UserName");
 			role = (String) req.getAttribute("select_role");
+			nextStr = "1";
+		    curPageStr = (String) req.getAttribute("CurPage");
 		}
 		else
 		{
 			userName = req.getParameter("UserName");
 			role = req.getParameter("select_role");
+			nextStr = req.getParameter("next");
+		    curPageStr = req.getParameter("curPage");
 		}
-		nextStr = req.getParameter("next");
-	    curPageStr = req.getParameter("curPage");
+		
 	    
 		req.getSession().setAttribute("searchInfo",new User(null,userName,null,role,null));
 		

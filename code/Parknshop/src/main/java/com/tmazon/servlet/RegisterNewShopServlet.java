@@ -46,7 +46,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 			return;
 		}
 		req.getSession().setAttribute(AttrName.SessionScope.SHOPID, "7880");
-		req.getRequestDispatcher("/WEB-INF/shopowner/add_products.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
@@ -119,7 +119,6 @@ public class RegisterNewShopServlet extends HttpServlet{
 			return;
 		}
 		Integer owner = onlineUser.getUserId();
-		System.out.println("owner ="+owner);
 		
 		String shopName = shopMap.get("name");
 		String shopType = shopMap.get("type");
@@ -127,16 +126,18 @@ public class RegisterNewShopServlet extends HttpServlet{
 		String file = shopMap.get("file");
 	
 		System.out.println("file: "+file+"  shop_name: "+shopName+"  shop_names: ");
-		System.out.println(owner);
-		if(owner==null||"".trim().equals(owner)){
-			resp.sendRedirect("myshop");;
-			return;
-		}
 		
 		if(shopName==null||"".trim().equals(shopName)||shopType==null||"".trim().equals(shopType))
 		{
 			System.out.println("1asas");
 			req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
+			return;
+		}
+		
+		// check if shop exists
+		if (shopService.isShopExist(new Shop(null, shopName, null, null, null,null))) {
+			req.setAttribute(AttrName.RequestScope.ERROR_SHOP_EXISTS, true);
+			req.getRequestDispatcher("WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
 			return;
 		}
 		
@@ -146,21 +147,25 @@ public class RegisterNewShopServlet extends HttpServlet{
 		shop.setStatus(Shop.STATUS_CHECKING);
 		shop.setOwner(owner);
 		
+				
+				
 		
 		if(path==null||"".trim().equals(path)){
 			shop.setPicture("images_shop/index.jpg");
 		}else{
 			shop.setPicture(path);
 		}
-		boolean insert = shopService.insert(shop);
+		
+		// register
+		boolean success = shopService.register(shop);
 		req.setAttribute("img", shop.getPicture());
-		if(insert==true){
+		req.setAttribute(AttrName.RequestScope.IS_SHOP_REGISTER_SUCCESS, success);
+		if(success==true){
 			req.getRequestDispatcher("myshop").forward(req, resp);
 			return;
 		}else{
 			resp.sendRedirect("registernewshop");
 			
 		}
-		
 	}
 }

@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -137,6 +138,8 @@ public class OrderServlet extends HttpServlet {
 				orderInfo.setProductUrl("productInfo?pid=" + orderInfo.getProductId());
 			}
 		}
+		
+		Collections.reverse(orders);
 		
 		JSONArray jsonArray = JSONArray.fromObject(orders);
 		resp.getWriter().write(jsonArray.toString());

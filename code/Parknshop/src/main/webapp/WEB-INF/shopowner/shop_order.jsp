@@ -10,8 +10,6 @@
 </head>
 <body>
     <%@ include file="header2.html"%>
-    
-    <hr/>
     <div class="container">
 	<div id="content">
 	    <div class="order-form">
@@ -67,13 +65,8 @@
 				</div>
 			</div>
 		  </c:forEach>
-
-		
-		
-		
 	</div>
 	</div>
-	
 	<%@ include file="footer.html"%>
 </body>
 </html>

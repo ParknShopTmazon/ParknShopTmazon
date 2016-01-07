@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 	<body>
 		<%@ include file="header.html"%>
+		<div class="other-container">
 			<div id="content" class="container_16 clearfix">
 			
 				
@@ -146,9 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</table>
 				</div>
 			</div>
-		
-		<div id="foot">
-			 Welcome to PARKnSHOP.
 		</div>
+		<%@ include file="footer.html"%>
 	</body>
 </html>
