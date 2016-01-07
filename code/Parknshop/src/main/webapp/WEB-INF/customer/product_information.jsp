@@ -106,7 +106,7 @@
 					<div class="comment-items">
 						<div>
 							<p class="value">${ comment.userId }</p>
-							<p class="name">User Name</p>
+							<p class="name">${ comment.userName }</p>
 						</div>
 						<div class="comment-part">
 							<p class="value">shop: <span>${ comment.shopScore }</span></p>
