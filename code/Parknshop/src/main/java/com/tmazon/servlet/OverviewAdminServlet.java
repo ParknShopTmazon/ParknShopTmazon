@@ -21,18 +21,26 @@ public class OverviewAdminServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false); 	
-		User onlineUser = (User) session.getAttribute(AttrName.SessionScope.USER);
-		if(onlineUser == null || !onlineUser.getRole().equals(User.ROLE_ADMIN))
+		try
 		{
-			if (session != null) {
-				session.invalidate();
+			HttpSession session = request.getSession(false);
+			User onlineUser = (User) session.getAttribute(AttrName.SessionScope.USER);
+			if(onlineUser == null || !onlineUser.getRole().equals(User.ROLE_ADMIN))
+			{
+				if (session != null) {
+					session.invalidate();
+				}
+				response.sendRedirect("login");
 			}
-			response.sendRedirect("login");
+			else
+			{
+				request.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(request,response);
+			}
 		}
-		else
+		catch(Exception e)
 		{
-			request.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(request,response);
+			e.printStackTrace();
+			response.sendRedirect("login");
 		}
 		
 	}

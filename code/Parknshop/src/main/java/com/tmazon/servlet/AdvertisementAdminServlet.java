@@ -20,18 +20,26 @@ public class AdvertisementAdminServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession(false);
-		User onlineUser = (User) session.getAttribute(AttrName.SessionScope.USER);
-		if(onlineUser == null || !onlineUser.getRole().equals(User.ROLE_ADMIN))
+		try
 		{
-			if (session != null) {
-				session.invalidate();
+			HttpSession session = req.getSession(false);
+			User onlineUser = (User) session.getAttribute(AttrName.SessionScope.USER);
+			if(onlineUser == null || !onlineUser.getRole().equals(User.ROLE_ADMIN))
+			{
+				if (session != null) {
+					session.invalidate();
+				}
+				resp.sendRedirect("login");
 			}
-			resp.sendRedirect("login");
+			else
+			{
+				req.getRequestDispatcher("WEB-INF/admin/advertisement.jsp").forward(req,resp);
+			}
 		}
-		else
+		catch(Exception e)
 		{
-			req.getRequestDispatcher("WEB-INF/admin/advertisement.jsp").forward(req,resp);
+			e.printStackTrace();
+			resp.sendRedirect("login");
 		}
 	}
 
