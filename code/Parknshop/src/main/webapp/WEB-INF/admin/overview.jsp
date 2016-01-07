@@ -36,13 +36,6 @@
 			<div id="content" class="container_16 clearfix">
 				<div class="grid_5">
 					<div class="box">
-						<h2>Admin</h2>
-						<div class="utils">
-							<a href="#">View More</a>
-						</div>
-						<p><strong>Last Signed In : </strong> Wed 11 Nov, 7:31<br /><strong>IP Address : </strong> 192.168.1.101</p>
-					</div>
-					<div class="box">
 						<h2>Database</h2>
 						<div class="utils">
 							<a href="#">View More</a>
@@ -69,48 +62,6 @@
 						</table>
 					</div>
 					<div class="box">
-						<h2>Messages</h2>
-						<div class="utils">
-							<a href="#">Inbox</a>
-						</div>
-						<p class="center">Have have <a href="#">10</a> unread messages.</p>
-					</div>
-					<div class="box">
-						<h2>Other</h2>
-						<div class="utils">
-							<a href="other.jsp">Check</a>
-						</div>
-						<p class="center">You are running the latest version.</p>
-					</div>
-				</div>
-				<div class="grid_6">
-					<div class="box">
-						<h2>Shop-Apply</h2>
-						<div class="utils">
-							<a href="#">View More</a>
-						</div>
-						<table>
-							<tbody>
-								<tr>
-									<td>1 Tom'Shop</td>
-									<td>2 xxx'Shop</td>
-								</tr>
-								<tr>
-									<td>2 xxx'Shop</td>
-									<td>2 xxx'Shop</td>
-								</tr>
-								<tr>
-									<td>3 xxx'Shops</td>
-									<td>0 xxx'Shop</td>
-								</tr>
-								<tr>
-									<td>4 xxx'Shop</td>
-									<td>0 xxx'Shop</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="box">
 						<h2>Quick Post</h2>
 						<div class="utils">
 							<a href="#">Advanced</a>
@@ -129,10 +80,43 @@
 							</p>
 						</form>
 					</div>
+					
+				</div>
+				<div class="grid_6">
+					<div class="box">
+						<h2>UserManagement</h2>
+						<div class="utils">
+							<a href="user">View More</a>
+						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td>1 Tom'Shop</td>
+									<td>2 xxx'Shop</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="box">
+						<h2>Shop-Apply</h2>
+						<div class="utils">
+							<a href="shopApply">View More</a>
+						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td>1 Tom'Shop</td>
+									<td>2 xxx'Shop</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				
+					
 				</div>
 				<div class="grid_5">
 					<div class="box">
-						<h2>Statistics</h2>
+						<h2>Income</h2>
 						<div class="utils">
 							<a href="#">View More</a>
 						</div>
@@ -153,86 +137,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="box">
-						<h2>Schedule</h2>
-						<div class="utils">
-							<a href="#">View More</a>
-						</div>
-						<table class="date">
-							<caption><a href="#">Prev</a> November 2009 <a href="#">Next</a> </caption>
-							<thead>
-								<tr>
-									<th>Mon</th>
-									<th>Tue</th>
-									<th>Wed</th>
-									<th>Thu</th>
-									<th>Fri</th>
-									<th>Sat</th>
-									<th>Sun</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><a href="#">1</a></td>
-								</tr>
-								<tr>
-									<td><a href="#">2</a></td>
-									<td><a href="#">3</a></td>
-									<td><a href="#">4</a></td>
-									<td><a href="#">5</a></td>
-									<td><a href="#">6</a></td>
-									<td><a href="#">7</a></td>
-									<td><a href="#">8</a></td>
-								</tr>
-								<tr>
-									<td><a href="#">9</a></td>
-									<td><a href="#">10</a></td>
-									<td><a href="#" class="active">11</a></td>
-									<td><a href="#">12</a></td>
-									<td><a href="#">13</a></td>
-									<td><a href="#">14</a></td>
-									<td><a href="#">15</a></td>
-								</tr>
-								<tr>
-									<td><a href="#">16</a></td>
-									<td><a href="#">17</a></td>
-									<td><a href="#">18</a></td>
-									<td><a href="#">19</a></td>
-									<td><a href="#">20</a></td>
-									<td><a href="#">21</a></td>
-									<td><a href="#">22</a></td>
-								</tr>
-								<tr>
-									<td><a href="#">23</a></td>
-									<td><a href="#">24</a></td>
-									<td><a href="#">25</a></td>
-									<td><a href="#">26</a></td>
-									<td><a href="#">27</a></td>
-									<td><a href="#">28</a></td>
-									<td><a href="#">29</a></td>
-								</tr>
-								<tr>
-									<td><a href="#">30</a></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-						<ol>
-							<li>Draft contract template.</li>
-							<li>Draft invoice template.</li>
-							<li>Draft business cards.</li>
-						</ol>
+					
 					</div>
 				</div>
 			</div>

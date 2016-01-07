@@ -1,9 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@ page language="java" import="java.util.*"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -14,7 +11,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--<link rel="stylesheet" href="css/fluid.css" type="text/css" media="screen" charset="utf-8" />-->
 		<link rel="stylesheet" href="css/template.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
-		<link href="css/skin/WdatePicker.css" rel="stylesheet" type="text/css">
 		<script language="javascript" type="text/javascript" src="css/WdatePicker.js"></script>
 	</head>
 	<body>
@@ -25,13 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="grid_4">
                 		<p>
 								<label for="title">Start Date:</label>
-								<input name="start" class="Wdate" type="text" onClick="WdatePicker()">
+								<input name="start"  type="date">
                         </p>
 				</div>
                 <div class="grid_4">
                          <p>			
 								<label for="post">End Date:</label>
-								<input name="end" class="Wdate" type="text" onClick="WdatePicker()"> 
+								<input name="end"  type="date" > 
 				         </p>
                 </div>
                 <div class="grid_2">	
@@ -43,22 +39,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</form>
 			<div class="grid_16">
-				<label>Sales History</label>
+				<label>Sales History:</label>
 					<table>
 						<thead>
 							<tr>
-								<th>Picture</th>
-								<th>Name</th>
+								<th>ProductName</th>
+								<th>SellerName</th>
+								<th>BuyerName</th>
+								<th>Quantity</th>
 								<th>Cost</th>
-								<th colspan="2" width="10%">Actions</th>
+								<th>Time</th>
 							</tr>
 						</thead>
 						<tfoot>
-							<tr>
-								<td colspan="5" class="pagination">
-									<span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 million</a>
+							<form method="get" action="">
+								<td colspan="5" rowspan="1" class="pagination">
+									<input id="prev-btn" type="submit"  value="<<"></input>
+									<span name="curIndex" class="active curved">${CurPage }</span>
+									<input id="next-btn" type="submit" value=">>"></input>
+									<input type="hidden" id="next-val" name="next" value="1"/>
 								</td>
-							</tr>
+							</form>
 							<tr>
 								<td colspan="5" class="pagination" style="text-align:right">
 									<span class="active curved">Total Income：1000458</span>
@@ -67,14 +68,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tfoot>
 						<tbody>
 							<tr>
-								<td><img src='css/food.png' height="30" width="30"></td>
+								<td>45646</td>
 								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
+								<td>hahah</td>
+								<td>Edit</a></td>
+								<td>Delete</a></td>
+								 <td>fsadfasdfsfasdfasd</td>
 							</tr>
-							
+							<c:forEach items="" var="history">
+								<tr>
+									<td>45646</td>
+									<td>Food</td>
+									<td>hahah</td>
+									<td>Edit</a></td>
+									<td>Delete</a></td>
+									 <td>fsadfasdfsfasdfasd</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
