@@ -2,7 +2,7 @@
 	isELIgnored="false" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
 <title>Shop Order</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
