@@ -28,4 +28,6 @@ public interface OrderService {
 	
 	public boolean changeStatus(OrderInfo orderInfo, String newStatus, String role);
 	
+	public boolean isBought(Integer userId, Integer productId);
+	
 }

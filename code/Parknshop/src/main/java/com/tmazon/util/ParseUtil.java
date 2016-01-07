@@ -2,6 +2,8 @@ package com.tmazon.util;
 
 import java.text.DecimalFormat;
 
+import com.tmazon.domain.Comment;
+
 public class ParseUtil {
 
 	public static String Price2String(Double price) {
@@ -31,6 +33,13 @@ public class ParseUtil {
 		}
 		return defaultValue;
 		
+	}
+	
+	public static Integer String2Score(String s, Integer defaultValue) {
+		Integer value = String2Integer(s, defaultValue);
+		value = value > Comment.SCORE_MIN?value:Comment.SCORE_MIN;
+		value = value < Comment.SCORE_MAX?value:Comment.SCORE_MAX;
+		return value;
 	}
 	
 }
