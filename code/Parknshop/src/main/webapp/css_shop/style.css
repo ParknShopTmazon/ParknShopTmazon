@@ -86,12 +86,6 @@ a {
     line-height: 26px;
 }
 
-.form-shop-img {
-    float: left;
-    padding-top: 0px;
-    height: 40px;
-}
-
 .form-input {
     width: 200px;
     height: 26px;
@@ -188,7 +182,8 @@ a {
  ****************************************************************/
 
 .shop-container,
-.register-container {
+.register-container,
+.delete-shop-container {
     padding: 95px 0 97px 4%;
 }
 
@@ -251,7 +246,6 @@ a {
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 50%;
-    background-image: url(./../images/link-btn.png);
     z-index: 3;
 }
 
@@ -470,4 +464,22 @@ a {
 
 .register-container .form-item-textarea {
     margin-bottom: 20px;
+}
+
+/*****************************************************************
+ *
+ * delete-shop-container
+ *
+ ****************************************************************/
+
+.delete-shop-container .form-control-right {
+	line-height: 26px;
+}
+
+.delete-shop-container .form-shop-img .img-container {
+	width: 200px;
+	height: 160px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
 }

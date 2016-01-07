@@ -66,6 +66,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		List<FileItem> items=null;
 		try {
 			items = servletFileUpload.parseRequest(req);
+			System.out.println(servletFileUpload.parseRequest(req));
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
