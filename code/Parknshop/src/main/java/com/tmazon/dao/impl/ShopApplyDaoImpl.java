@@ -13,7 +13,7 @@ import com.tmazon.util.DaoUtil;
 public class ShopApplyDaoImpl implements ShopApplyDao {
 	public List<Shop> getApply() {
 		String sql="SELECT *FROM shop WHERE	STATUS=?";
-		String param="checking";		
+		String param= Shop.STATUS_CHECKING;		
 		List<Shop>	list=null;
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {

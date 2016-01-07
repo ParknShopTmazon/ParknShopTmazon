@@ -2,6 +2,7 @@ package com.tmazon.service.impl;
 
 import com.tmazon.service.ShopApplyService;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,14 @@ public class ShopApplyServiceImpl implements ShopApplyService{
 		List<User> userList = new ArrayList<User>();
 		for(Shop shop : shopList)
 		{
-			userList.add(userDao.findById(shop.getShopId()));
+			userList.add(userDao.findById(shop.getOwner()));
 		}
 		return userList;
+	}
+	public Page<Shop> page(List<Shop> shopList,int curPage,int next)
+	{
+		Page<Shop> shopPage = new Page<Shop>();
+		shopPage.page(shopList,curPage,next);
+		return shopPage;
 	}
 }
