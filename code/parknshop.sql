@@ -93,7 +93,6 @@ CREATE TABLE orders (
 	status varchar(50) NOT NULL,
 	orderTime datetime NOT NULL,
 	userId int NOT NULL,
-	rate varchar(10) NOT NULL,
 	addressId int NOT NULL,
 	PRIMARY KEY (orderId),
 	FOREIGN KEY (userId) REFERENCES user(userId),
@@ -108,7 +107,9 @@ CREATE TABLE orderInfo(
 	status varchar(50) NOT NULL,
 	deliveryTime datetime,
 	dealTime datetime,
+	rate varchar(10) NOT NULL,
 	waybill varchar(50),
+	PRIMARY KEY(orderId, productId),
 	FOREIGN KEY (productId) REFERENCES product(productId),
 	FOREIGN KEY (orderId) REFERENCES orders(orderId),
 	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)

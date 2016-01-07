@@ -7,7 +7,7 @@ public class Order {
 	
 	public static final String PAY_TYPE_CASH_ON_DELIVERY = "cash_on_delivery";
 	public static final String PAY_TYPE_ONLINE_PAYMENT = "online_payment";
-	
+
 	public static final String STATUS_NORMAL = "normal";
 	public static final String STATUS_DELETED = "deleted";
 
@@ -17,7 +17,6 @@ public class Order {
 	private Date orderTime;
 	private Integer userId;
 	private Integer addressId;
-	private String rate;
 	
 	private  List<OrderInfo> orderInfos;
 	private Address address;
@@ -73,12 +72,6 @@ public class Order {
 		this.addressId = addressId;
 	}
 	
-	public String getRate() {
-		return rate;
-	}
-	public void setRate(String rate) {
-		this.rate = rate;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
