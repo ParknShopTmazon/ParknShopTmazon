@@ -35,10 +35,6 @@
 				</div>
 			</div>
 
-
-			
-
-
 			<c:forEach var="orderInfo" items="${orderInfoList}" >
 				<div class="order-item">
 		            <div class="brief-info">
