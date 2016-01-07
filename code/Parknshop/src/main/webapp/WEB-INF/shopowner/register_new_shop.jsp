@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <%@ include file="header2.html"%>
 	<div class="register-container">
 		<div id="shopinfo">
 			<div class="page-title">
