@@ -80,7 +80,7 @@
 		                <div class="info">
 		                    <div class="delivery-status">
 		                        <p class="value">${orderInfo.product.status }</p>
-		                        <p class="name">delivery status</p>
+		                        <p class="name">${orderInfo.status}</p>
 		                    </div>
 		                </div>
 		                <div class="handle-btn button" oid="${orderInfo.orderId}">Send</div>
