@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<%@ include file="header.html"%>
+	<%@ include file="header2.html"%>
 	<div class="shop-container">
 		<div id="shoplist">
 			<div class="page-title">

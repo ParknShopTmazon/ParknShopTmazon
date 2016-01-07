@@ -362,9 +362,8 @@ a {
     resize: none;
     outline: none;
     display: inline-block;
-    padding: 15px;
+    padding: 5px;
     box-sizing: border-box;
-    font-size: 1.2em;
     background-color: #f0ede5;
     border: 1px solid #ccc;
     border-radius: 4px;
