@@ -8,6 +8,10 @@
                 <div class="text-btn">Logout</div>
             </a>
         </c:when>
+        <c:otherwise>
+			<a href="login"><div class="text-btn">Login</div></a>
+			<a href="register"><div class="text-btn">Register</div></a>
+		</c:otherwise>
     </c:choose>
     <!-- <div class="header-search-block">
 		<form action="" class="searchform" name="searchform" method="get">

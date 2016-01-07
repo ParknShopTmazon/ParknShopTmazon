@@ -11,10 +11,13 @@
 
 <body>
     <%@ include file="header2.html"%>
-
-	<div id="container">
+	<div class="delete-shop-container">
 		<div id="shopinfo">
-			<h2>&nbsp;&nbsp;Please Register</h2>
+			<div class="page-title">
+				<span class="back-btn button"></span>
+			    <span class="parknshop">PARKnSHOP</span>
+			    <span class="main-title">Delete</span>
+			</div>
 			
 			<form class="complete-info" id="form1" name="formen" action="deleteshop" method="post" enctype="multipart/form-data">
 				
@@ -38,16 +41,16 @@
 				</div>
 				<div class="form-item-photo">
 					<div class="form-lable-left">Shop Photo</div>
-					 <div class="form-shop-img">
-						<img alt="no photo" src="${picture}" width="100" height="80">
-				  </div>
+					<div class="form-shop-img">
+						<div class="img-container" style="background-image: url(${picture});"></div>	
+					</div>
 				</div>
 				
 				<div class="form-item">
 					<div class="form-lable-left"></div>
 					<div class="form-control-right">
-						<input type="submit" value="delete" class="submit-btn" >
-						<button  name="cancel" type="button" onclick="window.open('myshop')" class="submit-btn">cancel</button>
+						<input type="submit" value="delete" class="submit-btn delete-btn button" >
+						<button  name="cancel" type="button" onclick="window.location.href='myshop';" class="submit-btn cancel-btn button">cancel</button>
 					</div>
 				</div>	
 			</form>

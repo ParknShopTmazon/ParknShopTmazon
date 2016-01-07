@@ -23,31 +23,34 @@
 					<c:if test="${shop.status=='success'}">
 						<a href="modifyshop?shopId=${shop.shopId}">
 					        <div class="over">
-					            <div class="link-btn"></div>
+					            <div class="link-btn" style="background-image: url(./images/configure-btn.png);"></div>
 					            <div class="shop-name">Shop Name: ${ shop.name }</div>
-					            <div class="shop-status">modify</div>
+					            <div class="shop-status">${shop.status}</div>
 					        </div>
 					    </a>
 					    <div class="shop" style="background-image: url('${ shop.picture }');"></div>
 					</c:if>
 					
 					<c:if test="${shop.status=='checking'}">
-						<a href="modifyshop?shopId=${shop.shopId}">
+						<a href="">
 					        <div class="over">
-					            <div class="link-btn"></div>
+					            <div class="link-btn" style="background-image: url(./images/refresh-btn.png);"></div>
 					            <div class="shop-name">Shop Name: ${ shop.name }</div>
-					            <div class="shop-status">modify</div>
+					            <div class="shop-status">${shop.status}</div>
 					        </div>
 					    </a>
 					    <div class="shop" style="background-image: url('${ shop.picture }');"></div>
 					</c:if>
 					
 					<c:if test="${shop.status=='fail'}">
-						<a href=" " class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
-						<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
-						<div>${shop.status}</div>
-						<a href="deleteshop?shopId=${shop.shopId}">delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="modifyshop?shopId=${shop.shopId}">modify</a>
+						<a href="deleteshop?shopId=${shop.shopId}">
+					        <div class="over">
+					            <div class="link-btn" style="background-image: url(./images/delete-btn.png);"></div>
+					            <div class="shop-name">Shop Name: ${ shop.name }</div>
+					            <div class="shop-status">${shop.status}</div>
+					        </div>
+					    </a>
+					    <div class="shop" style="background-image: url('${ shop.picture }');"></div>
 					</c:if>
 				    <div class="shop" style="background-image: url('${ product.picture }');"></div>
 				</div>

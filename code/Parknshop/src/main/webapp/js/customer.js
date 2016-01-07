@@ -1415,6 +1415,11 @@ var customer = {
                     name: 'Deal',
                     nextStep: 'deal',
                     disabled: ''
+                },
+                dealed: {
+                    name: 'Comment',
+                    nextStep: 'comment',
+                    disabled: ''
                 }
             };
 
@@ -1534,13 +1539,19 @@ var customer = {
                     name: 'Deal',
                     nextType: 'deal',
                     disabled: ''
+                },
+                dealed: {
+                    name: 'Comment',
+                    nextType: 'comment',                
+                    disabled: ''
                 }
             };
 
             const detailsType = {
                 unpaid: 'show',
                 paid: 'show',
-                delivering: 'show'
+                delivering: 'show',
+                dealed: 'show'
             }
 
             /** [for: append] */
@@ -1754,6 +1765,14 @@ var customer = {
                         'color': '#e0e0e0'
                     });
                     return;
+                } else if (data.orderInfos[i].productId == productId && data.orderInfos[i].status !== 'delivering') {
+                    $('.order-container #deal-info').html('You cannot deal the product');
+                    $('.order-container #deal-btn').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
                 }
             }
 
@@ -1762,7 +1781,7 @@ var customer = {
                 $.getJSON('changeOrderInfo', {
                     oid: oid,
                     pid: $('#productId').val(),
-                    newStatus: 'confirm_receipt'
+                    newStatus: 'dealed'
                 }, function(data, textStatus) {
                     /*optional stuff to do after success */
                     if (data.success) {

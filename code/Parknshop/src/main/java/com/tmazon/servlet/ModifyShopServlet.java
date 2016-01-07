@@ -79,7 +79,8 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024 * 10);
+
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
@@ -124,7 +125,7 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop"+File.separator+"upload"+File.separator+ d1 + File.separator + d2 + File.separator + fileName;
+				path ="images_shop/upload/"+ d1 + "/" + d2 + "/" + fileName;
 			}
 		}
 
@@ -139,20 +140,17 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		String shopName = shopMap.get("name");
 		String shopType = shopMap.get("type");
 		
-		String file = shopMap.get("file");
-	
-		System.out.println("file: "+file+"  shopName: "+shopName+"  shopType: "+shopType + " status:"+status);
 		System.out.println(shopId);
 		if(shopId==null||"".trim().equals(shopId)){
 			resp.sendRedirect("myshop");;
 			return;
 		}
 		
-//		if(shopName==null||"".trim().equals(shopName)||shopType==null||"".trim().equals(shopType)){
-//			System.out.println("1asas");
-//			req.getRequestDispatcher("/WEB-INF/shopowner/add_products.jsp").forward(req, resp);
-//			return;
-//		}
+		if(shopName==null||"".trim().equals(shopName)||shopType==null||"".trim().equals(shopType)){
+			System.out.println("1asas");
+			req.getRequestDispatcher("/WEB-INF/shopowner/add_products.jsp").forward(req, resp);
+			return;
+		}
 		
 		Shop shop =new Shop();
 		
