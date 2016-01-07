@@ -379,9 +379,13 @@ a {
     line-height: 18px;
     text-align: center;
     outline: none;
-    vertical-align: middle
+    vertical-align: top;
 }
 
 .register-container .form-control-right > label {
     color: #ffa200;
+}
+
+.register-container .form-item-textarea {
+    margin-bottom: 20px;
 }

@@ -23,7 +23,7 @@
 					<div class="form-item">
 						<div class="form-lable-left">&nbsp;Shop Name:</div>
 						<div class="form-control-right">
-							<input class="form-input" id="shop_name" name="name" type="text" value="${param.name}" maxlength="20" business="trueName" require="true";>
+							<input class="form-input" required id="shop_name" name="name" type="text" value="${param.name}" maxlength="20" business="trueName" require="true";>
 						</div>
 					</div>
 					<div class="form-item">
@@ -33,7 +33,6 @@
 							<label name="person" class="checked" for="person">person</label>
 							<input type="radio" id="company" name="type" value="company">
 							<label name="company" for="company">company</label>
-							
 						</div>
 					</div>
 					
@@ -47,10 +46,9 @@
 					<div class="item-photo form-item">
 						<div class="form-lable-left">Shop Photo:</div>
 						<div class="form-shop-img">
-						 
-						 <input type="file" name="file" id="file" style="display:none" onChange="document.formen.path.value=this.value"> 
-						 <input class="form-input" name="path" readonly> 
-						 <input type="button" class="button" value="Browse" onclick="document.formen.file.click()">  
+							<input type="file" name="file" id="file" style="display:none" onChange="document.formen.path.value=this.value"> 
+							<input class="form-input" name="path" readonly> 
+							<input type="button" class="button" value="Browse" onclick="document.formen.file.click()">  
 					  </div>
 					</div>	
 						  
@@ -58,16 +56,10 @@
 						<div class="form-lable-left">Description:</div>
 						<div class="form-textarea">
 							<textarea class="textarea"></textarea>
-						</div>
-					</div>
-					
-					<div class="form-item">
-						<div class="form-lable-left"></div>
-						<div class="form-control-right">
-							
 							<button type="submit" class="btn-warning">submit</button>
 						</div>
-					</div>	
+					</div>
+
 					<div class="control-group" align="center">
 						<c:if test="${ not empty r_error_shop_exists }">
 							<label style="color: red;">shop name already exists</label>
