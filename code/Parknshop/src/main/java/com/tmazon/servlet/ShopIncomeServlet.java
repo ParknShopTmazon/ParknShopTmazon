@@ -40,12 +40,18 @@ public class ShopIncomeServlet extends HttpServlet {
 			info.setDelivery(deliveryService.select(new Delivery(info.getDeliveryId(), null, null, null)).get(0));
 		}
 		
-//		Order order = 
+//		Order order = orderService.findById(id)
 		Double cost = 0.00;
 		Integer quantity = 0;
 		Double price = 0.00;
 		
-		
+		for(OrderInfo info : orderInfos){
+			if(info.getStatus().equals(OrderInfo.STATUS_CONFIRM_RECEIPT)||info.getStatus().equals(OrderInfo.STATUS_DELETED)){
+				quantity = info.getQuantity();
+				price = info.getProduct().getDiscountPrice();
+				cost +=quantity * price;
+			}
+		}
 		
 		
 		req.setAttribute("orderInfoList", orderInfos);
