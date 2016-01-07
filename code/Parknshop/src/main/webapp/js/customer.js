@@ -1853,5 +1853,20 @@ var customer = {
                 alert('you can only enter integer number between 1 and 99');
             }
         });
+
+        $('.jqzoom').jqzoom({
+            zoomType: 'standard',
+            lens:true,
+            preloadImages: false,
+            alwaysOn:true
+        });
+
+        $('.product-container .img-area').hover(function () {
+            /* Stuff to do when the mouse enters the element */
+            $('.zoomPad .zoomPup, .zoomPad .zoomWindow').show();
+        }, function () {
+            /* Stuff to do when the mouse leaves the element */
+            $('.zoomPad .zoomPup, .zoomPad .zoomWindow').hide();
+        });
     }
 };

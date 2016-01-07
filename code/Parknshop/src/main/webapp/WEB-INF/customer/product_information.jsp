@@ -6,9 +6,7 @@
 <head>
 <title>product information</title>
 <link rel="stylesheet" type="text/css" href="css/customer.css">
-<script text="text/javascript">
-
-</script>
+<link rel="stylesheet" type="text/css" href="css/jquery.jqzoom.css">
 </head>
 <body>
 	<%@ include file="header.html"%>
@@ -22,7 +20,11 @@
 		    <span class="main-title">Login</span>
 		</div>
 		<div class="product-area">
-			<div class="product-picture" style="background-image: url(${ product.picture });"></div>
+			<div class="img-area">
+				<a href="${ product.picture }" class="jqzoom" rel='gal1'  title="triumph" >
+		            <img src="${ product.picture }" class="product-picture">
+		        </a>
+			</div>
 			<div class="product-info">
 				<div class="main">Introduction of products</div>
 				<div class="infos">
@@ -122,6 +124,7 @@
 	</div>
 	<%@ include file="footer.html"%>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.jqzoom-core.js"></script>
 	<script type="text/javascript" src="js/customer.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
