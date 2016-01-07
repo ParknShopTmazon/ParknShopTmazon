@@ -20,7 +20,6 @@
 			</div>
 			
 			<form class="complete-info" id="form1" name="formen" action="deleteshop" method="post" enctype="multipart/form-data">
-				
 				<div class="form-item">
 				    <div class="form-item">
 						<div class="form-lable-left">Shop Id:</div>
@@ -41,9 +40,7 @@
 				</div>
 				<div class="form-item-photo">
 					<div class="form-lable-left">Shop Photo</div>
-					<div class="form-shop-img">
-						<div class="img-container" style="background-image: url(${picture});"></div>	
-					</div>
+					<div class="img-container" style="background-image: url(${picture});"></div>
 				</div>
 				
 				<div class="form-item">

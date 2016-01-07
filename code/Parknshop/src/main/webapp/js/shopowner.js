@@ -68,13 +68,21 @@ const shopOwner = {
     },
 
     /**
-     * [initCommon: init Common Part]
+     * [initCommon: init common part]
      * @return {[type]} [description]
      */
     init: function () {
         $('.back-btn').click(function() {
             history.go(-1);
         });
+    },
+
+    /**
+     * [initManage: init common part of shop management]
+     * @return {[type]} [description]
+     */
+    initManage: function () {
+        $('#menu #products-list, #menu #add-products, #menu #modify-products, #menu #delete-products').addClass('active');
     },
 
     /**
@@ -106,7 +114,19 @@ const shopOwner = {
         $('#menu #shops-list').addClass('selected');
     },
 
+    /**
+     * [initRegister: init the register page]
+     * @return {[type]} [description]
+     */
     initRegister: function () {
         $('#menu #add-shops').addClass('selected');
+    },
+
+    /**
+     * [initProductList: init the products list page]
+     * @return {[type]} [description]
+     */
+    initProductList: function () {
+        $('#menu #products-list').addClass('selected');  
     }
 };

@@ -21,13 +21,13 @@
 			<div class="form-table">
 				<form class="complete-info" id="form1" name="formen" action="registernewshop" method="post" enctype="multipart/form-data">
 					<div class="form-item">
-						<div class="form-lable-left">&nbsp;Shop Name:</div>
+						<div class="form-lable-left">Shop Name:</div>
 						<div class="form-control-right">
 							<input class="form-input" required id="shop_name" name="name" type="text" value="${param.name}" maxlength="20" business="trueName" require="true";>
 						</div>
 					</div>
 					<div class="form-item">
-						<div class="form-lable-left">&nbsp;Shop Type:</div>
+						<div class="form-lable-left">Shop Type:</div>
 						<div class="form-control-right">
 						    <input type="radio" id="person" checked="checked" name="type" value="person">
 							<label name="person" class="checked" for="person">person</label>
@@ -37,7 +37,7 @@
 					</div>
 					
 					<div class="form-item">
-						<div class="form-lable-left">&nbsp;Address:</div>
+						<div class="form-lable-left">Address:</div>
 						<div class="form-control-right">
 							<input class="form-input" id="address" name="address" type="text" value="${param.address}" maxlength="18" business="address" require="true";>
 						</div>
