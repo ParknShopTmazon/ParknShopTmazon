@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +65,7 @@ public class AddProductServlet extends HttpServlet{
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
@@ -112,7 +110,7 @@ public class AddProductServlet extends HttpServlet{
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop"+File.separator+"upload"+File.separator+ d1 + File.separator + d2 + File.separator + fileName;
+				path ="images_shop/upload/"+ d1 + "/" + d2 + "/" + fileName;
 			}
 		}
 
@@ -125,10 +123,7 @@ public class AddProductServlet extends HttpServlet{
 		String price = productMap.get("price");
 		String stockNum = productMap.get("stock_num");
 		String description = productMap.get("description");
-		String file = productMap.get("file");
 	
-		System.out.println("file: "+file+"  product_name: "+productName+"  product_names: ");
-		System.out.println(shopId);
 		if(shopId==null||"".trim().equals(shopId)){
 			resp.sendRedirect("myshop");;
 			return;

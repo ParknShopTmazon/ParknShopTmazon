@@ -6,51 +6,42 @@
 <head>
 <title>add product</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
-<link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
 </head>
 <body>
 	<%@ include file="header2.html"%>
-	<div class="content">
-		<div class="height2px color5"></div>
-		<div class="manage-nav">
-			<div class="unit" id="ProductList" onClick="window.open('selectedshop')"><span>ProductList</span></div>
-			<div class="unit" id="AddProduct" onClick="window.open('addproduct')"><span>Add Product</span></div>
-			<div class="unit selected" id="ModifyProduct" onClick="window.open('modifyproduct')"><span>Modify Product</span></div>
-			<div class="unit" id="DeleteProduct" onClick="window.open('deleteproduct')"><span>Delete Product</span></div>
-			<div class="fillspace"></div>
-		</div>
-		<br>
-		<br>
-		<div id="container" align="right">
+	<div class="modify-products-container">
+		<div id="shoplist">
+			<div class="page-title">
+				<span class="back-btn button"></span>
+			    <span class="parknshop">PARKnSHOP</span>
+			    <span class="main-title">Modify Products</span>
+			</div>
 			<form class="complete-info" action="modifyproduct" name="formen" method="post" enctype="multipart/form-data">
 				
 				<input type="hidden" name="product_id" value="${product_id }">
 				<div class="form-item-photo">
 					<div class="form-lable-left">Product Photo</div>
-					 <div class="form-shop-img">
-						<img alt="no photo" src="${image}" width="100" height="80">
-				  </div>
+					<div class="img-container" style="background-image: url(${image});"></div>
 				</div>	
 				<div class="form-item">
 					<div class="form-lable-left">Upload Photo</div>
 					 <div class="form-control-right">
 					 	<input type="file" name="file" id="file" style="display:none" accept="image/bmp,image/png,image/jpeg" onChange="document.formen.path.value=this.value"> 
-					 	<input name="path" readonly> 
+					 	<input class="form-input" name="path" readonly> 
 					 	<input type="button" value="Browse" onclick="document.formen.file.click()"> 
-<!-- 					    <input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg"> -->
+<!-- 					    <input class="form-input" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg"> -->
 				  </div>
 				</div>	
 				<div class="form-item">
 					<div class="form-lable-left">Product Name</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="product_name" value="${productName}" name="product_name" type="text" maxlength="20" business="productName" require="true";>
+						<input class="form-input" id="product_name" value="${productName}" name="product_name" type="text" maxlength="20" business="productName" require="true";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Category</div>
 					<div class="form-control-right">
 						<select name="category" >
-							<option value="null"></option>
 			   				<option value="TV& Home Theater">TV& Home Theater</option>
 			   				<option value="Computers & Tablets" >Computers & Tablets</option>
 			   				<option value="Cell Phones" >Cell Phones</option>
@@ -66,37 +57,34 @@
 				<div class="form-item">
 					<div class="form-lable-left">Product Price</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="price" value="${price}" name="price" type="text" maxlength="18";>
+						<input class="form-input" id="price" value="${price}" name="price" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Product Discount Price</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="discount_price" value="${discount_price}" name="discount_price" type="text" maxlength="18";>
+						<input class="form-input" id="discount_price" value="${discount_price}" name="discount_price" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item">
 					<div class="form-lable-left">Stock Number</div>
 					<div class="form-control-right">
-						<input class="form-input-right" id="stock_num" name="stock_num" value="${stockNum}" type="text" maxlength="18";>
+						<input class="form-input" id="stock_num" name="stock_num" value="${stockNum}" type="text" maxlength="18";>
 					</div>
 				</div>
 				<div class="form-item-textarea">
-					<div class="form-lable-left">description</div>
+					<div class="form-lable-left">Description</div>
 					<div class="form-textarea" >
 						<textarea class="textarea" name="description" >${description}</textarea>
+						<input type="submit" value="Update" class="submit-btn" >
 					</div>
-				</div>
-				<div class="form-item">
-					<div class="form-lable-left"></div>
-					<div class="form-control-right">
-						<input type="submit" value="next" class="submit-btn" >
-					</div>
-				</div>			
+				</div>		
 			</form>
 	   </div>
 	</div>
-	
-	   <%@ include file="footer.html"%>	
+	<script type="text/javascript">
+		shopOwner.initManage();
+	</script>
+	<%@ include file="footer.html"%>	
 </body>
 </html>

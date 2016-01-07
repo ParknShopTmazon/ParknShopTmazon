@@ -126,4 +126,8 @@ public class OrderServiceImpl implements OrderService {
 		return (list != null && !list.isEmpty())? list.get(0) : null;
 	}
 
+	public boolean isBought(Integer userId, Integer productId) {
+		return orderInfoDao.isBought(userId, productId);
+	}
+
 }

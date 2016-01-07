@@ -22,12 +22,13 @@
 		    <span class="main-title">Login</span>
 		</div>
 		<div class="product-area">
-			<div class="product-picture">
-				<img src="${ product.picture }">
-			</div>
+			<div class="product-picture" style="background-image: url(${ product.picture });"></div>
 			<div class="product-info">
 				<div class="main">Introduction of products</div>
 				<div class="infos">
+					<div class="info-items">
+						<div class="name product-name">${ product.name }</div>
+					</div>
 					<div class="info-items">
 						<span class="name">Shop Owner</span>
 						<span class="value">
@@ -101,31 +102,21 @@
 				</span>
 			</div>
 			<div class="comments">
-				<div class="comment-items">
-					<div>
-						<p class="value">user1</p>
-						<p class="name">User Name</p>
+				<c:forEach var="comment" items="${ comments }">
+					<div class="pan"></div>
+					<div class="comment-items">
+						<div>
+							<p class="value">${ comment.userId }</p>
+							<p class="name">${ comment.userName }</p>
+						</div>
+						<div class="comment-part">
+							<p class="value">shop: <span>${ comment.shopScore }</span></p>
+							<p class="value">product: <span>${ comment.productScore }</span></p>
+							<p class="value">delivery: <span>${ comment.deliveryScore }</span></p>
+							<p class="name">${ comment.content }</p>
+						</div>
 					</div>
-					<div class="comment-part">
-						<p class="value">shop: <span>5.0</span></p>
-						<p class="value">product: <span>4.0</span></p>
-						<p class="value">delivery: <span>3.0</span></p>
-						<p class="name">Comment</p>
-					</div>
-				</div>
-				<div class="pan"></div>
-				<div class="comment-items">
-					<div>
-						<p class="value">user2</p>
-						<p class="name">User Name</p>
-					</div>
-					<div class="comment-part">
-						<p class="value">shop: <span>4.0</span></p>
-						<p class="value">product: <span>4.0</span></p>
-						<p class="value">delivery: <span>5.0</span></p>
-						<p class="name">Comment</p>
-					</div>
-				</div>
+				</c:forEach>
 			</div>	
 		</div>
 	</div>

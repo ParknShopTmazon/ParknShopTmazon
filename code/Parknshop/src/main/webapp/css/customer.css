@@ -312,7 +312,7 @@ input {
 }
 
 .search-container .form-search .select {
-    width: 30%;
+    width: 15%;
     background-color: #ffa200;
     padding: 5px;
 }
@@ -367,11 +367,10 @@ input {
     display: inline-block;
     vertical-align: top;
     width: 35%;
-}
-
-.product-container .product-picture img {
-    width: 100%;
-    height: 100%;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .product-container .product-info {
@@ -491,6 +490,11 @@ input {
     border: 1px solid #e0e0e0 !important;
     background-color: #f0f0f0 !important;
     color: #e0e0e0 !important;
+}
+
+.product-container .product-info .product-name {
+    font-size: 1.5em !important;
+    color: #ffa200;
 }
 
 
@@ -1658,6 +1662,9 @@ input {
     box-sizing: border-box;
     font-size: 1.2em;
     float: right;
+    border-radius: 4px;
+    background-color: #ce8300;
+    border: 2px solid #B27100;
 }
 
 .order-container #order-info .shop-rate .name {

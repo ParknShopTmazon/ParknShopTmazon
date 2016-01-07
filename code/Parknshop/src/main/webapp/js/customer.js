@@ -23,7 +23,7 @@
  **********************************************************************/
 "use strict";
 /** Date format */
-Date.prototype.format = function(format) {
+Date.prototype.format = function (format) {
     var date = {
         "M+": this.getMonth() + 1,
         "d+": this.getDate(),
@@ -44,7 +44,7 @@ Date.prototype.format = function(format) {
     return format;
 }
 
-String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
+String.prototype.replaceAll = function (reallyDo, replaceWith, ignoreCase) {
     if (!RegExp.prototype.isPrototypeOf(reallyDo)) {
         return this.replace(new RegExp(reallyDo, (ignoreCase ? "gi" : "g")), replaceWith);
     } else {
@@ -59,12 +59,12 @@ var customer = {
      * @return {[type]} [description]
      */
     scrollController: {
-        disableScroll: function(object) {
+        disableScroll: function (object) {
             "use strict";
             object.addClass('fix-scroll');
         },
 
-        enableScroll: function(object) {
+        enableScroll: function (object) {
             "use strict";
             object.removeClass('fix-scroll');
         }
@@ -74,17 +74,17 @@ var customer = {
      * [init: init common parts]
      * @return {[type]} [description]
      */
-    init: function() {
+    init: function () {
         "use strict";
         var scrollController = this.scrollController;
         /** [click function of the black button] */
-        $('.back-btn').click(function() {
+        $('.back-btn').click(function () {
             history.go(-1);
         });
 
-        $('.scroll').hover(function() {
+        $('.scroll').hover(function () {
             scrollController.disableScroll($(document.body));
-        }, function() {
+        }, function () {
             scrollController.enableScroll($(document.body));
         });
 
@@ -92,7 +92,7 @@ var customer = {
         this.initDialog();
 
         /** disable enter key keydown */
-        $(document).on("keydown", function(event) {
+        $(document).on("keydown", function (event) {
             var userAgent = navigator.userAgent.toLowerCase();
             var keycode;
             if (userAgent.indexOf('firefox') >= 0 || userAgent.indexOf('ie') >= 0) {
@@ -108,7 +108,7 @@ var customer = {
         });
     },
 
-    initIndex: function() {
+    initIndex: function () {
         "use strict";
         const swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
@@ -121,7 +121,7 @@ var customer = {
             autoplayDisableOnInteraction: false
         });
 
-        $('.index-container .categories .products-btn').click(function() {
+        $('.index-container .categories .products-btn').click(function () {
             let backgroundImage;
             let $left = $(this).parent().css('left');
             $left = $left === '0px' ? '-300px' : '0px';
@@ -140,7 +140,7 @@ var customer = {
      * [initDialog: init the part, dialog]
      * @return {[type]} [description]
      */
-    initDialog: function() {
+    initDialog: function () {
         "use strict";
         /**
          * [stateMacine: the state machine of the operations]
@@ -205,7 +205,7 @@ var customer = {
                     dataType: 'json',
                     data: {},
                 })
-                .done(function(data) {
+                .done(function (data) {
                     /** clear all friends first */
                     for (var i = 0; i < $('.dialog #main .friend-list .list ul').children().length; i++) {
                         $('.dialog #main .friend-list .list ul').children(i).remove();
@@ -246,9 +246,9 @@ var customer = {
                         }
 
                         /** [click function of choosing friends] */
-                        $('.dialog #main .friend-list .list ul > li').click(function() {
+                        $('.dialog #main .friend-list .list ul > li').click(function () {
                             /** [remove the original selected item] */
-                            $(this).parent().children('li').each(function() {
+                            $(this).parent().children('li').each(function () {
                                 $(this).removeClass('select');
                             });
 
@@ -261,7 +261,7 @@ var customer = {
                     }
 
                 })
-                .fail(function() {
+                .fail(function () {
                     console.log("failed to get friends list");
                 });
         }
@@ -283,7 +283,7 @@ var customer = {
                     dataType: 'json',
                     data: postData
                 })
-                .done(function(data) {
+                .done(function (data) {
                     if (typeof(data.messages) != 'undefined') {
                         $('.dialog #main .dialog-show').children('p').remove();
                         for (let i = 0; i < data.messages.length; i++) {
@@ -314,9 +314,9 @@ var customer = {
                     if (isComet) {
                         const cometObj = Object.create(Comet);
                         cometObj.init('messages');
-                        cometObj.subscribe(postData, function() {
+                        cometObj.subscribe(postData, function () {
                             const $list = $('.dialog .list ul').children('li');
-                            $list.each(function() {
+                            $list.each(function () {
                                 if ($(this).html() === friendName) {
                                     $(this).append('<span></span>');
                                     return;
@@ -327,7 +327,7 @@ var customer = {
                         cometObj.run(updateArrays[friendName]);
                     }
                 })
-                .fail(function() {
+                .fail(function () {
                     console.log('failed to get message');
                 });
         }
@@ -348,7 +348,7 @@ var customer = {
                         content: content
                     },
                 })
-                .done(function(data) {
+                .done(function (data) {
                     if (data.success) {
                         let date = new Date();
 
@@ -365,7 +365,7 @@ var customer = {
                         console.log("failed to send a message, but post succeed");
                     }
                 })
-                .fail(function() {
+                .fail(function () {
                     console.log("failed to send a message");
                 });
         }
@@ -384,7 +384,7 @@ var customer = {
                         name: name
                     },
                 })
-                .done(function(data) {
+                .done(function (data) {
                     if (typeof(data.users) != 'undefined') {
                         /** clear children */
                         for (let i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
@@ -402,9 +402,9 @@ var customer = {
                         }
 
                         /** [click function of choosing people to add] */
-                        $('.dialog #people-list-main .list ul > li').click(function() {
+                        $('.dialog #people-list-main .list ul > li').click(function () {
                             /** [remove the original selected item] */
-                            $(this).parent().children('li').each(function() {
+                            $(this).parent().children('li').each(function () {
                                 $(this).removeClass('select');
                             });
 
@@ -415,7 +415,7 @@ var customer = {
                         console.log("failed to search friends, but post succeed");
                     }
                 })
-                .fail(function() {
+                .fail(function () {
                     console.log("failed to search friends");
                 });
         }
@@ -433,7 +433,7 @@ var customer = {
                         friendName: name
                     },
                 })
-                .done(function(data) {
+                .done(function (data) {
                     if (data.success) {
                         updateFriendList(name);
                     } else {
@@ -443,7 +443,7 @@ var customer = {
                     }
                     showPart('main');
                 })
-                .fail(function() {
+                .fail(function () {
                     console.log("failed to add the friend");
                 });
         }
@@ -462,7 +462,7 @@ var customer = {
                         friendName: name
                     },
                 })
-                .done(function(data) {
+                .done(function (data) {
                     if (data.success) {
                         updateFriendList();
                     } else {
@@ -475,7 +475,7 @@ var customer = {
                     /** clear the message area */
                     $('.dialog #main .dialog-show').children('p').remove();
                 })
-                .fail(function() {
+                .fail(function () {
                     console.log("failed to delete the friend");
                 });
         }
@@ -517,20 +517,20 @@ var customer = {
          */
         function initEvent() {
             /** focus function or blur function of the search box input */
-            $('.dialog #add-friend-main .search-box input[type="text"]').focus(function() {
+            $('.dialog #add-friend-main .search-box input[type="text"]').focus(function () {
                 $(this).attr('placeholder', '');
-            }).blur(function() {
+            }).blur(function () {
                 $(this).attr('placeholder', 'search...');
             });
 
             /** [click function of sending message button] */
-            $('.dialog #main .dialog-input .send-btn').click(function(event) {
+            $('.dialog #main .dialog-input .send-btn').click(function (event) {
                 /* Act on the event */
                 handleSend();
             });
 
             /** [keydown function of sending message button] */
-            $(document).on("keydown", function(event) {
+            $(document).on("keydown", function (event) {
                 var userAgent = navigator.userAgent.toLowerCase();
                 var keycode, ctrl;
                 if (userAgent.indexOf('firefox') >= 0 || userAgent.indexOf('ie') >= 0) {
@@ -547,12 +547,12 @@ var customer = {
             });
 
             /** [click function of add friend button] */
-            $('.dialog #main .bottom-buttons .add-friend-btn').click(function() {
+            $('.dialog #main .bottom-buttons .add-friend-btn').click(function () {
                 showPart('add-friend-main');
             });
 
             /** [click function of search button on the add friend page] */
-            $('.dialog #add-friend-main .search-btn').click(function() {
+            $('.dialog #add-friend-main .search-btn').click(function () {
                 showPart('people-list-main');
 
                 /** search friends */
@@ -560,7 +560,7 @@ var customer = {
             });
 
             /** [click function of certaining to add friends] */
-            $('.dialog #people-list-main .bottom-buttons .certain-btn').click(function(event) {
+            $('.dialog #people-list-main .bottom-buttons .certain-btn').click(function (event) {
                 /* Act on the event */
                 if ($('.dialog #people-list-main .list ul .select').length > 0) {
                     showPart('certain-add-main');
@@ -570,13 +570,13 @@ var customer = {
             });
 
             /** [click function of certaining] */
-            $('.dialog #certain-add-main .bottom-buttons .certain-btn').click(function(event) {
+            $('.dialog #certain-add-main .bottom-buttons .certain-btn').click(function (event) {
                 /* Act on the event */
                 addFriend($('.dialog #people-list-main .list ul .select').html());
             });
 
             /** [click function of certaining to delete friends] */
-            $('.dialog #main .bottom-buttons .del-friend-btn').click(function() {
+            $('.dialog #main .bottom-buttons .del-friend-btn').click(function () {
                 if ($('.dialog #main .friend-list .list ul .select').length > 0) {
                     showPart('certain-delete-main');
                 } else {
@@ -585,25 +585,25 @@ var customer = {
             });
 
             /** [click function of certaining] */
-            $('.dialog #certain-delete-main .bottom-buttons .certain-btn').click(function(event) {
+            $('.dialog #certain-delete-main .bottom-buttons .certain-btn').click(function (event) {
                 /* Act on the event */
                 delFriend($('.dialog #main .friend-list .list ul .select').html());
             });
 
             /** [click function of the dialog-back-btn] */
-            $('.dialog .dialog-back-btn').click(function() {
+            $('.dialog .dialog-back-btn').click(function () {
                 showPart(lastStep);
             })
 
             /** [go back when cancel] */
-            $('.dialog .bottom-buttons .cancel-btn').click(function() {
+            $('.dialog .bottom-buttons .cancel-btn').click(function () {
                 showPart(lastStep);
             })
 
             /** [check hover of communication button] */
-            $('#communicate-btn').hover(function() {
+            $('#communicate-btn').hover(function () {
                 $(this).css('width', '120px');
-            }, function() {
+            }, function () {
                 $(this).css('width', '30px');
             })
         }
@@ -625,7 +625,7 @@ var customer = {
      * [initRate: init the part, rate]
      * @return {[type]} [description]
      */
-    initRate: function() {
+    initRate: function () {
         "use strict";
         jQuery("div").webRating({
             // count
@@ -648,7 +648,7 @@ var customer = {
             cookieEnable: true,
             cookiePrefix: "myRating_",
             maxClick: 1000,
-            onClick: function(clickScore, data) {
+            onClick: function (clickScore, data) {
                 //Your function & post action
                 /** get the rate option */
                 var json = JSON.parse(data);
@@ -680,14 +680,14 @@ var customer = {
      * [initCart: init the cart page]
      * @return {[type]} [description]
      */
-    initCart: function() {
+    initCart: function () {
         "use strict";
         var origin_cost, right_cost;
         /**
          * [updateCost: update cost info]
          * @return {[type]} [description]
          */
-        var updateCost = function() {
+        var updateCost = function () {
                 var list = $('.cart-container #shop-lists .shop-item');
                 var origin_list = $('.cart-container #shop-lists .shop-info .price .value .origin-cost');
                 var right_list = $('.cart-container #shop-lists .shop-info .price .value .right-cost');
@@ -719,7 +719,7 @@ var customer = {
              * @param  {[type]} data [data from the interface]
              * @return {[type]}      [description]
              */
-            initData = function(data) {
+            initData = function (data) {
                 /** parse */
                 var cart = data.cart,
                     expired,
@@ -776,14 +776,14 @@ var customer = {
              * [initEvent: init all events]
              * @return {[type]} [description]
              */
-            initEvent = function() {
+            initEvent = function () {
                 /** delete shop item */
-                $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function() {
+                $('.cart-container #shop-lists .shop-item .shop-info .delete .value').click(function () {
                     var _this = $(this);
                     /** store data into database */
                     $.getJSON('deleteCart', {
                         sid: $(this).parent().prev().prev().prev().children('.value').children('input').attr('sid')
-                    }, function(data, textStatus) {
+                    }, function (data, textStatus) {
                         /*optional stuff to do after success */
                         if (typeof(data.result) != 'undefined' && data.result == 'true') {
                             _this.parent().parent().parent().remove();
@@ -796,12 +796,12 @@ var customer = {
                 });
 
                 /** [click function of the pay button] */
-                $('.cart-container #shop-cost .pay .value').click(function() {
+                $('.cart-container #shop-cost .pay .value').click(function () {
                     window.location.href = "./order?type=certain";
                 });
 
                 /** [change function of quantity changing] */
-                $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function(event) {
+                $('.cart-container #shop-lists .shop-info .quantity .value input[type="number"]').change(function (event) {
                     /* Act on the event */
                     var _this = $(this);
                     /** check legality when keydown */
@@ -816,7 +816,7 @@ var customer = {
                             $.getJSON('updateCart', {
                                 sid: $(this).attr('sid'),
                                 quantity: $(this).val()
-                            }, function(data, textStatus) {
+                            }, function (data, textStatus) {
                                 /*optional stuff to do after success */
                                 if (typeof(data.result) != 'undefined' && data.result == 'true') {
                                     _this.attr('value', _this.val());
@@ -844,7 +844,7 @@ var customer = {
                 dataType: 'json',
                 data: {},
             })
-            .done(function(data) {
+            .done(function (data) {
                 /** init the data of cart */
                 initData(data);
 
@@ -854,7 +854,7 @@ var customer = {
                 /** init all events */
                 initEvent();
             })
-            .fail(function() {
+            .fail(function () {
                 console.log('failed to get cart data');
             });
     },
@@ -871,7 +871,7 @@ var customer = {
      * @param  {[type]} productId [the product id]
      * @return {[type]}           [description]
      */
-    initComment: function(oid, productId) {
+    initComment: function (oid, productId) {
         "use strict";
         /** init the rate system */
         this.initRate();
@@ -880,7 +880,7 @@ var customer = {
         $.getJSON('orderByType', {
             type: 'show',
             oid: oid
-        }, function(data, textStatus) {
+        }, function (data, textStatus) {
             /*optional stuff to do after success */
             const productId = $('#productId').val();
             for (let i = 0; i < data.orderInfos.length; i++) {
@@ -894,11 +894,11 @@ var customer = {
                 }
             }
 
-            $('.order-container #order-info .comment-submit').click(function() {
+            $('.order-container #order-info .comment-submit').click(function () {
                 $.getJSON('payOrder', {
                     oid: oid,
                     productId: $('#productId').val()
-                }, function(data, textStatus) {
+                }, function (data, textStatus) {
                     /*optional stuff to do after success */
                     if (data.success) {
                         $('.order-container #order-info .comment-submit').css({
@@ -922,14 +922,14 @@ var customer = {
      * [initCertain: init the page certain]
      * @return {[type]} [description]
      */
-    initCertain: function() {
+    initCertain: function () {
         "use strict";
         var cost, cart, delivery_options, address_id = null;
         /**
          * [updateCost: update cost info]
          * @return {[type]} [description]
          */
-        var updateCost = function() {
+        var updateCost = function () {
                 var list = $('.order-container #order-details .order-item .order-price .shop-price');
                 var quantity = $('.order-container #order-details .quantity input[type="number"]');
                 var price = $('.order-container #order-details .order-item .order-origin-price span');
@@ -957,7 +957,7 @@ var customer = {
              * [updateCertainAddr: when another address is choosen, then change the certain addr in the bottom box ]
              * @return {[type]} [description]
              */
-            updateCertainAddr = function() {
+            updateCertainAddr = function () {
                 var radio_list = $('.order-container #order-addr .addresses input[type="radio"]');
                 var addr_list = $('.order-container #order-addr .addresses .address');
                 var receiver_list = $('.order-container #order-addr .addresses .receiver .value');
@@ -978,7 +978,7 @@ var customer = {
              * [changeRadio: change radio event]
              * @return {[type]} [description]
              */
-            changeRadio = function() {
+            changeRadio = function () {
                 /** clear checked */
                 /** clear all the check attribute of input tags */
                 var addr_list = $('.order-container #order-addr .addresses input[type="radio"]');
@@ -999,7 +999,7 @@ var customer = {
              * @param  {[type]} object [description]
              * @return {[type]}        [description]
              */
-            getValue = function(object) {
+            getValue = function (object) {
                 var value = object.val();
 
                 if (typeof(value) != 'undefined' && value == '') {
@@ -1014,7 +1014,7 @@ var customer = {
              * [initAddr: init the addr options]
              * @return {[type]} [description]
              */
-            initAddr = function() {
+            initAddr = function () {
                 /** get addrs data */
                 $.ajax({
                         url: 'showAddress',
@@ -1022,7 +1022,7 @@ var customer = {
                         dataType: 'json',
                         data: {},
                     })
-                    .done(function(data) {
+                    .done(function (data) {
                         var checked = '';
                         for (var i in data.addresses) {
                             /** [if: choose the first item] */
@@ -1056,7 +1056,7 @@ var customer = {
                         /** update addr info */
                         updateCertainAddr();
                     })
-                    .fail(function() {
+                    .fail(function () {
                         console.log("failed to get addr options");
                     });
             },
@@ -1067,7 +1067,7 @@ var customer = {
              * @param {[type]} receiver [the receiver name]
              * @param {[type]} phone    [the phone number]
              */
-            addAddr = function(addr, receiver, phone) {
+            addAddr = function (addr, receiver, phone) {
                 $.ajax({
                         url: 'addAddress',
                         type: 'POST',
@@ -1079,7 +1079,7 @@ var customer = {
                             phone: phone
                         },
                     })
-                    .done(function(data) {
+                    .done(function (data) {
                         if (data.result === 'false') {
                             alert('failed to add a new addr');
                         } else {
@@ -1117,7 +1117,7 @@ var customer = {
                             address_id = data.addressId;
                         }
                     })
-                    .fail(function() {
+                    .fail(function () {
                         console.log("failed to add an addr");
                     });
             },
@@ -1126,9 +1126,9 @@ var customer = {
              * [initEvent: init all events]
              * @return {[type]} [description]
              */
-            initEvent = function() {
+            initEvent = function () {
                 /** [change function of changing delivery company ] */
-                $('.order-container #order-details .order-delivery').change(function() {
+                $('.order-container #order-details .order-delivery').change(function () {
                     /** clear option */
                     $(this).next().children('select').children('option').remove();
 
@@ -1149,7 +1149,7 @@ var customer = {
                 });
 
                 /** [delivery price change] */
-                $('.order-container #order-details .order-delivery-price').change(function() {
+                $('.order-container #order-details .order-delivery-price').change(function () {
                     /** @type {[type]} [the selected delivery price] */
                     var selectPrice = parseFloat($(this).children('select').val());
 
@@ -1169,7 +1169,7 @@ var customer = {
                 });
 
                 /** [change function of quantity changing ] */
-                $('.order-container #order-details .quantity input[type="number"]').change(function(event) {
+                $('.order-container #order-details .quantity input[type="number"]').change(function (event) {
                     /** check legality when keydown */
                     var _this = $(this);
                     /** check legality when keydown */
@@ -1184,7 +1184,7 @@ var customer = {
                             $.getJSON('updateCart', {
                                 sid: $(this).attr('sid'),
                                 quantity: $(this).val()
-                            }, function(data, textStatus) {
+                            }, function (data, textStatus) {
                                 /*optional stuff to do after success */
                                 if (typeof(data.result) != 'undefined' && data.result == 'true') {
                                     _this.attr('value', _this.val());
@@ -1205,7 +1205,7 @@ var customer = {
                 });
 
                 /** [click function of other addr] */
-                $('.order-container #order-addr .other').click(function(event) {
+                $('.order-container #order-addr .other').click(function (event) {
                     /* Act on the event */
                     /** initialize the map */
                     $('.order-container #order-addr .addresses #other-addr-input .map').locationpicker({
@@ -1225,7 +1225,7 @@ var customer = {
                 });
 
                 /** [click function of adding address] */
-                $('.order-container #order-addr .addresses #other-addr-input a').click(function(event) {
+                $('.order-container #order-addr .addresses #other-addr-input a').click(function (event) {
                     /* Act on the event */
                     var otherAddr = getValue($('.order-container #order-addr .addresses #other-addr-input #add-addr'));
 
@@ -1258,7 +1258,7 @@ var customer = {
                 });
 
                 /** [click function of submitting the order] */
-                $('.order-container #final-order .box .submit-btn').click(function(event) {
+                $('.order-container #final-order .box .submit-btn').click(function (event) {
                     /* Act on the event */
                     var productLists = $('.order-container #order-details .order-item');
 
@@ -1281,7 +1281,7 @@ var customer = {
                             $.getJSON('addOrder', {
                                 address_id: address_id,
                                 options: orders
-                            }, function(data, textStatus) {
+                            }, function (data, textStatus) {
                                 /*optional stuff to do after success */
                                 window.location.href = '?type=pay&oid=' + data.oid;
                             });
@@ -1295,7 +1295,7 @@ var customer = {
              * @param  {[type]} data [data from the interface]
              * @return {[type]}      [description]
              */
-            initData = function(data) {
+            initData = function (data) {
                 /** parse */
                 cart = data.cart;
                 delivery_options = data.delivery_options;
@@ -1369,7 +1369,7 @@ var customer = {
                 dataType: 'json',
                 data: {},
             })
-            .done(function(data) {
+            .done(function (data) {
                 /** init the data of order */
                 initData(data);
 
@@ -1382,19 +1382,19 @@ var customer = {
                 /** update cost info */
                 updateCost();
             })
-            .fail(function() {
+            .fail(function () {
                 console.log('failed to get order data');
             });
     },
 
-    initShow: function(oid, item) {
+    initShow: function (oid, item) {
         "use strict";
         /**
          * [initData: init the data of the item of the order]
          * @param  {[type]} data [description]
          * @return {[type]}      [description]
          */
-        const initData = function(data) {
+        const initData = function (data) {
             const operations = {
                 '': {
                     name: '',
@@ -1414,6 +1414,11 @@ var customer = {
                 delivering: {
                     name: 'Deal',
                     nextStep: 'deal',
+                    disabled: ''
+                },
+                dealed: {
+                    name: 'Comment',
+                    nextStep: 'comment',
                     disabled: ''
                 }
             };
@@ -1487,7 +1492,7 @@ var customer = {
             <div class="shop-confirm button ' + operations[data.orderInfos[item].status].disabled + '">' + operations[data.orderInfos[item].status].name + '</div>');
 
             if (operations[data.orderInfos[item].status].disabled !== 'disabled') {
-                $('.order-container #order-info .shop-confirm').click(function(event) {
+                $('.order-container #order-info .shop-confirm').click(function (event) {
                     /* Act on the event */
                     window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&productId=' + data.orderInfos[item].productId;
                 });
@@ -1503,21 +1508,21 @@ var customer = {
                     oid: oid
                 },
             })
-            .done(function(data) {
+            .done(function (data) {
                 initData(data);
             })
-            .fail(function() {
+            .fail(function () {
                 console.log("failed to get order info");
             });
     },
 
-    initList: function() {
+    initList: function () {
         "use strict";
         /**
          * [initData: init the data of orders list]
          * @return {[type]} [description]
          */
-        var initData = function(data) {
+        var initData = function (data) {
             /** @type {Object} [operations of different statuses] */
             const operations = {
                 unpaid: {
@@ -1534,13 +1539,19 @@ var customer = {
                     name: 'Deal',
                     nextType: 'deal',
                     disabled: ''
+                },
+                dealed: {
+                    name: 'Comment',
+                    nextType: 'comment',                
+                    disabled: ''
                 }
             };
 
             const detailsType = {
                 unpaid: 'show',
                 paid: 'show',
-                delivering: 'show'
+                delivering: 'show',
+                dealed: 'show'
             }
 
             /** [for: append] */
@@ -1626,17 +1637,17 @@ var customer = {
                     type: 'list'
                 },
             })
-            .done(function(data) {
+            .done(function (data) {
                 /** init the data */
                 initData(data);
 
                 /** [click function of delete order] */
-                $('.order-container #order-list .order-item .delete-btn').click(function(event) {
+                $('.order-container #order-list .order-item .delete-btn').click(function (event) {
                     const _this = $(this);
 
                     $.getJSON('deleteOrder', {
                         oid: $(this).prev().prev().children('.value').html()
-                    }, function(data, textStatus) {
+                    }, function (data, textStatus) {
                         console.log(data.success);
                         /*optional stuff to do after success */
                         if (!data.success) {
@@ -1648,22 +1659,37 @@ var customer = {
                     });
                 })
             })
-            .fail(function() {
+            .fail(function () {
                 console.log("failed to get orders list");
             });
+    },
+
+    /**
+     * [initSearchPage: init the search page]
+     * @return {[type]} [description]
+     */
+    initSearchPage: function () {
+        $('#searchMethod').change(function(event) {
+            /* Act on the event */
+            if ($(this).val() === 'shopName') {
+                $(this).next().hide();
+            } else {
+                $(this).next().show();
+            }
+        });
     },
 
     /**
      * [initPay: init the page page of order]
      * @return {[type]} [description]
      */
-    initPay: function(oid) {
+    initPay: function (oid) {
         "use strict";
         /** check whether pay or not */
         $.getJSON('orderByType', {
             type: 'show',
             oid: oid
-        }, function(data, textStatus) {
+        }, function (data, textStatus) {
             /*optional stuff to do after success */
             const productId = $('#productId').val();
             if (productId === 'null') {
@@ -1698,11 +1724,11 @@ var customer = {
             }
 
             $('.order-container #pay-info').html('Pay the product');
-            $('.order-container #pay-btn').click(function() {
+            $('.order-container #pay-btn').click(function () {
                 $.getJSON('payOrder', {
                     oid: oid,
                     productId: $('#productId').val()
-                }, function(data, textStatus) {
+                }, function (data, textStatus) {
                     /*optional stuff to do after success */
                     if (data.result) {
                         $('.order-container #pay-btn').css({
@@ -1728,13 +1754,13 @@ var customer = {
      * @param  {[type]} productId [the product id]
      * @return {[type]}           [description]
      */
-    initDeal: function(oid, productId) {
+    initDeal: function (oid, productId) {
         "use strict";
         /** check whether deal or not */
         $.getJSON('orderByType', {
             type: 'show',
             oid: oid
-        }, function(data, textStatus) {
+        }, function (data, textStatus) {
             /*optional stuff to do after success */
             const productId = $('#productId').val();
             for (let i = 0; i < data.orderInfos.length; i++) {
@@ -1754,16 +1780,24 @@ var customer = {
                         'color': '#e0e0e0'
                     });
                     return;
+                } else if (data.orderInfos[i].productId == productId && data.orderInfos[i].status !== 'delivering') {
+                    $('.order-container #deal-info').html('You cannot deal the product');
+                    $('.order-container #deal-btn').css({
+                        'border': '2px solid #e0e0e0',
+                        'background-color': '#f0f0f0',
+                        'color': '#e0e0e0'
+                    });
+                    return;
                 }
             }
 
             $('.order-container #deal-info').html('Are you sure to deal?');
-            $('.order-container #deal-btn').click(function() {
+            $('.order-container #deal-btn').click(function () {
                 $.getJSON('changeOrderInfo', {
                     oid: oid,
                     pid: $('#productId').val(),
-                    newStatus: 'confirm_receipt'
-                }, function(data, textStatus) {
+                    newStatus: 'dealed'
+                }, function (data, textStatus) {
                     /*optional stuff to do after success */
                     if (data.success) {
                         $('.order-container #deal-btn').css({
@@ -1787,20 +1821,20 @@ var customer = {
      * [initProductInfo: init the product info]
      * @return {[type]} [description]
      */
-    initProductInfo: function() {
+    initProductInfo: function () {
         const $scores = $('.product-container .product-area .comments .comment-items .value > span');
 
         let scores = 0;
         let i = 0;
 
-        $scores.each(function() {
+        $scores.each(function () {
             i++;
             scores += parseFloat($(this).html());
         });
 
         $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1));
 
-        $('.product-container .product-info .info-items .value input[type="number"]').change(function() {
+        $('.product-container .product-info .info-items .value input[type="number"]').change(function () {
             /* Act on the event */
             const _this = $(this);
             /** check legality when keydown */

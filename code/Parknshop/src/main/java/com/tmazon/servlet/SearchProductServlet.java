@@ -30,6 +30,13 @@ public class SearchProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");
 		String category = req.getParameter("type");
+		String searchMethod = req.getParameter("searchMethod");
+		if("shopName".equals(searchMethod)){
+			if ("".equals(category)) {
+				category = null;
+			}
+			
+		}
 		if ("".equals(category)) {
 			category = null;
 		}
