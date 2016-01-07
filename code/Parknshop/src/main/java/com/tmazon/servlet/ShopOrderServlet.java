@@ -47,7 +47,7 @@ public class ShopOrderServlet extends HttpServlet {
         Integer shopId =Integer.parseInt(shopIdStr);
 		
 		
-		System.out.println(shopId);
+		System.out.println("shopId="+shopId);
 		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shopId);
 		for (OrderInfo info :orderInfos) {
 			info.setOrder(orderService.findById(info.getOrderId()));
