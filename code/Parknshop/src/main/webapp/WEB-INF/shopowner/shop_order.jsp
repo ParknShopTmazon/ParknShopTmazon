@@ -2,7 +2,7 @@
 	isELIgnored="false" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
 <title>Shop Order</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
@@ -18,20 +18,17 @@
 			</div>
 		    <div class="order-form">
 				<div>
-					shop Name
+					shop name
 					<select>
 						<option>ALL</option>
 						<option>ShopName1</option>
 						<option>ShopName2</option>
 						<option>ShopName3</option>
 					</select>
-					Date:
-					<select>
-						<option>Near one day</option>
-						<option>Near one week</option>
-						<option>Near one Month</option>
-						<option>Near one year</option>
-					</select>
+					from
+					<input type="date" name="start">
+					to
+					<input type="date" name="end">	
 				</div>
 			</div>
 
@@ -83,7 +80,7 @@
 		                <div class="info">
 		                    <div class="delivery-status">
 		                        <p class="value">${orderInfo.product.status }</p>
-		                        <p class="name">delivery status</p>
+		                        <p class="name">${orderInfo.status}</p>
 		                    </div>
 		                </div>
 		                <div class="handle-btn button" oid="${orderInfo.orderId}">Send</div>

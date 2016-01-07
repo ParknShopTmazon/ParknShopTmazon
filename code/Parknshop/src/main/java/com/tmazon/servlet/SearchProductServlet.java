@@ -35,7 +35,34 @@ public class SearchProductServlet extends HttpServlet {
 			if ("".equals(category)) {
 				category = null;
 			}
-			
+			Shop shop =new Shop();
+			shop.setName(name);
+			List<Shop> shoplist = shopService.selectInLike(shop);
+			List<Product> products = new ArrayList<Product>();
+			if(shoplist!=null){
+				for (Shop shop2 : shoplist) {
+					Product  product=new Product();
+					product.setShopId(shop2.getShopId());
+					List<Product> select = productService.select(product);
+					if(select!=null){
+						for(int i=0;i<select.size();i++){
+							Product temp = select.get(i);
+							temp.setShop(shop2);
+							select.set(i,temp);
+						}
+						products.addAll(select);
+					}	
+				}
+				if(products!=null){
+					req.setAttribute("num", products.size());
+					req.setAttribute("productList", products);
+					req.setAttribute("test", 0);
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp");
+					requestDispatcher.forward(req, resp);
+					return;
+				}
+				
+			}
 		}
 		if ("".equals(category)) {
 			category = null;

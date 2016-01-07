@@ -16,4 +16,5 @@ public interface ShopDao {
 	
 	public Shop findById(Integer id);
 	
+	public List<Shop> selectInLike(Shop shop);
 }
