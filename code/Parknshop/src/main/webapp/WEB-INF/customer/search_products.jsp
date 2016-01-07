@@ -22,6 +22,16 @@
 		</div>
 		<form class="form-search">
 			<input class="input-medium search-query" type="text" name="name" value="${param.name}" placeholder="Search..."/>
+			<select name="searchMethod" class="select">
+				<c:if test="${param.searchMethod=='productName'||empty param.searchMethod}">
+					<option value="productName" selected="selected">Product Name</option>
+	    			<option value="shopName">Shop Name</option>
+				</c:if>
+				<c:if test="${param.searchMethod=='shopName'}">
+					<option value="productName">Product Name</option>
+	    			<option value="shopName" selected="selected">Shop Name</option>
+				</c:if>
+			</select>
 			<select name="type" class="select">
 	    		<c:if test="${param.type=='' ||empty param.type}">
 	    			<option value="" selected="selected">ALL</option>
