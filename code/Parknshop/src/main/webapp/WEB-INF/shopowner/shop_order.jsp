@@ -60,8 +60,19 @@
 		                    </a>
 		                <div class="shop" style="background-image: url(${orderInfo.product.picture });"></div>
 		                </div>
+		                <div class="shopId">
+		                    <p class="value">${orderInfo.product.shopId }</p>
+		                    <p class="name">id</p>
+		                </div>
+		                <div class="productName">
+		                    <p class="value">${orderInfo.product.name }</p>
+		                    <p class="name">name</p>
+		                </div>
 		                <div class="origin-price">
-		                    <p class="current" title="$${orderInfo.product.price }">$${orderInfo.product.discountPrice }</p>
+		                	<p class="origin">
+                                <s title="$${orderInfo.product.price }">$${orderInfo.product.price }</s>
+                            </p>
+		                    <p class="current" title="$${orderInfo.product.discountPrice }">$${orderInfo.product.discountPrice }</p>
 		                </div>
 		                <div class="quantity">
 		                    <p class="value">${orderInfo.quantity }</p>
@@ -69,44 +80,19 @@
 		                </div>
 		                <div class="price">
 		                    <p class="shop-price">
-		                        $${orderInfo.quantity * 1}
+		                        $${orderInfo.quantity * orderInfo.product.discountPrice + orderInfo.delivery.price}
 		                    </p>
 		                    <p class="delivery-price">delivery price: ${orderInfo.delivery.price}</p>
 		                </div>
 		                <div class="info">
 		                    <div class="delivery-status">
-		                        <p class="value">${orderInfo.order.status }</p>
+		                        <p class="value">${orderInfo.product.status }</p>
 		                        <p class="name">delivery status</p>
 		                    </div>
 		                </div>
 		                <div class="handle-btn button" oid="${orderInfo.orderId}">Send</div>
 		            </div>
 		        </div>	
-				
-
-
-
-
-	            
-
-				<!-- <div class="order-item ">
-					<div class="item-product-id"><span>Order ID:${orderInfo.orderId }</span></div>
-					<div class="item-product-photo"><img src=></div>
-					<div class="item-name-time-shop">
-						<div class="name"></div>
-						<div class="time"><span>Date:&nbsp;</span></div>
-						<div class="shop">${orderInfo.product.shopId }</div>
-					</div>
-						<ul>
-							<li>Manage
-								<ul>
-									<li><a href="deleteshoporder">delete</a></li>
-									<li><a href="">update</a></li>
-								</ul>
-							</li>
-						</ul>	
-					</div>
-				</div> -->
 			</c:forEach>
 		</div>
 	</div>

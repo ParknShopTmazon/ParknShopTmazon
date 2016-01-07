@@ -43,6 +43,10 @@ select {
     outline: none;
 }
 
+s {
+	color: #ccc;
+}
+
 @import url(layout.css);
 @import url(nav.css);
 .text-align-right {
@@ -881,6 +885,8 @@ a {
 .shops-orders-container #order-list .order-item .price,
 .shops-orders-container #order-list .order-item .size,
 .shops-orders-container #order-list .order-item .quantity,
+.shops-orders-container #order-list .order-item .productName,
+.shops-orders-container #order-list .order-item .shopId,
 .shops-orders-container #order-list .order-item .info,
 .shops-orders-container #order-list .order-item .handle-btn {
     display: inline-block;
@@ -905,17 +911,23 @@ a {
 }
 
 .shops-orders-container #order-list .order-item .size .name,
-.shops-orders-container #order-list .order-item .quantity .name {
+.shops-orders-container #order-list .order-item .quantity .name,
+.shops-orders-container #order-list .order-item .productName .name,
+.shops-orders-container #order-list .order-item .shopId .name {
     color: #999;
 }
 
 .shops-orders-container #order-list .order-item .size .value,
-.shops-orders-container #order-list .order-item .quantity .value {
+.shops-orders-container #order-list .order-item .quantity .value,
+.shops-orders-container #order-list .order-item .productName .value,
+.shops-orders-container #order-list .order-item .shopId .value {
     font-size: 2em;
 }
 
 .shops-orders-container #order-list .order-item .size p,
-.shops-orders-container #order-list .order-item .quantity p {
+.shops-orders-container #order-list .order-item .quantity p,
+.shops-orders-container #order-list .order-item .productName p,
+.shops-orders-container #order-list .order-item .shopId p {
     text-align: right;
     width: 90px;
 }
