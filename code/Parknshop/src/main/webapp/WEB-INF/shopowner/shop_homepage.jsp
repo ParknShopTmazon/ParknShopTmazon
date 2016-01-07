@@ -5,9 +5,6 @@
 <html>
 <head>
 <title>Shop Homepage</title>
-<link rel="stylesheet" type="text/css" href="css_shop/style.css">
-<link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
-<link rel="stylesheet" type="text/css" href="css_shop/order.css">
 <script type="text/javascript">
 	var m=1;
 	var id="ProductList";
@@ -47,10 +44,7 @@
 </head>
 <body>
     <%@ include file="header2.html"%>
-	
 	<div class="content">
-		
-		
 		<div id="shoplist">
 		    <div class="manage-nav">
 			<div class="unit selected" id="selectedshop" onClick="window.open('selectedshop')"><span>ProductList</span></div>
@@ -61,20 +55,20 @@
 		    </div>
 		    <br/>
 			<c:forEach var="product" items="${product_list}" >
-	          <div class="shopbox">				
-				<a href="./productInfo?pid=${ product.productId }" class="shopphoto"><img src="${ product.picture }"  class="shop-img-box" alt="no p no t"></a>
-				<div><a class="shopname" href=""><span id="">${ product.name }</span></a></div>
-				<div>${product.price}</div>
-				<a href="modifyproduct?product_id=${product.productId}">modify</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="deleteproduct?product_id=${product.productId}">delete</a>
-		      </div>
-	       </c:forEach>
+				<div class="shopbox">				
+					<a href="./productInfo?pid=${ product.productId }" class="shopphoto"><img src="${ product.picture }"  class="shop-img-box" alt="no p no t"></a>
+					<div><a class="shopname" href=""><span id="">${ product.name }</span></a></div>
+					<div>${product.price}</div>
+					<a href="modifyproduct?product_id=${product.productId}">modify</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="deleteproduct?product_id=${product.productId}">delete</a>
+				</div>
+			</c:forEach>
 	      
-		      <div class="shopbox">
+			<div class="shopbox">
 				<div  class="shopphoto" onclick="window.open('addproduct')"><img src="images_shop/plus.jpg" class="shop-img-box" alt=" "></div>
 				<div><span id="">Add a new one</span></div>
 				<div id="shopname" onclick="window.open('addproduct')">more info</div>	
-			  </div>
+			</div>
 	   </div>
 	</div>
 	<%@include file="footer.html" %>
