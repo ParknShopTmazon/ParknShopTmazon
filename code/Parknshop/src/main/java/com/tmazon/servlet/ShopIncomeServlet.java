@@ -41,13 +41,11 @@ public class ShopIncomeServlet extends HttpServlet {
 		}
 		
 //		Order order = 
-//		Double cost = 0.00;
-//		Integer quantity = 0;
-//		Double price = 0.00;
-//		for(){
-//			if()
-//		}
-//		
+		Double cost = 0.00;
+		Integer quantity = 0;
+		Double price = 0.00;
+		
+		
 		
 		
 		req.setAttribute("orderInfoList", orderInfos);
