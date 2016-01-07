@@ -12,26 +12,30 @@
 <body>
     <%@ include file="header2.html"%>
 
-	<div id="container">
+	<div class="modify-shops-container">
 		<div id="shopinfo">
-			<h2>&nbsp;&nbsp;Please Modify</h2>
+			<div class="page-title">
+				<span class="back-btn button"></span>
+			    <span class="parknshop">PARKnSHOP</span>
+			    <span class="main-title">Modify Shops</span>
+			</div>
 			
 			<form class="complete-info" id="form1" name="formen" action="modifyshop" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="product_id" value="${shopId }">
 				<div class="form-item">
-					<div class="form-lable-left">&nbsp;Shop Status:${status}</div>
+					<div class="form-lable-left">Shop Status</div>
 					<div class="form-control-right">
-						<input class="form-input" id="shop_name" name="name" type="text" value="${status}" maxlength="20" business="trueName" require="true";>
+						<input class="form-input" disabled id="shop_name" name="name" type="text" value="${status}" maxlength="20" business="trueName" require="true";>
 					</div>
 				</div>
 				<div class="form-item">
-					<div class="form-lable-left">&nbsp;Shop Name:</div>
+					<div class="form-lable-left">Shop Name:</div>
 					<div class="form-control-right">
 						<input class="form-input" id="shop_name" name="name" type="text" value="${name}" maxlength="20" business="trueName" require="true";>
 					</div>
 				</div>
 				<div class="form-item">
-					<div class="form-lable-left">&nbsp;Shop Type:</div>
+					<div class="form-lable-left">Shop Type:</div>
 					<div class="form-control-right">
 					    <input type="radio" id="person" checked="checked" name="type" value="person">
 						<label name="person" class="checked" for="person">person</label>
@@ -42,7 +46,7 @@
 				</div>
 				
 				<div class="form-item">
-					<div class="form-lable-left">&nbsp;Address:</div>
+					<div class="form-lable-left">Address:</div>
 					<div class="form-control-right">
 						<input class="form-input" id="address" name="address" type="text" value="${param.address}" maxlength="18" business="address" require="true";>
 					</div>
@@ -50,17 +54,14 @@
 				
 				<div class="form-item-photo">
 					<div class="form-lable-left">Shop Photo</div>
-					 <div class="form-shop-img">
-						<img alt="no photo" src="${picture}" width="100" height="80">
-				  </div>
+					<div class="img-container" style="background-image: url(${picture});"></div>
 				</div>	
 				<div class="form-item">
 					<div class="form-lable-left">Upload Photo</div>
 					 <div class="form-control-right">
 					 	<input type="file" name="file" id="file" style="display:none" accept="image/bmp,image/png,image/jpeg" onChange="document.formen.path.value=this.value"> 
-					 	<input name="path" readonly> 
-					 	<input type="button" value="Browse" onclick="document.formen.file.click()"> 
-<!-- 					    <input class="form-input-right" id="file" name="file" type="file" accept="image/bmp,image/png,image/jpeg"> -->
+					 	<input class="form-input" name="path" readonly> 
+					 	<input type="button" value="Browse" onclick="document.formen.file.click()">
 				  </div>
 				</div>	
 				
@@ -68,15 +69,10 @@
 					<div class="form-lable-left">Description:</div>
 					<div class="form-textarea">
 						<textarea class="textarea"></textarea>
+						<input type="submit" value="Update" class="submit-btn" >
 					</div>
 				</div>
-				
-				<div class="form-item">
-					<div class="form-lable-left"></div>
-					<div class="form-control-right">
-						<input type="submit" value="next" class="submit-btn" >
-					</div>
-				</div>		
+
 				<div class="control-group" align="center">
 					<c:if test="${ not empty r_error_shop_exists }">
 						<label style="color: red;">shop name already exists</label>

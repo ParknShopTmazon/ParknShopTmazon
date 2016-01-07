@@ -1658,6 +1658,9 @@ input {
     box-sizing: border-box;
     font-size: 1.2em;
     float: right;
+    border-radius: 4px;
+    background-color: #ce8300;
+    border: 2px solid #B27100;
 }
 
 .order-container #order-info .shop-rate .name {

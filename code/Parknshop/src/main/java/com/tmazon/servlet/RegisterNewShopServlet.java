@@ -59,12 +59,14 @@ public class RegisterNewShopServlet extends HttpServlet{
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+
 		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
 		try {
 			items = servletFileUpload.parseRequest(req);
+			System.out.println(servletFileUpload.parseRequest(req));
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
