@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tmazon.domain.Delivery;
+import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
 import com.tmazon.service.DeliveryService;
 import com.tmazon.service.OrderService;
@@ -38,6 +39,20 @@ public class ShopIncomeServlet extends HttpServlet {
 			info.setProduct(productService.getProductById(info.getProductId()));
 			info.setDelivery(deliveryService.select(new Delivery(info.getDeliveryId(), null, null, null)).get(0));
 		}
+		
+//		Order order = orderService.findById(id)
+		Double cost = 0.00;
+		Integer quantity = 0;
+		Double price = 0.00;
+		
+		for(OrderInfo info : orderInfos){
+			if(info.getStatus().equals(OrderInfo.STATUS_CONFIRM_RECEIPT)||info.getStatus().equals(OrderInfo.STATUS_DELETED)){
+				quantity = info.getQuantity();
+				price = info.getProduct().getDiscountPrice();
+				cost +=quantity * price;
+			}
+		}
+		
 		
 		req.setAttribute("orderInfoList", orderInfos);
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_income.jsp").forward(req, resp);
