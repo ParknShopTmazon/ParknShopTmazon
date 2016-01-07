@@ -31,6 +31,12 @@ public class SearchProductServlet extends HttpServlet {
 		String name = req.getParameter("name");
 		String category = req.getParameter("type");
 		String searchMethod = req.getParameter("searchMethod");
+		if("shopName".equals(searchMethod)){
+			if ("".equals(category)) {
+				category = null;
+			}
+			
+		}
 		if ("".equals(category)) {
 			category = null;
 		}
