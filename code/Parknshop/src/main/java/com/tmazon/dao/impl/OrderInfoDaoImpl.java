@@ -40,6 +40,10 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			sqlBuilder.append("AND productId = ? ");
 			params.add(orderInfo.getProductId());
 		}
+		if (orderInfo.getStatus() != null) {
+			sqlBuilder.append("AND status = ? ");
+			params.add(orderInfo.getStatus());
+		}
 
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
@@ -180,6 +184,30 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public boolean isBought(Integer userId, Integer productId) {
+		
+		String sql = "select * from orders,orderinfo where orders.userId = ? and orderinfo.productId = ? and orders.orderId = orderinfo.orderId "
+				+ "and (orderinfo.status = ? or orderinfo.status = ?)";
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(userId);
+		params.add(productId);
+		params.add(OrderInfo.STATUS_CONFIRM_RECEIPT);
+		params.add(OrderInfo.STATUS_DELETED);
+		
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<OrderInfo> result = runner.query(sql, new BeanListHandler<OrderInfo>(
+					OrderInfo.class), params.toArray());
+			return !result.isEmpty();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 }

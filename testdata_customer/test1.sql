@@ -97,3 +97,9 @@ INSERT INTO `parknshop`.`friend` VALUES (12312, 7878);
 
 INSERT INTO `parknshop`.`message` VALUES (100, 12312, 7878, 'hello?', 0, now());
 INSERT INTO `parknshop`.`message` VALUES (101, 7878, 12312, 'hello', 1, now());
+
+
+INSERT INTO `parknshop`.`comment` (`commentId`, `userId`, `productId`, `content`, `commentTime`, `shopScore`, `productScore`, `deliveryScore`) VALUES ('1', '12312', '4', 'aaaaa', '2016-1-7', '3', '4', '3');
+INSERT INTO `parknshop`.`comment` (`commentId`, `userId`, `productId`, `content`, `commentTime`, `shopScore`, `productScore`, `deliveryScore`) VALUES ('2', '12312', '4', 'bbbb', '2016-1-7', '3', '3', '3');
+INSERT INTO `parknshop`.`comment` (`commentId`, `userId`, `productId`, `content`, `commentTime`, `shopScore`, `productScore`, `deliveryScore`) VALUES ('3', '12312', '4', 'ccccc', '2016-1-7', '3', '1', '2');
+
