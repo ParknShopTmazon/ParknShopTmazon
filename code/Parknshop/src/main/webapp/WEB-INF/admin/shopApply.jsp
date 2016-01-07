@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*,com.tmazon.domain.Shop"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -46,6 +46,7 @@
 						<tr>
 							<th>Shop_ID</th>
 							<th>Name</th>
+							<th>Shop_Owner</th>
 							<th>Type</th>
 							<th colspan="3" width="10%">Actions</th>
 						</tr>
@@ -60,27 +61,18 @@
 					</tfoot>
 					<tbody>
 
-						<%
-							if (session.getAttribute("apply") != null) {
-								List<Shop> ls = (List<Shop>) session.getAttribute("apply");
-								if (ls.size() > 0) {
-									for (Shop s : ls) {
-						%>
+					<c:forEach items="${ shopList }" var="shop">
 						<tr>
-							<td><%=s.getShopId()%></td>
-							<td><%=s.getName()%></td>
-							<td><%=s.getType()%></td>
+							<td>${shop.shopId }</td>
+							<td>${shop.name }</td>
+							<td>${shop.owner }</td>
+							<td>${shop.type }</td>
 							<td><a href="javascript: void(0);" class="delete"
 								type="agree">agree</a></td>
 							<td><a href="javascript: void(0);" class="delete"
 								type="disagree">disagree</a></td>
 						</tr>
-
-						<%
-							}
-								}
-							}
-						%>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

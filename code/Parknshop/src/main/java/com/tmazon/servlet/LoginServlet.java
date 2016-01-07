@@ -87,15 +87,15 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("online user: " + users.size());
 		
 		if (user.getRole().equals(User.ROLE_ADMIN)) {
-			ShopApplyDao s=new ShopApplyDaoImpl();
-			List <Shop> list=s.getApply();
-			req.getSession().setAttribute("apply", list);
-			req.getSession().setAttribute("rate", 5);
-			req.getSession().setAttribute("profit", 0);
-			AdvertisementDao ado=new AdvertisementDaoImpl();
-			List<Advertisement> lad=ado.select();
-			req.getSession().setAttribute("showAd", lad);
-			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req, resp);;
+//			ShopApplyDao s=new ShopApplyDaoImpl();
+//			List <Shop> list=s.getApply();
+//			req.getSession().setAttribute("apply", list);
+//			req.getSession().setAttribute("rate", 5);
+//			req.getSession().setAttribute("profit", 0);
+//			AdvertisementDao ado=new AdvertisementDaoImpl();
+//			List<Advertisement> lad=ado.select();
+//			req.getSession().setAttribute("showAd", lad);
+			req.getRequestDispatcher("overview").forward(req, resp);;
 			return ;
 		}
 		
