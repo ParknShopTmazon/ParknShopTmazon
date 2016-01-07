@@ -139,7 +139,7 @@ const shopOwner = {
      */
     initAddProducts: function () {
         $('#menu #add-products').addClass('selected');  
-    }
+    },
 
     /**
      * [initOrderList: init the order-list]
