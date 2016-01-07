@@ -120,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
 		orderInfo.setStatus(newStatus);
 		return canChange? orderInfoDao.updateStatus(orderInfo) : false;
 	}
-
+	
 	public OrderInfo getOrderInfo(Integer orderId, Integer productId) {
 		List<OrderInfo> list = orderInfoDao.select(new OrderInfo(orderId, null, null, productId, null));
 		return (list != null && !list.isEmpty())? list.get(0) : null;
