@@ -138,7 +138,7 @@ req.setCharacterEncoding("utf-8");
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop"+File.separator+"upload"+File.separator+ d1 + File.separator + d2 + File.separator + fileName;
+				path ="images_shop/upload/"+ d1 + "/" + d2 + "/"+ fileName;
 			}
 		}
 
@@ -153,9 +153,6 @@ req.setCharacterEncoding("utf-8");
 		String discountPrice = productMap.get("discount_price");
 		String stockNum = productMap.get("stock_num");
 		String description = productMap.get("description");
-		String file = productMap.get("file");
-	
-		System.out.println("file: "+file+"  product_name: "+productName+"  product_names: ");
 		System.out.println(shopId);
 		if(shopId==null||"".trim().equals(shopId)){
 			resp.sendRedirect("myshop");;
