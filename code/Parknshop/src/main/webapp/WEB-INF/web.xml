@@ -77,24 +77,29 @@
   <servlet-class>com.tmazon.servlet.UpdateCartServlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>otherJSP</servlet-name>
-  <jsp-file>/WEB-INF/admin/other.jsp</jsp-file>
+  <servlet-name>otherServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.OthersAdminServlet</servlet-class>
+  
  </servlet>
  <servlet>
-  <servlet-name>advertisementJsp</servlet-name>
-  <jsp-file>/WEB-INF/admin/advertisement.jsp</jsp-file>
+  <servlet-name>advertisementServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.AdvertisementAdminServlet</servlet-class>
+  
  </servlet>
  <servlet>
-  <servlet-name>overviewJsp</servlet-name>
-  <jsp-file>/WEB-INF/admin/overview.jsp</jsp-file>
+  <servlet-name>overviewServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.OverviewAdminServlet</servlet-class>
+  
  </servlet>
  <servlet>
-  <servlet-name>shopApplyJsp</servlet-name>
-  <jsp-file>/WEB-INF/admin/shopApply.jsp</jsp-file>
+  <servlet-name>shopApplyServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ShopApplyAdminServlet</servlet-class>
+  
  </servlet>
  <servlet>
-  <servlet-name>userJsp</servlet-name>
-  <jsp-file>/WEB-INF/admin/userManagement.jsp</jsp-file>
+  <servlet-name>userServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.UserManageAdminServlet</servlet-class>
+  
  </servlet>
  <servlet>
   <servlet-name>DisagreeServlet</servlet-name>
@@ -220,32 +225,45 @@
   <servlet-class>com.tmazon.servlet.UpdateOrderConditionServlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>DeleteShopOrderServlet</servlet-name>
-  <servlet-class>com.tmazon.servlet.DeleteShopOrderServlet</servlet-class>
- </servlet>
- <servlet>
   <servlet-name>PayOrderServlet</servlet-name>
   <display-name>PayOrderServlet</display-name>
   <servlet-class>com.tmazon.servlet.PayOrderServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>ChangeOrderInfoStatusServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ChangeOrderInfoStatusServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>DeleteShopServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.DeleteShopServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ModifyShopServlet</servlet-name>
+  <servlet-class>com.tmazon.servlet.ModifyShopServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CommentServlet</servlet-name>
+  <display-name>CommentServlet</display-name>
+  <servlet-class>com.tmazon.servlet.CommentServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
-  <servlet-name>userJsp</servlet-name>
+  <servlet-name>userServlet</servlet-name>
   <url-pattern>/user</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>shopApplyJsp</servlet-name>
+  <servlet-name>shopApplyServlet</servlet-name>
   <url-pattern>/shopApply</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>overviewJsp</servlet-name>
+  <servlet-name>overviewServlet</servlet-name>
   <url-pattern>/overview</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>advertisementJsp</servlet-name>
+  <servlet-name>advertisementServlet</servlet-name>
   <url-pattern>/advertisement</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>otherJSP</servlet-name>
+  <servlet-name>otherServlet</servlet-name>
   <url-pattern>/other</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
@@ -425,12 +443,24 @@
   <url-pattern>/updateordercondition</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>DeleteShopOrderServlet</servlet-name>
-  <url-pattern>/deleteshoporder</url-pattern>
- </servlet-mapping>
- <servlet-mapping>
   <servlet-name>PayOrderServlet</servlet-name>
   <url-pattern>/payOrder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ChangeOrderInfoStatusServlet</servlet-name>
+  <url-pattern>/changeOrderInfo</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeleteShopServlet</servlet-name>
+  <url-pattern>/deleteshop</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ModifyShopServlet</servlet-name>
+  <url-pattern>/modifyshop</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>CommentServlet</servlet-name>
+  <url-pattern>/comment</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>

@@ -60,6 +60,7 @@ public class AddOrderServlet extends HttpServlet {
 			int deliveryId = ParseUtil.String2Integer(params.get("options[" + i + "][delivery_id]")[0], null);
 			orderInfo.setProductId(productId);
 			orderInfo.setDeliveryId(deliveryId);
+			orderInfo.setStatus(OrderInfo.STATUS_UNPAID);
 			orderInfos.add(orderInfo);
 		}
 		

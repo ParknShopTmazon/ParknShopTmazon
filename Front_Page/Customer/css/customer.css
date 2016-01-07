@@ -87,6 +87,17 @@ s {
     position: fixed;
 }
 
+/*************************************************
+     *
+     * Index
+     *
+     *********************************/
+.swiper-banner {
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 /*************************************************
      *

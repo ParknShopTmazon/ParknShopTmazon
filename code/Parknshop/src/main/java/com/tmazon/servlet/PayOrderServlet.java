@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.Order;
+import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.User;
 import com.tmazon.service.OrderService;
 import com.tmazon.util.AttrName;
@@ -41,6 +43,7 @@ public class PayOrderServlet extends HttpServlet {
 		Map<String, String[]> params = req.getParameterMap();
 		
 		String[] oidStrings = params.get("oid");
+		String[] productIdStrings = params.get("productId");
 		if(oidStrings == null){
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Cannot get order, please try it again!");
@@ -70,13 +73,52 @@ public class PayOrderServlet extends HttpServlet {
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
-		
-		if(orderService.changeStatus(order, Order.STATUS_PAID)){
-			jsonObject.put("result", true + "");
-			jsonObject.put("errMsg", "");
-		}else {
+		if(productIdStrings == null){
 			jsonObject.put("result", false + "");
-			jsonObject.put("errMsg", "Failed!");
+			jsonObject.put("errMsg", "Cannot get product, please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
+		String productIdString = productIdStrings[0];
+		if(productIdString == null){
+			jsonObject.put("result", false + "");
+			jsonObject.put("errMsg", "Cannot get product, please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
+		
+		
+		// TODO pay
+		if(productIdString.equals("null")){
+			List<OrderInfo> orderInfos = orderService.getOrderInfo(order.getOrderId());
+			for(OrderInfo orderInfo : orderInfos){
+				if(orderService.changeStatus(orderInfo, OrderInfo.STATUS_PAID, User.ROLE_ADMIN)){
+					jsonObject.put("result", true + "");
+					jsonObject.put("errMsg", "");
+				}else {
+					jsonObject.put("result", false + "");
+					jsonObject.put("errMsg", "Failed!");
+					resp.getWriter().write(jsonObject.toString());
+					return;
+				}
+			}
+		}else {
+			int productId = ParseUtil.String2Integer(productIdString, null);
+			OrderInfo orderInfo = orderService.getOrderInfoByPK(orderId, productId);
+			if(orderInfo == null){
+				jsonObject.put("result", false + "");
+				jsonObject.put("errMsg", "This product isn't in the order!");
+				resp.getWriter().write(jsonObject.toString());
+				return;
+			}else {
+				if(orderService.changeStatus(orderInfo, OrderInfo.STATUS_PAID, User.ROLE_ADMIN)){
+					jsonObject.put("result", true + "");
+					jsonObject.put("errMsg", "");
+				}else {
+					jsonObject.put("result", false + "");
+					jsonObject.put("errMsg", "Failed!");
+				}
+			}
 		}
 		
 		resp.getWriter().write(jsonObject.toString());

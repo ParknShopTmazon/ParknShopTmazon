@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.tmazon.domain.Order;
+import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.User;
 import com.tmazon.service.OrderService;
 import com.tmazon.util.AttrName;
@@ -48,8 +50,16 @@ public class DeleteOrderServlet extends HttpServlet {
 		}
 		
 		// check order status
-		if (!Order.STATUS_UNPAID.equals(order.getStatus())) {
+		if (!Order.STATUS_NORMAL.equals(order.getStatus())) {
 			return;
+		}
+		
+		// check order info status
+		List<OrderInfo> orderInfos = orderService.getOrderInfo(orderId);
+		for (OrderInfo info : orderInfos) {
+			if (!OrderInfo.STATUS_UNPAID.equals(info.getStatus())) {
+				return;
+			}
 		}
 		
 		// delete order

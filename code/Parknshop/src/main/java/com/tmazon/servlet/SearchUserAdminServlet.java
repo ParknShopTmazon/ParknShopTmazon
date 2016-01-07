@@ -7,10 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.User;
 import com.tmazon.service.UserManageService;
 import com.tmazon.service.UserService;
+import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.Page;
 
@@ -24,6 +26,18 @@ public class SearchUserAdminServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//if the user is online or offline?
+		HttpSession session = req.getSession(false);
+		User onlineUser = (User) session.getAttribute(AttrName.SessionScope.USER);
+		if(onlineUser == null)
+		{
+			if (session != null) {
+				session.invalidate();
+			}
+			resp.sendRedirect("login");
+		}
+		
 		//get the parameter from the input
 		String option = (String)req.getAttribute("option");
 		String userName,role;
@@ -54,7 +68,7 @@ public class SearchUserAdminServlet extends HttpServlet{
 		{
 			role = null;
 		}
-		if(nextStr == null || curPageStr==null)
+		if(nextStr == null || curPageStr==null || nextStr.equals("") || curPageStr.equals(""))
 		{
 			curPage = 1;
 			next = 0;

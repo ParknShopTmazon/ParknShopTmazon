@@ -16,18 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 	</head>
 	<body>
-		
-					
-		
-		<ul id="navigation">
-			<li><img src="css/logo.png"></li>
-			<li><a href="overview">Overview</a></li>
-			<li><a href="user">User Management</a></li>
-			<li><a href="shopApply">Shop-Apply Management</a></li>
-			<li><a href="advertisement">Advertisement Management</a></li>
-			<li><span class="active">Ohter</span></li>
-		</ul>
-		
+		<%@ include file="header.html"%>
+		<div class="other-container">
 			<div id="content" class="container_16 clearfix">
 			
 				
@@ -157,9 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</table>
 				</div>
 			</div>
-		
-		<div id="foot">
-			 Welcome to PARKnSHOP.
 		</div>
+		<%@ include file="footer.html"%>
 	</body>
 </html>

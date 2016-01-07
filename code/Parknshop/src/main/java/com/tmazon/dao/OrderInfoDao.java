@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
-import com.tmazon.domain.Shop;
 
 
 public interface OrderInfoDao {
@@ -20,5 +19,9 @@ public interface OrderInfoDao {
 	public boolean update(OrderInfo orderInfo);
 	
 	public boolean delete(OrderInfo orderInfo);
+	
+	public boolean changeStatus(OrderInfo orderInfo);
+	
+	public boolean updateStatus(OrderInfo orderInfo);
 	
 }

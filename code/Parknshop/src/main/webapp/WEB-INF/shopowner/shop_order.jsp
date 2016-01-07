@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css_shop/order.css">
 </head>
 <body>
-    <%@ include file="header.html"%>
+    <%@ include file="header2.html"%>
     
     <hr/>
     <div class="container">

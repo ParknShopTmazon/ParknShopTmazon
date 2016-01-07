@@ -11,15 +11,14 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.tmazon.dao.OrderInfoDao;
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
-import com.tmazon.domain.Product;
-import com.tmazon.domain.Shop;
 import com.tmazon.util.DaoUtil;
 
 public class OrderInfoDaoImpl implements OrderInfoDao {
 
 	public List<OrderInfo> select(OrderInfo orderInfo) {
 
-		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM orderInfo WHERE 1=1 ");
+		StringBuilder sqlBuilder = new StringBuilder(
+				"SELECT * FROM orderInfo WHERE 1=1 ");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (orderInfo.getOrderId() != null) {
 			sqlBuilder.append("AND orderId = ? ");
@@ -47,7 +46,8 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<OrderInfo> result = runner.query(sql, new BeanListHandler<OrderInfo>(OrderInfo.class),
+			List<OrderInfo> result = runner.query(sql,
+					new BeanListHandler<OrderInfo>(OrderInfo.class),
 					params.toArray());
 			return result;
 		} catch (SQLException e) {
@@ -57,13 +57,16 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public boolean insert(OrderInfo orderInfo) {
-		String sql = "INSERT INTO orderInfo VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO orderInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.insert(sql, new BeanHandler<OrderInfo>(OrderInfo.class), orderInfo.getOrderId(),
-					orderInfo.getDeliveryId(), orderInfo.getQuantity(), orderInfo.getProductId(), orderInfo.getWaybill());
+			runner.insert(sql, new BeanHandler<OrderInfo>(OrderInfo.class),
+					orderInfo.getOrderId(), orderInfo.getDeliveryId(),
+					orderInfo.getQuantity(), orderInfo.getProductId(),
+					orderInfo.getStatus(), orderInfo.getDeliveryTime(),
+					orderInfo.getDealTime(), orderInfo.getWaybill());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +80,9 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.update(sql,orderInfo.getDeliveryId(), orderInfo.getProductId(), orderInfo.getWaybill(), orderInfo.getOrderId(), orderInfo.getProductId());
+			runner.update(sql, orderInfo.getDeliveryId(),
+					orderInfo.getQuantity(), orderInfo.getWaybill(),
+					orderInfo.getOrderId(), orderInfo.getProductId());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,11 +105,12 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public List<Order> getOrderByShopId(Integer shopId) {
-		StringBuilder sqlBuilder = new StringBuilder("select * from product,orderinfo,orders where shopId = ? AND orderinfo.productId = product.productId AND orders.orderId = orderinfo.orderId group by orders.orderId");
+		StringBuilder sqlBuilder = new StringBuilder(
+				"select * from product,orderinfo,orders where shopId = ? AND orderinfo.productId = product.productId AND orders.orderId = orderinfo.orderId group by orders.orderId");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (shopId != null) {
 			params.add(shopId);
-		}else {
+		} else {
 			return null;
 		}
 
@@ -113,8 +119,8 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<Order> result = runner.query(sql, new BeanListHandler<Order>(Order.class),
-					params.toArray());
+			List<Order> result = runner.query(sql, new BeanListHandler<Order>(
+					Order.class), params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,12 +129,13 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public List<OrderInfo> getOrderInfosByshop(Integer shopId) {
-		
-		StringBuilder sqlBuilder = new StringBuilder("select * from product,orderinfo where shopId = ? AND orderinfo.productId = product.productId");
+
+		StringBuilder sqlBuilder = new StringBuilder(
+				"select * from product,orderinfo where shopId = ? AND orderinfo.productId = product.productId");
 		ArrayList<Object> params = new ArrayList<Object>();
 		if (shopId != null) {
 			params.add(shopId);
-		}else {
+		} else {
 			return null;
 		}
 
@@ -137,12 +144,41 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<OrderInfo> result = runner.query(sql, new BeanListHandler<OrderInfo>(OrderInfo.class),
+			List<OrderInfo> result = runner.query(sql,
+					new BeanListHandler<OrderInfo>(OrderInfo.class),
 					params.toArray());
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public boolean changeStatus(OrderInfo orderInfo) {
+		String sql = "UPDATE orderInfo SET status = ? WHERE orderId = ? AND productId = ?";
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			int row = runner.update(sql, orderInfo.getStatus(),orderInfo.getOrderId(),orderInfo.getProduct());
+			return row > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean updateStatus(OrderInfo orderInfo) {
+		String sql = "UPDATE orderInfo SET status = ? WHERE orderId = ? AND productId = ?";
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			int rows = runner.update(sql, orderInfo.getStatus(), orderInfo.getOrderId(), orderInfo.getProductId());
+			return rows > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 

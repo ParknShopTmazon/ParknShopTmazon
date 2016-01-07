@@ -1,4 +1,34 @@
 /* CSS Document */
+/* CSS Document */
+* {
+    margin: 0;
+}
+
+
+/**
+ * html
+ */
+
+html {
+    height: 100%;
+}
+
+body
+{
+	margin: 0;
+    font-family: "Ping Hei", "¶¬ÇàºÚÌå", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "Î¢ÈíÑÅºÚ";
+    font-size: 15px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+    color: #000;
+	background:url(back.jpeg);
+	background-color: #f5f7f7;
+}
+
 @import url(layout.css);
 @import url(nav.css);
 .text-align-right{text-align:right;}.float-right{float:right;}
@@ -86,8 +116,11 @@ a{text-decoration:none;}
 .height10px{height:10px;}
 .height5px{height:5px;}
 .height2px{height:2px;}
-.outset{border-style:outset;};
+.outset{border-style:outset;}
 .font1.4{font-size:1.4em;}
 .nofloat{clear:both;}
 
-
+#menu, 
+.shop-container {
+	padding: 95px 0 97px;
+}
