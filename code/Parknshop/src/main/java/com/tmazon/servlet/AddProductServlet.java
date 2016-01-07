@@ -60,7 +60,6 @@ public class AddProductServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8"); 
-		
 		String contextPath = getServletContext().getRealPath(File.separator+"images_shop"+File.separator);
 		String uploadPath =File.separator+ "upload"+File.separator;
 		String tmpPath = "tmp"+File.separator;
