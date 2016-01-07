@@ -32,6 +32,7 @@ public class SearchUserAdminServlet extends HttpServlet{
 		if(!CheckAdmin.isAdminOnline(req))
 		{
 			resp.sendRedirect("login");
+			return;
 		}
 		
 		//get the parameter from the input

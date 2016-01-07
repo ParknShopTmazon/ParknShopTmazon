@@ -14,4 +14,6 @@ public interface UserManageService {
 	public boolean delete(String name);
 	
 	public Page<User> page(User user,int curPage , int next);
+	
+	public Page<User> pageList(List<User> userList,int curPage , int next);
 }

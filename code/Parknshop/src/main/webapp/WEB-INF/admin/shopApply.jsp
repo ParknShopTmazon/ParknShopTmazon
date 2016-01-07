@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*,com.tmazon.domain.Shop"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.tmazon.domain.User,java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -19,26 +20,10 @@
 	<%@ include file="header.html"%>
 	<div class="shop-apply-container">
 		<div id="content" class="container_16 clearfix">
-			<div class="grid_4">
-				<p>
-					<label>Shop_ID</label> <input type="text" value="all" />
-				</p>
+			<div style="text-align:center;font-size:34px;font-weight:bold">
+				Shop Apply List
 			</div>
-			<div class="grid_5">
-				<p>
-					<label>Name</label> <input type="text" value="all" />
-				</p>
-			</div>
-			<div class="grid_5">
-				<p>
-					<label>Type</label> <input type="text" value="all" />
-				</p>
-			</div>
-			<div class="grid_2">
-				<p>
-					<label>&nbsp;</label> <input type="submit" value="Search" />
-				</p>
-			</div>
+			<br/>
 
 			<div class="grid_16">
 				<table>
@@ -53,19 +38,23 @@
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="5" class="pagination"><span
-								class="active curved">1</span><a href="#" class="curved">2</a><a
-								href="#" class="curved">3</a><a href="#" class="curved">4</a> ...
-								<a href="#" class="curved">10 million</a></td>
+							<form method="get" action="shopApply">
+								<td colspan="5" rowspan="1" class="pagination">
+									<input id="prev-btn" type="submit"  value="<<"></input>
+									<span name="curIndex" class="active curved">${CurPage }</span>
+									<input id="next-btn" type="submit" value=">>"></input>
+									<input type="hidden" id="next-val" name="next" value="1"/>
+								</td>
+							</form>
 						</tr>
 					</tfoot>
 					<tbody>
-
-					<c:forEach items="${ shopList }" var="shop">
+					
+					<c:forEach items="${ shopList }" var="shop" varStatus="status">
 						<tr>
-							<td>${shop.shopId }</td>
+							<td>${shop.shopId }</td>	
 							<td>${shop.name }</td>
-							<td>${shop.owner }</td>
+							<td>${userList[status.index].name }</td>
 							<td>${shop.type }</td>
 							<td><a href="javascript: void(0);" class="delete"
 								type="agree">agree</a></td>
@@ -82,6 +71,13 @@
 	<%@ include file="footer.html"%>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
+		document.getElementById('next-btn').addEventListener('click', function() {
+				document.getElementById('next-val').setAttribute('value', 1);
+			});
+			
+		document.getElementById('prev-btn').addEventListener('click', function() {
+				document.getElementById('next-val').setAttribute('value', -1);
+			});
 		$(document)
 				.ready(
 						function() {
@@ -95,10 +91,10 @@
 														: 'DisagreeServlet';
 												var sid = $(this).attr('type') == 'agree' ? $(
 														this).parent().prev()
-														.prev().prev().html()
+														.prev().prev().prev().html()
 														: $(this).parent()
 																.prev().prev()
-																.prev().prev()
+																.prev().prev().prev()
 																.html();
 											$.ajax({
 													url : url,

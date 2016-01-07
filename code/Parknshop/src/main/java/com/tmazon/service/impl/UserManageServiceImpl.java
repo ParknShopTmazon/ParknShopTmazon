@@ -30,4 +30,11 @@ public class UserManageServiceImpl implements UserManageService{
 		userPage.page(userList,curPage,next);
 		return userPage;
 	}
+	public Page<User> pageList(List<User> userList,int curPage , int next)
+	{
+		Page<User> userPage = new Page<User>();
+		userPage.page(userList,curPage,next);
+		return userPage;
+	}
+	
 }

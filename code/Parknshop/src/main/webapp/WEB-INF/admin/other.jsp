@@ -14,44 +14,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--<link rel="stylesheet" href="css/fluid.css" type="text/css" media="screen" charset="utf-8" />-->
 		<link rel="stylesheet" href="css/template.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
+		<link href="css/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+		<script language="javascript" type="text/javascript" src="css/WdatePicker.js"></script>
 	</head>
 	<body>
 		<%@ include file="header.html"%>
 		<div class="other-container">
 			<div id="content" class="container_16 clearfix">
-			
-				
-				<form action="ProfitServlet" method="post">
+			<form method="post">
 				<div class="grid_4">
-					<p>
-						<label>Income</label>
-						<input type='text' value=<%=session.getAttribute("profit") %>></input>
-					</p>
+                		<p>
+								<label for="title">Start Date:</label>
+								<input name="start" class="Wdate" type="text" onClick="WdatePicker()">
+                        </p>
 				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input type="submit" value="Show" />
-					</p>
+                <div class="grid_4">
+                         <p>			
+								<label for="post">End Date:</label>
+								<input name="end" class="Wdate" type="text" onClick="WdatePicker()"> 
+				         </p>
+                </div>
+                <div class="grid_2">	
+                         <p>	
+                         <label>&nbsp;</label>	
+								<input type="submit" value="search" />
+						</p>
+                       
 				</div>
-				</form>
-				
-				<form action="ModifyRateServlet" method="post" >
-				<div class="grid_4">
-					<p>
-						<label>Commission Rates</label>
-						<input name="rate" type='text' value=""></input>
-					</p>
-				</div>
-				<div class="grid_2">
-					<p>
-						<label>&nbsp;</label>
-						<input type="submit" value="OK" />
-					</p>
-				</div>
-				</form>
-				
-				<div class="grid_16">
+			</form>
+			<div class="grid_16">
 				<label>Sales History</label>
 					<table>
 						<thead>
@@ -68,6 +59,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 million</a>
 								</td>
 							</tr>
+							<tr>
+								<td colspan="5" class="pagination" style="text-align:right">
+									<span class="active curved">Total Income：1000458</span>
+								</td>
+							</tr>
 						</tfoot>
 						<tbody>
 							<tr>
@@ -78,71 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td><a href="#" class="delete">Delete</a></td>
 								 
 							</tr>
-							<tr class="alt">
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr>
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr class="alt">
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr>
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr class="alt">
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr>
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr class="alt">
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-							<tr class="alt">
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>Food</td>
-								<td>1$</td>
-								<td><a href="#" class="edit">Edit</a></td>
-								<td><a href="#" class="delete">Delete</a></td>
-								 
-							</tr>
-
+							
 						</tbody>
 					</table>
 				</div>
