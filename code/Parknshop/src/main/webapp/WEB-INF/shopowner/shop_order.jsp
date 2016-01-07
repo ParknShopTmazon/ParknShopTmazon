@@ -25,13 +25,10 @@
 						<option>ShopName2</option>
 						<option>ShopName3</option>
 					</select>
-					Date:
-					<select>
-						<option>Near one day</option>
-						<option>Near one week</option>
-						<option>Near one Month</option>
-						<option>Near one year</option>
-					</select>
+					from
+					<input type="datetime-local" name="start">
+					to
+					<input type="datetime-local" name="end">	
 				</div>
 			</div>
 

@@ -995,3 +995,11 @@ a {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.shops-orders-container input[type="datetime-local"] {
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #ffa200;
+    border: none;
+    outline: none;
+}
