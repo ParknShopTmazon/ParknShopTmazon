@@ -1,5 +1,8 @@
 /* CSS Document */
+
+
 /* CSS Document */
+
 * {
     margin: 0;
 }
@@ -13,9 +16,8 @@ html {
     height: 100%;
 }
 
-body
-{
-	margin: 0;
+body {
+    margin: 0;
     font-family: "Ping Hei", "¶¬ÇàºÚÌå", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "Î¢ÈíÑÅºÚ";
     font-size: 15px;
     min-height: 100%;
@@ -25,102 +27,361 @@ body
     position: relative;
     overflow-y: scroll;
     color: #000;
-	background:url(back.jpeg);
-	background-color: #f5f7f7;
+    background: url(back.jpeg);
+    background-color: #f5f7f7;
+}
+
+input {
+    outline-color: #ffa200;
 }
 
 @import url(layout.css);
 @import url(nav.css);
-.text-align-right{text-align:right;}.float-right{float:right;}
-a{text-decoration:none;}
-#info-photo{
-	height:120px;
-	width:120px;
-	text-align:center;
-	display:inline;
-	float:right;
-}
-.block{
-	display:block;
+.text-align-right {
+    text-align: right;
 }
 
-.complete-info{
-	height:800px;
-	font-size:20px;
-	text-align:left;
-	display:block;
-	overflow:hidden;
-	float:left;
+.float-right {
+    float: right;
 }
-.form-item{
-		clear:both;
-		height: 50px;
-		text-align:left;
-		margin-top:18px;
-}
-.form-item-img{
-	clear:both;
-	height:150px;
-}
-.form-item-textarea{
-	clear:both;
-	height:120px;
-}
-.form-lable-left{
-	float:left;
-	width: 130px;
-	line-height: 1em;
-	font-size: 18px;
-	margin-right: 10px;
-	padding-top:10px;
-	overflow: hidden;
-}
-.form-control-right{
-	float:left;
-	line-height:1em;
-	padding-top:10px;
-	padding: 8px 0;
-}
-.form-shop-img{
-	float:left;
-	padding-top:0px;
-	height: 80px;
-}
-.form-textarea{
-	float:left;
-	height: 120px;
-}
-.form-input-right{
-	padding: 6px 10px;
-	border: 1px solid;
-	outline: 0;
-}
-.textarea{
-	height:120px;
-	width:300px;
-}
-.submit-btn{
-	width:100px;
-	height:36px;
-	font-size:18px;
-}
-.hide{display:none;}
-.color1{background-color:#FFFF99;}
-.color2{background-color:#6699FF;}
-.color3{background-color:#CC6699;}
-.color4{background-color:#FFFFFF;}
-.color5{background-color:#1091E4;}
-.white{background-color:#FFFFFF;}
-.black{background-color:#000000;}
-.fontred{font:red;}
-.height10px{height:10px;}
-.height5px{height:5px;}
-.height2px{height:2px;}
-.outset{border-style:outset;}
-.font1.4{font-size:1.4em;}
-.nofloat{clear:both;}
 
-#menu, 
-.shop-container {
-	padding: 95px 0 97px;
+a {
+    text-decoration: none;
+}
+
+#info-photo {
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    display: inline;
+    float: right;
+}
+
+.block {
+    display: block;
+}
+
+.form-item {
+    clear: both;
+    text-align: left;
+    margin: 15px 0;
+}
+
+.form-item-img {
+    clear: both;
+    height: 150px;
+}
+
+.form-item-textarea {
+    clear: both;
+}
+
+.form-lable-left {
+    float: left;
+    width: 130px;
+    line-height: 1em;
+    font-size: 18px;
+    margin-right: 10px;
+    overflow: hidden;
+    line-height: 26px;
+}
+
+.form-shop-img {
+    float: left;
+    padding-top: 0px;
+    height: 40px;
+}
+
+.form-input {
+    width: 200px;
+    height: 26px;
+    border-radius: 4px;
+    background-color: #f0ede5;
+    border: 1px solid #ccc;
+    height: 25px;
+    padding-left: 0.5em;
+    box-sizing: border-box;
+}
+
+.form-input-right {
+    padding: 6px 10px;
+    border: 1px solid;
+    outline: 0;
+}
+
+.textarea {
+    height: 120px;
+    width: 300px;
+}
+
+.submit-btn {
+    width: 100px;
+    height: 36px;
+    font-size: 18px;
+}
+
+.hide {
+    display: none;
+}
+
+.color1 {
+    background-color: #FFFF99;
+}
+
+.color2 {
+    background-color: #6699FF;
+}
+
+.color3 {
+    background-color: #CC6699;
+}
+
+.color4 {
+    background-color: #FFFFFF;
+}
+
+.color5 {
+    background-color: #1091E4;
+}
+
+.white {
+    background-color: #FFFFFF;
+}
+
+.black {
+    background-color: #000000;
+}
+
+.fontred {
+    font: red;
+}
+
+.height10px {
+    height: 10px;
+}
+
+.height5px {
+    height: 5px;
+}
+
+.height2px {
+    height: 2px;
+}
+
+.outset {
+    border-style: outset;
+}
+
+.font1.4 {
+    font-size: 1.4em;
+}
+
+.nofloat {
+    clear: both;
+}
+
+
+/*****************************************************************
+ *
+ * common
+ *
+ ****************************************************************/
+
+.shop-container,
+.register-container {
+    padding: 95px 0 97px 4%;
+}
+
+.button {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+}
+
+.button:active {
+    transform: scale(0.9, 0.9);
+    -webkit-transform: scale(0.9, 0.9);
+    -moz-transform: scale(0.9, 0.9);
+    -o-transform: scale(0.9, 0.9);
+    -ms-transform: scale(0.9, 0.9);
+}
+
+
+/*****************************************************************
+ *
+ * page title
+ *
+ ****************************************************************/
+
+.page-title {
+    margin: 2% 0 0 0;
+    padding-bottom: 3px;
+    width: 50%;
+    border-bottom: 2px solid #000;
+}
+
+.page-title span {
+    margin-right: 5px;
+}
+
+.page-title .back-btn {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: 20px;
+    cursor: pointer;
+    float: left;
+    background-image: url(./../images/back-btn.png);
+}
+
+.page-title .parknshop,
+.page-title .main-title {
+    font-size: 1.6em;
+}
+
+.page-title .main-title {
+    color: #ffa200;
+}
+
+
+/*****************************************************************
+ *
+ * menu
+ *
+ ****************************************************************/
+
+#menu {
+    position: fixed;
+    top: 95px;
+    z-index: 2;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    width: 300px;
+    left: -300px;
+    transition: left 0.6s;
+    -webkit-transition: left 0.6s;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+#menu .head-item {
+    padding: 15px;
+    color: #fff;
+    text-align: left;
+}
+
+#menu .item-list {
+    padding: 0;
+}
+
+#menu .item-list a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#menu .item-list a:active {
+    color: #fff;
+}
+
+#menu .item-list li {
+    list-style: none;
+    padding: 10px 0;
+    transition: background-color 0.8s;
+}
+
+#menu .item-list .active:hover {
+    background-color: #ffa200;
+}
+
+#menu .item-list .selected {
+    color: #fff !important;
+    background-color: #ffa200 !important;
+}
+
+#menu .menu-btn {
+    height: 100px;
+    width: 30px;
+    background-image: url(./../images/products-btn-close.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 25%;
+    right: -30px;
+    cursor: pointer;
+}
+
+
+/*****************************************************************
+ *
+ * shop container
+ *
+ ****************************************************************/
+
+.shop-container #shop-lists {}
+
+.shop-container .shopbox {
+    width: 200px;
+    height: 120px;
+    margin: 15px 15px 0 0;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.shop-container .add-box {
+    background-image: url(./../images/add-btn.png);
+    border-radius: 4px;
+    background-size: 24% auto;
+    border: 2px dashed #ffa200;
+}
+
+
+/*****************************************************************
+ *
+ * shop container
+ *
+ ****************************************************************/
+
+.register-container .complete-info {
+    font-size: 20px;
+    text-align: left;
+    display: block;
+    overflow: hidden;
+    width: 80%;
+}
+
+.register-container textarea {
+    width: 400px;
+    height: 300px;
+    resize: none;
+    outline: none;
+    display: inline-block;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: #f0ede5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.register-container input[type="button"],
+.register-container button {
+    border-radius: 4px;
+    border: 1px solid #B27100;
+    background-color: #ce8300;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 18px;
+    text-align: center;
+    outline: none;
+    vertical-align: middle
+}
+
+.register-container .form-control-right > label {
+    color: #ffa200;
 }
