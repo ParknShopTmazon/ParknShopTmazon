@@ -41,4 +41,8 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.update(shop);
 	}
 	
+	public List<Shop> selectInLike(Shop shop){
+		return shopDao.selectInLike(shop);
+	}
+	
 }
