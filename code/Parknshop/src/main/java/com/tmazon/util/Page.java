@@ -40,7 +40,7 @@ public class Page<T> {
 			int nextPage =curPage+next;
 			getMaxPage(Items);
 			System.out.println("MAX_PAGE::"+this.MAX_PAGE);
-			if(nextPage<=0 || next == 0)
+			if(nextPage <= 0)
 			{
 				this.curPage = 1;
 				curIndex = 0;
