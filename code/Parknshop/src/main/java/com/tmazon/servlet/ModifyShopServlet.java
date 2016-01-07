@@ -79,6 +79,7 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+
 		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
