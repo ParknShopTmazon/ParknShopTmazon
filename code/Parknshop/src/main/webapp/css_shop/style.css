@@ -44,7 +44,7 @@ select {
 }
 
 s {
-	color: #ccc;
+    color: #ccc;
 }
 
 @import url(layout.css);
@@ -986,4 +986,12 @@ a {
     border: 1px solid #e0e0e0 !important;
     background-color: #f0f0f0 !important;
     color: #e0e0e0 !important;
+}
+
+.shops-orders-container #order-list .order-item .shopId .value,
+.shops-orders-container #order-list .order-item .productName .value {
+    width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

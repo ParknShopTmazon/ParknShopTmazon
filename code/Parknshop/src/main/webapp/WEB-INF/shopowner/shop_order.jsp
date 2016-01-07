@@ -61,11 +61,11 @@
 		                <div class="shop" style="background-image: url(${orderInfo.product.picture });"></div>
 		                </div>
 		                <div class="shopId">
-		                    <p class="value">${orderInfo.product.shopId }</p>
+		                    <p class="value" title="${orderInfo.product.shopId }">${orderInfo.product.shopId }</p>
 		                    <p class="name">id</p>
 		                </div>
 		                <div class="productName">
-		                    <p class="value">${orderInfo.product.name }</p>
+		                    <p class="value" title="${orderInfo.product.shopId }">${orderInfo.product.name }</p>
 		                    <p class="name">name</p>
 		                </div>
 		                <div class="origin-price">
