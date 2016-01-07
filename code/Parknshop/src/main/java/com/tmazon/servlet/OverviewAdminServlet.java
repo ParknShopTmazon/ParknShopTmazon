@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.User;
 import com.tmazon.util.AttrName;
+import com.tmazon.util.CheckAdmin;
 
 
 public class OverviewAdminServlet extends HttpServlet {
@@ -20,28 +21,17 @@ public class OverviewAdminServlet extends HttpServlet {
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		if(CheckAdmin.isAdminOnline(req))
 		{
-			HttpSession session = request.getSession(false);
-			User onlineUser = (User) session.getAttribute(AttrName.SessionScope.USER);
-			if(onlineUser == null || !onlineUser.getRole().equals(User.ROLE_ADMIN))
-			{
-				if (session != null) {
-					session.invalidate();
-				}
-				response.sendRedirect("login");
-			}
-			else
-			{
-				request.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(request,response);
-			}
+			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req,resp);
 		}
-		catch(Exception e)
+		else
 		{
-			e.printStackTrace();
-			response.sendRedirect("login");
+			resp.sendRedirect("login");
 		}
+		
 		
 	}
 

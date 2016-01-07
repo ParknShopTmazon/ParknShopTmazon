@@ -169,7 +169,14 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 	
 	public boolean updateStatus(OrderInfo orderInfo) {
-		String sql = "UPDATE orderInfo SET status = ? WHERE orderId = ? AND productId = ?";
+		StringBuilder sqlBuilder = new StringBuilder("UPDATE orderInfo SET status = ? ");
+		if (OrderInfo.STATUS_ON_DELIVERY.equals(orderInfo.getStatus())) {
+			sqlBuilder.append(", deliveryTime = now() ");
+		} else if (OrderInfo.STATUS_CONFIRM_RECEIPT.equals(orderInfo.getStatus())) {
+			sqlBuilder.append(", dealTime = now() ");
+		}
+		sqlBuilder.append("WHERE orderId = ? AND productId = ?");
+		String sql = sqlBuilder.toString();
 		System.out.println(sql);
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());

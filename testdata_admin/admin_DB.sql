@@ -21,3 +21,17 @@ INSERT INTO user(userId,name,password,role,status) VALUES (16,'qwerty','qwerty',
 
 --ad
 
+
+
+--shop-apply
+insert into shop(shopId,name,type,status,owner) values(7881,'aaa','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7882,'bbb','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7883,'ccc','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7884,'ddd','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7885,'eee','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7886,'fff','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7887,'ggg','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7888,'hhh','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7889,'abc','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7890,'fadfas','company','checking',7878);
+insert into shop(shopId,name,type,status,owner) values(7891,'iojio','company','checking',7878);
