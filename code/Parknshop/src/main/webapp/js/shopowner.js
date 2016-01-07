@@ -82,9 +82,10 @@ const shopOwner = {
      * @return {[type]} [description]
      */
     initManage: function () {
-        $('#menu #products-list, #menu #add-products').addClass('active');
+        $('#menu #products-list, #menu #add-products, #menu #manage-orders').addClass('active');
         $('#menu #products-list').parent().attr('href', 'selectedshop');
         $('#menu #add-products').parent().attr('href', 'addproduct');
+        $('#menu #manage-orders').parent().attr('href', 'shoporder');
     },
 
     /**
@@ -138,5 +139,32 @@ const shopOwner = {
      */
     initAddProducts: function () {
         $('#menu #add-products').addClass('selected');  
+    }
+
+    /**
+     * [initOrderList: init the order-list]
+     * @return {[type]} [description]
+     */
+    initOrderList: function () {
+        $('.shops-orders-container #order-list .order-item .handle-btn').click(function(event) {
+            /* Act on the event */
+            const orderId = $(this).attr('oid');
+            const _this = $(this);
+            
+            $.getJSON('updateordercondition', {orderId: orderId}, function(data, textStatus) {
+                /*optional stuff to do after success */
+                if (!data.success) {
+                    _this.css({
+                            'border': '1px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                    _this.removeClass('button');
+
+                    _this.unbind('click');
+                }
+            });
+        });
     }
 };
