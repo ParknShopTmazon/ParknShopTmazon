@@ -18,7 +18,7 @@
 			</div>
 		    <div class="order-form">
 				<div>
-					shop Name
+					shop name
 					<select>
 						<option>ALL</option>
 						<option>ShopName1</option>
