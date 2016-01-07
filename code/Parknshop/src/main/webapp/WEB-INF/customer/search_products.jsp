@@ -22,7 +22,7 @@
 		</div>
 		<form class="form-search">
 			<input class="input-medium search-query" type="text" name="name" value="${param.name}" placeholder="Search..."/>
-			<select name="searchMethod" class="select">
+			<select name="searchMethod" class="select" id="searchMethod">
 				<c:if test="${param.searchMethod=='productName'||empty param.searchMethod}">
 					<option value="productName" selected="selected">Product Name</option>
 	    			<option value="shopName">Shop Name</option>
@@ -181,6 +181,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			customer.init();
+			customer.initSearchPage();
 		});
 	</script>
 </body>

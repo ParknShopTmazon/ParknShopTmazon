@@ -27,6 +27,9 @@
 				<div class="main">Introduction of products</div>
 				<div class="infos">
 					<div class="info-items">
+						<div class="name product-name">${ product.name }</div>
+					</div>
+					<div class="info-items">
 						<span class="name">Shop Owner</span>
 						<span class="value">
 							<!-- <a href="#" >${ shopOwnerName }</a> -->

@@ -312,7 +312,7 @@ input {
 }
 
 .search-container .form-search .select {
-    width: 30%;
+    width: 15%;
     background-color: #ffa200;
     padding: 5px;
 }
@@ -490,6 +490,11 @@ input {
     border: 1px solid #e0e0e0 !important;
     background-color: #f0f0f0 !important;
     color: #e0e0e0 !important;
+}
+
+.product-container .product-info .product-name {
+    font-size: 1.5em !important;
+    color: #ffa200;
 }
 
 

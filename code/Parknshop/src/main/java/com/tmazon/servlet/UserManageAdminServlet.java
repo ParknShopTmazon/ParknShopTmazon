@@ -18,7 +18,7 @@ public class UserManageAdminServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if(CheckAdmin.isAdminOnline(req))
 		{
-			req.getRequestDispatcher("WEB-INF/admin/userManagement.jsp").forward(req,resp);
+			req.getRequestDispatcher("searchUserAdmin").forward(req,resp);
 		}
 		else
 		{

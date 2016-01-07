@@ -216,10 +216,10 @@ input[type="submit"], input[type="reset"], input[type="file"] {
 
 /* Pagination */
 .pagination {
-	text-align:right;
+	text-align:center;
 }
 .pagination a, .pagination span {
 	display:inline-block;
-	margin:0 2px;
-	padding:2px 6px;
+	margin:0 10px;
+	padding:2px 12px;
 }
