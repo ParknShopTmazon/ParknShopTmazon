@@ -21,7 +21,7 @@
 			<c:forEach var="shop" items="${shopList}" >
 				<div class="pic-container">
 					<c:if test="${shop.status=='success'}">
-						<a href="selectedshop?shopId=${shop.shopId}" title="info">
+						<a href="selectedshop?shopId=${shop.shopId}" title="details">
 					        <div class="over before">
 					            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
 					            <div class="shop-name">${ shop.name }</div>

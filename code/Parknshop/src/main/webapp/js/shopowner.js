@@ -82,7 +82,9 @@ const shopOwner = {
      * @return {[type]} [description]
      */
     initManage: function () {
-        $('#menu #products-list, #menu #add-products, #menu #modify-products, #menu #delete-products').addClass('active');
+        $('#menu #products-list, #menu #add-products').addClass('active');
+        $('#menu #products-list').parent().attr('href', 'selectedshop');
+        $('#menu #add-products').parent().attr('href', 'addproduct');
     },
 
     /**
@@ -124,9 +126,17 @@ const shopOwner = {
 
     /**
      * [initProductList: init the products list page]
-     * @return {[type]} [description]
+     * @return {[type]}        [description]
      */
     initProductList: function () {
-        $('#menu #products-list').addClass('selected');  
+        $('#menu #products-list').addClass('selected');
+    },
+
+    /**
+     * [initAddProducts: init the produts add page]
+     * @return {[type]}        [description]
+     */
+    initAddProducts: function () {
+        $('#menu #add-products').addClass('selected');  
     }
 };

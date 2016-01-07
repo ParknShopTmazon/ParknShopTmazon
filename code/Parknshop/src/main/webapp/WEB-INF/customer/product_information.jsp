@@ -22,9 +22,7 @@
 		    <span class="main-title">Login</span>
 		</div>
 		<div class="product-area">
-			<div class="product-picture">
-				<img src="${ product.picture }">
-			</div>
+			<div class="product-picture" style="background-image: url(${ product.picture });"></div>
 			<div class="product-info">
 				<div class="main">Introduction of products</div>
 				<div class="infos">
