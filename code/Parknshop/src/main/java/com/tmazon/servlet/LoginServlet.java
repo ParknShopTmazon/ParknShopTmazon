@@ -1,7 +1,6 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,12 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.tmazon.dao.AdvertisementDao;
-import com.tmazon.dao.ShopApplyDao;
-import com.tmazon.dao.impl.AdvertisementDaoImpl;
-import com.tmazon.dao.impl.ShopApplyDaoImpl;
-import com.tmazon.domain.Advertisement;
-import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
 import com.tmazon.service.OverviewAdminService;
 import com.tmazon.service.UserService;
@@ -66,14 +59,6 @@ public class LoginServlet extends HttpServlet {
 					resp);
 			return;
 		}
-		
-		// check user status
-		if (user.getRole().equals(User.STATUS_BLACK)) {
-			req.setAttribute(AttrName.RequestScope.ERROR_USER_BLACK, true);
-			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
-					resp);
-			return;
-		}
 
 		// check if logged-on
 		if (req.getSession().getAttribute(AttrName.SessionScope.USER) != null) {
@@ -90,8 +75,16 @@ public class LoginServlet extends HttpServlet {
 			users.get(name).invalidate();
 		}
 
-		// log in
+		// check user status
 		user = userService.findByName(name);
+		if (user.getStatus().equals(User.STATUS_BLACK)) {
+			req.setAttribute(AttrName.RequestScope.ERROR_USER_BLACK, true);
+			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
+					resp);
+			return;
+		}
+		
+		// log in
 		req.getSession().setAttribute(AttrName.SessionScope.USER, user);
 		users.put(name, req.getSession());
 		System.out.println("online user: " + users.size());

@@ -78,16 +78,16 @@ INSERT INTO `parknshop`.`address` (`addressId`, `userId`, `description`, `zipcod
 INSERT INTO `parknshop`.`orders` VALUES (100, 'online_payment', 'normal', now(), 12312, 1);
 
 -- orderInfo
-INSERT INTO `parknshop`.`orderInfo` VALUES (100, 1, 2, 78781, 'unpaid', null, null, '50256678700001');
-INSERT INTO `parknshop`.`orderInfo` VALUES (100, 2, 1, 78782, 'unpaid', null, null, '50256678700002');
+INSERT INTO `parknshop`.`orderInfo` VALUES (100, 1, 2, 78781, 'unpaid', null, null, null, '50256678700001');
+INSERT INTO `parknshop`.`orderInfo` VALUES (100, 2, 1, 78782, 'unpaid', null, null, null, '50256678700002');
 
 INSERT INTO `parknshop`.`orders` VALUES ('1', 'online_payment', 'normal', '2015-1-1', '12312', '1');
 INSERT INTO `parknshop`.`orders` VALUES ('2', 'online_payment', 'normal', '2015-1-1', '12312', '1');
 
-INSERT INTO `parknshop`.`orderinfo` VALUES ('1', '1', '2', '78781', 'unpaid', null, null, null);
-INSERT INTO `parknshop`.`orderinfo` VALUES ('1', '1', '3', '78782', 'unpaid', null, null, null);
-INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '2', '2', '78781', 'unpaid', null, null, null);
-INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '1', '3', '78783', 'unpaid', null, null, null);
+INSERT INTO `parknshop`.`orderinfo` VALUES ('1', '1', '2', '78781', 'unpaid', null, null, null, null);
+INSERT INTO `parknshop`.`orderinfo` VALUES ('1', '1', '3', '78782', 'unpaid', null, null, null, null);
+INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '2', '2', '78781', 'unpaid', null, null, null, null);
+INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '1', '3', '78783', 'unpaid', null, null, null, null);
 
 
 -- friend
