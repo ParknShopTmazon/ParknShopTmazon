@@ -21,7 +21,7 @@
 					shop name
 					<select name="shopId">
 						<option value="-1">ALL</option>
-						<c:forEach var="shop" items="${shopList}">
+						<c:forEach var="shop" items="${shopLists}">
 							<option value="${shop.shopId }">${shop.name }</option>
 						</c:forEach>
 					</select>
@@ -86,7 +86,7 @@
 		                        <p class="name">status</p>
 		                    </div>
 		                </div>
-		            	<div class="handle-btn button">Send</div>
+		            	<div class="handle-btn button" ><a href="modifyorder?oid=${orderInfo.orderId}&pid=${orderInfo.productId}">Send</a></div>
 		            </div>
 		            </c:forEach>
 		        </div>	

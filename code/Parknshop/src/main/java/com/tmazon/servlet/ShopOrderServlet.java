@@ -55,15 +55,15 @@ public class ShopOrderServlet extends HttpServlet {
 		}
 		Shop shop = new Shop();
 		shop.setOwner(user.getUserId());
-		List<Shop> shopList = shopService.select(shop);
-		req.setAttribute("shopList", shopList);
+		List<Shop> shopLists = shopService.select(shop);
+		req.setAttribute("shopLists", shopLists);
 		
 		String  Id= req.getParameter("shopId");
 		
 		Integer shopId = ParseUtil.String2Integer(Id, null);
 		List<OrderInfo> orderInfos= new ArrayList<OrderInfo>();
 		if(shopId==null||shopId==-1){
-			for (Shop shop2 : shopList) {
+			for (Shop shop2 : shopLists) {
 				orderInfos.addAll(orderService.getOrderInfosByshop(shop2.getShopId()));
 			}
 		}else{
