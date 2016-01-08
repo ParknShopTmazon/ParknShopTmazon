@@ -44,6 +44,7 @@
 		                </div>
 		                <!-- <div class="delete-btn button"></div> -->
 		            </div>
+		            <c:forEach  var="orderInfo" items="${order.orderInfos}">
 		            <div class="shop-item">
 		                <div class="pic-container">
 		                    <a href="" target="_blank">
@@ -51,7 +52,6 @@
 		                            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
 		                        </div>
 		                    </a>
-		                 <c:forEach  var="order" items="${order.orderInfos}"></c:forEach>
 		                <div class="shop" style="background-image: url(${orderInfo.product.picture });"></div>
 		                </div>
 		                <div class="shopId">
@@ -84,8 +84,10 @@
 		                        <p class="name">status</p>
 		                    </div>
 		                </div>
-		                <div class="handle-btn button"><a href="modifyorder?orderId=${orderInfo.orderId}">Send</a></div>
+		                
 		            </div>
+		            </c:forEach>
+		            <div class="handle-btn button"><a href="modifyorder?orderId=${order.orderId}">Send</a></div>
 		        </div>	
 			</c:forEach>
 		</div>
