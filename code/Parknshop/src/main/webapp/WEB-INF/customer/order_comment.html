@@ -4,36 +4,36 @@
     <span class="main-title">Comment</span>
 </div>
 <form action="" id="order-comment-form">
-	<input type="hidden" id="shop_rate" name="shop_rate">
-	<input type="hidden" id="product_rate" name="product_rate">
-	<input type="hidden" id="delivery_rate" name="delivery_rate">
+	<input type="hidden" id="shop_rate" name="shop_rate" value="3">
+	<input type="hidden" id="product_rate" name="product_rate" value="3">
+	<input type="hidden" id="delivery_rate" name="delivery_rate" value="3">
     <div id="order-info">
         <div class="shop-info">
             
         </div>
         <div class="shop-rate">
             <div class="shop">
-                <span class="name"><strong>shop rate</strong></span>
+                <span class="name"><strong>shop rate</strong><span class="rate-val">3.0</span></span>
                 <span class="value">
-	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "shop"}'></div>	
+	            	<div class="divClass" data-webRating="3" data-webRatingN="5" data-webRatingArg='{"option": "shop"}'></div>	
 	        	</span>
             </div>
             <div class="product">
-                <span class="name"><strong>product rate</strong></span>
+                <span class="name"><strong>product rate</strong><span class="rate-val">3.0</span></span>
                 <span class="value">
-	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "product"}'></div>	
+	            	<div class="divClass" data-webRating="3" data-webRatingN="5" data-webRatingArg='{"option": "product"}'></div>	
 	        	</span>
             </div>
             <div class="delivery">
-                <span class="name"><strong>delivery rate</strong></span>
+                <span class="name"><strong>delivery rate</strong><span class="rate-val">3.0</span></span>
                 <span class="value">
-	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "delivery"}'></div>	
+	            	<div class="divClass" data-webRating="3" data-webRatingN="5" data-webRatingArg='{"option": "delivery"}'></div>	
 	        	</span>
             </div>
             <div class="comment-area">
                 <span class="name"><strong>comment</strong></span>
                 <span>
-                    <textarea placeholder="description..."></textarea>
+                    <textarea id="commentContent" placeholder="comment..."></textarea>
                 </span>
             </div>
         </div>
@@ -46,6 +46,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
     customer.init();
-    customer.initComment($('#oid').val(), $('#productId').val());
+    customer.initComment($('#oid').val(), $('#productId').val(), $('#item_num').val());
 });
 </script>

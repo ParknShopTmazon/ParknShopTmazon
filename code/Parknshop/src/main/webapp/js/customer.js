@@ -655,6 +655,8 @@ var customer = {
                 var option = json.option;
                 /** set the rate score */
                 $('#' + option + '_rate').val(clickScore);
+                /** set the score to show */
+                $('.order-container #order-info .shop-rate .' + option + ' .rate-val').html(parseFloat(clickScore).toFixed(1));
             },
 
             //Tooltip
@@ -869,43 +871,71 @@ var customer = {
      * [initComment: init the comment page of order]
      * @param  {[type]} oid       [the order id]
      * @param  {[type]} productId [the product id]
+     * @param  {[type]} itemId    [the item id]
      * @return {[type]}           [description]
      */
-    initComment: function (oid, productId) {
+    initComment: function (oid, productId, item) {
         "use strict";
         function initData(data) {
+            /** @type {Date} [date object] */
+            let date = new Date();
+            let deliveryTime = new Date();
+            let dealTime = new Date();
+            
+            /** item should not be greater than the actual quantity */
+            if (item >= data.orderInfos.length) {
+                return;
+            }
+
+            date.setTime(data.orderTime.time);
+            if (data.orderInfos[item].deliveryTime) {
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime);
+                deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                deliveryTime = '/';
+            }
+
+            if (data.orderInfos[item].dealTime) {
+                dealTime.setTime(data.orderInfos[item].dealTime);
+                dealTime = dealTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                dealTime = '/';
+            }
+
             $('.order-container #order-info .shop-info').append('<div class="pic-container">\
-                <div class="over">\
-                    <div class="link-btn"></div>\
+                    <a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
+                        <div class="over">\
+                            <div class="link-btn"></div>\
+                        </div>\
+                    </a>\
+                    <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
                 </div>\
-                <div class="shop" style="background-image: url(./images/shops/shop1.jpg);"></div>\
-            </div>\
-            <div class="info">\
-                <div class="item">\
-                    <span class="name">Order Id</span>\
-                    <span class="value">1231231152</span>\
-                </div>\
-                <div class="item">\
-                    <span class="name">Shop Owner</span>\
-                    <span class="value">shop owner1</span>\
-                </div>\
-                <div class="address item">\
-                    <span class="name">Address</span>\
-                    <span class="value">Room 701, Unit 3, No.46, JiHua Road 4, Chan City Disrict, Foshan, Guangdong, China</span>\
-                </div>\
-                <div class="time item">\
-                    <span class="name">Create Time</span>\
-                    <span class="value">2015-12-05 13:08:25</span>\
-                </div>\
-                <div class="item">\
-                    <span class="name">Delivery Time</span>\
-                    <span class="value">2015-12-06 13:08:25</span>\
-                </div>\
-                <div class="item">\
-                    <span class="name">Deal Time</span>\
-                    <span class="value">2015-12-10 13:08:25</span>\
-                </div>\
-            </div>')
+                <div class="info">\
+                    <div class="item">\
+                        <span class="name">Order Id</span>\
+                        <span class="value">' + data.orderId + '</span>\
+                    </div>\
+                    <div class="item">\
+                        <span class="name">Shop Owner</span>\
+                        <span class="value">' + data.orderInfos[item].product.shop.name + '</span>\
+                    </div>\
+                    <div class="address item">\
+                        <span class="name">Address</span>\
+                        <span class="value">' + data.address.description + '</span>\
+                    </div>\
+                    <div class="time item">\
+                        <span class="name">Create Time</span>\
+                        <span class="value">' + date.format('yyyy-MM-dd hh:mm') + '</span>\
+                    </div>\
+                    <div class="item">\
+                        <span class="name">Delivery Time</span>\
+                        <span class="value">' + deliveryTime + '</span>\
+                    </div>\
+                    <div class="item">\
+                        <span class="name">Deal Time</span>\
+                        <span class="value">' + dealTime + '</span>\
+                    </div>\
+                </div>')
         }
         
         /** init the rate system */
@@ -933,25 +963,33 @@ var customer = {
             }
 
             $('.order-container #order-info .comment-submit').click(function () {
-                $.getJSON('payOrder', {
-                    oid: oid,
-                    productId: $('#productId').val()
-                }, function (data, textStatus) {
-                    /*optional stuff to do after success */
-                    if (data.success) {
-                        $('.order-container #order-info .comment-submit').css({
-                            'border': '2px solid #e0e0e0',
-                            'background-color': '#f0f0f0',
-                            'color': '#e0e0e0'
-                        });
+            	if ($('#commentContent').val() === '') {
+            		$('#commentContent').focus();
+            		alert('fill the empty comment');
+            	} else {
+            		$.getJSON('comment', {
+                        productId: $('#productId').val(),
+                        content: $('#commentContent').val(),
+                        shopScore: $('#shop_rate').val(),
+                        productScore: $('#product_rate').val(),
+                        deliveryScore: $('#delivery_rate').val()
+                    }, function (data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (data.success) {
+                            $('.order-container #order-info .comment-submit').css({
+                                'border': '2px solid #e0e0e0',
+                                'background-color': '#f0f0f0',
+                                'color': '#e0e0e0'
+                            });
 
-                        $('.order-container #pay-btn').removeClass('button');
+                            $('.order-container #pay-btn').removeClass('button');
 
-                        $('.order-container #pay-btn').unbind('click');
-                    } else {
-                        alert('Ooops, failed to comment');
-                    }
-                });
+                            $('.order-container #pay-btn').unbind('click');
+                        } else {
+                            alert('Ooops, failed to comment');
+                        }
+                    });
+            	}
             });
         });
     },
@@ -1532,7 +1570,7 @@ var customer = {
             if (operations[data.orderInfos[item].status].disabled !== 'disabled') {
                 $('.order-container #order-info .shop-confirm').click(function (event) {
                     /* Act on the event */
-                    window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&productId=' + data.orderInfos[item].productId;
+                    window.location.href = 'viewOrder?type=' + operations[data.orderInfos[item].status].nextStep + '&oid=' + oid + '&productId=' + data.orderInfos[item].productId + '&item=' + item;
                 });
             }
         };
@@ -1610,7 +1648,7 @@ var customer = {
                     clickUrl = '';
                     if (operations[data[i].orderInfos[j].status].disabled !== 'disabled') {
                         /* Act on the event */
-                        clickUrl = '?type=' + operations[data[i].orderInfos[j].status].nextType + '&oid=' + data[i].orderId + '&productId=' + data[i].orderInfos[j].productId;
+                        clickUrl = '?type=' + operations[data[i].orderInfos[j].status].nextType + '&oid=' + data[i].orderId + '&productId=' + data[i].orderInfos[j].productId + '&item=' + j;
                     }
                     shopItem += '<div class="shop-item">\
                         <div class="pic-container">\

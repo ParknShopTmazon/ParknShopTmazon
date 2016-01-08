@@ -1683,6 +1683,12 @@ input {
     float: left;
 }
 
+.order-container #order-info .shop-rate .name .rate-val {
+	margin-left: 10px;
+	color: #b27100;
+	font-size: 1.3em;
+}
+
 .order-container #order-info .shop-rate .value {
     float: right;
 }
