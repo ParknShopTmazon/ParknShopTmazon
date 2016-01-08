@@ -14,6 +14,7 @@ public class ShopServiceImpl implements ShopService {
 	private ShopDao shopDao = BasicFactory.getImpl(ShopDao.class);
 
 	public List<Shop> select(Shop shop){
+		
 		return shopDao.select(shop);
 	}
 	public Shop findById(Integer id) {
