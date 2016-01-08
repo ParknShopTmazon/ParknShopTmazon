@@ -26,6 +26,9 @@ public class AddAdvertisementServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 //		System.out.println(request.getParameter("cost"));
 //		System.out.println(request.getParameter("productID"));
 //		if((!request.getParameter("cost").equals(null))&&(!request.getParameter("cost").equals(""))){

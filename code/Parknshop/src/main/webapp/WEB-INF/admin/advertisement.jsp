@@ -26,7 +26,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="grid_4">
 					<p>
 						<label>ProductName:</label>
-						<input type="text" name="searchProductName" value="${searchProductName }" />
+						<input type="text" name="searchProductName" 
+						
+						value="${searchProductName }" />
 					</p>
 				</div>
 				<div class="grid_5">
@@ -243,7 +245,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${pro.productId }</td>
 								<td>${pro.name }</td>
 								<td>${shopList[status.index].name }</td>		
-								<td><a href="#" class="delete">Add</a></td>
+								<td><a href="#" onclick="mischief()" id="mischief">Add</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -266,8 +268,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	
                             	
                                 <label>&nbsp;</label>	
-								<input type="submit" value="Add"  onclick="vanish()"/>						  
-                                                 
+								<input type="submit" value="Add"   onclick="vanish()"/>						  	
 		 </form>      
          </div>
         <%@ include file="footer.html"%>
@@ -296,9 +297,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 {
 				if(imgfile.value)
 				{ 
-				mypic.src=imgfile.value;
-				mypic.style.display="block";
-				mypic.style.border=1;
+					mypic.src=imgfile.value;
+					mypic.style.display="block";
+					mypic.style.border=1;
 				 }
 			 }
 			 $(document)

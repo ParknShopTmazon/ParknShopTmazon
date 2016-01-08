@@ -25,6 +25,7 @@ public class ModifyAdvServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 //		System.out.println(request.getParameter("advId"));
 //		System.out.println(request.getParameter("cost"));
 //		if((!request.getParameter("cost").equals(null))&&(!request.getParameter("cost").equals(""))){
