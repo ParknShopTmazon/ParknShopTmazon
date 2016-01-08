@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.tmazon.domain.OrderInfo;
+import com.tmazon.domain.Product;
 import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
 import com.tmazon.service.OrderService;
+import com.tmazon.service.ProductService;
 import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
@@ -21,6 +23,7 @@ public class DeleteShopServlet extends HttpServlet {
 
     private ShopService shopService = BasicFactory.getImpl(ShopService.class);
     private OrderService orderService = BasicFactory.getImpl(OrderService.class);
+    private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
@@ -100,26 +103,32 @@ public class DeleteShopServlet extends HttpServlet {
 		    }
 			
 		   if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
-		    	List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(id);
-				boolean canBeDelete = true;
-				for(int i=0;i<orderInfos.size();i++){
-					String status=orderInfos.get(i).getStatus();
-					if(!status.equals(OrderInfo.STATUS_DELETED)&&!status.equals(OrderInfo.STATUS_CONFIRM_RECEIPT)&& !status.equals(OrderInfo.STATUS_UNPAID)){
-						canBeDelete = false;
-						break ;
+			    List<Product> productList = productService.findByShopId(shop.getShopId());
+			    if(productList.isEmpty()){
+			    	List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shop.getShopId());
+					boolean canBeDelete = true;
+					for(int i=0;i<orderInfos.size();i++){
+						String status=orderInfos.get(i).getStatus();
+						if(!status.equals(OrderInfo.STATUS_DELETED)&&!status.equals(OrderInfo.STATUS_CONFIRM_RECEIPT)&& !status.equals(OrderInfo.STATUS_UNPAID)){
+							canBeDelete = false;
+							break ;
+						}
 					}
-				}
-				if(canBeDelete){
-					shop.setStatus(Shop.STATUS_DELETED);
-					boolean isUpdateSuccess = shopService.update(shop);
-					if(isUpdateSuccess==true){
-						System.out.println("修改成功");
+					
+					if(canBeDelete){
+						shop.setStatus(Shop.STATUS_DELETED);
+						boolean isUpdateSuccess = shopService.update(shop);
+						if(isUpdateSuccess==true){
+							System.out.println("修改成功");
+						}
+						resp.sendRedirect("myshop");
+					}else{
+						req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, canBeDelete);
+						resp.sendRedirect("myshop");
 					}
-					resp.sendRedirect("myshop");
-				}else{
-					req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, canBeDelete);
-					resp.sendRedirect("myshop");
-				}
+			  }else{
+			   	resp.sendRedirect("myshop");
+			  }
 		    }
 	}
 }

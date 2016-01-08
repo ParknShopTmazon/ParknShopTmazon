@@ -332,6 +332,26 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		
 	}
+	
+	public List<Product> findByShopId(Integer shopId){
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product WHERE 1=1 ");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if(shopId != null){
+			sqlBuilder.append("AND shopId = ? ");
+			params.add(shopId);
+		}
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<Product> result = runner.query(sql, new BeanListHandler<Product>(Product.class), params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
 	
 
