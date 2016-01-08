@@ -76,7 +76,7 @@
 }
 
 .zoomWrapperTitle {
-    display: block;
+    display: none !important;
     background: #999;
     color: #FFF;
     height: 18px;

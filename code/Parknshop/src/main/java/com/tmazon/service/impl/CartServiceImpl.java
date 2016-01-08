@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.tmazon.dao.CartDao;
+import com.tmazon.dao.ProductDao;
 import com.tmazon.domain.Cart;
+import com.tmazon.domain.Product;
 import com.tmazon.domain.User;
 import com.tmazon.service.CartService;
 import com.tmazon.util.AttrName;
@@ -15,10 +17,20 @@ import com.tmazon.util.BasicFactory;
 public class CartServiceImpl implements CartService {
 	
 	private CartDao cartDao = BasicFactory.getImpl(CartDao.class);
+	private ProductDao productDao = BasicFactory.getImpl(ProductDao.class);
 	
 	public List<Cart> getCart(User user) {
 		
 		List<Cart> list = cartDao.select(new Cart(user.getUserId(), null, null));
+		
+		for(Cart cart : list){
+			Product product = productDao.findById(cart.getProductId());
+			int stockNum = product.getStockNum();
+			if(stockNum < cart.getQuantity()){
+				cart.setQuantity(stockNum);
+				cartDao.update(cart);
+			}
+		}
 		
 		return list;
 	}

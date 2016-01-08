@@ -16,21 +16,23 @@
 			    <span class="parknshop">PARKnSHOP</span>
 			    <span class="main-title">Orders List & Incomes</span>
 			</div>
+			<div class="main">Filter</div>
 		    <div class="order-form">
 				<div>
 					shop name
-					<select name="shopId">
+					<select id="shopId" name="shopId">
 						<option value="-1">ALL</option>
 						<c:forEach var="shop" items="${shopLists}">
 							<option value="${shop.shopId }">${shop.name }</option>
 						</c:forEach>
 					</select>
 					from
-					<input type="date" name="start">
+					<input type="date" id="startDate" value="" name="start">
 					to
-					<input type="date" name="end">	
+					<input type="date" id="endDate" value="" name="end">	
 				</div>
 			</div>
+			<div class="main">Orders</div>			
 			<c:if test="${num==0 }">
 			no order
 			</c:if>
@@ -86,7 +88,7 @@
 		                        <p class="name">status</p>
 		                    </div>
 		                </div>
-		            	<div class="handle-btn button" ><a href="modifyorder?oid=${orderInfo.orderId}&pid=${orderInfo.productId}">Send</a></div>
+		            	<div class="handle-btn button" oid="${order.orderId}" pid="${orderInfo.productId}" status="${orderInfo.status}">Send</a></div>
 		            </div>
 		            </c:forEach>
 		        </div>	
