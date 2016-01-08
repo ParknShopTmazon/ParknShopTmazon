@@ -29,9 +29,9 @@
 					<div class="control-group">
 						<label class="control-label">ROLES</label>
 						<div class="controls">
-							<input type="radio" id="customer" checked="checked" name="roles" value="customer">
+							<input type="radio" id="customer" checked="checked" name="role" value="customer">
 							<label for="customer">Customer</label>
-							<input type="radio" name="roles" value="shop-owner" id="shop-owner">
+							<input type="radio" name="role" value="shop_owner" id="shop-owner">
 							<label class="checked" for="shop-owner">Shop Owner</label>
 						</div>
 					</div>
@@ -65,6 +65,9 @@
 						</c:if>
 						<c:if test="${ not empty r_error_parameters }">
 							<label style="color: red;">6-20 characters for name and password only</label>
+						</c:if>
+						<c:if test="${ not empty r_error_param_role }">
+							<label style="color: red;">error role</label>
 						</c:if>
 						<c:if test="${ not empty r_is_register_success }">
 							<c:choose>
