@@ -18,37 +18,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<body>
 		<%@ include file="header.html"%>
 		<div class="ad-container">
+		
 			<div id="content" class="container_16 clearfix">
+			<form action="" method="post">
 				<div class="grid_4">
 					<p>
-						<label>Product_Name</label>
-						<input type="text" name="" value=""/>
+						<label>Product_Name:</label>
+						<input type="text" name="searchProductName" />
 					</p>
 				</div>
 				<div class="grid_5">
 					<p>
-						<label>Company</label>
-						<input type="text" name="" value=""/>
+						<label>ShopName:</label>
+						<input type="text" name="searchShopName" />
 					</p>
 				</div>
 				<div class="grid_5">
 					<p>
-						<label>Type</label>
-						<select>
+						<label>Type:</label>
+						<select name="select_type">
 							<option>ALL</option>
-							<option>Food</option>
-							<option>Clothes</option>
-							<option>Book</option>
+							
 						</select>
 					</p>
 				</div>
 				<div class="grid_2">
 					<p>
 						<label>&nbsp;</label>
-                        <a href="#" class="Add" onclick="mischief()" id="mischief">Add</a>
+                        <input   type="submit" value="Search" />
 					</p>
 				</div>
-                
+              </form> 
                 
                 
 				<div class="grid_16">
@@ -94,9 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <table>
 						<thead>
 							<tr>
-								<th>shop</th>
-								<th>price</th>
-								<th>style</th>
+								<th></th>
+								<th>ProductName:</th>
+								<th>ShopName:</th>
+								
 								<th colspan="3" width="10%">Action</th>
 							</tr>
 						</thead>

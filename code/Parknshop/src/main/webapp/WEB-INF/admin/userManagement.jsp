@@ -14,6 +14,9 @@
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 	</head>
 	<body>
+	<!--<script type="text/javascript">
+			document.getElemntById('select_role')
+		</script>  -->	
 		<%@ include file="header.html"%>
 		<div class="user-container">
 			<form method="post" action="searchUserAdmin">

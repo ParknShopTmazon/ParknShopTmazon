@@ -58,10 +58,10 @@ public class SearchHistoryAdminServlet extends HttpServlet {
 		{
 			next = Integer.parseInt(nextStr);
 		}
-		SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
 		try {
-			Date startDate = startDateStr == null? null: formatter.parse(startDateStr+" 00:00:00");
-			Date endDate = endDateStr == null? null : formatter.parse(endDateStr+" 23:59:59");
+			SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+			Date startDate = startDateStr == null || startDateStr.equals("")? null: formatter.parse(startDateStr+" 00:00:00");
+			Date endDate = endDateStr == null || endDateStr.equals("")? null : formatter.parse(endDateStr+" 23:59:59");
 			if(startDate != null && endDate != null)
 						System.out.println(startDate.toString()+"::"+endDate.toString());
 			List<History> historyList = historyAdminService.search(startDate,endDate);

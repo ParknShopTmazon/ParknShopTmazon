@@ -15,7 +15,7 @@ public class RateDaoImpl implements RateDao{
 
 	public double getRate()
 	{
-		String sql = "SELECT * FROM  rate";
+		String sql = "SELECT * FROM rate";
 		List<Rate> rateList = null;
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
