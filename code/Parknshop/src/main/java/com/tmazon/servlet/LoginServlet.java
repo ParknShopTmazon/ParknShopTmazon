@@ -64,6 +64,14 @@ public class LoginServlet extends HttpServlet {
 					resp);
 			return;
 		}
+		
+		// check user status
+		if (user.getRole().equals(User.STATUS_BLACK)) {
+			req.setAttribute(AttrName.RequestScope.ERROR_USER_BLACK, true);
+			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
+					resp);
+			return;
+		}
 
 		// check if logged-on
 		if (req.getSession().getAttribute(AttrName.SessionScope.USER) != null) {
