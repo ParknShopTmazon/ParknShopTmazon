@@ -53,7 +53,7 @@
 				<c:forEach var="product" varStatus="status" begin="0" end="4"
 					items="${ r_products }">
 					<div class="pic-container">
-					    <a href="productInfo?pid=${ product.productId }" target="_blank">
+					    <a href="productInfo?pid=${ product.productId }">
 					        <div class="over">
 					            <div class="link-btn"></div>
 					            <div class="product-name">${ product.name }</div>

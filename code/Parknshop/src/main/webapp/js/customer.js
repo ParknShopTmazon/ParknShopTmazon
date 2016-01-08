@@ -873,6 +873,41 @@ var customer = {
      */
     initComment: function (oid, productId) {
         "use strict";
+        function initData(data) {
+            $('.order-container #order-info .shop-info').append('<div class="pic-container">\
+                <div class="over">\
+                    <div class="link-btn"></div>\
+                </div>\
+                <div class="shop" style="background-image: url(./images/shops/shop1.jpg);"></div>\
+            </div>\
+            <div class="info">\
+                <div class="item">\
+                    <span class="name">Order Id</span>\
+                    <span class="value">1231231152</span>\
+                </div>\
+                <div class="item">\
+                    <span class="name">Shop Owner</span>\
+                    <span class="value">shop owner1</span>\
+                </div>\
+                <div class="address item">\
+                    <span class="name">Address</span>\
+                    <span class="value">Room 701, Unit 3, No.46, JiHua Road 4, Chan City Disrict, Foshan, Guangdong, China</span>\
+                </div>\
+                <div class="time item">\
+                    <span class="name">Create Time</span>\
+                    <span class="value">2015-12-05 13:08:25</span>\
+                </div>\
+                <div class="item">\
+                    <span class="name">Delivery Time</span>\
+                    <span class="value">2015-12-06 13:08:25</span>\
+                </div>\
+                <div class="item">\
+                    <span class="name">Deal Time</span>\
+                    <span class="value">2015-12-10 13:08:25</span>\
+                </div>\
+            </div>')
+        }
+        
         /** init the rate system */
         this.initRate();
 
@@ -883,8 +918,11 @@ var customer = {
         }, function (data, textStatus) {
             /*optional stuff to do after success */
             const productId = $('#productId').val();
+
+            initData(data);
+
             for (let i = 0; i < data.orderInfos.length; i++) {
-                if (data.orderInfos[i].productId == productId && data.orderInfos[i].status !== 'deal') {
+                if (data.orderInfos[i].productId == productId && data.orderInfos[i].status !== 'dealed') {
                     $('.order-container #order-info .comment-submit').css({
                         'border': '2px solid #e0e0e0',
                         'background-color': '#f0f0f0',

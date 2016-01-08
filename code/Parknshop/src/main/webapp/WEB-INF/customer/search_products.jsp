@@ -32,7 +32,7 @@
 	    			<option value="shopName" selected="selected">Shop Name</option>
 				</c:if>
 			</select>
-			<select name="type" class="select">
+			<select name="type" class="select"<c:if test="${param.searchMethod=='shopName'}">style="display: none;"</c:if>>
 	    		<c:if test="${param.type=='' ||empty param.type}">
 	    			<option value="" selected="selected">ALL</option>
 	    			<option value="TV& Home Theater">TV& Home Theater</option>
@@ -162,7 +162,7 @@
 			<div class="result-area">
 				<c:forEach var="product" items="${productList}" >
 					<div class="pic-container">
-					    <a href="productInfo?pid=${ product.productId }" target="_blank">
+					    <a href="productInfo?pid=${ product.productId }">
 					        <div class="over">
 					            <div class="link-btn"></div>
 					            <div class="product-name">name:${ product.name } &nbsp;&nbsp;&nbsp;shop:${product.shop.name }</div>
@@ -172,6 +172,9 @@
 					    <div class="shop" style="background-image: url('${ product.picture }');"></div>
 					</div>
 				</c:forEach>
+				<c:if test="${num==0}">
+					not found
+				</c:if>
 			</div>
 		</div>
 	</div>
