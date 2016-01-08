@@ -59,13 +59,13 @@ public class ShopOrderServlet extends HttpServlet {
 			info.setDelivery(deliveryService.select(new Delivery(info.getDeliveryId(), null, null, null)).get(0));
 			
 		}
-		
-		
+		System.out.println(orderInfos);
 		for (OrderInfo orderInfo : orderInfos) {
 			List<OrderInfo> orderInfos2=null;
 			if(orderInfoMap.get(orderInfo.getOrderId())==null){
 				intList.add(orderInfo.getOrderId());
 				orderInfos2 =new ArrayList<OrderInfo>();
+				orderInfos2.add(orderInfo);
 				orderInfoMap.put(orderInfo.getOrderId(), orderInfos2);
 			}else{
 				List<OrderInfo> list = orderInfoMap.get(orderInfo.getOrderId());

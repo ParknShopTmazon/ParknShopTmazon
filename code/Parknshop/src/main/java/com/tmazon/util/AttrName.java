@@ -24,6 +24,7 @@ public class AttrName {
 		private RequestScope() {
 		}
 		
+		public static final String ERROR_USER_BLACK = "r_error_user_black";
 		public static final String ERROR_NAME_PASSWORD = "r_error_name_password";
 		public static final String ERROR_PARAMETERS = "r_error_parameters";
 		public static final String ERROR_USER_EXISTS = "r_error_user_exists";
