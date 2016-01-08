@@ -78,26 +78,40 @@ public class DeleteShopServlet extends HttpServlet {
 			return;
 		}
 		
-		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(id);
-		boolean canBeDelete = true;
-		for(int i=0;i<orderInfos.size();i++){
-			String status=orderInfos.get(i).getStatus();
-			if(!status.equals(OrderInfo.STATUS_DELETED)&&!status.equals(OrderInfo.STATUS_CONFIRM_RECEIPT)){
-				canBeDelete = false;
-				break ;
-			}
-		}
-		if(canBeDelete){
-			Shop shop =new Shop();
-			shop.setShopId(id);;
-			boolean isDeleteSuccess = shopService.delete(shop);
-			if(isDeleteSuccess==true){
-				System.out.println("修改成功");
-			}
-			resp.sendRedirect("myshop");
-		}else{
-			req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, canBeDelete);
-			resp.sendRedirect("deleteshop");
-		}
+		
+		
+//			Shop shop =new Shop();
+//			shop.setShopId(id);
+		    Shop shop = shopService.findById(id);
+		    if(shop.getStatus().equals(Shop.STATUS_FAIL)){
+		    	boolean isDeleteSuccess = shopService.delete(shop);
+				if(isDeleteSuccess==true){
+					System.out.println("修改成功");
+				}
+				resp.sendRedirect("myshop");
+		    }
+			
+		   if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
+		    	List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(id);
+				boolean canBeDelete = true;
+				for(int i=0;i<orderInfos.size();i++){
+					String status=orderInfos.get(i).getStatus();
+					if(!status.equals(OrderInfo.STATUS_DELETED)&&!status.equals(OrderInfo.STATUS_CONFIRM_RECEIPT)&& !status.equals(OrderInfo.STATUS_UNPAID)){
+						canBeDelete = false;
+						break ;
+					}
+				}
+				if(canBeDelete){
+					shop.setStatus(Shop.STATUS_DELETED);
+					boolean isUpdateSuccess = shopService.update(shop);
+					if(isUpdateSuccess==true){
+						System.out.println("修改成功");
+					}
+					resp.sendRedirect("myshop");
+				}else{
+					req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, canBeDelete);
+					resp.sendRedirect("deleteshop");
+				}
+		    }
 	}
 }
