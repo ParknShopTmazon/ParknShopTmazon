@@ -30,6 +30,7 @@ public class AttrName {
 		public static final String IS_REGISTER_SUCCESS = "r_is_register_success";
 		public static final String ERROR_SHOP_EXISTS = "r_error_shop_exists";
 		public static final String IS_SHOP_REGISTER_SUCCESS = "r_is_shop_register_success";
+		public static final String IS_SHOP_DELETE_SUCCESS = "r_is_shop_delete_success";
 		
 		public static final String CATEGORIES = "r_categories";
 		public static final String PRODUCTS = "r_products";

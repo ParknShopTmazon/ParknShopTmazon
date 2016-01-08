@@ -49,6 +49,12 @@
 						<button  name="cancel" type="button" onclick="window.location.href='myshop';" class="submit-btn cancel-btn button">cancel</button>
 					</div>
 				</div>	
+				
+				<div class="control-group" align="center">
+						<c:if test="${ not empty r_is_shop_delete_success }">
+							<label style="color: red;">you have unfinished orders,can't delete shop!</label>
+						</c:if>
+				</div>	
 			</form>
 	   </div>
 	</div>
