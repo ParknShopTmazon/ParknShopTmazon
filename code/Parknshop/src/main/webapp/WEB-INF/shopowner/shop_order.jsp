@@ -22,7 +22,7 @@
 					shop name
 					<select id="shopId" name="shopId">
 						<option value="-1">ALL</option>
-						<c:forEach var="shop" items="${shopList}">
+						<c:forEach var="shop" items="${shopLists}">
 							<option value="${shop.shopId }">${shop.name }</option>
 						</c:forEach>
 					</select>

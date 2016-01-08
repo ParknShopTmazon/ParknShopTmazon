@@ -44,14 +44,14 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		
 		Integer shopId=Integer.parseInt(req.getParameter("shopId"));
 		System.out.println("*******************"+shopId);
-		if(!(shopId==null||"".trim().equals(shopId))){
+		if(!(shopId==null)){
 			System.out.println("sdsdsdsddssdsddssd"+shopId);
 			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
 		}
 		
 		
 		Shop shop = shopService.findById(shopId);
-		if(shopId!=shop.getShopId()){
+		if(!shopId.equals(shop.getShopId())){
 			resp.sendRedirect("myshop");
 			return;
 		}
