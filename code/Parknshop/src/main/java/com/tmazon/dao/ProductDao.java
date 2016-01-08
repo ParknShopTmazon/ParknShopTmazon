@@ -26,4 +26,6 @@ public interface ProductDao {
 	public Product findOnSellById(Integer id);
 	
 	public List<Product> selectOnSell(Product product);
+	
+	public List<Product> findByShopId(Integer shopId);
 }

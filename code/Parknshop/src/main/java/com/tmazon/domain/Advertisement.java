@@ -4,6 +4,8 @@ public class Advertisement {
 	private Integer adId;
 	private Integer productID;
 	private Integer cost;
+	private String picture;
+	
 	public Advertisement(){
 		super();
 	}
@@ -29,5 +31,11 @@ public class Advertisement {
 	}
 	public Integer getCost(){
 		return cost;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 }

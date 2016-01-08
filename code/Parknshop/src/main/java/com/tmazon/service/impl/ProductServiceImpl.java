@@ -63,4 +63,8 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> selectOnSell(Product product){
 		return productDao.selectOnSell(product);
 	}
+	
+	public List<Product> findByShopId(Integer shopId){
+		return productDao.findByShopId(shopId);
+	}
 }

@@ -19,7 +19,7 @@ public class OthersAdminServlet extends HttpServlet{
 		
 		if(CheckAdmin.isAdminOnline(req))
 		{
-			req.getRequestDispatcher("WEB-INF/admin/other.jsp").forward(req,resp);
+			req.getRequestDispatcher("searchHistoryAdminServlet").forward(req,resp);
 		}
 		else
 		{

@@ -30,4 +30,5 @@ public interface ProductService {
 	
 	public List<Product> selectOnSell(Product product);
 	
+	public List<Product> findByShopId(Integer shopId);
 }
