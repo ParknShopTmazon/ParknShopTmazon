@@ -402,11 +402,11 @@ const shopOwner = {
                     /* Act on the event */
                     $.getJSON('changeOrderInfo', {
                         oid: oid,
-                        productId: pid,
+                        pid: pid,
                         newStatus: 'delivering'
                     }, function(data, textStatus) {
                         /*optional stuff to do after success */
-                        if (data.success == 'true') {
+                        if (data.success) {
                             _this.css({
                                     'border': '1px solid #e0e0e0',
                                     'background-color': '#f0f0f0',
