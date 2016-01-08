@@ -3,6 +3,7 @@ package com.tmazon.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +30,8 @@ import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.DaoUtil;
 
+import net.sf.json.JSONArray;
+
 public class ShopOrderServlet extends HttpServlet {
 
 	private OrderService orderService = BasicFactory.getImpl(OrderService.class);
@@ -45,8 +48,7 @@ public class ShopOrderServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String shopIdStr=(String) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
-        Integer shopId =Integer.parseInt(shopIdStr);
+		Integer  shopId= (Integer) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
         Map<Integer, List<OrderInfo>> orderInfoMap =new HashMap<Integer, List<OrderInfo>>();
         List<Integer> intList = new ArrayList<Integer>();
 		System.out.println("shopId="+shopId);
@@ -57,6 +59,8 @@ public class ShopOrderServlet extends HttpServlet {
 			info.setDelivery(deliveryService.select(new Delivery(info.getDeliveryId(), null, null, null)).get(0));
 			
 		}
+		
+		
 		for (OrderInfo orderInfo : orderInfos) {
 			List<OrderInfo> orderInfos2=null;
 			if(orderInfoMap.get(orderInfo.getOrderId())==null){

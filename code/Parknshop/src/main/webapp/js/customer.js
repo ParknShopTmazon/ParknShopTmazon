@@ -1902,13 +1902,14 @@ var customer = {
 
         let scores = 0;
         let i = 0;
-
+        let avg;
         $scores.each(function () {
             i++;
             scores += parseFloat($(this).html());
         });
-
-        $('.product-container .product-area .main > span .averageValue').html((scores / i).toFixed(1));
+        
+        avg = (i == 0) ? 0.0 : scores / i;
+        $('.product-container .product-area .main > span .averageValue').html((avg).toFixed(1));
 
         $('.product-container .product-info .info-items .value input[type="number"]').change(function () {
             /* Act on the event */
