@@ -108,6 +108,26 @@ var customer = {
         });
     },
 
+    /**
+     * [initRegister: init some events of the register page]
+     * @return {[type]} [description]
+     */
+    initRegister: function () {
+    	function changeRadio() {
+                /** clear checked */
+                /** clear all the check attribute of input tags */
+                const radioLists = $('.register-area input[type="radio"]');
+                for (let i = 0; i < radioLists.length; i++) {
+                    radioLists[i].removeAttribute('checked');
+                }
+
+                /** set checked */
+                $(this).attr('checked', 'checked');
+            }
+
+    	// $('.register-area input[type="radio"]').change(changeRadio);
+    },
+
     initIndex: function () {
         "use strict";
         const swiper = new Swiper('.swiper-container', {
