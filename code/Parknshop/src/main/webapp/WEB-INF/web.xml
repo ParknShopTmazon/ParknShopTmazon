@@ -117,10 +117,6 @@
   <servlet-class>com.tmazon.servlet.AddAdvertisementServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>SearchHistoryAdminServlet</servlet-name>
- 	<servlet-class>com.tmazon.servlet.SearchHistoryAdminServlet</servlet-class>
- </servlet>
- <servlet>
   <servlet-name>DeleteAdvServlet</servlet-name>
   <display-name>DeleteAdvServlet</display-name>
   <servlet-class>com.tmazon.servlet.DeleteAdvServlet</servlet-class>
@@ -253,7 +249,6 @@
  <servlet>
  	<servlet-name>SearchHistoryAdminServlet</servlet-name>
  	<display-name>SearchHistoryAdminServlet</display-name>
- 	<description></description>
  	<servlet-class>com.tmazon.servlet.SearchHistoryAdminServlet</servlet-class>
  </servlet>
  <servlet>
