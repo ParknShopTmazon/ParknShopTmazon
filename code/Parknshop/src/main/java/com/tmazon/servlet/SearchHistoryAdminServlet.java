@@ -60,9 +60,10 @@ public class SearchHistoryAdminServlet extends HttpServlet {
 		}
 		SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
 		try {
-			Date startDate =  formatter.parse(startDateStr+" 00:00:00");
-			Date endDate = formatter.parse(endDateStr+" 23:59:59");
-			System.out.println(startDate.toString()+"::"+endDate.toString());
+			Date startDate = startDateStr == null? null: formatter.parse(startDateStr+" 00:00:00");
+			Date endDate = endDateStr == null? null : formatter.parse(endDateStr+" 23:59:59");
+			if(startDate != null && endDate != null)
+						System.out.println(startDate.toString()+"::"+endDate.toString());
 			List<History> historyList = historyAdminService.search(startDate,endDate);
 			Page<History> historyPage = historyAdminService.page(historyList,curPage,next);
 			double income = historyAdminService.getIncome(historyList);
@@ -72,7 +73,6 @@ public class SearchHistoryAdminServlet extends HttpServlet {
 			req.getRequestDispatcher("WEB-INF/admin/other.jsp").forward(req,resp);
 			return;
 		} catch (ParseException e) {
-			
 			e.printStackTrace();
 			req.setAttribute("CurPage",1);
 			req.getRequestDispatcher("WEB-INF/admin/other.jsp").forward(req,resp);

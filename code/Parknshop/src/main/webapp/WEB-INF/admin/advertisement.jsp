@@ -19,61 +19,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<%@ include file="header.html"%>
 		<div class="ad-container">
 			<div id="content" class="container_16 clearfix">
-
-			  <form action="AddAdvertisementServlet" method="post">
 				<div class="grid_4">
 					<p>
-						<label>Product_ID</label>
-						<input type='text' name="productID" value=""/>
+						<label>Product_Name</label>
+						<input type="text" name="" value=""/>
 					</p>
 				</div>
-			
-				<div class="grid_4">
+				<div class="grid_5">
 					<p>
-						<label>Cost</label>
-						<input type='text' name="cost" value=""/>
+						<label>Company</label>
+						<input type="text" name="" value=""/>
 					</p>
 				</div>
-				<div class="grid_4">
+				<div class="grid_5">
+					<p>
+						<label>Type</label>
+						<select>
+							<option>ALL</option>
+							<option>Food</option>
+							<option>Clothes</option>
+							<option>Book</option>
+						</select>
+					</p>
+				</div>
+				<div class="grid_2">
 					<p>
 						<label>&nbsp;</label>
-						<input type="submit" value="Add" />
+                        <a href="#" class="Add" onclick="mischief()" id="mischief">Add</a>
 					</p>
 				</div>
-			  </form>
-
+                
+                
+                
 				<div class="grid_16">
+                    <h2>advertisement</h2>
 					<table>
 						<thead>
 							<tr>
-								<th>AD_ID</th>
-								<th>Product_ID</th>
+								<th>Company</th>
+								<th>Type</th>
 								<th>Cost</th>
 								<th colspan="3" width="10%">Actions</th>
 							</tr>
 						</thead>
-						
-						<tbody>
-							<%
-								if (session.getAttribute("showAd") != null) {
-									List<Advertisement> ls = (List<Advertisement>) session.getAttribute("showAd");
-									if (ls.size() > 0) {
-										for (Advertisement s : ls) {
-							%>
-							<tr>
-								<td><%=s.getAdId()%></td>
-								<td><%=s.getProductID()%></td>
-								<td><input type='text' class="grid_4"  value=<%=s.getCost() %> ></td>
-								<td><a href="javascript: void(0);" class="edit">Modify</a></td>
-								<td><a href="javascript: void(0);" class="delete" type="del">Delete</a></td>	
-							</tr>
-							<%
-								}
-									}
-								}
-							%>
-						</tbody>
-
 						<tfoot>
 							<tr>
 								<td colspan="5" class="pagination">
@@ -81,14 +69,105 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</td>
 							</tr>
 						</tfoot>
+						<tbody>
+							<tr>
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
+
+								<td><a href="#" class="delete">Delete</a></td>	
+								<td><a href="#" class="delete">Modified</a></td>
+							</tr>
+							<tr class="alt">
+								<td>A Company</td>
+								<td>Food</td>
+								<td>50</td>
+								<td><a href="#" class="delete">Delete</a></td>
+								<td><a href="#" class="delete">Modified</a></td>
+							</tr>
+							
+						</tbody>
+					</table>
+                    
+                    <!-- 商品列表 -->
+                    <h2>Product</h2>
+                    <table>
+						<thead>
+							<tr>
+								<th>shop</th>
+								<th>price</th>
+								<th>style</th>
+								<th colspan="3" width="10%">Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<td colspan="5" class="pagination">
+									<span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 million</a>
+								</td>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td>taobao</td>
+								<td>60</td>
+								<td><img src='css/food.png' height="30" width="30"></td>				
+								<td><a href="#" class="delete">Add</a></td>
+							</tr>
+							<tr class="alt">
+								<td>A Company</td>
+								<td>Food</td>
+								<td><img src='css/food.png' height="30" width="30"></td>
+								<td><a href="#" class="delete">Add</a></td>
+							</tr>
+							
+						</tbody>
 					</table>
 				</div>
 			</div>
-		</div>		
-		<%@ include file="footer.html"%>
+        
+		<div id="addBox" style="display:none;"> 
+        <form>                      
+                		      <p>
+								<label for="post" id="meme">Image </label>
+								<input  name="imgfile"  type="file" id="imgfile" size="40" onchange="viewmypic(showing,this.form.imgfile);"/>
+                                <img name="showing" id="showing" src="" style="display:none" alt="viewpic"/>
+                             </p>
+				       
+                             <p>			
+								<label for="post"  id="meme1">Cost</label>
+								<input type="text" class="mystyle"/> 
+				             </p>
+                        	
+                            	
+                                <label>&nbsp;</label>	
+								<input type="submit" value="Add"  onclick="vanish()"/>						  
+                                                 
+		 </form>      
+         </div>
+        <%@ include file="footer.html"%>
+        
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript">
-			$(document)
+			function mischief(){
+			 document.getElementById('mischief').style.backgroundColor="#36F";
+			 document.getElementById('addBox').style.display="block";	 
+			 }
+			 
+			 function vanish(){
+			 document.getElementById('addBox').style.display="none";	 
+			 }
+			 
+			 function viewmypic(mypic,imgfile)
+			 {
+				if(imgfile.value)
+				{ 
+				mypic.src=imgfile.value;
+				mypic.style.display="block";
+				mypic.style.border=1;
+				 }
+			 }
+			 /*$(document)
 				.ready(
 						function() {
 							$('.grid_16 .delete')
@@ -144,7 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												console.log('error');
 											});alert("修改成功");
 										});
-					});
+					});*/
 
 	</script>
 	</body>
