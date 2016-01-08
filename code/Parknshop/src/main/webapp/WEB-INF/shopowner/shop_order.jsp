@@ -49,7 +49,7 @@
 		            <c:forEach  var="orderInfo" items="${order.orderInfos}">
 		            <div class="shop-item">
 		                <div class="pic-container">
-		                    <a href="" target="_blank">
+		                    <a href="productInfo?pid=${orderInfo.productId}" target="_blank">
 		                        <div class="over">
 		                            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
 		                        </div>
@@ -57,11 +57,11 @@
 		                <div class="shop" style="background-image: url(${orderInfo.product.picture });"></div>
 		                </div>
 		                <div class="shopId">
-		                    <p class="value" title="${orderInfo.product.shopId }">${orderInfo.product.shopId }</p>
-		                    <p class="name">id</p>
+		                    <p class="value" title="${orderInfo.product.shopId}">${orderInfo.product.shopId}</p>
+		                    <p class="name">Shop Id</p>
 		                </div>
 		                <div class="productName">
-		                    <p class="value" title="${orderInfo.product.shopId }">${orderInfo.product.name }</p>
+		                    <p class="value" title="${orderInfo.product.name }">${orderInfo.product.name }</p>
 		                    <p class="name">name</p>
 		                </div>
 		                <div class="origin-price">
@@ -86,10 +86,9 @@
 		                        <p class="name">status</p>
 		                    </div>
 		                </div>
-		                
+		            	<div class="handle-btn button">Send</div>
 		            </div>
 		            </c:forEach>
-		            <div class="handle-btn button"><a href="modifyorder?orderId=${order.orderId}">Send</a></div>
 		        </div>	
 			</c:forEach>
 		</div>
