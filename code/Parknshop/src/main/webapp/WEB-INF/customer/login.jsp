@@ -43,9 +43,6 @@
 						<c:if test="${ not empty r_error_name_password }">
 							<label style="color: red;">error name or password</label>
 						</c:if>
-						<c:if test="${ not empty r_error_user_checking }">
-							<label style="color: red;">this account is checking</label>
-						</c:if>
 						<c:if test="${ not empty r_error_parameters }">
 							<label style="color: red;">6-20 characters for name and password only</label>
 						</c:if>
