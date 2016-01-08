@@ -88,6 +88,7 @@ INSERT INTO `parknshop`.`orderinfo` VALUES ('1', '1', '2', '78781', 'unpaid', nu
 INSERT INTO `parknshop`.`orderinfo` VALUES ('1', '1', '3', '78782', 'unpaid', null, null, null, null);
 INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '2', '2', '78781', 'unpaid', null, null, null, null);
 INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '1', '3', '78783', 'unpaid', null, null, null, null);
+INSERT INTO `parknshop`.`orderinfo` VALUES ('2', '1', '3', '4', 'dealed', now(), now(), '5', null);
 
 
 -- friend

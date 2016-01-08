@@ -106,11 +106,13 @@ public class CommentServlet extends HttpServlet {
 			jsonObject.put("result", false + "");
 			jsonObject.put("errMsg", "Failed!");
 			resp.getWriter().write(jsonObject.toString());
+			System.out.println("##################################### is null");
 			return;
 		}else {
 			jsonObject.put("result", true + "");
 			jsonObject.put("errMsg", "");
 			resp.getWriter().write(jsonObject.toString());
+			System.out.println("##################################### not null");
 			return;
 		}
 		
