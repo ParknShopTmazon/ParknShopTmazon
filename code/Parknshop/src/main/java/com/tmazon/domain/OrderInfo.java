@@ -6,8 +6,8 @@ public class OrderInfo {
 
 	public static final String STATUS_UNPAID = "unpaid";
 	public static final String STATUS_PAID = "paid";
-	public static final String STATUS_ON_DELIVERY = "delivery";
-	public static final String STATUS_CONFIRM_RECEIPT = "confirm_receipt";
+	public static final String STATUS_ON_DELIVERY = "delivering";
+	public static final String STATUS_CONFIRM_RECEIPT = "dealed";
 	public static final String STATUS_DELETED = "deleted";
 	
 	private Product product;
