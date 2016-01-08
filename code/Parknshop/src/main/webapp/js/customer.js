@@ -1359,7 +1359,11 @@ var customer = {
                                 options: orders
                             }, function (data, textStatus) {
                                 /*optional stuff to do after success */
-                                window.location.href = '?type=pay&oid=' + data.oid;
+                                if (data.result == 'true') {
+                                	window.location.href = '?type=pay&oid=' + data.oid;
+                                } else {
+                                	alert('failed to create an order');
+                                }
                             });
                         }
                     }
