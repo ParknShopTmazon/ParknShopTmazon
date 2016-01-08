@@ -33,17 +33,17 @@
 							
 							<select name="select_role" 
 									id ="select_role">
-								<c:if test="${sessionScope.searchInfo.role eq '' || sessionScope.searchInfo.role eq null }">
+								<c:if test="${searchInfo.role eq '' || sessionScope.searchInfo.role eq null }">
 								<option value="" selected="selected">---------</option>
 								<option value="shop_owner">ShopOwner</option>
 								<option value="customer">Customer</option>
 								</c:if>
-								<c:if test="${sessionScope.searchInfo.role eq 'shop_owner' }">
+								<c:if test="${searchInfo.role eq 'shop_owner' }">
 								<option value="" >---------</option>
 								<option value="shop_owner" selected="selected">ShopOwner</option>
 								<option value="customer">Customer</option>
 								</c:if>
-								<c:if test="${sessionScope.searchInfo.role eq 'customer' }">
+								<c:if test="${searchInfo.role eq 'customer' }">
 								<option value="" >---------</option>
 								<option value="shop_owner" >ShopOwner</option>
 								<option value="customer" selected="selected">Customer</option>
@@ -75,11 +75,11 @@
 							  
 							<form method="post" action="searchUserAdmin">
 									<input id="prev-btn" type="submit"  value="<<"></input>
-									<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
+									<span name="curIndex" class="active curved">${curPage }</span>
 									<input id="next-btn" type="submit" value=">>"></input>
-									<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
-									<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
-									<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
+									<input name="UserName"  type="hidden" value="${searchInfo.name }" />
+									<input name="select_role"  type="hidden" value="${searchInfo.role }" />
+									<input name="curPage"  type="hidden" value="${curPage }" />
 									<input type="hidden" id="next-val" name="next" value="1"/>
 							</form>
 						</td>
@@ -89,7 +89,7 @@
 					<tbody>
 					<%-- show the user list --%>
 				
-					<c:forEach items="${sessionScope.userList}" var="user" >
+					<c:forEach items="${userList}" var="user" >
 						<tr>
 							<td align="left">${ user.name }</td>
 							<td align="left">${ user.password }</td>

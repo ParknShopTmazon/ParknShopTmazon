@@ -28,4 +28,6 @@ public interface ProductDao {
 	public List<Product> selectOnSell(Product product);
 	
 	public List<Product> findByShopId(Integer shopId);
+	
+	public List<Product> selectByAdmin(String productName,String category);
 }

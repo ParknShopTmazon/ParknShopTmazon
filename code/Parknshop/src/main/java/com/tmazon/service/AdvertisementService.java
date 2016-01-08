@@ -5,6 +5,7 @@ import java.util.List;
 import com.tmazon.domain.Advertisement;
 import com.tmazon.domain.Product;
 import com.tmazon.domain.Shop;
+import com.tmazon.domain.ShowAd;
 import com.tmazon.util.Page;
 
 public interface AdvertisementService {
@@ -15,4 +16,5 @@ public interface AdvertisementService {
 	public List<Shop> getShopList(List<Product> productList);
 	public Page<Advertisement> getAdPage(List<Advertisement> adList,int curPage,int next);
 	public List<Advertisement> getAdList();
+	public List<ShowAd> getShowAd(List<Advertisement> adList);
 }

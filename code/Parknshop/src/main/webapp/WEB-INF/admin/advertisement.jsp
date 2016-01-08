@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.* ,com.tmazon.domain.Advertisement" pageEncoding="UTF-8"
-	isELIgnored="false"%>
+	isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
@@ -18,31 +18,141 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 	</head>
 	<body>
+		
 		<%@ include file="header.html"%>
 		<div class="ad-container">
-		
 			<div id="content" class="container_16 clearfix">
-			<form action="" method="post">
+			<form action="searchProductAdmin" method="post">
 				<div class="grid_4">
 					<p>
 						<label>ProductName:</label>
-						<input type="text" name="searchProductName" />
+						<input type="text" name="searchProductName" value="${searchProductName }" />
 					</p>
 				</div>
 				<div class="grid_5">
 					<p>
 						<label>Type:</label>
-						<select name="select_type">
-							<option value="" >ALL</option>
-							<option value="TV& Home Theater" >TV& Home Theater</option>
-	    					<option value="Computers & Tablets" >Computers & Tablets</option>
-	    					<option value="Cell Phones" >Cell Phones</option>
-	    					<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
-	    					<option value="Audio" >Audio</option>
-	    					<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
-	    					<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
-	    					<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
-	    					<option value="Home & Office" >Home & Office</option>
+						<select id="select_type" name="select_type" >
+							<c:if test="${select_type=='' ||empty select_type}">
+					    			<option value="" selected="selected">ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='TV& Home Theater'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater" selected="selected">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Computers & Tablets'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" selected="selected">Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Cell Phones'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" selected="selected">Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Cameras & Camcorders'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" selected="selected">Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Audio'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" selected="selected">Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Car Electronics & GPS'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" selected="selected" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Video, Games, Movies & Music'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" selected="selected">Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Health, Fitness & Sports'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports"  selected="selected">Health, Fitness & Sports</option>
+					    			<option value="Home & Office" >Home & Office</option>
+					    		</c:if>
+					    		<c:if test="${select_type=='Home & Office'}">
+					    			<option value="" >ALL</option>
+					    			<option value="TV& Home Theater">TV& Home Theater</option>
+					    			<option value="Computers & Tablets" >Computers & Tablets</option>
+					    			<option value="Cell Phones" >Cell Phones</option>
+					    			<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+					    			<option value="Audio" >Audio</option>
+					    			<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+					    			<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+					    			<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+					    			<option value="Home & Office" selected="selected">Home & Office</option>
+					    		</c:if>
 						</select>
 					</p>
 				</div>
@@ -60,8 +170,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table>
 						<thead>
 							<tr>
-								<th>ShopName</th>
+								<th>ID</th>
 								<th>ProductName</th>
+								<th>ShopName</th>
 								<th>Type</th>
 								<th>Cost</th>
 								<th colspan="3" width="10%">Actions</th>
@@ -82,15 +193,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  -->	
 						</tfoot>
 						<tbody>
-							<tr>
-								<td>A Company</td>
-								<td>Food</td>
-								<td>abc</td>
-								<td>50</td>
-								<td><a href="#" class="delete">Delete</a></td>	
-								<td><a href="#" class="delete">Modified</a></td>
-							</tr>
-							
+							<c:forEach items="${sessionScope.showAdList }" var="ad">
+								<tr>
+									<td>${ad.ad.adId }</td>
+									<td>${ad.product.name }</td>
+									<td>${ad.shop.name }</td>
+									<td>${ad.product.category }</td>
+									<td>${ad.ad.cost }</td>
+									<td><a href="#" class="delete">Delete</a></td>	
+									<td><a href="#" class="edit">Modified</a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
                     
@@ -101,9 +214,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<thead>
 							<tr>
 								<th></th>
-								<th>ProductId:</th>
-								<th>ProductName:</th>
-								<th>ShopName:</th>
+								<th>ProductId</th>
+								<th>ProductName</th>
+								<th>ShopName</th>
 								
 								<th colspan="3" width="10%">Action</th>
 							</tr>
@@ -111,10 +224,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tfoot>
 							<tr>
 								<td colspan="3" rowspan="2" class="pagination">
-									<form method="post" action="searchUserAdmin">
+									<form method="post" action="searchProductAdmin">
 										<input id="prev-btn" type="submit"  value="<<"></input>
 										<span name="curIndex" class="active curved">${curPage }</span>
 										<input id="next-btn" type="submit" value=">>"></input>
+										<input name="searchProductName"  type="hidden" value="${searchProductName }" />
+										<input name="select_type"  type="hidden" value="${select_type }" />
 										<input name="curPage"  type="hidden" value="${curPage }" />
 										<input type="hidden" id="next-val" name="next" value="1"/>
 								</form>
@@ -122,14 +237,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 						</tfoot>
 						<tbody>
+							<c:forEach items="${ productList }"  var="pro" varStatus="status">
 							<tr>
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td>taobao</td>
-								<td>60</td>
-								<td>asdfds</td>				
+								<td><img src="${pro.picture}" height="30" width="30"></td>
+								<td>${pro.productId }</td>
+								<td>${pro.name }</td>
+								<td>${shopList[status.index].name }</td>		
 								<td><a href="#" class="delete">Add</a></td>
 							</tr>
-						
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -158,12 +274,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript">
-			document.getElementById('next-btn-first').addEventListener('click', function() {
-				document.getElementById('next-val-first').setAttribute('value', 1);
-			});
-			document.getElementById('prev-btn-first').addEventListener('click', function() {
-				document.getElementById('next-val-first').setAttribute('value', -1);
-			});	
 		
 			document.getElementById('next-btn').addEventListener('click', function() {
 				document.getElementById('next-val').setAttribute('value', 1);
@@ -191,7 +301,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				mypic.style.border=1;
 				 }
 			 }
-			 /*$(document)
+			 $(document)
 				.ready(
 						function() {
 							$('.grid_16 .delete')
@@ -203,7 +313,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													var url = 'DeleteAdvServlet';
 													var sid = $(this).parent()
 																.prev().prev()
-																.prev().prev()
+																.prev().prev().prev()
 																.html();
 
 											$.ajax({
@@ -247,7 +357,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												console.log('error');
 											});alert("修改成功");
 										});
-					});*/
+					});
 
 	</script>
 	</body>

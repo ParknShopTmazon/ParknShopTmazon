@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tmazon.domain.Advertisement;
 import com.tmazon.domain.Product;
+import com.tmazon.domain.Shop;
 import com.tmazon.service.AdvertisementService;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.CheckAdmin;
 import com.tmazon.util.Page;
 
 public class SearchProductAdminServlet extends HttpServlet {
@@ -27,14 +29,17 @@ public class SearchProductAdminServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		if(!CheckAdmin.isAdminOnline(req))
+		{
+			resp.sendRedirect("login");
+			return;
+		}
 		String type = req.getParameter("select_type");
 		String productName = req.getParameter("searchProductName");
-		String curPageStr,nextStr,curPageFisrtStr,nextFirstStr;
-		int curPage,next,curPageFirst,nextFirst;
+		String curPageStr,nextStr;
+		int curPage,next;
 		curPageStr = req.getParameter("curPage");
 		nextStr = req.getParameter("next");
-//		curPageFisrtStr = req.getParameter("curPageFirst");
-//		nextFirstStr = req.getParameter("nextFirst");
 		if(type == null || type.equals(""))
 		{
 			type = null;
@@ -51,7 +56,7 @@ public class SearchProductAdminServlet extends HttpServlet {
 		{
 			curPage = Integer.parseInt(curPageStr);
 		}
-		if(nextStr == null || nextStr.equals("0"))
+		if(nextStr == null || nextStr.equals(""))
 		{
 			next = 0;
 		}
@@ -60,28 +65,13 @@ public class SearchProductAdminServlet extends HttpServlet {
 			next = Integer.parseInt(nextStr);
 		}
 		
-//		if(curPageFisrtStr == null || curPageFisrtStr.equals(""))
-//		{
-//			curPageFirst = 1;
-//		}
-//		else
-//		{
-//			curPageFirst = Integer.parseInt(curPageFisrtStr);
-//		}
-//		if(nextFirstStr == null || nextFirstStr.equals("0"))
-//		{
-//			nextFirst = 0;
-//		}
-//		else
-//		{
-//			nextFirst = Integer.parseInt(nextFirstStr);
-//		}
 		Page<Product> productPage = advertisementService.searchByPage(productName,type,curPage,next);
-		List<Advertisement> adList = advertisementService.getAdList();
-//		Page<Advertisement> adPage = advertisementService.getAdPage(adList,curPageFirst,nextFirst);
-		req.setAttribute("adList",adList);
+		List<Shop> shopList = advertisementService.getShopList(productPage.getSubitems());
+		req.setAttribute("shopList",shopList);
 		req.setAttribute("productList",productPage.getSubitems());
-		req.setAttribute("CurPage",productPage.getCurPage()==0?1:productPage.getCurPage());
+		req.setAttribute("curPage",productPage.getCurPage()==0?1:productPage.getCurPage());
+		req.setAttribute("searchProductName",productName);
+		req.setAttribute("select_type",type);
 		req.getRequestDispatcher("WEB-INF/admin/advertisement.jsp").forward(req,resp);
 	}
 

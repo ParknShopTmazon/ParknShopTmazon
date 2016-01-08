@@ -10,6 +10,7 @@ import com.tmazon.dao.impl.AdvertisementDaoImpl;
 import com.tmazon.domain.Advertisement;
 import com.tmazon.domain.Product;
 import com.tmazon.domain.Shop;
+import com.tmazon.domain.ShowAd;
 import com.tmazon.service.AdvertisementService;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.Page;
@@ -43,10 +44,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	}
 	public Page<Product> searchByPage(String productName,String type,int curPage,int next)
 	{
-		Product product = new Product();
-		product.setName(productName);
-		product.setCategory(type);
-		List<Product> productList = productDao.select(product);
+		List<Product> productList = productDao.selectByAdmin(productName,type);
 		Page<Product> productPage = new Page<Product>();
 		productPage.setPageSize(5);
 		productPage.page(productList,curPage,next);
@@ -58,6 +56,17 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 		adPage.setPageSize(5);
 		adPage.page(adList,curPage,next);
 		return adPage;
+	}
+	public List<ShowAd> getShowAd(List<Advertisement> adList)
+	{
+		List<ShowAd> showAdList = new ArrayList<ShowAd>();
+		for(Advertisement ad : adList)
+		{
+			Product pro = productDao.findById(ad.getAdId());
+			Shop shop = shopDao.findById(pro.getShopId());
+			showAdList.add(new ShowAd(pro,shop,ad));
+		}
+		return showAdList;
 	}
 	public List<Advertisement> getAdList()
 	{
