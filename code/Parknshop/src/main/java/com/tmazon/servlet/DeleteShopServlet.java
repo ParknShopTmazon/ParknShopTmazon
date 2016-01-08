@@ -105,28 +105,14 @@ public class DeleteShopServlet extends HttpServlet {
 		   if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
 			    List<Product> productList = productService.findByShopId(shop.getShopId());
 			    if(productList.isEmpty()){
-			    	List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shop.getShopId());
-					boolean canBeDelete = true;
-					for(int i=0;i<orderInfos.size();i++){
-						String status=orderInfos.get(i).getStatus();
-						if(!status.equals(OrderInfo.STATUS_DELETED)&&!status.equals(OrderInfo.STATUS_CONFIRM_RECEIPT)&& !status.equals(OrderInfo.STATUS_UNPAID)){
-							canBeDelete = false;
-							break ;
-						}
+					shop.setStatus(Shop.STATUS_DELETED);
+					boolean isUpdateSuccess = shopService.update(shop);
+					if(isUpdateSuccess==true){
+						System.out.println("修改成功");
 					}
-					
-					if(canBeDelete){
-						shop.setStatus(Shop.STATUS_DELETED);
-						boolean isUpdateSuccess = shopService.update(shop);
-						if(isUpdateSuccess==true){
-							System.out.println("修改成功");
-						}
-						resp.sendRedirect("myshop");
-					}else{
-						req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, canBeDelete);
-						resp.sendRedirect("myshop");
-					}
-			  }else{
+					resp.sendRedirect("myshop");
+			   }else{
+				 req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, false);
 			   	resp.sendRedirect("myshop");
 			  }
 		    }
