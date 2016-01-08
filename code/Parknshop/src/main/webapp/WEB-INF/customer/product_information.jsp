@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@ include file="header.html"%>
-	<c:if test="${ not empty s_user }">
+	<c:if test="${ not empty s_user and s_user.role ne 'admin'}">
 		<%@ include file="dialog.html"%>
 	</c:if>
 	<div class="product-container">

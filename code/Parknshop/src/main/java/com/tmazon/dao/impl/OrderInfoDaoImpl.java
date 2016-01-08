@@ -62,7 +62,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public boolean insert(OrderInfo orderInfo) {
-		String sql = "INSERT INTO orderInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO orderInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
@@ -71,7 +71,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 					orderInfo.getOrderId(), orderInfo.getDeliveryId(),
 					orderInfo.getQuantity(), orderInfo.getProductId(),
 					orderInfo.getStatus(), orderInfo.getDeliveryTime(),
-					orderInfo.getDealTime(), orderInfo.getWaybill());
+					orderInfo.getDealTime(), null, orderInfo.getWaybill());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,8 +85,8 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.update(sql, orderInfo.getStatus(),
-					orderInfo.getOrderId(), orderInfo.getProductId());
+			runner.update(sql, orderInfo.getStatus(), orderInfo.getOrderId(),
+					orderInfo.getProductId());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,37 +164,42 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			int row = runner.update(sql, orderInfo.getStatus(),orderInfo.getOrderId(),orderInfo.getProduct());
+			int row = runner.update(sql, orderInfo.getStatus(),
+					orderInfo.getOrderId(), orderInfo.getProduct());
 			return row > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
+
 	public boolean updateStatus(OrderInfo orderInfo) {
-		StringBuilder sqlBuilder = new StringBuilder("UPDATE orderInfo SET status = ? ");
+		StringBuilder sqlBuilder = new StringBuilder(
+				"UPDATE orderInfo SET status = ? ");
 		if (OrderInfo.STATUS_ON_DELIVERY.equals(orderInfo.getStatus())) {
 			sqlBuilder.append(", deliveryTime = now() ");
-		} else if (OrderInfo.STATUS_CONFIRM_RECEIPT.equals(orderInfo.getStatus())) {
-			sqlBuilder.append(", dealTime = now(), rate = '" + RateUtil.getRate() + "' ");
+		} else if (OrderInfo.STATUS_CONFIRM_RECEIPT.equals(orderInfo
+				.getStatus())) {
+			sqlBuilder.append(", dealTime = now(), rate = '"
+					+ RateUtil.getRate() + "' ");
 		}
 		sqlBuilder.append("WHERE orderId = ? AND productId = ?");
 		String sql = sqlBuilder.toString();
 		System.out.println(sql);
-		
+
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			int rows = runner.update(sql, orderInfo.getStatus(), orderInfo.getOrderId(), orderInfo.getProductId());
+			int rows = runner.update(sql, orderInfo.getStatus(),
+					orderInfo.getOrderId(), orderInfo.getProductId());
 			return rows > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
+
 	public boolean isBought(Integer userId, Integer productId) {
-		
+
 		String sql = "select * from orders,orderinfo where orders.userId = ? and orderinfo.productId = ? and orders.orderId = orderinfo.orderId "
 				+ "and (orderinfo.status = ? or orderinfo.status = ?)";
 		ArrayList<Object> params = new ArrayList<Object>();
@@ -202,19 +207,20 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		params.add(productId);
 		params.add(OrderInfo.STATUS_CONFIRM_RECEIPT);
 		params.add(OrderInfo.STATUS_DELETED);
-		
+
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			List<OrderInfo> result = runner.query(sql, new BeanListHandler<OrderInfo>(
-					OrderInfo.class), params.toArray());
+			List<OrderInfo> result = runner.query(sql,
+					new BeanListHandler<OrderInfo>(OrderInfo.class),
+					params.toArray());
 			return !result.isEmpty();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 	}
 
 }

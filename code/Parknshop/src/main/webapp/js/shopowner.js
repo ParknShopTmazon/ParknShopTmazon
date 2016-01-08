@@ -75,6 +75,29 @@ const shopOwner = {
         $('.back-btn').click(function() {
             history.go(-1);
         });
+
+        $('#price').change(function(event) {
+            /* Act on the event */
+            if(isNaN($(this).val())) {
+                $(this).focus();
+                $(this).val('');
+                alert('please input a number');
+            } else {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            }
+        });
+
+        $('#stock_num').change(function(event) {
+            /* Act on the event */
+            const regex = new RegExp("^[0-9]*[1-9][0-9]*$");
+            if (regex.test($(this).val())) {
+                /** do something */
+            } else {
+                $(this).focus();
+                $(this).val('');
+                alert('you can only input an integer');
+            }
+        });
     },
 
     /**
@@ -138,7 +161,7 @@ const shopOwner = {
      * @return {[type]}        [description]
      */
     initAddProducts: function () {
-        $('#menu #add-products').addClass('selected');  
+        $('#menu #add-products').addClass('selected');
     },
 
     /**
