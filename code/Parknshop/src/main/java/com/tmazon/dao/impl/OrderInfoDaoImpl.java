@@ -12,6 +12,7 @@ import com.tmazon.dao.OrderInfoDao;
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
 import com.tmazon.util.DaoUtil;
+import com.tmazon.util.Rate;
 
 public class OrderInfoDaoImpl implements OrderInfoDao {
 
@@ -177,7 +178,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		if (OrderInfo.STATUS_ON_DELIVERY.equals(orderInfo.getStatus())) {
 			sqlBuilder.append(", deliveryTime = now() ");
 		} else if (OrderInfo.STATUS_CONFIRM_RECEIPT.equals(orderInfo.getStatus())) {
-			sqlBuilder.append(", dealTime = now() ");
+			sqlBuilder.append(", dealTime = now(), rate = '" + Rate.getRate() + "' ");
 		}
 		sqlBuilder.append("WHERE orderId = ? AND productId = ?");
 		String sql = sqlBuilder.toString();
@@ -192,7 +193,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			return false;
 		}
 	}
-
+	
 	public boolean isBought(Integer userId, Integer productId) {
 		
 		String sql = "select * from orders,orderinfo where orders.userId = ? and orderinfo.productId = ? and orders.orderId = orderinfo.orderId "
