@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,7 +52,6 @@ public class ShopOrderServlet extends HttpServlet {
 		
 		Integer  shopId= (Integer) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
         Map<Integer, List<OrderInfo>> orderInfoMap =new HashMap<Integer, List<OrderInfo>>();
-        List<Integer> intList = new ArrayList<Integer>();
 		System.out.println("shopId="+shopId);
 		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shopId);
 		for (OrderInfo info :orderInfos) {
@@ -63,7 +64,6 @@ public class ShopOrderServlet extends HttpServlet {
 		for (OrderInfo orderInfo : orderInfos) {
 			List<OrderInfo> orderInfos2=null;
 			if(orderInfoMap.get(orderInfo.getOrderId())==null){
-				intList.add(orderInfo.getOrderId());
 				orderInfos2 =new ArrayList<OrderInfo>();
 				orderInfos2.add(orderInfo);
 				orderInfoMap.put(orderInfo.getOrderId(), orderInfos2);
@@ -73,10 +73,11 @@ public class ShopOrderServlet extends HttpServlet {
 				orderInfoMap.put(orderInfo.getOrderId(), list);
 			}
 		}
+		Set<Entry<Integer, List<OrderInfo>>> entrySet = orderInfoMap.entrySet();
 		List<Order> orderList = new ArrayList<Order>();
-		for (Integer id : intList) {
-			Order order = orderService.findById(id);
-			order.setOrderInfo(orderInfoMap.get(id));
+		for (Entry<Integer, List<OrderInfo>> id : entrySet) {
+			Order order = orderService.findById(id.getKey());
+			order.setOrderInfo(id.getValue());
 			orderList.add(order);
 		}
 		
