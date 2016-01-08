@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
 			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
 					resp);
 			return;
-		}
+		} 
 		
 		// log in
 		req.getSession().setAttribute(AttrName.SessionScope.USER, user);

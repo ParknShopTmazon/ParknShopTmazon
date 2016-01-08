@@ -47,7 +47,7 @@
 							<label style="color: red;">6-20 characters for name and password only</label>
 						</c:if>
 						<c:if test="${ not empty r_error_user_black }">
-							<label style="color: red;">user is in black list</label>
+							<label style="color: red;">this account is in black list</label>
 						</c:if>
 					</div>
 				</form>

@@ -46,7 +46,7 @@ public class DeleteShopServlet extends HttpServlet {
 		
 		
 		Shop shop = shopService.findById(shopId);
-		if(shopId!=shop.getShopId()){
+		if(!shopId.equals(shop.getShopId())){
 			resp.sendRedirect("myshop");
 			return;
 		}

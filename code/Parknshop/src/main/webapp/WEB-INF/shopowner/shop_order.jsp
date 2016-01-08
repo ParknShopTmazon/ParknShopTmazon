@@ -16,21 +16,23 @@
 			    <span class="parknshop">PARKnSHOP</span>
 			    <span class="main-title">Orders List & Incomes</span>
 			</div>
+			<div class="main">Filter</div>
 		    <div class="order-form">
 				<div>
 					shop name
-					<select name="shopId">
+					<select id="shopId" name="shopId">
 						<option value="-1">ALL</option>
-						<c:forEach var="shop" items="${shopList}">
+						<c:forEach var="shop" items="${shopLists}">
 							<option value="${shop.shopId }">${shop.name }</option>
 						</c:forEach>
 					</select>
 					from
-					<input type="date" name="start">
+					<input type="date" id="startDate" value="" name="start">
 					to
-					<input type="date" name="end">	
+					<input type="date" id="endDate" value="" name="end">	
 				</div>
 			</div>
+			<div class="main">Orders</div>			
 			<c:if test="${num==0 }">
 			no order
 			</c:if>
@@ -49,7 +51,7 @@
 		            <c:forEach  var="orderInfo" items="${order.orderInfos}">
 		            <div class="shop-item">
 		                <div class="pic-container">
-		                    <a href="" target="_blank">
+		                    <a href="productInfo?pid=${orderInfo.productId}" target="_blank">
 		                        <div class="over">
 		                            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
 		                        </div>
@@ -57,11 +59,11 @@
 		                <div class="shop" style="background-image: url(${orderInfo.product.picture });"></div>
 		                </div>
 		                <div class="shopId">
-		                    <p class="value" title="${orderInfo.product.shopId }">${orderInfo.product.shopId }</p>
-		                    <p class="name">id</p>
+		                    <p class="value" title="${orderInfo.product.shopId}">${orderInfo.product.shopId}</p>
+		                    <p class="name">Shop Id</p>
 		                </div>
 		                <div class="productName">
-		                    <p class="value" title="${orderInfo.product.shopId }">${orderInfo.product.name }</p>
+		                    <p class="value" title="${orderInfo.product.name }">${orderInfo.product.name }</p>
 		                    <p class="name">name</p>
 		                </div>
 		                <div class="origin-price">
@@ -86,10 +88,9 @@
 		                        <p class="name">status</p>
 		                    </div>
 		                </div>
-		                
+		            	<div class="handle-btn button" oid="${order.orderId}" pid="${orderInfo.productId}" status="${orderInfo.status}">Send</div>
 		            </div>
 		            </c:forEach>
-		            <div class="handle-btn button"><a href="modifyorder?orderId=${order.orderId}">Send</a></div>
 		        </div>	
 			</c:forEach>
 		</div>
