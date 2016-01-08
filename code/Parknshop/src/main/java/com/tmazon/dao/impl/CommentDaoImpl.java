@@ -72,13 +72,13 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	public Comment insert(Comment comment) {
-		String sql = "INSERT INTO comment(userId,productId,content,commentTime,replyId) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO comment(userId,productId,content,commentTime,shopScore,productScore,deliveryScore,replyId) VALUES (?, ?, ?, ?, ?,?,?,?)";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
 			runner.insert(sql, new BeanHandler<Comment>(Comment.class), comment.getUserId(), comment.getProductId(),
-					comment.getContent(), comment.getCommentTime(), comment.getReplyId());
+					comment.getContent(), comment.getCommentTime(),comment.getShopScore(),comment.getProductScore(),comment.getDeliveryScore(), comment.getReplyId());
 			
 			List<Comment> list = select(comment);
 			if(list.isEmpty()){
