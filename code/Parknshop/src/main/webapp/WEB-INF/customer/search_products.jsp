@@ -172,6 +172,9 @@
 					    <div class="shop" style="background-image: url('${ product.picture }');"></div>
 					</div>
 				</c:forEach>
+				<c:if test="${num==0}">
+					not found
+				</c:if>
 			</div>
 		</div>
 	</div>
