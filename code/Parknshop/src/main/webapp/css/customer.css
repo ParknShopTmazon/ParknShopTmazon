@@ -368,16 +368,15 @@ input {
     height: 400px;
     display: inline-block;
     vertical-align: top;
-    overflow: hidden;
 }
 
 .product-container .product-picture {
     display: inline-block;
     vertical-align: top;
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 400px;
+    background-position: top;
     background-repeat: no-repeat;
-    background-position: center;
     background-size: cover;
 }
 

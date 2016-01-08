@@ -54,7 +54,7 @@
             'text-decoration': 'none'
         });
         //BASE IMAGE
-        var img = $("img:eq(0)", el);
+        var img = $(".product-picture", el);
         el.title = $(el).attr('title');
         el.imagetitle = img.attr('title');
         var zoomtitle = ($.trim(el.title).length > 0) ? el.title : el.imagetitle;
@@ -241,7 +241,7 @@
             }
         });
         //sometimes image is already loaded and onload will not fire
-        if (img[0].complete) {
+        if (img[0]) {
             //fetching data from sallimage if was previously loaded
             smallimage.fetchdata();
             if ($(".zoomPad", el).length == 0) obj.create();
@@ -635,7 +635,8 @@
                 $obj.pos.r = $obj.w + $obj.pos.l;
                 $obj.pos.b = $obj.h + $obj.pos.t;
                 scale.x = ($obj.w / smallimage.w);
-                scale.y = ($obj.h / smallimage.h);
+                // scale.y = ($obj.h / smallimage.h);
+                scale.y = scale.x;
                 el.scale = scale;
                 document.body.removeChild(this.node);
                 $('.zoomWrapperImage', el).empty().append(this.node);
