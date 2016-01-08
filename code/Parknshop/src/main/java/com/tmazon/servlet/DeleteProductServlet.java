@@ -38,7 +38,7 @@ public class DeleteProductServlet extends HttpServlet{
 			return;
 		}
 		Product product = productService.findOnSellById(id);
-		if(product==null||product.getProductId()==null||product.getProductId()!=id){
+		if(product==null||product.getProductId()==null){
 			resp.sendRedirect("selectedshop");
 			return;
 		}
