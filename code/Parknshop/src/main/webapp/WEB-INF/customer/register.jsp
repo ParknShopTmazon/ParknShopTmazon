@@ -27,6 +27,15 @@
 						</div>
 					</div>
 					<div class="control-group">
+						<label class="control-label">ROLES</label>
+						<div class="controls">
+							<input type="radio" id="customer" checked="checked" name="roles" value="customer">
+							<label for="customer">Customer</label>
+							<input type="radio" name="roles" value="shop-owner" id="shop-owner">
+							<label class="checked" for="shop-owner">Shop Owner</label>
+						</div>
+					</div>
+					<div class="control-group">
 						<label class="control-label" for="input2">PASSWORD</label>
 						<div class="controls">
 							<input id="input2" type="password" name="password" value="${ param.password }"
@@ -79,6 +88,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			customer.init();
+			customer.initRegister();
 		});
 	</script>
 </body>
