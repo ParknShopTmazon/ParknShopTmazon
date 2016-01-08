@@ -35,7 +35,7 @@ public class CommentServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		
 		if(user == null){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "You're already offline!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
@@ -51,31 +51,31 @@ public class CommentServlet extends HttpServlet {
 		String[] deliveryScoreStrings = params.get("deliveryScore");
 		
 		if(productIdStrings == null || productIdStrings.length != 1){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Cannot get product,please try it again!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
 		if(contents == null || contents.length != 1){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Cannot get content,please try it again!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
 		if(shopScoreStrings == null || shopScoreStrings.length != 1){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Cannot get shop score,please try it again!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
 		if(productScoreStrings == null || productScoreStrings.length != 1){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Cannot get product score,please try it again!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
 		if(deliveryScoreStrings == null || deliveryScoreStrings.length != 1){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Cannot get delivery score,please try it again!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
@@ -90,7 +90,7 @@ public class CommentServlet extends HttpServlet {
 		int productId = ParseUtil.String2Integer(productIdString, null);
 		
 		if(!orderService.isBought(user.getUserId(), productId)){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Never bought this product!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
@@ -103,13 +103,13 @@ public class CommentServlet extends HttpServlet {
 		Comment comment = new Comment(null, user.getUserId(), productId, content, null, shopScore, productScore, deliveryScore, null);
 		comment = commentService.addComment(comment);
 		if(comment == null){
-			jsonObject.put("result", false + "");
+			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Failed!");
 			resp.getWriter().write(jsonObject.toString());
 			System.out.println("##################################### is null");
 			return;
 		}else {
-			jsonObject.put("result", true + "");
+			jsonObject.put("success", true + "");
 			jsonObject.put("errMsg", "");
 			resp.getWriter().write(jsonObject.toString());
 			System.out.println("##################################### not null");
