@@ -169,25 +169,122 @@ const shopOwner = {
      * @return {[type]} [description]
      */
     initOrderList: function () {
-        $('.shops-orders-container #order-list .order-item .handle-btn').click(function(event) {
-            /* Act on the event */
-            const orderId = $(this).attr('oid');
-            const _this = $(this);
+        /**
+         * [initDate: init the date]
+         * @return {[type]} [description]
+         */
+        function initDate() {
+            const dateObj = new Date();
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).length == 1 ? '0' + (dateObj.getMonth() + 1) : dateObj.getMonth() + 1;
+            const dateVal = String(dateObj.getDate() + 1).length ? '0' + dateObj.getDate() : dateObj.getDate();
+            const today = [year, month, dateVal].join('-');
+            const theFirstDate = [year, month, '01'].join('-');
+            $('.shops-orders-container #startDate').val(theFirstDate);
+            $('.shops-orders-container #endDate').val(today);
+        }
+
+        /**
+         * [compareDate: compare two date, return 1 when the prev one is greater than the next one with the format yyyy-MM-dd. Otherwise, return -1]
+         * @param  {[type]}   prev [prev date]
+         * @param  {Function} next [description]
+         * @return {[type]}        [description]
+         */
+        function compareDate(prev, next) {
+            const prevArray = prev.split('-');
+            const nextArray = next.split('-');
             
-            $.getJSON('updateordercondition', {orderId: orderId}, function(data, textStatus) {
-                /*optional stuff to do after success */
-                if (!data.success) {
-                    _this.css({
-                            'border': '1px solid #e0e0e0',
-                            'background-color': '#f0f0f0',
-                            'color': '#e0e0e0'
-                        });
+            /** year */
+            if ((prevArray[0] >> 0) < (nextArray[0] >> 0)) {
+            	return -1;
+            }
+            
+            /** month */
+            if ((prevArray[1] >> 0) < (nextArray[1] >> 0)) {
+            	return -1;
+            }
+            
+            /** date */
+            if ((prevArray[2] >> 0) <= (nextArray[2] >> 0)) {
+            	return -1;
+            }
+            
+            return 1;
+        }
 
-                    _this.removeClass('button');
+        function showOrders(oid, start, end) {
+            const $orderLists = $('.order-item');
+            
+            $orderLists.each(function() {
+                const $shopLists = $(this).children('.shop-item');
+                const dateTime = $(this).find('.brief-info').find('.order-ctime').find('.value').html().split(' ')[0];
+                let i = 0;
+                $(this).show();
 
-                    _this.unbind('click');
+                if (compareDate(start, dateTime) > 0 || compareDate(dateTime, end) > 0) {
+                	$(this).hide();
+                } else {
+                	$shopLists.each(function() {
+                        $(this).show();
+                        if (oid !== '-1' && oid !== $(this).find('.shopId').find('.value').html()) {
+                            $(this).hide();
+                            i++;
+                        }
+                    });
+
+                    if (i === $shopLists.length) {
+                        $(this).hide();
+                    }
                 }
             });
+        }
+
+        initDate();
+
+        showOrders('-1', $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
+
+        const $listBtns = $('.shops-orders-container #order-list .order-item .handle-btn');
+
+        $listBtns.each(function() {
+            if ($(this).attr('status') !== 'paid') {
+                $(this).css({
+                    'border': '1px solid #e0e0e0',
+                    'background-color': '#f0f0f0',
+                    'color': '#e0e0e0'
+                });
+            } else {
+                const _this = $(this);
+                const oid = $(this).attr('oid');
+                const pid = $(this).attr('pid');
+                
+                $(this).click(function(event) {
+                    /* Act on the event */
+                    $.getJSON('modifyorder', {
+                        oid: oid,
+                        pid: pid
+                    }, function(data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (data.success == 'true') {
+                            _this.css({
+                                    'border': '1px solid #e0e0e0',
+                                    'background-color': '#f0f0f0',
+                                    'color': '#e0e0e0'
+                                });
+
+                            _this.removeClass('button');
+
+                            _this.unbind('click');
+                        } else {
+                            alert('faied to send products');
+                        }
+                    });
+                });
+            }
+        });
+
+        $('.shops-orders-container #shopId, .shops-orders-container #startDate, .shops-orders-container #endDate').change(function(event) {
+            /* Act on the event */
+            showOrders($('.shops-orders-container #shopId').val(), $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
         });
     }
 };

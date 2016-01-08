@@ -822,6 +822,15 @@ a {
     position: relative;
 }
 
+.shops-orders-container .main {
+    margin: 15px 0;
+    font-size: 1.3em;
+    color: #ffa200;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #999;
+    width: 20%;
+}
+
 .shops-orders-container #order-list .order-item .order-id,
 .shops-orders-container #order-list .order-item .order-ctime,
 .shops-orders-container #order-list .order-item .delete-btn {
