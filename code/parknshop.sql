@@ -107,7 +107,7 @@ CREATE TABLE orderInfo(
 	status varchar(50) NOT NULL,
 	deliveryTime datetime,
 	dealTime datetime,
-	rate varchar(10) NOT NULL,
+	rate varchar(10),
 	waybill varchar(50),
 	PRIMARY KEY(orderId, productId),
 	FOREIGN KEY (productId) REFERENCES product(productId),
