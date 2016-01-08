@@ -19,11 +19,11 @@
 		    <div class="order-form">
 				<div>
 					shop name
-					<select>
-						<option>ALL</option>
-						<option>ShopName1</option>
-						<option>ShopName2</option>
-						<option>ShopName3</option>
+					<select name="shopId">
+						<option value="-1">ALL</option>
+						<c:forEach var="shop" items="${shopList}">
+							<option value="${shop.shopId }">${shop.name }</option>
+						</c:forEach>
 					</select>
 					from
 					<input type="date" name="start">
@@ -31,7 +31,9 @@
 					<input type="date" name="end">	
 				</div>
 			</div>
-
+			<c:if test="${num==0 }">
+			no order
+			</c:if>
 			<c:forEach var="order" items="${orderList}" >
 				<div class="order-item">
 		            <div class="brief-info">
