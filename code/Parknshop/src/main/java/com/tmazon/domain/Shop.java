@@ -5,6 +5,7 @@ public class Shop {
 	public static final String STATUS_CHECKING = "checking";
 	public static final String STATUS_FAIL = "fail";
 	public static final String STATUS_SUCCESS = "success";
+	public static final String STATUS_DELETED ="deleted";
 
 	public static final String TYPE_PERSON = "person";
 	public static final String TYPE_COMPANY = "company";
