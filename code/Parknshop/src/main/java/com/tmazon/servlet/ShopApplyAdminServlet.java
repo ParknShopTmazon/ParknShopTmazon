@@ -57,7 +57,7 @@ public class ShopApplyAdminServlet extends HttpServlet {
 			Page<User> userPage = userManageService.pageList(userList,curPage,next);
  			req.setAttribute("shopList",shopPage.getSubitems());
 			req.setAttribute("userList",userPage.getSubitems());
-			req.setAttribute("CurPage",shopPage.getCurPage());
+			req.setAttribute("CurPage",shopPage.getCurPage()==0?1:shopPage.getCurPage());
 			req.getRequestDispatcher("WEB-INF/admin/shopApply.jsp").forward(req,resp);
 		}
 		else

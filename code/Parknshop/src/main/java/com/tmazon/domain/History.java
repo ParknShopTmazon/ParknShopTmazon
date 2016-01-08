@@ -1,37 +1,52 @@
 package com.tmazon.domain;
 
+import java.util.List;
+
 public class History {
 	
 	private OrderInfo orderInfo;
-	private Order order;
 	private Shop shop;
 	private User user;
 	private Product product;
+	private String dealTime;
+	private double cost;
 	
-	public History(OrderInfo orderInfo,Order order,Shop shop,User user,Product product){
+
+	public History(OrderInfo orderInfo,Shop shop,User user,Product product){
 		
-		this.orderInfo=orderInfo;
-		this.order=order;
+		this.orderInfo = orderInfo;
 		this.shop=shop;
 		this.user=user;
 		this.product=product;
 	}
+
+	public String getDealTime() {
+		return orderInfo.getDealTime().toString();
+	}
+
+	public double getCost() {
+		return orderInfo.getQuantity() * product.getPrice();
+	}
+	public double getRate()
+	{
+		String rateStr = this.orderInfo.getRate();
+		if(rateStr == null || rateStr.equals(""))
+		{
+			System.out.println("Error::History::getRate::RateStr is null");
+			return 0.0;
+		}
+		else
+		{
+			return Double.valueOf(rateStr);
+		}
+	}
+
 	public OrderInfo getOrderInfo() {
 		return orderInfo;
 	}
-
 	public void setOrderInfo(OrderInfo orderInfo) {
 		this.orderInfo = orderInfo;
 	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
 	public Shop getShop() {
 		return shop;
 	}

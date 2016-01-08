@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tmazon.util.Rate;
+import com.tmazon.util.RateUtil;
 
 
 public class ModifyRateServlet extends HttpServlet {
@@ -26,7 +26,7 @@ public class ModifyRateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//	System.out.println(123);
 		if(!request.getParameter("rate").equals(null)&&!request.getParameter("rate").equals("")){
-			Rate.setRate(Integer.parseInt(""+request.getParameter("rate")));
+			RateUtil.setRate(Integer.parseInt(""+request.getParameter("rate")));
 			request.getSession().setAttribute("rate", Integer.parseInt(request.getParameter("rate")));
 		}
 		

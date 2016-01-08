@@ -6,7 +6,7 @@ import com.tmazon.dao.ProfitDao;
 import com.tmazon.dao.impl.ProfitDaoImpl;
 import com.tmazon.domain.Profit;
 import com.tmazon.service.ProfitService;
-import com.tmazon.util.Rate;
+import com.tmazon.util.RateUtil;
 
 
 // the controller of Profit
@@ -23,7 +23,7 @@ public class ProfitServiceImpl implements ProfitService {
 		List<Profit> l=pd.getList();
 		if(l==null) return 0;
 		for(Profit p:l){
-			pro+=p.getQuantity()*p.getPrice()*Rate.getRate();
+			pro+=p.getQuantity()*p.getPrice()*RateUtil.getRate();
 		}
 	/*	System.out.println("----------------");
 		System.out.println(l.get(0).getProductId());

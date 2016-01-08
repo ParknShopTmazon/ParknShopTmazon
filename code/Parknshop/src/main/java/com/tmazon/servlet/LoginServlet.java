@@ -17,9 +17,11 @@ import com.tmazon.dao.impl.ShopApplyDaoImpl;
 import com.tmazon.domain.Advertisement;
 import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
+import com.tmazon.service.OverviewAdminService;
 import com.tmazon.service.UserService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.RateUtil;
 
 public class LoginServlet extends HttpServlet {
 
@@ -29,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private UserService userService = BasicFactory.getImpl(UserService.class);
-
+	private OverviewAdminService overviewAdminService = BasicFactory.getImpl(OverviewAdminService.class);
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -86,15 +88,10 @@ public class LoginServlet extends HttpServlet {
 		users.put(name, req.getSession());
 		System.out.println("online user: " + users.size());
 		
+		//When user log in, set tht Rate,
+		//Attention! the Rate is double.
+		RateUtil.setRate(overviewAdminService.getRate());
 		if (user.getRole().equals(User.ROLE_ADMIN)) {
-//			ShopApplyDao s=new ShopApplyDaoImpl();
-//			List <Shop> list=s.getApply();
-//			req.getSession().setAttribute("apply", list);
-//			req.getSession().setAttribute("rate", 5);
-//			req.getSession().setAttribute("profit", 0);
-//			AdvertisementDao ado=new AdvertisementDaoImpl();
-//			List<Advertisement> lad=ado.select();
-//			req.getSession().setAttribute("showAd", lad);
 			req.getRequestDispatcher("overview").forward(req, resp);;
 			return ;
 		}
