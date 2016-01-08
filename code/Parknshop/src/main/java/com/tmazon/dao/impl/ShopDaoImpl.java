@@ -78,7 +78,9 @@ public class ShopDaoImpl implements ShopDao {
 		ArrayList<Object> params = new ArrayList<Object>();
         if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
 			params.add(Shop.STATUS_SUCCESS);
-        }else{
+        }else if(shop.getStatus().equals(Shop.STATUS_DELETED)){
+			params.add(Shop.STATUS_DELETED);
+		}else{
 			params.add(Shop.STATUS_CHECKING);
 		}
         
