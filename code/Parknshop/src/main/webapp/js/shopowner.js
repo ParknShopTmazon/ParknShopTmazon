@@ -305,18 +305,18 @@ const shopOwner = {
         	/** calculate the average value */
         	const avgSets = [];
         	
-        	for(let i = 0; i < dataSets.length; i++) {
-        		let avg = 0;
-        		for(let j = 0; j < dataSets.length; j++) {
-            		avg += dataSets[j].data[i].value
+        	if (dataSets.length > 1 && dataSets[0].data.length > 1) {
+        		for(let i = 0; i < dataSets.length; i++) {
+            		let avg = 0;
+            		for(let j = 0; j < dataSets[i].data.length; j++) {
+                		avg += dataSets[j].data[i].value
+            		}
+            		
+            		avgSets.push({
+            			'value': String((avg / dataSets[0].data.length).toFixed(2))
+            		});
         		}
-        		
-        		console.log(avg);
-        		
-        		avgSets.push({
-        			'value': String((avg / dataSets.length).toFixed(2))
-        		});
-    		}
+        	}
         	
         	dataSets.push({
                 "seriesname": "Average",
