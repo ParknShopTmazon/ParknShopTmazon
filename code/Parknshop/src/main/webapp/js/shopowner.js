@@ -305,14 +305,16 @@ const shopOwner = {
         	/** calculate the average value */
         	const avgSets = [];
         	
-        	for(let i = 0; i < dataSets.length - 1; i++) {
+        	for(let i = 0; i < dataSets.length; i++) {
         		let avg = 0;
-        		for(let j = 0; j < dataSets.length - 1; j++) {
+        		for(let j = 0; j < dataSets.length; j++) {
             		avg += dataSets[j].data[i].value
         		}
         		
+        		console.log(avg);
+        		
         		avgSets.push({
-        			'value': avg / (dataSets.length - 1)
+        			'value': String((avg / dataSets.length).toFixed(2))
         		});
     		}
         	
@@ -320,7 +322,7 @@ const shopOwner = {
                 "seriesname": "Average",
                 "renderas": "line",
                 "showvalues": "0",
-                "data": []
+                "data": avgSets
             });
         	
         	
@@ -379,8 +381,6 @@ const shopOwner = {
         initDate();
         
         calculateAmount();
-
-        initChart(-1, $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
         
         showOrders('-1', $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
 
