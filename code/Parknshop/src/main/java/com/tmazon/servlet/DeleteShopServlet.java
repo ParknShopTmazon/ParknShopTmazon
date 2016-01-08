@@ -64,25 +64,15 @@ public class DeleteShopServlet extends HttpServlet {
 		
 		
 		System.out.println("**************************");
-		String shopId =(String) req.getSession(true).getAttribute(AttrName.SessionScope.SHOPID);
+		Integer shopId =(Integer) req.getSession(true).getAttribute(AttrName.SessionScope.SHOPID);
 		System.out.println("shopId=="+shopId);
-		int id=-1;
-		try {
-			id=Integer.parseInt(shopId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(id==-1){
-			resp.sendRedirect("myshop");
-			return;
-		}
+		
 		
 		
 		
 //			Shop shop =new Shop();
 //			shop.setShopId(id);
-		    Shop shop = shopService.findById(id);
+		    Shop shop = shopService.findById(shopId);
 		    if(shop.getStatus().equals(Shop.STATUS_FAIL)){
 		    	boolean isDeleteSuccess = shopService.delete(shop);
 				if(isDeleteSuccess==true){
