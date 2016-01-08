@@ -34,7 +34,7 @@ public class DeleteShopServlet extends HttpServlet {
 			return;
 		}
 		
-		String shopId=req.getParameter("shopId");
+		Integer shopId=Integer.parseInt(req.getParameter("shopId"));
 		System.out.println("*******************"+shopId);
 		if(shopId == null){
 			resp.sendRedirect("myshop");
@@ -44,20 +44,9 @@ public class DeleteShopServlet extends HttpServlet {
 			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
 		}
 		
-		int shopOneId = -1;
-		try {
-			shopOneId=Integer.parseInt(shopId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		if(shopOneId == -1){
-			resp.sendRedirect("myshop");
-		}
-		
-		Shop shop = shopService.findById(shopOneId);
-		if(shopOneId!=shop.getShopId()){
+		Shop shop = shopService.findById(shopId);
+		if(!shopId.equals(shop.getShopId())){
 			resp.sendRedirect("myshop");
 			return;
 		}
@@ -75,25 +64,15 @@ public class DeleteShopServlet extends HttpServlet {
 		
 		
 		System.out.println("**************************");
-		String shopId =(String) req.getSession(true).getAttribute(AttrName.SessionScope.SHOPID);
+		Integer shopId =(Integer) req.getSession(true).getAttribute(AttrName.SessionScope.SHOPID);
 		System.out.println("shopId=="+shopId);
-		int id=-1;
-		try {
-			id=Integer.parseInt(shopId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(id==-1){
-			resp.sendRedirect("myshop");
-			return;
-		}
+		
 		
 		
 		
 //			Shop shop =new Shop();
 //			shop.setShopId(id);
-		    Shop shop = shopService.findById(id);
+		    Shop shop = shopService.findById(shopId);
 		    if(shop.getStatus().equals(Shop.STATUS_FAIL)){
 		    	boolean isDeleteSuccess = shopService.delete(shop);
 				if(isDeleteSuccess==true){

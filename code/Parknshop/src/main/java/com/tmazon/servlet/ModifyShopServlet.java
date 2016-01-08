@@ -42,22 +42,16 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 			return;
 		}
 		
-		String shopId=req.getParameter("shopId");
+		Integer shopId=Integer.parseInt(req.getParameter("shopId"));
 		System.out.println("*******************"+shopId);
-		if(!(shopId==null||"".trim().equals(shopId))){
+		if(!(shopId==null)){
 			System.out.println("sdsdsdsddssdsddssd"+shopId);
 			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
 		}
 		
-		int shopOneId = -1;
-		try {
-			shopOneId=Integer.parseInt(shopId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Shop shop = shopService.findById(shopOneId);
-		if(shopOneId!=shop.getShopId()){
+		
+		Shop shop = shopService.findById(shopId);
+		if(!shopId.equals(shop.getShopId())){
 			resp.sendRedirect("myshop");
 			return;
 		}
@@ -132,9 +126,9 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		
 		
 		HttpSession session = req.getSession();
-		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
-		Integer shopIdInt = Integer.parseInt(shopId);
-		Shop myShop = shopService.findById(shopIdInt);
+		Integer shopId =(Integer) session.getAttribute(AttrName.SessionScope.SHOPID);
+		
+		Shop myShop = shopService.findById(shopId);
 		String status = myShop.getStatus();
 		
 		String shopName = shopMap.get("name");
@@ -154,7 +148,7 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		
 		Shop shop =new Shop();
 		
-		shop.setShopId(shopIdInt);
+		shop.setShopId(shopId);
 		shop.setName(shopName);
 		shop.setType(shopType);
 		shop.setStatus(status);

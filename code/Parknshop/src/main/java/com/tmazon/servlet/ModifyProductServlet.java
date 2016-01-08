@@ -52,7 +52,7 @@ public class ModifyProductServlet extends HttpServlet{
 			return;
 		}
 		Product product = productService.findOnSellById(id);
-		if(product==null||product.getProductId()==null){
+		if(product==null){
 			resp.sendRedirect("selectedshop");
 			return;
 		}

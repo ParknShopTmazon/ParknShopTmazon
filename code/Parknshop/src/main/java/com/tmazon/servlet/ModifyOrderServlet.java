@@ -20,8 +20,10 @@ public class ModifyOrderServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
-		String orderIdStr = req.getParameter("orderId");
+		String orderIdStr = req.getParameter("oid");
+		String productId = req.getParameter("pid");
 		System.out.println("orderInfo="+orderIdStr);
+		System.out.println("productId="+productId);
 		Integer orderId = -1;
 		
 		try {
@@ -31,20 +33,22 @@ public class ModifyOrderServlet extends HttpServlet {
 		}
 		
 		if(orderId == -1){
-			resp.sendRedirect("shoporder");
+//			resp.sendRedirect("shoporder");
 		}
 		
 //		OrderInfo orderInfo = new OrderInfo(orderId, null, null, null, null);
 		List<OrderInfo> orderInfoList = orderService.getOrderInfo(orderId);
 		for (int i = 0; i < orderInfoList.size(); i++) {
-			if(orderInfoList.get(i).getStatus().equals("paid")){
-				orderInfoList.get(i).setStatus("delivering");
-				orderService.modify(orderInfoList.get(i));
+			if(orderInfoList.get(i).getProductId().equals(productId)){
+				if(orderInfoList.get(i).getStatus().equals("paid")){
+					orderInfoList.get(i).setStatus("delivering");
+					orderService.modify(orderInfoList.get(i));
+				}
 			}
+			
 			
 		}
 		resp.sendRedirect("shoporder");
-		return;
 	}
 	
 		

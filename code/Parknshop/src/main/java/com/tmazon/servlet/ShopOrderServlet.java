@@ -49,22 +49,24 @@ public class ShopOrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		User user =(User) req.getSession(true).getAttribute(AttrName.SessionScope.USER);
+		if(user==null){
+			resp.sendRedirect("login");
+			return;
+		}
 		Shop shop = new Shop();
 		shop.setOwner(user.getUserId());
-		List<Shop> shopList = shopService.select(shop);
-		req.setAttribute("shopList", shopList);
+		List<Shop> shopLists = shopService.select(shop);
+		req.setAttribute("shopLists", shopLists);
 		
 		String  Id= req.getParameter("shopId");
 		
 		Integer shopId = ParseUtil.String2Integer(Id, null);
 		List<OrderInfo> orderInfos= new ArrayList<OrderInfo>();
-		if(shopId==null||shopId==-1){
-			for (Shop shop2 : shopList) {
-				orderInfos.addAll(orderService.getOrderInfosByshop(shop2.getShopId()));
-			}
-		}else{
-			orderInfos = orderService.getOrderInfosByshop(shopId);
+		
+		for (Shop shop2 : shopLists) {
+			orderInfos.addAll(orderService.getOrderInfosByshop(shop2.getShopId()));
 		}
+		
         Map<Integer, List<OrderInfo>> orderInfoMap =new HashMap<Integer, List<OrderInfo>>();
 		if(orderInfos==null){
 			req.setAttribute("num", 0);

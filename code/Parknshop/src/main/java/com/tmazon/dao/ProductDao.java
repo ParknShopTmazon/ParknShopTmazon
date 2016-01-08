@@ -29,5 +29,8 @@ public interface ProductDao {
 	
 	public List<Product> findByShopId(Integer shopId);
 	
+	//for add order
+	public boolean updateStockNum(Product product);
+	
 	public List<Product> selectByAdmin(String productName,String category);
 }

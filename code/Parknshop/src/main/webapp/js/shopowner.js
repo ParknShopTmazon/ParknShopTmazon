@@ -169,25 +169,266 @@ const shopOwner = {
      * @return {[type]} [description]
      */
     initOrderList: function () {
-        $('.shops-orders-container #order-list .order-item .handle-btn').click(function(event) {
-            /* Act on the event */
-            const orderId = $(this).attr('oid');
-            const _this = $(this);
+        let amount = {};
+    	/**
+         * [initDate: init the date]
+         * @return {[type]} [description]
+         */
+        function initDate() {
+            const dateObj = new Date();
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).length == 1 ? '0' + (dateObj.getMonth() + 1) : dateObj.getMonth() + 1;
+            const dateVal = String(dateObj.getDate() + 1).length ? '0' + dateObj.getDate() : dateObj.getDate();
+            const today = [year, month, dateVal].join('-');
+            const theFirstDate = [year, month, '01'].join('-');
+            $('.shops-orders-container #startDate').val(theFirstDate);
+            $('.shops-orders-container #endDate').val(today);
+        }
+        
+        /**
+         * [compareDate: compare two date, return 1 when the prev one is greater than the next one with the format yyyy-MM-dd. Otherwise, return -1]
+         * @param  {[type]}   prev [prev date]
+         * @param  {Function} next [description]
+         * @return {[type]}        [description]
+         */
+        function compareDate(prev, next) {
+            const prevArray = prev.split('-');
+            const nextArray = next.split('-');
             
-            $.getJSON('updateordercondition', {orderId: orderId}, function(data, textStatus) {
-                /*optional stuff to do after success */
-                if (!data.success) {
-                    _this.css({
-                            'border': '1px solid #e0e0e0',
-                            'background-color': '#f0f0f0',
-                            'color': '#e0e0e0'
-                        });
+            /** year */
+            if ((prevArray[0] >> 0) < (nextArray[0] >> 0)) {
+            	return -1;
+            }
+            
+            /** month */
+            if ((prevArray[1] >> 0) < (nextArray[1] >> 0)) {
+            	return -1;
+            }
+            
+            /** date */
+            if ((prevArray[2] >> 0) <= (nextArray[2] >> 0)) {
+            	return -1;
+            }
+            
+            return 1;
+        }
+        
+        function calculateAmount() {
+        	 const $orderLists = $('.order-item');
+        	 const $shopNames = $('#shopId').children('option');
+        	 
+        	 $shopNames.each(function() {
+        		if ($(this).html() === 'ALL') {
+      				return;
+      			}
+      			
+        		amount[$(this).val()] = {};
+         	});
+             
+             $orderLists.each(function() {
+            	 const $shopLists = $(this).children('.shop-item');
+            	 const dateTime = $(this).find('.brief-info').find('.order-ctime').find('.value').html().split(' ')[0];
+            	 const shopId = $(this).find('.shopId').find('.value').html();
+            	 
+            	 if (typeof(amount[shopId][dateTime]) == 'undefined') {
+            		 amount[shopId][dateTime] = 0.0;
+            	 }
+            	 
+            	 let sum = 0.0;
+            	 $shopLists.each(function() {
+            		 let salary = $(this).find('.price').find('.shop-price').html();
+            		 salary = salary.trim();
+            		 salary = parseFloat(salary.substr(1, salary.length));
+            		 sum += salary;
+				 });
+            	 
+            	 amount[shopId][dateTime] += sum;
+             });
+             console.log(amount);
+        }
+        
+        function initChart(sid, start, end) {
+        	$("#chart-container").empty();
+        	
+        	if (compareDate(start, end) > 1) {
+        		return;
+        	}
+        	
+        	const $shopNames = $('#shopId').children('option');
+        	const _sid = sid;
 
-                    _this.removeClass('button');
-
-                    _this.unbind('click');
+        	let markDate = {};
+        	let dataSets = [];
+        	
+        	/** foreach shop to find the date of them */
+        	$shopNames.each(function() {
+        		const valSets = [];
+        		for (let i in amount[$(this).val()]) {
+        			if (compareDate(start, i) > 0 || compareDate(i, end) > 0) {
+        				continue;
+        			} else {
+        				valSets.unshift({
+        					'value': amount[$(this).val()][i]
+        				});
+        				
+        				/** mark the date */
+            			markDate[i] = 0;
+        			}
+                }
+        		
+    			if (_sid === '-1') {
+    				if ($(this).html() === 'ALL') {
+        				return;
+        			}
+            		dataSets.push({
+            			'seriesname': $(this).html(),
+            			'data': valSets
+            		});
+    			} else {
+    				if ($(this).val() == _sid) {
+    					dataSets.push({
+                			'seriesname': $(this).html(),
+                			'data': valSets
+                		});
+    				}
+    			}
+        	});
+        	
+        	let categories = [];
+        	/** generate the categories */
+        	for (let i in markDate) {
+        		categories.unshift({
+        			'label': i
+        		});
+        	}
+        	
+        	/** calculate the average value */
+        	const avgSets = [];
+        	
+        	if (dataSets.length > 1 && dataSets[0].data.length > 1) {
+        		for(let i = 0; i < dataSets.length; i++) {
+            		let avg = 0;
+            		for(let j = 0; j < dataSets[i].data.length; j++) {
+                		avg += dataSets[j].data[i].value
+            		}
+            		
+            		avgSets.push({
+            			'value': String((avg / dataSets[0].data.length).toFixed(2))
+            		});
+        		}
+        	}
+        	
+        	dataSets.push({
+                "seriesname": "Average",
+                "renderas": "line",
+                "showvalues": "0",
+                "data": avgSets
+            });
+        	
+        	
+        	$("#chart-container").insertFusionCharts({
+                type: "mscombi2d",
+                width: "100%",
+                height: "480",
+                dataFormat: "json",
+                dataSource: {
+                    "chart": {
+                        "caption": "Incomes of your shops",
+                        "xaxisname": "Date",
+                        "yaxisname": "Amount (In USD)",
+                        "numberprefix": "$",
+                        "theme": "fint",
+                    },
+                    "categories": [
+                        {
+                            "category": categories
+                        }
+                    ],
+                    "dataset": dataSets
                 }
             });
+        }
+
+        function showOrders(sid, start, end) {
+            const $orderLists = $('.order-item');
+            
+            $orderLists.each(function() {
+                const $shopLists = $(this).children('.shop-item');
+                const dateTime = $(this).find('.brief-info').find('.order-ctime').find('.value').html().split(' ')[0];
+                let i = 0;
+                $(this).show();
+
+                if (compareDate(start, dateTime) > 0 || compareDate(dateTime, end) > 0) {
+                	$(this).hide();
+                } else {
+                	$shopLists.each(function() {
+                        $(this).show();
+                        if (sid !== '-1' && sid !== $(this).find('.shopId').find('.value').html()) {
+                            $(this).hide();
+                            i++;
+                        }
+                    });
+
+                    if (i === $shopLists.length) {
+                        $(this).hide();
+                    }
+                }
+            });
+            
+            initChart(sid, start, end);
+        }
+
+        initDate();
+        
+        calculateAmount();
+        
+        showOrders('-1', $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
+
+        const $listBtns = $('.shops-orders-container #order-list .order-item .handle-btn');
+
+        $listBtns.each(function() {
+            if ($(this).attr('status') !== 'paid') {
+                $(this).css({
+                    'border': '1px solid #e0e0e0',
+                    'background-color': '#f0f0f0',
+                    'color': '#e0e0e0'
+                });
+            } else {
+                const _this = $(this);
+                const oid = $(this).attr('oid');
+                const pid = $(this).attr('pid');
+                
+                $(this).click(function(event) {
+                    /* Act on the event */
+                    $.getJSON('changeOrderInfo', {
+                        oid: oid,
+                        pid: pid,
+                        newStatus: 'delivering'
+                    }, function(data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (data.success) {
+                            _this.css({
+                                    'border': '1px solid #e0e0e0',
+                                    'background-color': '#f0f0f0',
+                                    'color': '#e0e0e0'
+                                });
+
+                            _this.removeClass('button');
+
+                            _this.unbind('click');
+                            
+                            _this.prev().find('.delivery-status').find('.value').html('delivering');
+                        } else {
+                            alert('faied to send products');
+                        }
+                    });
+                });
+            }
+        });
+
+        $('.shops-orders-container #shopId, .shops-orders-container #startDate, .shops-orders-container #endDate').change(function(event) {
+            /* Act on the event */
+            showOrders($('.shops-orders-container #shopId').val(), $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
         });
     }
 };
