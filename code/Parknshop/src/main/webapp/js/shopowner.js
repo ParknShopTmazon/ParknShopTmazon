@@ -259,25 +259,7 @@ const shopOwner = {
                 
                 $(this).click(function(event) {
                     /* Act on the event */
-                    $.getJSON('modifyorder', {
-                        oid: oid,
-                        pid: pid
-                    }, function(data, textStatus) {
-                        /*optional stuff to do after success */
-                        if (data.success == 'true') {
-                            _this.css({
-                                    'border': '1px solid #e0e0e0',
-                                    'background-color': '#f0f0f0',
-                                    'color': '#e0e0e0'
-                                });
-
-                            _this.removeClass('button');
-
-                            _this.unbind('click');
-                        } else {
-                            alert('faied to send products');
-                        }
-                    });
+                    window.location.href = 'modifyorder?oid=' + oid + '&pid=' + pid;
                 });
             }
         });
