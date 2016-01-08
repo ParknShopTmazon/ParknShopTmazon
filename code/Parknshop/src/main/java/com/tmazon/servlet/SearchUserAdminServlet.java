@@ -82,8 +82,8 @@ public class SearchUserAdminServlet extends HttpServlet{
 		User user = new User(null,userName,null,role,null);
 		Page<User> pageUserList = userManageService.page(user,curPage,next);
 		userList = pageUserList.getSubitems();
-		req.getSession().setAttribute("userList",userList);
-		req.getSession().setAttribute("curPage",pageUserList.getCurPage());
+		req.setAttribute("userList",userList);
+		req.setAttribute("curPage",pageUserList.getCurPage());
 		req.getRequestDispatcher("WEB-INF/admin/userManagement.jsp").forward(req, resp);
 	}
 

@@ -75,7 +75,33 @@ public class ProductDaoImpl implements ProductDao{
 			return null;
 		}
 	}
-
+	
+	public List<Product> selectByAdmin(String productName,String category) {
+		
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM product WHERE 1=1 ");
+		ArrayList<Object> params = new ArrayList<Object>();
+		
+		if (productName != null) {
+			sqlBuilder.append("AND name LIKE ? ");
+			params.add("%"+productName+"%");
+		}
+		if (category != null) {
+			sqlBuilder.append("AND category = ? ");
+			params.add(category);
+		}
+		
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<Product> result = runner.query(sql, new BeanListHandler<Product>(Product.class), params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public Product findByName(String name) {
 		// TODO Auto-generated method stub
 		List<Product> list =select(new Product(null, null, name, null, null,null,null,null,null,null));

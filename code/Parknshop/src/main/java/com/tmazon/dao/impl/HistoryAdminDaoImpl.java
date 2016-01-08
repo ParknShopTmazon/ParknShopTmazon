@@ -17,9 +17,10 @@ public class HistoryAdminDaoImpl implements HistoryAdminDao{
 	
 	public List<OrderInfo> search(Date start,Date end) {
 		
-		StringBuilder sql= new StringBuilder("SELECT * FROM orderinfo WHERE status = 'confirm_receipt' ");
+		StringBuilder sql= new StringBuilder("SELECT * FROM orderinfo WHERE status = ? ");
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(OrderInfo.STATUS_CONFIRM_RECEIPT);
 		if(start != null)
 		{
 			sql.append(" AND dealtime >= ? ");
