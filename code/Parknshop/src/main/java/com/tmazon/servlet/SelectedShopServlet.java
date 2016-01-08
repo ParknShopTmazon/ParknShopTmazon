@@ -35,7 +35,7 @@ public class SelectedShopServlet extends HttpServlet {
 		}
 		String shopId=req.getParameter("shopId");
 		Integer id = ParseUtil.String2Integer(shopId, null);
-		if(id==null){
+		if(id!=null){
 			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,id);
 		}
 		doPost(req, resp);
