@@ -6,6 +6,8 @@ import com.tmazon.domain.Shop;
 
 public interface ShopService {
 
+	public List<Shop> select(Shop shop);
+	
 	public Shop findById(Integer id);
 	
 	public boolean register(Shop shop);
