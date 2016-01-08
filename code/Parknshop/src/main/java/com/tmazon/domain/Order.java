@@ -7,7 +7,7 @@ public class Order {
 	
 	public static final String PAY_TYPE_CASH_ON_DELIVERY = "cash_on_delivery";
 	public static final String PAY_TYPE_ONLINE_PAYMENT = "online_payment";
-	
+
 	public static final String STATUS_NORMAL = "normal";
 	public static final String STATUS_DELETED = "deleted";
 
@@ -71,6 +71,7 @@ public class Order {
 	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

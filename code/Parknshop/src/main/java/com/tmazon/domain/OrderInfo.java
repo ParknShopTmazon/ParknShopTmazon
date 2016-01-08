@@ -6,9 +6,8 @@ public class OrderInfo {
 
 	public static final String STATUS_UNPAID = "unpaid";
 	public static final String STATUS_PAID = "paid";
-	public static final String STATUS_ON_DELIVERY = "delivering";
-	public static final String STATUS_ON_DELIVERY_AND_UNPAID = "on_delivery_AND_unpaid";
-	public static final String STATUS_CONFIRM_RECEIPT = "dealed";
+	public static final String STATUS_ON_DELIVERY = "delivery";
+	public static final String STATUS_CONFIRM_RECEIPT = "confirm_receipt";
 	public static final String STATUS_DELETED = "deleted";
 	
 	private Product product;
@@ -22,6 +21,7 @@ public class OrderInfo {
 	private Date deliveryTime;
 	private Date dealTime;
 	private String status;
+	private String rate;
 	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String status) {
 		super();
 		this.orderId = orderId;
@@ -88,6 +88,15 @@ public class OrderInfo {
 	public void setWaybill(String waybill) {
 		this.waybill = waybill;
 	}
+	
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

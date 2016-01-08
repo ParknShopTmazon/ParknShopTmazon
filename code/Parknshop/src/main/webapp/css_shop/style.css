@@ -996,7 +996,7 @@ a {
     text-overflow: ellipsis;
 }
 
-.shops-orders-container input[type="datetime-local"] {
+.shops-orders-container input[type="date"] {
     padding: 5px;
     border-radius: 4px;
     background-color: #ffa200;

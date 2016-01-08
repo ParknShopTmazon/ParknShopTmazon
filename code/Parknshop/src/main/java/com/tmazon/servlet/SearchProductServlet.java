@@ -56,7 +56,6 @@ public class SearchProductServlet extends HttpServlet {
 				if(products!=null){
 					req.setAttribute("num", products.size());
 					req.setAttribute("productList", products);
-					req.setAttribute("test", 0);
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp");
 					requestDispatcher.forward(req, resp);
 					return;
@@ -76,7 +75,6 @@ public class SearchProductServlet extends HttpServlet {
 		}else{
 			req.setAttribute("num", productList.size());
 			req.setAttribute("productList", productList);
-			req.setAttribute("test", 0);
 		}
 		
 		for(int i=0;i<productList.size();i++){

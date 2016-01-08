@@ -26,9 +26,9 @@
 						<option>ShopName3</option>
 					</select>
 					from
-					<input type="datetime-local" name="start">
+					<input type="date" name="start">
 					to
-					<input type="datetime-local" name="end">	
+					<input type="date" name="end">	
 				</div>
 			</div>
 
