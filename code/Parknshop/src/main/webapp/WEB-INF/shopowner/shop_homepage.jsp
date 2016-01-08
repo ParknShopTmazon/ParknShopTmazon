@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Shop Homepage</title>
+<title>Shops Homepage</title>
 <script type="text/javascript">
 	var m=1;
 	var id="ProductList";

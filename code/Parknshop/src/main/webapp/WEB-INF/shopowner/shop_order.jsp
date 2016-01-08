@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>Shop Order</title>
+<title>Shop Orders</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
 </head>
 <body>
