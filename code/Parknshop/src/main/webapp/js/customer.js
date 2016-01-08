@@ -1856,17 +1856,24 @@ var customer = {
 
         $('.jqzoom').jqzoom({
             zoomType: 'standard',
-            lens:true,
+            lens: true,
             preloadImages: false,
-            alwaysOn:true
+            alwaysOn: true
         });
-
+        
         $('.product-container .img-area').hover(function () {
             /* Stuff to do when the mouse enters the element */
-            $('.zoomPad .zoomPup, .zoomPad .zoomWindow').show();
+            $('.zoomPad .zoomPup').show().css({
+                opacity: 0.6
+            });
+            
+            $('.zoomPad .zoomWindow').show().css({
+                opacity: 1
+            });
         }, function () {
             /* Stuff to do when the mouse leaves the element */
             $('.zoomPad .zoomPup, .zoomPad .zoomWindow').hide();
+
         });
     }
 };
