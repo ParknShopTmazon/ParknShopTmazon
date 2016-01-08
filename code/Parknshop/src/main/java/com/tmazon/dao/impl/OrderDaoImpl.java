@@ -124,7 +124,9 @@ public class OrderDaoImpl implements OrderDao {
 		return select(new Order(null, null, status, null, user.getUserId(), null), null);
 	}
 
-	public List<Order> findByOrderId(Integer orderId){
-		return select(new Order(orderId,null,null,null,null,null), null);
+	public Order findByOrderId(Integer orderId){
+		
+		List<Order> orderList = select(new Order(orderId,null,null,null,null,null), null);
+		return orderList.isEmpty()? null:orderList.get(0);
 	}
 }

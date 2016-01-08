@@ -164,5 +164,6 @@ create table advertisement(
 	adId int(11) auto_increment primary key,
 	productID int(11),
 	cost int(10),
+	picture varchar(100),
 	foreign key(productID) references product(productId)
 );
