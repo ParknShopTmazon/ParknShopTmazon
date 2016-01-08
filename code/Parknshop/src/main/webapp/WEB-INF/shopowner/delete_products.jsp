@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html >
 <head>
-<title>add product</title>
+<title>Delete Products</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
 </head>
 <body>

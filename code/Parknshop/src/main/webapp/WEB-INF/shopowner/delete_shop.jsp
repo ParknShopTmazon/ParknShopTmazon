@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>Register Shop Page</title>
+    <title>Delete Shops</title>
     <link rel="stylesheet" type="text/css" href="css_shop/style.css">
 </head>
 
