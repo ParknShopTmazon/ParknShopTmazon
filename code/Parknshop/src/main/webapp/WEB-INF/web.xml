@@ -480,12 +480,9 @@
  	<servlet-name>SearchHistoryAdminServlet</servlet-name>
  	<url-pattern>/searchHistoryAdminServlet</url-pattern>
  </servlet-mapping>
- <welcome-file-list>
  <servlet-mapping>
  	<servlet-name>ModifyOrderServlet</servlet-name>
  	<url-pattern>/modifyorder</url-pattern>
- </servlet-mapping>
- <welcome-file-list>
+ </servlet-mapping><welcome-file-list>
   <welcome-file>index</welcome-file>
- </welcome-file-list>
-</web-app>
+ </welcome-file-list></web-app>
