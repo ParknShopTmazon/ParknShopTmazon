@@ -110,14 +110,18 @@
 					<div class="pan"></div>
 					<div class="comment-items">
 						<div>
-							<p class="value">${ comment.userId }</p>
-							<p class="name">${ comment.userName }</p>
+							<p class="value">${ comment.userName }</p>
+							<p class="name">User Name</p>
+						</div>
+						<div>
+							<p class="value">${ comment.content }</p>
+							<p class="name">Comments</p>
 						</div>
 						<div class="comment-part">
 							<p class="value">shop: <span>${ comment.shopScore }</span></p>
 							<p class="value">product: <span>${ comment.productScore }</span></p>
 							<p class="value">delivery: <span>${ comment.deliveryScore }</span></p>
-							<p class="name">${ comment.content }</p>
+							<p class="name">Rate</p>
 						</div>
 					</div>
 				</c:forEach>
