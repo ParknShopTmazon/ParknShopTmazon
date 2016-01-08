@@ -1872,7 +1872,7 @@ var customer = {
                 $.getJSON('changeOrderInfo', {
                     oid: oid,
                     pid: $('#productId').val(),
-                    newStatus: 'confirm_receipt'
+                    newStatus: 'dealed'
                 }, function (data, textStatus) {
                     /*optional stuff to do after success */
                     if (data.success) {
