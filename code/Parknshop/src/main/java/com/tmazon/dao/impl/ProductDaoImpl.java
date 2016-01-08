@@ -352,6 +352,21 @@ public class ProductDaoImpl implements ProductDao{
 			return null;
 		}
 	}
+	
+	//for add order
+	public boolean updateStockNum(Product product) {
+		String sql = "UPDATE product SET stockNum = ?,soldNum = ? WHERE productId = ?";
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			int row = runner.update(sql, product.getStockNum(), product.getSoldNum(), product.getProductId());
+			return row > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
 	
 

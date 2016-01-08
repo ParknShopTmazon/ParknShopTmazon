@@ -5,9 +5,12 @@ import java.util.List;
 
 import com.tmazon.dao.CartDao;
 import com.tmazon.dao.OrderInfoDao;
+import com.tmazon.dao.ProductDao;
+import com.tmazon.dao.ShopDao;
 import com.tmazon.dao.OrderDao;
 import com.tmazon.domain.Cart;
 import com.tmazon.domain.OrderInfo;
+import com.tmazon.domain.Product;
 import com.tmazon.domain.Order;
 import com.tmazon.domain.User;
 import com.tmazon.service.OrderService;
@@ -16,6 +19,7 @@ import com.tmazon.util.BasicFactory;
 public class OrderServiceImpl implements OrderService {
 
 	private OrderDao ordersDao = BasicFactory.getImpl(OrderDao.class);
+	private ProductDao productDao = BasicFactory.getImpl(ProductDao.class);
 	
 	private OrderInfoDao orderInfoDao = BasicFactory
 			.getImpl(OrderInfoDao.class);
@@ -41,9 +45,18 @@ public class OrderServiceImpl implements OrderService {
 			orderInfo.setOrderId(order.getOrderId());
 			Cart cart = cartDao.findByPKId(order.getUserId(),
 					orderInfo.getProductId());
+			Product product = productDao.findById(orderInfo.getProductId());
+			int stockNum = product.getSoldNum();
+			int quantity = cart.getQuantity();
+			if(stockNum < quantity){
+				cart.setQuantity(stockNum);
+			}
 			orderInfo.setQuantity(cart.getQuantity());
 			orderInfo.setStatus(OrderInfo.STATUS_UNPAID);
 			if (orderInfoDao.insert(orderInfo)) {
+				product.setStockNum(product.getStockNum() - cart.getQuantity());
+				product.setSoldNum(product.getSoldNum() + cart.getQuantity());
+				productDao.updateStockNum(product);
 				cartDao.delete(new Cart(order.getUserId(), orderInfo
 						.getProductId(), null));
 			} else {

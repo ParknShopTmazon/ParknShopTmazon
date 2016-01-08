@@ -28,4 +28,7 @@ public interface ProductDao {
 	public List<Product> selectOnSell(Product product);
 	
 	public List<Product> findByShopId(Integer shopId);
+	
+	//for add order
+	public boolean updateStockNum(Product product);
 }
