@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +31,10 @@ import com.tmazon.util.IOUtil;
 
 public class AddProductServlet extends HttpServlet{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 	@Override
@@ -44,14 +46,8 @@ public class AddProductServlet extends HttpServlet{
 			resp.sendRedirect("login");
 			return;
 		}
-		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
-		Shop shop=null;
-		try {
-			shop =shopService.findById(Integer.parseInt(shopId));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Integer shopId =  (Integer) session.getAttribute(AttrName.SessionScope.SHOPID);
+		Shop shop =shopService.findById(shopId);
 		if(shop==null||!Shop.STATUS_SUCCESS.equals(shop.getStatus())){
 			resp.sendRedirect("myshop");
 			return;
@@ -67,14 +63,13 @@ public class AddProductServlet extends HttpServlet{
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
 		try {
 			items = servletFileUpload.parseRequest(req);
 		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -112,24 +107,21 @@ public class AddProductServlet extends HttpServlet{
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop"+File.separator+"upload"+File.separator+ d1 + File.separator + d2 + File.separator + fileName;
+				path ="images_shop/upload/"+ d1 + "/" + d2 + "/" + fileName;
 			}
 		}
 
 		
 		
 		HttpSession session = req.getSession();
-		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
+		Integer shopId = (Integer) session.getAttribute(AttrName.SessionScope.SHOPID);
 		String productName = productMap.get("product_name");
 		String category = productMap.get("category");
 		String price = productMap.get("price");
 		String stockNum = productMap.get("stock_num");
 		String description = productMap.get("description");
-		String file = productMap.get("file");
 	
-		System.out.println("file: "+file+"  product_name: "+productName+"  product_names: ");
-		System.out.println(shopId);
-		if(shopId==null||"".trim().equals(shopId)){
+		if(shopId==null){
 			resp.sendRedirect("myshop");;
 			return;
 		}
@@ -147,7 +139,7 @@ public class AddProductServlet extends HttpServlet{
 		product.setCategory(category);
 		product.setPrice(Double.valueOf(price));
 		product.setDiscountPrice(Double.valueOf(price));
-		product.setShopId(Integer.parseInt(shopId));
+		product.setShopId(shopId);
 		product.setStockNum(Integer.parseInt(stockNum));
 		product.setDescription(description);
 		

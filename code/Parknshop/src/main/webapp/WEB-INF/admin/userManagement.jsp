@@ -68,19 +68,12 @@
 					<tfoot>
 					
 						<tr>
-						
-							<td colspan="2" rowspan="1" class="pagination">
+							<td colspan="3" rowspan="2" class="pagination">
 							  
 						<form method="post" action="searchUserAdmin">
 								<input id="prev-btn" type="submit"  value="<<"></input>
-								<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
-								<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
-								<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
-							
 								<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
-							
 								<input id="next-btn" type="submit" value=">>"></input>
-								
 								<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
 								<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
 								<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
@@ -106,15 +99,9 @@
 								<td></td>
 								</c:when>
 								<c:when test="${user.status eq 'normal' }">
-								<form method="post" action="updateUTableServlet"> 	
-									<td>
-									<input type="hidden" name="status" value="delete"/>
-									<input type="hidden" name="user_name" value="${user.name}"/>
-									<input type="submit" value="  Delete  " ></input></td>
-								</form>
 								<form method="post" action="updateUTableServlet"> 
-									
 									<td>
+									<input type="hidden" name="Page" value="${sessionScope.curPage }"/>
 									<input type="hidden" name="status" value="black"/>
 									<input type="hidden" name="user_name" value="${user.name}"/>
 									<input  type="submit" value="BlackList"></input></td>	
@@ -123,6 +110,7 @@
 								<c:otherwise>
 								<form method="post" action="updateUTableServlet"> 
 									<td>
+									<input type="hidden" name="Page" value="${sessionScope.curPage }"/>
 									<input type="hidden" name="status" value="normal"/>
 									<input type="hidden" name="user_name" value="${user.name}"/>
 										<input type="submit" value="Activate">

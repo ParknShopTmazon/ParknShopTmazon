@@ -26,45 +26,37 @@ import com.tmazon.service.ProductService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.IOUtil;
+import com.tmazon.util.ParseUtil;
 
 public class ModifyProductServlet extends HttpServlet{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		User userId =  (User) session.getAttribute(AttrName.SessionScope.USER);
-		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
+		Integer shopId =  (Integer) session.getAttribute(AttrName.SessionScope.SHOPID);
 		if(userId==null){
 			resp.sendRedirect("login");
 			return;
 		}
 		String productId = req.getParameter("product_id");
-		int id =-1;
-		try {
-			id=Integer.parseInt(productId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(id==-1){
+		Integer id = ParseUtil.String2Integer(productId, null);
+		if(id==null){
 			resp.sendRedirect("selectedshop");
 			return;
 		}
 		Product product = productService.findOnSellById(id);
-		if(product==null||product.getProductId()==null||product.getProductId()!=id){
+		if(product==null||product.getProductId()==null){
 			resp.sendRedirect("selectedshop");
 			return;
 		}
-		int shop = -1;
-		try {
-			shop=Integer.parseInt(shopId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(shop!=product.getShopId()){
+		if(!shopId.equals(product.getShopId())){
 			resp.sendRedirect("myshop");
 			return;
 		}
@@ -81,21 +73,19 @@ public class ModifyProductServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-req.setCharacterEncoding("utf-8"); 
-		
+		req.setCharacterEncoding("utf-8"); 
 		String contextPath = getServletContext().getRealPath(File.separator+"images_shop"+File.separator);
 		String uploadPath =File.separator+ "upload"+File.separator;
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
 		try {
 			items = servletFileUpload.parseRequest(req);
 		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -133,14 +123,14 @@ req.setCharacterEncoding("utf-8");
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop"+File.separator+"upload"+File.separator+ d1 + File.separator + d2 + File.separator + fileName;
+				path ="images_shop/upload/"+ d1 + "/" + d2 + "/"+ fileName;
 			}
 		}
 
 		
 		
 		HttpSession session = req.getSession();
-		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
+		Integer shopId =  (Integer) session.getAttribute(AttrName.SessionScope.SHOPID);
 		String productId = productMap.get("product_id");
 		String productName = productMap.get("product_name");
 		String category = productMap.get("category");
@@ -148,15 +138,11 @@ req.setCharacterEncoding("utf-8");
 		String discountPrice = productMap.get("discount_price");
 		String stockNum = productMap.get("stock_num");
 		String description = productMap.get("description");
-		String file = productMap.get("file");
-	
-		System.out.println("file: "+file+"  product_name: "+productName+"  product_names: ");
 		System.out.println(shopId);
-		if(shopId==null||"".trim().equals(shopId)){
+		if(shopId==null){
 			resp.sendRedirect("myshop");;
 			return;
 		}
-		
 		if(productName==null||"".trim().equals(productName)||category==null||"".trim().equals(category)||
 				price==null||"".equals(price)||stockNum==null||"".trim().equals(stockNum)||description==null||
 				"".trim().equals(description)){
@@ -171,7 +157,7 @@ req.setCharacterEncoding("utf-8");
 		product.setCategory(category);
 		product.setPrice(Double.valueOf(price));
 		product.setDiscountPrice(Double.valueOf(discountPrice));
-		product.setShopId(Integer.parseInt(shopId));
+		product.setShopId(shopId);
 		product.setStockNum(Integer.parseInt(stockNum));
 		product.setDescription(description);
 		

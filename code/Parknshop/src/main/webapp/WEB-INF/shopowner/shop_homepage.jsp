@@ -41,36 +41,48 @@
 	}
 }
 </script>
+<link rel="stylesheet" type="text/css" href="css_shop/style.css">
 </head>
 <body>
     <%@ include file="header2.html"%>
-	<div class="content">
+	<div class="products-list-container">
 		<div id="shoplist">
-		    <div class="manage-nav">
-			<div class="unit selected" id="selectedshop" onClick="window.open('selectedshop')"><span>ProductList</span></div>
-			<div class="unit" id="AddProduct" onClick="window.open('addproduct')"><span>Add Product</span></div>
-			<div class="unit" id="ModifyProduct" onClick="window.open('modifyproduct')"><span>Modify Product</span></div>
-			<div class="unit" id="DeleteProduct" onClick="window.open('deleteproduct')"><span>Delete Product</span></div>
-			<div class="fillspace"></div>
-		    </div>
-		    <br/>
+			<div class="page-title">
+				<span class="back-btn button"></span>
+			    <span class="parknshop">PARKnSHOP</span>
+			    <span class="main-title">Products List</span>
+			</div>
 			<c:forEach var="product" items="${product_list}" >
-				<div class="shopbox">				
-					<a href="./productInfo?pid=${ product.productId }" class="shopphoto"><img src="${ product.picture }"  class="shop-img-box" alt="no p no t"></a>
-					<div><a class="shopname" href=""><span id="">${ product.name }</span></a></div>
-					<div>${product.price}</div>
-					<a href="modifyproduct?product_id=${product.productId}">modify</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="deleteproduct?product_id=${product.productId}">delete</a>
+				<div class="pic-container">	
+					<a href="productInfo?pid=${ product.productId }" title="details">
+				        <div class="over before">
+				            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
+				            <div class="shop-name">${ product.name }</div>
+				            <div class="shop-status">$${product.price}</div>
+				        </div>
+				    </a>
+					<a href="modifyproduct?product_id=${product.productId}" title="modify">
+				        <div class="over success-over after-left">
+				            <div class="link-btn" style="background-image: url(./images/configure-btn.png);"></div>
+				        </div>
+				    </a>
+				    <a href="deleteproduct?product_id=${product.productId}" title="delete">
+				        <div class="over before after-right">
+				            <div class="link-btn" style="background-image: url(./images/delete-btn.png);"></div>
+				        </div>
+				    </a>
+				    <div class="shop" style="background-image: url('${ product.picture }');"></div>
 				</div>
 			</c:forEach>
-	      
-			<div class="shopbox">
-				<div  class="shopphoto" onclick="window.open('addproduct')"><img src="images_shop/plus.jpg" class="shop-img-box" alt=" "></div>
-				<div><span id="">Add a new one</span></div>
-				<div id="shopname" onclick="window.open('addproduct')">more info</div>	
-			</div>
+			<a href="addproduct">
+				<div class="shopbox add-box"></div>
+			</a>
 	   </div>
 	</div>
+	<script type="text/javascript">
+		shopOwner.initManage();
+		shopOwner.initProductList();
+	</script>
 	<%@include file="footer.html" %>
 </body>
 </html>

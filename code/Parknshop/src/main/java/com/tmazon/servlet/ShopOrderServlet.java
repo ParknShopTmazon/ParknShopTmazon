@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,24 +47,43 @@ public class ShopOrderServlet extends HttpServlet {
 		
 		String shopIdStr=(String) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
         Integer shopId =Integer.parseInt(shopIdStr);
-		
-		
+        Map<Integer, List<OrderInfo>> orderInfoMap =new HashMap<Integer, List<OrderInfo>>();
+        List<Integer> intList = new ArrayList<Integer>();
 		System.out.println("shopId="+shopId);
 		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shopId);
 		for (OrderInfo info :orderInfos) {
 			info.setOrder(orderService.findById(info.getOrderId()));
 			info.setProduct(productService.getProductById(info.getProductId()));
 			info.setDelivery(deliveryService.select(new Delivery(info.getDeliveryId(), null, null, null)).get(0));
+			
+		}
+		for (OrderInfo orderInfo : orderInfos) {
+			List<OrderInfo> orderInfos2=null;
+			if(orderInfoMap.get(orderInfo.getOrderId())==null){
+				intList.add(orderInfo.getOrderId());
+				orderInfos2 =new ArrayList<OrderInfo>();
+				orderInfoMap.put(orderInfo.getOrderId(), orderInfos2);
+			}else{
+				List<OrderInfo> list = orderInfoMap.get(orderInfo.getOrderId());
+				list.add(orderInfo);
+				orderInfoMap.put(orderInfo.getOrderId(), list);
+			}
+		}
+		List<Order> orderList = new ArrayList<Order>();
+		for (Integer id : intList) {
+			Order order = orderService.findById(id);
+			order.setOrderInfo(orderInfoMap.get(id));
+			orderList.add(order);
 		}
 		
-		orderInfos.sort(new Comparator<OrderInfo>() {
+		orderList.sort(new Comparator<Order>() {
 
-			public int compare(OrderInfo o1, OrderInfo o2) {
-				return o2.getOrder().getOrderTime().compareTo(o1.getOrder().getOrderTime());
+			public int compare(Order o1, Order o2) {
+				return o2.getOrderTime().compareTo(o1.getOrderTime());
 			}
 		});
 		
-		req.setAttribute("orderInfoList", orderInfos);
+		req.setAttribute("orderList", orderList);
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_order.jsp").forward(req, resp);
 	}
 }

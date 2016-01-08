@@ -45,7 +45,6 @@ public class RegisterNewShopServlet extends HttpServlet{
 			resp.sendRedirect("login");
 			return;
 		}
-		req.getSession().setAttribute(AttrName.SessionScope.SHOPID, "7880");
 		req.getRequestDispatcher("/WEB-INF/shopowner/register_new_shop.jsp").forward(req, resp);
 	}
 	
@@ -60,12 +59,14 @@ public class RegisterNewShopServlet extends HttpServlet{
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024);
+
+		fileItemFactory.setSizeThreshold(1024 * 1024*10);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 		List<FileItem> items=null;
 		try {
 			items = servletFileUpload.parseRequest(req);
+			System.out.println(servletFileUpload.parseRequest(req));
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,7 +107,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop"+File.separator+"upload"+File.separator+ d1 + File.separator + d2 + File.separator + fileName;
+				path ="images_shop/upload/"+ d1 +"/"+ d2 + "/" + fileName;
 			}
 		}
 
@@ -121,12 +122,7 @@ public class RegisterNewShopServlet extends HttpServlet{
 		Integer owner = onlineUser.getUserId();
 		
 		String shopName = shopMap.get("name");
-		String shopType = shopMap.get("type");
-		
-		String file = shopMap.get("file");
-	
-		System.out.println("file: "+file+"  shop_name: "+shopName+"  shop_names: ");
-		
+		String shopType = shopMap.get("type");		
 		if(shopName==null||"".trim().equals(shopName)||shopType==null||"".trim().equals(shopType))
 		{
 			System.out.println("1asas");
@@ -146,9 +142,6 @@ public class RegisterNewShopServlet extends HttpServlet{
 		shop.setType(shopType);
 		shop.setStatus(Shop.STATUS_CHECKING);
 		shop.setOwner(owner);
-		
-				
-				
 		
 		if(path==null||"".trim().equals(path)){
 			shop.setPicture("images_shop/index.jpg");

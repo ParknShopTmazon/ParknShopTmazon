@@ -24,4 +24,6 @@ public interface OrderInfoDao {
 	
 	public boolean updateStatus(OrderInfo orderInfo);
 	
+	public boolean isBought(Integer userId, Integer productId);
+	
 }

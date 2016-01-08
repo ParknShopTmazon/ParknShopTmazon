@@ -19,27 +19,56 @@
 			</div>
 
 			<c:forEach var="shop" items="${shopList}" >
-			  <div class="shopbox">
-				<c:if test="${shop.status=='success'}">
-					<a href="selectedshop?shopId=${shop.shopId}" class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
-					<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
-					<a href="modifyshop?shopId=${shop.shopId}">modify</a>
-				</c:if>
-				
-				<c:if test="${shop.status=='checking'}">
-					<a href=" " class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
-					<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
-					<div>${shop.status}</div>
-				</c:if>
-				
-				<c:if test="${shop.status=='fail'}">
-					<a href=" " class="shopphoto"><img src="${ shop.picture }"  class="shop-img-box" alt="no p no t"></a>
-					<div><a class="shopname" href=""><span id="">${ shop.name }</span></a></div>
-					<div>${shop.status}</div>
-					<a href="deleteshop?shopId=${shop.shopId}">delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="modifyshop?shopId=${shop.shopId}">modify</a>
-				</c:if>
-			  </div>
+				<div class="pic-container">
+					<c:if test="${shop.status=='success'}">
+						<a href="selectedshop?shopId=${shop.shopId}" title="details">
+					        <div class="over before">
+					            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
+					            <div class="shop-name">${ shop.name }</div>
+					            <div class="shop-status">${shop.status}</div>
+					        </div>
+					    </a>
+						<a href="modifyshop?shopId=${shop.shopId}" title="modify">
+					        <div class="over success-over after-left">
+					            <div class="link-btn" style="background-image: url(./images/configure-btn.png);"></div>
+					        </div>
+					    </a>
+					    <a href="deleteshop?shopId=${shop.shopId}" title="delete">
+					        <div class="over before after-right">
+					            <div class="link-btn" style="background-image: url(./images/delete-btn.png);"></div>
+					        </div>
+					    </a>
+					    <div class="shop" style="background-image: url('${ shop.picture }');"></div>
+					</c:if>
+					
+					<c:if test="${shop.status=='checking'}">
+						<a href="myshop" title="refresh">
+					        <div class="over">
+					            <div class="link-btn" style="background-image: url(./images/refresh-btn.png);"></div>
+					            <div class="shop-name">${ shop.name }</div>
+					            <div class="shop-status">${shop.status}</div>
+					        </div>
+					    </a>
+					    <div class="shop" style="background-image: url('${ shop.picture }');"></div>
+					</c:if>
+					
+					<c:if test="${shop.status=='fail'}">
+						<a href="modifyshop?shopId=${shop.shopId}" title="modify">
+					        <div class="over before">
+					            <div class="link-btn" style="background-image: url(./images/configure-btn.png);"></div>
+					            <div class="shop-name">${ shop.name }</div>
+					            <div class="shop-status">${shop.status}</div>
+					        </div>
+					    </a>
+					    <a href="deleteshop?shopId=${shop.shopId}" title="delete">
+					        <div class="over before after">
+					            <div class="link-btn" style="background-image: url(./images/delete-btn.png);"></div>
+					        </div>
+					    </a>
+					    <div class="shop" style="background-image: url('${ shop.picture }');"></div>
+					</c:if>
+				    <div class="shop" style="background-image: url('${ product.picture }');"></div>
+				</div>
 			</c:forEach>
 			<a href="registershoppage">
 				<div class="shopbox add-box"></div>

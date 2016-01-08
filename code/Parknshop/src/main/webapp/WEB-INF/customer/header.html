@@ -5,7 +5,7 @@
 		<c:when test="${ not empty s_user }">
 			<div class="user-item">${ s_user.name }</div>
 			<c:if test="${ s_user.role eq 'shop_owner' }">
-				<a href="myshop"><div class="text-btn">My shop</div></a>
+				<a href="myshop"><div class="text-btn">Back Stage</div></a>
 			</c:if>
 			
 			<c:if test="${ s_user.role ne 'admin' }">

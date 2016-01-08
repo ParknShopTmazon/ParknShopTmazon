@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tmazon.dao.ShopApplyDao;
 import com.tmazon.dao.impl.ShopApplyDaoImpl;
+import com.tmazon.service.ShopApplyService;
+import com.tmazon.util.BasicFactory;
+import com.tmazon.util.CheckAdmin;
 
 
 public class DisagreeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+	private ShopApplyService shopApplyService = BasicFactory.getImpl(ShopApplyService.class); 
     public DisagreeServlet() {
         super();
     }
@@ -25,10 +28,15 @@ public class DisagreeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			if((!request.getParameter("sid").equals(null))&&(!request.getParameter("sid").equals(""))){
-				int shopId=Integer.parseInt(request.getParameter("sid"));
-				ShopApplyDao sad=new ShopApplyDaoImpl();
-				sad.setStatus(shopId, false);
+			if(!CheckAdmin.isAdminOnline(request))
+			{
+				response.sendRedirect("login");
+				return;
+			}
+			String shopIdStr = request.getParameter("sid");
+			if(shopIdStr != null &&!shopIdStr.equals("")){
+				int shopId=Integer.parseInt(shopIdStr);
+				shopApplyService.setStatus(shopId, false);
 			}
 			String url = request.getHeader("Referer");
 			response.sendRedirect(url);

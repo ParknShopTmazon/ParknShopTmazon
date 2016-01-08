@@ -30,6 +30,39 @@ public class SearchProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");
 		String category = req.getParameter("type");
+		String searchMethod = req.getParameter("searchMethod");
+		if("shopName".equals(searchMethod)){
+			if ("".equals(category)) {
+				category = null;
+			}
+			Shop shop =new Shop();
+			shop.setName(name);
+			List<Shop> shoplist = shopService.selectInLike(shop);
+			List<Product> products = new ArrayList<Product>();
+			if(shoplist!=null){
+				for (Shop shop2 : shoplist) {
+					Product  product=new Product();
+					product.setShopId(shop2.getShopId());
+					List<Product> select = productService.select(product);
+					if(select!=null){
+						for(int i=0;i<select.size();i++){
+							Product temp = select.get(i);
+							temp.setShop(shop2);
+							select.set(i,temp);
+						}
+						products.addAll(select);
+					}	
+				}
+				if(products!=null){
+					req.setAttribute("num", products.size());
+					req.setAttribute("productList", products);
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/search_products.jsp");
+					requestDispatcher.forward(req, resp);
+					return;
+				}
+				
+			}
+		}
 		if ("".equals(category)) {
 			category = null;
 		}
@@ -42,7 +75,6 @@ public class SearchProductServlet extends HttpServlet {
 		}else{
 			req.setAttribute("num", productList.size());
 			req.setAttribute("productList", productList);
-			req.setAttribute("test", 0);
 		}
 		
 		for(int i=0;i<productList.size();i++){

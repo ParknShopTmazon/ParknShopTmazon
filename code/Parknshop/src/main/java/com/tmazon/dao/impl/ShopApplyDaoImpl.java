@@ -13,32 +13,32 @@ import com.tmazon.util.DaoUtil;
 public class ShopApplyDaoImpl implements ShopApplyDao {
 	public List<Shop> getApply() {
 		String sql="SELECT *FROM shop WHERE	STATUS=?";
-		String param="0";		
+		String param= Shop.STATUS_CHECKING;		
 		List<Shop>	list=null;
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-		list=runner.query(sql,new BeanListHandler<Shop>(Shop.class),param);
+			list=runner.query(sql,new BeanListHandler<Shop>(Shop.class),param);
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-		}finally{
-			return list;
 		}
-		
 	}
 	public boolean setStatus(int id, boolean isOk) {
 		String sql = "UPDATE  shop SET STATUS = ? WHERE shopId = ? ";
-		String status=isOk?"1":"2";
+		String status=isOk?Shop.STATUS_SUCCESS:Shop.STATUS_FAIL;
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		int ans;
 		try {
-			runner.update(sql, status,id);
-			return true;
+			ans = runner.update(sql, status, id);
+			return ans > 0 ? true : false;
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("update shop status Failure");
-		}finally{
 			return false;
-		}		
+		}
+		
+			
 	}
 
 }

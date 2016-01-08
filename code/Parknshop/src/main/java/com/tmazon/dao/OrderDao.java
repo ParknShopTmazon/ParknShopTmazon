@@ -18,5 +18,7 @@ public interface OrderDao {
 	public List<Order> findByUser(User user);
 	
 	public List<Order> findByUserANDstatus(User user, String status);
+	
+	public Order findByOrderId(Integer orderId);
 
 }

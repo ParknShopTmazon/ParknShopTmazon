@@ -78,7 +78,9 @@ public class ShopDaoImpl implements ShopDao {
 		ArrayList<Object> params = new ArrayList<Object>();
         if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
 			params.add(Shop.STATUS_SUCCESS);
-        }else{
+        }else if(shop.getStatus().equals(Shop.STATUS_DELETED)){
+			params.add(Shop.STATUS_DELETED);
+		}else{
 			params.add(Shop.STATUS_CHECKING);
 		}
         
@@ -133,6 +135,48 @@ public class ShopDaoImpl implements ShopDao {
 		}
 		
 		return null;
+	}
+	
+	
+	public List<Shop> selectInLike(Shop shop) {
+		StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM shop WHERE 1=1 ");
+		ArrayList<Object> params = new ArrayList<Object>();
+		if(shop.getName() != null){
+			sqlBuilder.append("AND name like ? ");
+			params.add("%"+shop.getName()+"%");
+		}
+		if(shop.getOwner() != null){
+			sqlBuilder.append("AND owner = ? ");
+			params.add(shop.getOwner());
+		}
+		if(shop.getShopId() != null){
+			sqlBuilder.append("AND shopId = ? ");
+			params.add(shop.getShopId());
+		}
+		if(shop.getType() != null){
+			sqlBuilder.append("AND type = ? ");
+			params.add(shop.getType());
+		}
+		if(shop.getStatus() != null){
+			sqlBuilder.append("AND status = ? ");
+			params.add(shop.getStatus());
+		}
+		if(shop.getPicture() != null){
+			sqlBuilder.append("AND picture = ?");
+			params.add(shop.getPicture());
+		}
+		String sql = sqlBuilder.toString();
+		System.out.println(sql);
+		
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<Shop> result = runner.query(sql, new BeanListHandler<Shop>(Shop.class), params.toArray());
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

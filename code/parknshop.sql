@@ -12,6 +12,10 @@ CREATE TABLE user (
 	UNIQUE (name)
 );
 
+CREATE TABLE rate(
+	rate varchar(10) NOT NULL
+);
+
 CREATE TABLE address(
 	addressId int AUTO_INCREMENT,
 	userId int NOT NULL,
@@ -103,7 +107,9 @@ CREATE TABLE orderInfo(
 	status varchar(50) NOT NULL,
 	deliveryTime datetime,
 	dealTime datetime,
+	rate varchar(10) NOT NULL,
 	waybill varchar(50),
+	PRIMARY KEY(orderId, productId),
 	FOREIGN KEY (productId) REFERENCES product(productId),
 	FOREIGN KEY (orderId) REFERENCES orders(orderId),
 	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
@@ -158,5 +164,6 @@ create table advertisement(
 	adId int(11) auto_increment primary key,
 	productID int(11),
 	cost int(10),
+	picture varchar(100),
 	foreign key(productID) references product(productId)
 );

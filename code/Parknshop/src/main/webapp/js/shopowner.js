@@ -68,13 +68,24 @@ const shopOwner = {
     },
 
     /**
-     * [initCommon: init Common Part]
+     * [initCommon: init common part]
      * @return {[type]} [description]
      */
     init: function () {
         $('.back-btn').click(function() {
             history.go(-1);
         });
+    },
+
+    /**
+     * [initManage: init common part of shop management]
+     * @return {[type]} [description]
+     */
+    initManage: function () {
+        $('#menu #products-list, #menu #add-products, #menu #manage-orders').addClass('active');
+        $('#menu #products-list').parent().attr('href', 'selectedshop');
+        $('#menu #add-products').parent().attr('href', 'addproduct');
+        $('#menu #manage-orders').parent().attr('href', 'shoporder');
     },
 
     /**
@@ -106,7 +117,54 @@ const shopOwner = {
         $('#menu #shops-list').addClass('selected');
     },
 
+    /**
+     * [initRegister: init the register page]
+     * @return {[type]} [description]
+     */
     initRegister: function () {
         $('#menu #add-shops').addClass('selected');
+    },
+
+    /**
+     * [initProductList: init the products list page]
+     * @return {[type]}        [description]
+     */
+    initProductList: function () {
+        $('#menu #products-list').addClass('selected');
+    },
+
+    /**
+     * [initAddProducts: init the produts add page]
+     * @return {[type]}        [description]
+     */
+    initAddProducts: function () {
+        $('#menu #add-products').addClass('selected');  
+    },
+
+    /**
+     * [initOrderList: init the order-list]
+     * @return {[type]} [description]
+     */
+    initOrderList: function () {
+        $('.shops-orders-container #order-list .order-item .handle-btn').click(function(event) {
+            /* Act on the event */
+            const orderId = $(this).attr('oid');
+            const _this = $(this);
+            
+            $.getJSON('updateordercondition', {orderId: orderId}, function(data, textStatus) {
+                /*optional stuff to do after success */
+                if (!data.success) {
+                    _this.css({
+                            'border': '1px solid #e0e0e0',
+                            'background-color': '#f0f0f0',
+                            'color': '#e0e0e0'
+                        });
+
+                    _this.removeClass('button');
+
+                    _this.unbind('click');
+                }
+            });
+        });
     }
 };

@@ -1,5 +1,6 @@
 package com.tmazon.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tmazon.dao.ShopDao;
@@ -24,7 +25,13 @@ public class ShopServiceImpl implements ShopService {
 	
 	public boolean isShopExist(Shop shop) {
 		List<Shop> list = shopDao.select(shop);
-		return list != null && !list.isEmpty();
+		List<Shop> shopList = new ArrayList<Shop>();
+		for(int i=0;i<list.size();i++){
+			if(!list.get(i).getStatus().equals(Shop.STATUS_DELETED)){
+				shopList.add(list.get(i));
+			}
+		}
+		return shopList != null && !shopList.isEmpty();
 	}
 	
 	public boolean insert(Shop shop) {
@@ -39,6 +46,10 @@ public class ShopServiceImpl implements ShopService {
 	
 	public boolean update(Shop shop){
 		return shopDao.update(shop);
+	}
+	
+	public List<Shop> selectInLike(Shop shop){
+		return shopDao.selectInLike(shop);
 	}
 	
 }

@@ -16,6 +16,7 @@ import com.tmazon.util.BasicFactory;
 public class OrderServiceImpl implements OrderService {
 
 	private OrderDao ordersDao = BasicFactory.getImpl(OrderDao.class);
+	
 	private OrderInfoDao orderInfoDao = BasicFactory
 			.getImpl(OrderInfoDao.class);
 	private CartDao cartDao = BasicFactory.getImpl(CartDao.class);
@@ -120,10 +121,19 @@ public class OrderServiceImpl implements OrderService {
 		orderInfo.setStatus(newStatus);
 		return canChange? orderInfoDao.updateStatus(orderInfo) : false;
 	}
-
+	
 	public OrderInfo getOrderInfo(Integer orderId, Integer productId) {
 		List<OrderInfo> list = orderInfoDao.select(new OrderInfo(orderId, null, null, productId, null));
 		return (list != null && !list.isEmpty())? list.get(0) : null;
 	}
 
+	public boolean isBought(Integer userId, Integer productId) {
+		return orderInfoDao.isBought(userId, productId);
+	}
+
+	public  boolean modify(OrderInfo orderInfo){
+
+			boolean isSuccess = orderInfoDao.update(orderInfo);
+			return isSuccess;
+	}
 }

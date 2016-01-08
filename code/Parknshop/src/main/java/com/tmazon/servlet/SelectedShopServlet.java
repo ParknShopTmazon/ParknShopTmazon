@@ -9,14 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tmazon.domain.Product;
+import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
 import com.tmazon.service.ProductService;
+import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.ParseUtil;
 
 public class SelectedShopServlet extends HttpServlet {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
+	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,41 +34,26 @@ public class SelectedShopServlet extends HttpServlet {
 			return;
 		}
 		String shopId=req.getParameter("shopId");
-		System.out.println("*******************"+shopId);
-		if(!(shopId==null||"".trim().equals(shopId))){
-			System.out.println("sdsdsdsddssdsddssd"+shopId);
-			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
+		Integer id = ParseUtil.String2Integer(shopId, null);
+		if(id!=null){
+			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,id);
 		}
 		doPost(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("this is post************");
-		String shopId=(String) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
-		int id =-1;
-		try {
-			id=Integer.parseInt(shopId);
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		if(id==-1){
+		User user = (User) req.getSession().getAttribute(AttrName.SessionScope.USER);
+		Integer shopId=(Integer) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
+		Shop shop = shopService.findById(shopId);
+		if(shop==null||user==null||!shop.getOwner().equals(user.getUserId())){
 			resp.sendRedirect("myshop");
 			return;
 		}
 		Product product = new Product();
-		product.setShopId(id);
+		product.setShopId(shopId);
 		ArrayList<Product> productList = (ArrayList<Product>) productService.selectOnSell(product);
 		req.setAttribute("product_list",productList );
-		req.setAttribute("num",productList.size());
-//			Product product = new Product(null,1,null,null,null,null,null,null,null,null,null);
-//			ArrayList<Product> productList = (ArrayList<Product>) productService.select(product);
-//			for(Product temp : productList){
-//				System.out.println(temp.getName());
-//			}
-
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_homepage.jsp").forward(req, resp);
 		return;
 	}

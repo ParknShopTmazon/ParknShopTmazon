@@ -12,6 +12,7 @@ import com.tmazon.dao.OrderInfoDao;
 import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
 import com.tmazon.util.DaoUtil;
+import com.tmazon.util.RateUtil;
 
 public class OrderInfoDaoImpl implements OrderInfoDao {
 
@@ -39,6 +40,10 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		if (orderInfo.getProductId() != null) {
 			sqlBuilder.append("AND productId = ? ");
 			params.add(orderInfo.getProductId());
+		}
+		if (orderInfo.getStatus() != null) {
+			sqlBuilder.append("AND status = ? ");
+			params.add(orderInfo.getStatus());
 		}
 
 		String sql = sqlBuilder.toString();
@@ -75,13 +80,12 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 
 	public boolean update(OrderInfo orderInfo) {
-		String sql = "UPDATE orderInfo SET deliveryId = ?,quantity = ?,waybill = ? WHERE orderId = ? AND productId = ?";
+		String sql = "UPDATE orderInfo SET status=? WHERE orderId = ? AND productId = ?";
 		System.out.println(sql);
 
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		try {
-			runner.update(sql, orderInfo.getDeliveryId(),
-					orderInfo.getQuantity(), orderInfo.getWaybill(),
+			runner.update(sql, orderInfo.getStatus(),
 					orderInfo.getOrderId(), orderInfo.getProductId());
 			return true;
 		} catch (SQLException e) {
@@ -173,7 +177,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		if (OrderInfo.STATUS_ON_DELIVERY.equals(orderInfo.getStatus())) {
 			sqlBuilder.append(", deliveryTime = now() ");
 		} else if (OrderInfo.STATUS_CONFIRM_RECEIPT.equals(orderInfo.getStatus())) {
-			sqlBuilder.append(", dealTime = now() ");
+			sqlBuilder.append(", dealTime = now(), rate = '" + RateUtil.getRate() + "' ");
 		}
 		sqlBuilder.append("WHERE orderId = ? AND productId = ?");
 		String sql = sqlBuilder.toString();
@@ -187,6 +191,30 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean isBought(Integer userId, Integer productId) {
+		
+		String sql = "select * from orders,orderinfo where orders.userId = ? and orderinfo.productId = ? and orders.orderId = orderinfo.orderId "
+				+ "and (orderinfo.status = ? or orderinfo.status = ?)";
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(userId);
+		params.add(productId);
+		params.add(OrderInfo.STATUS_CONFIRM_RECEIPT);
+		params.add(OrderInfo.STATUS_DELETED);
+		
+		System.out.println(sql);
+
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		try {
+			List<OrderInfo> result = runner.query(sql, new BeanListHandler<OrderInfo>(
+					OrderInfo.class), params.toArray());
+			return !result.isEmpty();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 }
