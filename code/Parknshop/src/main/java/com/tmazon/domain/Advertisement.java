@@ -9,10 +9,11 @@ public class Advertisement {
 	public Advertisement(){
 		super();
 	}
-	public Advertisement(Integer adId,Integer productID,Integer cost){
+	public Advertisement(Integer adId,Integer productID,Integer cost,String picture){
 		this.adId=adId;
 		this.productID=productID;
 		this.cost=cost;
+		this.picture=picture;
 	}
 	public void setAdId(Integer adId){
 		this.adId=adId;

@@ -70,6 +70,8 @@ public class SearchHistoryAdminServlet extends HttpServlet {
 			req.setAttribute("historyList",historyPage.getSubitems());
 			req.setAttribute("CurPage",historyPage.getCurPage()==0?1:historyPage.getCurPage());
 			req.setAttribute("Income",income);
+			req.setAttribute("start",startDateStr);
+			req.setAttribute("end",endDateStr);
 			req.getRequestDispatcher("WEB-INF/admin/other.jsp").forward(req,resp);
 			return;
 		} catch (ParseException e) {

@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.* ,com.tmazon.domain.Advertisement" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.* ,com.tmazon.domain.Advertisement" pageEncoding="UTF-8"
+	isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,22 +25,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form action="" method="post">
 				<div class="grid_4">
 					<p>
-						<label>Product_Name:</label>
+						<label>ProductName:</label>
 						<input type="text" name="searchProductName" />
-					</p>
-				</div>
-				<div class="grid_5">
-					<p>
-						<label>ShopName:</label>
-						<input type="text" name="searchShopName" />
 					</p>
 				</div>
 				<div class="grid_5">
 					<p>
 						<label>Type:</label>
 						<select name="select_type">
-							<option>ALL</option>
-							
+							<option value="" >ALL</option>
+							<option value="TV& Home Theater" >TV& Home Theater</option>
+	    					<option value="Computers & Tablets" >Computers & Tablets</option>
+	    					<option value="Cell Phones" >Cell Phones</option>
+	    					<option value="Cameras & Camcorders" >Cameras & Camcorders</option>
+	    					<option value="Audio" >Audio</option>
+	    					<option value="Car Electronics & GPS" >Car Electronics & GPS</option>
+	    					<option value="Video, Games, Movies & Music" >Video, Games, Movies & Music</option>
+	    					<option value="Health, Fitness & Sports" >Health, Fitness & Sports</option>
+	    					<option value="Home & Office" >Home & Office</option>
 						</select>
 					</p>
 				</div>
@@ -52,37 +56,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 
 				<div class="grid_16">
-                    <h2>advertisement</h2>
+                    <h2>Advertisement:</h2>
 					<table>
 						<thead>
 							<tr>
-								<th>Company</th>
+								<th>ShopName</th>
+								<th>ProductName</th>
 								<th>Type</th>
 								<th>Cost</th>
 								<th colspan="3" width="10%">Actions</th>
 							</tr>
 						</thead>
 						<tfoot>
-							<tr>
-								<td colspan="5" class="pagination">
-									<span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 million</a>
+				<!--		<tr>
+								<td colspan="3" rowspan="2" class="pagination">
+									<form method="post" action="searchUserAdmin">
+										<input id="prev-btn-first" type="submit"  value="<<"></input>
+										<span name="curIndex" class="active curved">${curPageFirst }</span>
+										<input id="next-btn-first" type="submit" value=">>"></input>
+										<input name="curPageFirst"  type="hidden" value="${curPageFirst }" />
+										<input type="hidden" id="next-val-first" name="nextFirst" value="1"/>
+									</form>
 								</td>
 							</tr>
+			  -->	
 						</tfoot>
 						<tbody>
 							<tr>
 								<td>A Company</td>
 								<td>Food</td>
+								<td>abc</td>
 								<td>50</td>
-
 								<td><a href="#" class="delete">Delete</a></td>	
-								<td><a href="#" class="delete">Modified</a></td>
-							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td>50</td>
-								<td><a href="#" class="delete">Delete</a></td>
 								<td><a href="#" class="delete">Modified</a></td>
 							</tr>
 							
@@ -90,11 +95,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</table>
                     
                     <!-- 商品列表 -->
-                    <h2>Product</h2>
+                   
+                    <h2>Product:</h2>
                     <table>
 						<thead>
 							<tr>
 								<th></th>
+								<th>ProductId:</th>
 								<th>ProductName:</th>
 								<th>ShopName:</th>
 								
@@ -103,25 +110,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</thead>
 						<tfoot>
 							<tr>
-								<td colspan="5" class="pagination">
-									<span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 million</a>
+								<td colspan="3" rowspan="2" class="pagination">
+									<form method="post" action="searchUserAdmin">
+										<input id="prev-btn" type="submit"  value="<<"></input>
+										<span name="curIndex" class="active curved">${curPage }</span>
+										<input id="next-btn" type="submit" value=">>"></input>
+										<input name="curPage"  type="hidden" value="${curPage }" />
+										<input type="hidden" id="next-val" name="next" value="1"/>
+								</form>
 								</td>
-							</tr>
+						</tr>
 						</tfoot>
 						<tbody>
 							<tr>
+								<td><img src='css/food.png' height="30" width="30"></td>
 								<td>taobao</td>
 								<td>60</td>
-								<td><img src='css/food.png' height="30" width="30"></td>				
+								<td>asdfds</td>				
 								<td><a href="#" class="delete">Add</a></td>
 							</tr>
-							<tr class="alt">
-								<td>A Company</td>
-								<td>Food</td>
-								<td><img src='css/food.png' height="30" width="30"></td>
-								<td><a href="#" class="delete">Add</a></td>
-							</tr>
-							
+						
 						</tbody>
 					</table>
 				</div>
@@ -150,6 +158,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript">
+			document.getElementById('next-btn-first').addEventListener('click', function() {
+				document.getElementById('next-val-first').setAttribute('value', 1);
+			});
+			document.getElementById('prev-btn-first').addEventListener('click', function() {
+				document.getElementById('next-val-first').setAttribute('value', -1);
+			});	
+		
+			document.getElementById('next-btn').addEventListener('click', function() {
+				document.getElementById('next-val').setAttribute('value', 1);
+			});
+			document.getElementById('prev-btn').addEventListener('click', function() {
+				document.getElementById('next-val').setAttribute('value', -1);
+			});
+			
+			
 			function mischief(){
 			 document.getElementById('mischief').style.backgroundColor="#36F";
 			 document.getElementById('addBox').style.display="block";	 
