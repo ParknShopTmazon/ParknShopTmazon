@@ -17,7 +17,7 @@
 		<div class="page-title">
 		    <span class="back-btn button"></span>
 		    <span class="parknshop">PARKnSHOP</span>
-		    <span class="main-title">Login</span>
+		    <span class="main-title">Products Info</span>
 		</div>
 		<div class="product-area">
 			<div class="img-area">
@@ -34,7 +34,6 @@
 					<div class="info-items">
 						<span class="name">Shop Owner</span>
 						<span class="value">
-							<!-- <a href="#" >${ shopOwnerName }</a> -->
 							${ shopOwnerName }
 							<span class="line">
 								<c:choose>
@@ -75,8 +74,11 @@
 									<span class="name">Quantity</span>
 									<span class="value"><input name="quantity" type="number" id="add-to-cart" min="1" max_quantity="${ product.stockNum }" value="1"/></span>
 								</div>
-								<c:if test="${ s_user.role ne 'admin' }">
+								<c:if test="${ s_user.role ne 'admin' and s_user.name ne shopOwnerName }">
 									<button class="btn-warning">Add to cart</button>
+								</c:if>
+								<c:if test="${ s_user.name eq shopOwnerName }">
+									<button class="btn-warning btn-disabled">Your products</button>
 								</c:if>
 								<c:if test="${ s_user.role eq 'admin' }">
 									<button class="btn-warning btn-disabled" disabled>Admin</button>

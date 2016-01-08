@@ -1674,6 +1674,10 @@ input {
     border: 2px solid #B27100;
 }
 
+.order-container #order-info .shop-rate .comment-area textarea::-webkit-input-placeholder {
+    color: #000;
+}
+
 .order-container #order-info .shop-rate .name {
     line-height: 29px;
     float: left;
