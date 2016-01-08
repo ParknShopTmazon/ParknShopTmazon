@@ -26,7 +26,20 @@ public class ModifyOrderServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Integer orderId = 1;
+		
+		String orderIdStr = req.getParameter("orderId");
+		
+		Integer orderId = -1;
+		
+		try {
+			orderId=Integer.parseInt(orderIdStr);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		if(orderId == -1){
+			resp.sendRedirect("shop_order");
+		}
 		
 //		OrderInfo orderInfo = new OrderInfo(orderId, null, null, null, null);
 		List<OrderInfo> orderInfoList = orderService.getOrderInfo(orderId);

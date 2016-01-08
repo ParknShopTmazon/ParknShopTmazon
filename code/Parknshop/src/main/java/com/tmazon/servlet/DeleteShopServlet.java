@@ -33,6 +33,9 @@ public class DeleteShopServlet extends HttpServlet {
 		
 		String shopId=req.getParameter("shopId");
 		System.out.println("*******************"+shopId);
+		if(shopId == null){
+			resp.sendRedirect("myshop");
+		}
 		if(!(shopId==null||"".trim().equals(shopId))){
 			System.out.println("sdsdsdsddssdsddssd"+shopId);
 			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
@@ -45,6 +48,11 @@ public class DeleteShopServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if(shopOneId == -1){
+			resp.sendRedirect("myshop");
+		}
+		
 		Shop shop = shopService.findById(shopOneId);
 		if(shopOneId!=shop.getShopId()){
 			resp.sendRedirect("myshop");
@@ -86,7 +94,7 @@ public class DeleteShopServlet extends HttpServlet {
 		    if(shop.getStatus().equals(Shop.STATUS_FAIL)){
 		    	boolean isDeleteSuccess = shopService.delete(shop);
 				if(isDeleteSuccess==true){
-					System.out.println("修改成功");
+					System.out.println("删除成功");
 				}
 				resp.sendRedirect("myshop");
 		    }
@@ -110,7 +118,7 @@ public class DeleteShopServlet extends HttpServlet {
 					resp.sendRedirect("myshop");
 				}else{
 					req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, canBeDelete);
-					resp.sendRedirect("deleteshop");
+					resp.sendRedirect("myshop");
 				}
 		    }
 	}
