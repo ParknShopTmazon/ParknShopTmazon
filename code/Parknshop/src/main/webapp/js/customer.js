@@ -1899,7 +1899,7 @@ var customer = {
             alwaysOn: true
         });
         
-        $('.product-container .img-area').hover(function () {
+        $('.product-container .img-area').hover(function (event) {
             /* Stuff to do when the mouse enters the element */
             $('.zoomPad .zoomPup').show().css({
                 opacity: 0.6
@@ -1911,7 +1911,6 @@ var customer = {
         }, function () {
             /* Stuff to do when the mouse leaves the element */
             $('.zoomPad .zoomPup, .zoomPad .zoomWindow').hide();
-
         });
     }
 };

@@ -22,7 +22,7 @@
 		<div class="product-area">
 			<div class="img-area">
 				<a href="${ product.picture }" class="jqzoom" rel='gal1'  title="triumph" >
-		            <img src="${ product.picture }" class="product-picture">
+		            <div class="product-picture" style="background-image: url(${ product.picture });"></div>
 		        </a>
 			</div>
 			<div class="product-info">
