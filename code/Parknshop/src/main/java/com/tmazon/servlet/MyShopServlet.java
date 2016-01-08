@@ -2,6 +2,7 @@ package com.tmazon.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -43,7 +44,13 @@ public class MyShopServlet extends HttpServlet {
 	    	
 	    	try {
 				List<Shop> shopList= runner.query(sql, new BeanListHandler<Shop>(Shop.class));
-				req.setAttribute("shopList", shopList);
+				List<Shop> shopGetList = new ArrayList<Shop>();
+				for(int i=0;i<shopList.size();i++){
+					if(!shopList.get(i).getStatus().equals(Shop.STATUS_DELETED)){
+						shopGetList.add(shopList.get(i));
+					}
+				}
+				req.setAttribute("shopList", shopGetList);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

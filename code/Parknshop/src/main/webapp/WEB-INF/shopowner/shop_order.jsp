@@ -83,7 +83,7 @@
 		                        <p class="name">status</p>
 		                    </div>
 		                </div>
-		                <div class="handle-btn button" oid="${orderInfo.orderId}">Send</div>
+		                <div class="handle-btn button"><a href="modifyorder?orderId=${orderInfo.orderId}">Send</a></div>
 		            </div>
 		        </div>	
 			</c:forEach>
