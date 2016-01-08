@@ -246,6 +246,10 @@
   <display-name>CommentServlet</display-name>
   <servlet-class>com.tmazon.servlet.CommentServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>ModifyOrderServlet</servlet-name>
+ 	<servlet-class>com.tmazon.servlet.ModifyOrderServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userServlet</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -461,6 +465,10 @@
  <servlet-mapping>
   <servlet-name>CommentServlet</servlet-name>
   <url-pattern>/comment</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ModifyOrderServlet</servlet-name>
+ 	<url-pattern>/modifyorder</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index</welcome-file>
