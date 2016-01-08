@@ -10,6 +10,7 @@ public class User {
 	
 	public static final String STATUS_NORMAL = "normal";
 	public static final String STATUS_BLACK = "black";
+	public static final String STATUS_CHECKING = "checking";
 	
 	/**
 	 * min characters of user name and password
