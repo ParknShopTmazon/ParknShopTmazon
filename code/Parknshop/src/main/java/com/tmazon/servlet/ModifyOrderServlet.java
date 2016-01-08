@@ -20,8 +20,8 @@ public class ModifyOrderServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
-		String orderIdStr = req.getParameter("orderId");
-		String productId = req.getParameter("productId");
+		String orderIdStr = req.getParameter("oid");
+		String productId = req.getParameter("pid");
 		System.out.println("orderInfo="+orderIdStr);
 		System.out.println("productId="+productId);
 		Integer orderId = -1;
