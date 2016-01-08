@@ -48,7 +48,7 @@
 		                <div class="pic-container">
 		                    <a href="" target="_blank">
 		                        <div class="over">
-		                            <div class="link-btn"></div>
+		                            <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>
 		                        </div>
 		                    </a>
 		                 <c:forEach  var="order" items="${order.orderInfos}"></c:forEach>
@@ -80,8 +80,8 @@
 		                </div>
 		                <div class="info">
 		                    <div class="delivery-status">
-		                        <p class="value">${orderInfo.product.status }</p>
-		                        <p class="name">${orderInfo.status}</p>
+		                        <p class="value">${orderInfo.status}</p>
+		                        <p class="name">status</p>
 		                    </div>
 		                </div>
 		                <div class="handle-btn button"><a href="modifyorder?orderId=${orderInfo.orderId}">Send</a></div>

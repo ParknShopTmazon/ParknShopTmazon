@@ -17,18 +17,11 @@ import com.tmazon.util.BasicFactory;
 public class ModifyOrderServlet extends HttpServlet {
 
 	private OrderService orderService = BasicFactory.getImpl(OrderService.class);
-	private OrderInfoService orderInfoService = BasicFactory.getImpl(OrderInfoService.class);
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
 		String orderIdStr = req.getParameter("orderId");
-		
+		System.out.println("orderInfo="+orderIdStr);
 		Integer orderId = -1;
 		
 		try {
@@ -38,7 +31,7 @@ public class ModifyOrderServlet extends HttpServlet {
 		}
 		
 		if(orderId == -1){
-			resp.sendRedirect("shop_order");
+			resp.sendRedirect("shoporder");
 		}
 		
 //		OrderInfo orderInfo = new OrderInfo(orderId, null, null, null, null);
@@ -46,10 +39,14 @@ public class ModifyOrderServlet extends HttpServlet {
 		for (int i = 0; i < orderInfoList.size(); i++) {
 			if(orderInfoList.get(i).getStatus().equals("paid")){
 				orderInfoList.get(i).setStatus("delivering");
-				orderInfoService.modify(orderInfoList.get(i));
+				orderService.modify(orderInfoList.get(i));
 			}
+			
 		}
-		req.getRequestDispatcher("/WEB-INF/shopowner/shop_order.jsp").forward(req, resp);
+		resp.sendRedirect("shoporder");
 		return;
 	}
+	
+		
+		
 }

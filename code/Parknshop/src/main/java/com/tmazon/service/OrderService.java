@@ -30,4 +30,5 @@ public interface OrderService {
 	
 	public boolean isBought(Integer userId, Integer productId);
 	
+	public  boolean modify(OrderInfo orderInfo);
 }

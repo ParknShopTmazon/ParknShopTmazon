@@ -4,67 +4,36 @@
     <span class="main-title">Comment</span>
 </div>
 <form action="" id="order-comment-form">
-	<input type="hidden" id="shop_rate" name="shop_rate">
-	<input type="hidden" id="product_rate" name="product_rate">
-	<input type="hidden" id="delivery_rate" name="delivery_rate">
+	<input type="hidden" id="shop_rate" name="shop_rate" value="3">
+	<input type="hidden" id="product_rate" name="product_rate" value="3">
+	<input type="hidden" id="delivery_rate" name="delivery_rate" value="3">
     <div id="order-info">
         <div class="shop-info">
-            <div class="pic-container">
-                <div class="over">
-                    <div class="link-btn"></div>
-                </div>
-                <div class="shop" style="background-image: url(./images/shops/shop1.jpg);"></div>
-            </div>
-            <div class="info">
-                <div class="item">
-                    <span class="name">Order Id</span>
-                    <span class="value">1231231152</span>
-                </div>
-                <div class="item">
-                    <span class="name">Shop Owner</span>
-                    <span class="value">shop owner1</span>
-                </div>
-                <div class="address item">
-                    <span class="name">Address</span>
-                    <span class="value">Room 701, Unit 3, No.46, JiHua Road 4, Chan City Disrict, Foshan, Guangdong, China</span>
-                </div>
-                <div class="time item">
-                    <span class="name">Create Time</span>
-                    <span class="value">2015-12-05 13:08:25</span>
-                </div>
-                <div class="item">
-                    <span class="name">Delivery Time</span>
-                    <span class="value">2015-12-06 13:08:25</span>
-                </div>
-                <div class="item">
-                    <span class="name">Deal Time</span>
-                    <span class="value">2015-12-10 13:08:25</span>
-                </div>
-            </div>
+            
         </div>
         <div class="shop-rate">
             <div class="shop">
-                <span class="name"><strong>shop rate</strong></span>
+                <span class="name"><strong>shop rate</strong><span class="rate-val">3.0</span></span>
                 <span class="value">
-	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "shop"}'></div>	
+	            	<div class="divClass" data-webRating="3" data-webRatingN="5" data-webRatingArg='{"option": "shop"}'></div>	
 	        	</span>
             </div>
             <div class="product">
-                <span class="name"><strong>product rate</strong></span>
+                <span class="name"><strong>product rate</strong><span class="rate-val">3.0</span></span>
                 <span class="value">
-	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "product"}'></div>	
+	            	<div class="divClass" data-webRating="3" data-webRatingN="5" data-webRatingArg='{"option": "product"}'></div>	
 	        	</span>
             </div>
             <div class="delivery">
-                <span class="name"><strong>delivery rate</strong></span>
+                <span class="name"><strong>delivery rate</strong><span class="rate-val">3.0</span></span>
                 <span class="value">
-	            	<div class="divClass" data-webRating="0" data-webRatingN="5" data-webRatingArg='{"option": "delivery"}'></div>	
+	            	<div class="divClass" data-webRating="3" data-webRatingN="5" data-webRatingArg='{"option": "delivery"}'></div>	
 	        	</span>
             </div>
             <div class="comment-area">
                 <span class="name"><strong>comment</strong></span>
                 <span>
-                    <textarea></textarea>
+                    <textarea id="commentContent" placeholder="comment..."></textarea>
                 </span>
             </div>
         </div>
@@ -77,6 +46,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
     customer.init();
-    customer.initComment(oid, productId);
+    customer.initComment($('#oid').val(), $('#productId').val(), $('#item_num').val());
 });
 </script>

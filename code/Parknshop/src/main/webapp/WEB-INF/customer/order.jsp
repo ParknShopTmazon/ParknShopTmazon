@@ -26,8 +26,10 @@
 		<%	} %>
 		<%	if (order_id != null && !order_id.equals("") && type != null && type.equals("comment")) {%>
 				<% String productId = request.getParameter("productId"); %>
+				<% String item = request.getParameter("item"); %>
 				<% if (productId != null && !productId.equals("")) {%>
 					<%@ include file="order_comment.html"%>
+					<input type="hidden" id="item_num" value="<%=item%>">
 					<input type="hidden" id="productId" value="<%=productId%>">
 					<input type="hidden" id="oid" value="<%=order_id%>">
 				<%}%>
