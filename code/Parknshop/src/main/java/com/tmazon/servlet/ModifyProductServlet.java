@@ -48,12 +48,11 @@ public class ModifyProductServlet extends HttpServlet{
 		String productId = req.getParameter("product_id");
 		Integer id = ParseUtil.String2Integer(productId, null);
 		if(id==null){
-			System.out.println("77777777777777777777777777");
 			resp.sendRedirect("selectedshop");
 			return;
 		}
 		Product product = productService.findOnSellById(id);
-		if(product==null||product.getProductId()==null||product.getProductId()!=id){
+		if(product==null||product.getProductId()==null){
 			resp.sendRedirect("selectedshop");
 			return;
 		}
