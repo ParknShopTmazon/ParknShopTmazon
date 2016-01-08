@@ -25,12 +25,15 @@ import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.Product;
 import com.tmazon.domain.Shop;
+import com.tmazon.domain.User;
 import com.tmazon.service.DeliveryService;
 import com.tmazon.service.OrderService;
 import com.tmazon.service.ProductService;
+import com.tmazon.service.ShopService;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.DaoUtil;
+import com.tmazon.util.ParseUtil;
 
 import net.sf.json.JSONArray;
 
@@ -39,21 +42,33 @@ public class ShopOrderServlet extends HttpServlet {
 	private OrderService orderService = BasicFactory.getImpl(OrderService.class);
 	private ProductService productService = BasicFactory.getImpl(ProductService.class);
 	private DeliveryService deliveryService = BasicFactory.getImpl(DeliveryService.class);
+	private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		doPost(req, resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		User user =(User) req.getSession(true).getAttribute(AttrName.SessionScope.USER);
+		Shop shop = new Shop();
+		shop.setOwner(user.getUserId());
+		List<Shop> shopList = shopService.select(shop);
+		req.setAttribute("shopList", shopList);
 		
-		Integer  shopId= (Integer) req.getSession().getAttribute(AttrName.SessionScope.SHOPID);
+		String  Id= req.getParameter("shopId");
+		
+		Integer shopId = ParseUtil.String2Integer(Id, null);
+		List<OrderInfo> orderInfos= new ArrayList<OrderInfo>();
+		if(shopId==null||shopId==-1){
+			for (Shop shop2 : shopList) {
+				orderInfos.addAll(orderService.getOrderInfosByshop(shop2.getShopId()));
+			}
+		}else{
+			orderInfos = orderService.getOrderInfosByshop(shopId);
+		}
         Map<Integer, List<OrderInfo>> orderInfoMap =new HashMap<Integer, List<OrderInfo>>();
-		System.out.println("shopId="+shopId);
-		List<OrderInfo> orderInfos = orderService.getOrderInfosByshop(shopId);
+		if(orderInfos==null){
+			req.setAttribute("num", 0);
+		}
 		for (OrderInfo info :orderInfos) {
 			info.setOrder(orderService.findById(info.getOrderId()));
 			info.setProduct(productService.getProductById(info.getProductId()));
@@ -91,4 +106,5 @@ public class ShopOrderServlet extends HttpServlet {
 		req.setAttribute("orderList", orderList);
 		req.getRequestDispatcher("/WEB-INF/shopowner/shop_order.jsp").forward(req, resp);
 	}
+	
 }

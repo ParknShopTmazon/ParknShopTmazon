@@ -34,7 +34,7 @@ public class DeleteShopServlet extends HttpServlet {
 			return;
 		}
 		
-		String shopId=req.getParameter("shopId");
+		Integer shopId=Integer.parseInt(req.getParameter("shopId"));
 		System.out.println("*******************"+shopId);
 		if(shopId == null){
 			resp.sendRedirect("myshop");
@@ -44,20 +44,9 @@ public class DeleteShopServlet extends HttpServlet {
 			req.getSession(true).setAttribute(AttrName.SessionScope.SHOPID,shopId);
 		}
 		
-		int shopOneId = -1;
-		try {
-			shopOneId=Integer.parseInt(shopId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		if(shopOneId == -1){
-			resp.sendRedirect("myshop");
-		}
-		
-		Shop shop = shopService.findById(shopOneId);
-		if(shopOneId!=shop.getShopId()){
+		Shop shop = shopService.findById(shopId);
+		if(shopId!=shop.getShopId()){
 			resp.sendRedirect("myshop");
 			return;
 		}
