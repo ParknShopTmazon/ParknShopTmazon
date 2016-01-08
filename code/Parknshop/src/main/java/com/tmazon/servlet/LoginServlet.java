@@ -82,6 +82,11 @@ public class LoginServlet extends HttpServlet {
 			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
 					resp);
 			return;
+		} else if (user.getStatus().equals(User.STATUS_CHECKING)) {
+			req.setAttribute(AttrName.RequestScope.ERROR_USER_CHECKING, true);
+			req.getRequestDispatcher("WEB-INF/customer/login.jsp").forward(req,
+					resp);
+			return;
 		}
 		
 		// log in

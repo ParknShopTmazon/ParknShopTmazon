@@ -34,7 +34,18 @@ public class RegisterServlet extends HttpServlet {
 		// check parameters
 		String name = req.getParameter("name");
 		String password = req.getParameter("password");
-		User user = new User(null, name, password, User.ROLE_CUSTOMER, User.STATUS_NORMAL);
+		String role = req.getParameter("role");
+		String status = null;
+		if (User.ROLE_CUSTOMER.equals(role)) {
+			status = User.STATUS_NORMAL;
+		} else if (User.ROLE_SHOP_OWNER.equals(role)) {
+			status = User.STATUS_CHECKING;
+		} else {
+			req.setAttribute(AttrName.RequestScope.ERROR_PARAM_ROLE, true);
+			req.getRequestDispatcher("WEB-INF/customer/register.jsp").forward(req, resp);
+			return;
+		}
+		User user = new User(null, name, password, role, status);
 		if (!user.isNamePasswordValid()) {
 			req.setAttribute(AttrName.RequestScope.ERROR_PARAMETERS, true);
 			req.getRequestDispatcher("WEB-INF/customer/register.jsp").forward(req, resp);
