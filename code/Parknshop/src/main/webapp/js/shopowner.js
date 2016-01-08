@@ -169,7 +169,8 @@ const shopOwner = {
      * @return {[type]} [description]
      */
     initOrderList: function () {
-        /**
+        let amount = {};
+    	/**
          * [initDate: init the date]
          * @return {[type]} [description]
          */
@@ -183,7 +184,7 @@ const shopOwner = {
             $('.shops-orders-container #startDate').val(theFirstDate);
             $('.shops-orders-container #endDate').val(today);
         }
-
+        
         /**
          * [compareDate: compare two date, return 1 when the prev one is greater than the next one with the format yyyy-MM-dd. Otherwise, return -1]
          * @param  {[type]}   prev [prev date]
@@ -211,8 +212,142 @@ const shopOwner = {
             
             return 1;
         }
+        
+        function calculateAmount() {
+        	 const $orderLists = $('.order-item');
+        	 const $shopNames = $('#shopId').children('option');
+        	 
+        	 $shopNames.each(function() {
+        		if ($(this).html() === 'ALL') {
+      				return;
+      			}
+      			
+        		amount[$(this).val()] = {};
+         	});
+             
+             $orderLists.each(function() {
+            	 const $shopLists = $(this).children('.shop-item');
+            	 const dateTime = $(this).find('.brief-info').find('.order-ctime').find('.value').html().split(' ')[0];
+            	 const shopId = $(this).find('.shopId').find('.value').html();
+            	 
+            	 if (typeof(amount[shopId][dateTime]) == 'undefined') {
+            		 amount[shopId][dateTime] = 0.0;
+            	 }
+            	 
+            	 let sum = 0.0;
+            	 $shopLists.each(function() {
+            		 let salary = $(this).find('.price').find('.shop-price').html();
+            		 salary = salary.trim();
+            		 salary = parseFloat(salary.substr(1, salary.length));
+            		 sum += salary;
+				 });
+            	 
+            	 amount[shopId][dateTime] += sum;
+             });
+             console.log(amount);
+        }
+        
+        function initChart(sid, start, end) {
+        	$("#chart-container").empty();
+        	
+        	if (compareDate(start, end) > 1) {
+        		return;
+        	}
+        	
+        	const $shopNames = $('#shopId').children('option');
+        	const _sid = sid;
 
-        function showOrders(oid, start, end) {
+        	let markDate = {};
+        	let dataSets = [];
+        	
+        	/** foreach shop to find the date of them */
+        	$shopNames.each(function() {
+        		const valSets = [];
+        		for (let i in amount[$(this).val()]) {
+        			if (compareDate(start, i) > 0 || compareDate(i, end) > 0) {
+        				continue;
+        			} else {
+        				valSets.unshift({
+        					'value': amount[$(this).val()][i]
+        				});
+        				
+        				/** mark the date */
+            			markDate[i] = 0;
+        			}
+                }
+        		
+    			if (_sid === '-1') {
+    				if ($(this).html() === 'ALL') {
+        				return;
+        			}
+            		dataSets.push({
+            			'seriesname': $(this).html(),
+            			'data': valSets
+            		});
+    			} else {
+    				if ($(this).val() == _sid) {
+    					dataSets.push({
+                			'seriesname': $(this).html(),
+                			'data': valSets
+                		});
+    				}
+    			}
+        	});
+        	
+        	let categories = [];
+        	/** generate the categories */
+        	for (let i in markDate) {
+        		categories.unshift({
+        			'label': i
+        		});
+        	}
+        	
+        	/** calculate the average value */
+        	const avgSets = [];
+        	
+        	for(let i = 0; i < dataSets.length - 1; i++) {
+        		let avg = 0;
+        		for(let j = 0; j < dataSets.length - 1; j++) {
+            		avg += dataSets[j].data[i].value
+        		}
+        		
+        		avgSets.push({
+        			'value': avg / (dataSets.length - 1)
+        		});
+    		}
+        	
+        	dataSets.push({
+                "seriesname": "Average",
+                "renderas": "line",
+                "showvalues": "0",
+                "data": []
+            });
+        	
+        	
+        	$("#chart-container").insertFusionCharts({
+                type: "mscombi2d",
+                width: "100%",
+                height: "480",
+                dataFormat: "json",
+                dataSource: {
+                    "chart": {
+                        "caption": "Incomes of your shops",
+                        "xaxisname": "Date",
+                        "yaxisname": "Amount (In USD)",
+                        "numberprefix": "$",
+                        "theme": "fint",
+                    },
+                    "categories": [
+                        {
+                            "category": categories
+                        }
+                    ],
+                    "dataset": dataSets
+                }
+            });
+        }
+
+        function showOrders(sid, start, end) {
             const $orderLists = $('.order-item');
             
             $orderLists.each(function() {
@@ -226,7 +361,7 @@ const shopOwner = {
                 } else {
                 	$shopLists.each(function() {
                         $(this).show();
-                        if (oid !== '-1' && oid !== $(this).find('.shopId').find('.value').html()) {
+                        if (sid !== '-1' && sid !== $(this).find('.shopId').find('.value').html()) {
                             $(this).hide();
                             i++;
                         }
@@ -237,10 +372,16 @@ const shopOwner = {
                     }
                 }
             });
+            
+            initChart(sid, start, end);
         }
 
         initDate();
+        
+        calculateAmount();
 
+        initChart(-1, $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
+        
         showOrders('-1', $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
 
         const $listBtns = $('.shops-orders-container #order-list .order-item .handle-btn');
@@ -259,7 +400,28 @@ const shopOwner = {
                 
                 $(this).click(function(event) {
                     /* Act on the event */
-                    window.location.href = 'modifyorder?oid=' + oid + '&pid=' + pid;
+                    $.getJSON('changeOrderInfo', {
+                        oid: oid,
+                        productId: pid,
+                        newStatus: 'delivering'
+                    }, function(data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (data.success == 'true') {
+                            _this.css({
+                                    'border': '1px solid #e0e0e0',
+                                    'background-color': '#f0f0f0',
+                                    'color': '#e0e0e0'
+                                });
+
+                            _this.removeClass('button');
+
+                            _this.unbind('click');
+                            
+                            _this.prev().find('.delivery-status').find('.value').html('delivering');
+                        } else {
+                            alert('faied to send products');
+                        }
+                    });
                 });
             }
         });
