@@ -32,15 +32,15 @@
 				</div>
 			</div>
 
-			<c:forEach var="orderInfo" items="${orderInfoList}" >
+			<c:forEach var="order" items="${orderList}" >
 				<div class="order-item">
 		            <div class="brief-info">
 		                <div class="order-id">
 		                    <span class="name">order id:</span>
-		                    <span class="value">${orderInfo.orderId}</span>
+		                    <span class="value">${order.orderId}</span>
 		                </div>
 		                <div class="order-ctime">
-		                    <span class="value">${orderInfo.order.orderTime }</span>
+		                    <span class="value">${order.orderTime }</span>
 		                </div>
 		                <!-- <div class="delete-btn button"></div> -->
 		            </div>
@@ -51,6 +51,7 @@
 		                            <div class="link-btn"></div>
 		                        </div>
 		                    </a>
+		                 <c:forEach  var="order" items="${order.orderInfos}"></c:forEach>
 		                <div class="shop" style="background-image: url(${orderInfo.product.picture });"></div>
 		                </div>
 		                <div class="shopId">
