@@ -1,0 +1,169 @@
+CREATE DATABASE parknshop character set  utf8 collate utf8_general_ci;
+
+USE parknshop;
+
+CREATE TABLE user (									-- 用户表，保存用户基本信息
+	userId int AUTO_INCREMENT,							-- 用户ID，自增、主键
+	name varchar(50) NOT NULL,							-- 用户名
+	password varchar(50) NOT NULL,						-- 密码
+	role varchar(50) NOT NULL,							-- 用户角色。customer（买家）、shop_owner（卖家）或admin（管理员）
+	status varchar(50) NOT NULL,						-- 用户状态。normal（可以正常使用系统）、black（黑名单用户，不能使用系统）
+	PRIMARY KEY (userId),
+	UNIQUE (name)
+);
+
+CREATE TABLE rate(									-- 汇率表
+	rate varchar(10) NOT NULL							-- 汇率。表示网站从每笔成功的交易中能够获取的提成比例
+);
+
+CREATE TABLE address(
+	addressId int AUTO_INCREMENT,						-- 派送地址ID，自增、主键
+	userId int NOT NULL,								-- 用户ID，外键（user.userId）。表示该地址属于某用户
+	description varchar(255),							-- 地址描述
+	zipcode varchar(50),								-- 邮编
+	name varchar(50),									-- 收件人姓名
+	phone varchar(50),									-- 收件人号码
+	PRIMARY KEY (addressId),
+	FOREIGN KEY (userId) REFERENCES user(userId)
+);
+
+CREATE TABLE userInfo(								-- 用户详细信息表
+	userId int NOT NULL,								-- 用户ID，主键。外键（user.userId）
+	phone varchar(50) NOT NULL,							-- 用户电话
+	email varchar(50) NOT NULL,							-- 用户邮箱
+	realName varchar(50) NOT NULL,						-- 真实姓名
+	sex bit NOT NULL,									-- 性别
+	birthday date NOT NULL,								-- 生日
+	detail text,										-- 详细信息
+	alipay varchar(50) NOT NULL,						-- 支付账号
+	FOREIGN KEY (userId) REFERENCES user(userId)
+);
+
+CREATE TABLE shop(									-- 店铺
+	shopId int AUTO_INCREMENT,							-- 店铺ID，主键、自增
+	name varchar(50) NOT NULL,							-- 店铺名
+	type varchar(50) NOT NULL,							-- 店铺的类型。person（个人所有）、company（公司所有）
+	status varchar(50) NOT NULL,						-- 店铺状态。checking（审批阶段）、fail（未通过审批）、success（通过审批）、deleted（店铺被删除）
+	owner int NOT NULL,									-- 店铺的所有人。外键（user.userId）
+	picture varchar(100),								-- 店铺图片
+	CONSTRAINT pk_shopId PRIMARY KEY (shopId),
+	FOREIGN KEY (owner) REFERENCES user(userId)
+);
+
+CREATE TABLE category (								-- 商品类型
+	category varchar(50),								-- 商品类型值。共有9种类型。
+	PRIMARY KEY (category)
+);
+
+CREATE TABLE product (								-- 商品
+	productId int AUTO_INCREMENT,						-- 商品ID，主键、自增
+	shopId int NOT NULL,								-- 所属店铺ID。外键（shop.shopId）
+	name varchar(50) NOT NULL,							-- 商品名
+	price decimal(10,2) NOT NULL,						-- 价格
+	discountPrice decimal(10,2) NOT NULL,				-- 折后价格
+	category varchar(50) NOT NULL,						-- 商品类型。外键（categorycategory）
+	stockNum int NOT NULL,								-- 库存数量
+	soldNum int NOT NULL,								-- 已售数量
+	description text NOT NULL,							-- 描述
+	picture varchar(100),								-- 图片
+	status varchar(50) NOT NULL,						-- 状态。onsell（在架上），pulloff（下架）
+	PRIMARY KEY (productId),
+	FOREIGN KEY (shopId) REFERENCES shop(shopId),
+	FOREIGN KEY (category) REFERENCES category(category)
+);
+
+CREATE TABLE productInfo (							-- 商品详情
+	productId int,										-- 商品ID。外键（product.productId）
+	size varchar(50),									-- 尺寸
+	color varchar(50),									-- 颜色。使用RGB表示，如#000000
+	FOREIGN KEY (productId) REFERENCES product(productId)
+);
+
+CREATE TABLE delivery(								-- 递送方式
+	deliveryId int AUTO_INCREMENT,						-- 递送方式ID。主键、自增
+	company varchar(50) NOT NULL,						-- 公司
+	price decimal(10,2) NOT NULL,						-- 价格
+	type varchar(50) NOT NULL,							-- 类型。fast（快速），normal（平邮）
+	PRIMARY KEY (deliveryId)
+);
+
+CREATE TABLE orders (								-- 订单
+	orderId int AUTO_INCREMENT,							-- 订单ID。主键，自增
+	payType varchar(50) NOT NULL,						-- 支付类型（没啥用，但别删了。写文档可以不写进去）
+	status varchar(50) NOT NULL,						-- 状态。normal（正常状态），deleted（删除）
+	orderTime datetime NOT NULL,						-- 下单时间
+	userId int NOT NULL,								-- 用户ID
+	addressId int NOT NULL,								-- 收货地址
+	PRIMARY KEY (orderId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (addressId) REFERENCES address(addressId)
+);
+
+CREATE TABLE orderInfo(								-- 订单详情表，用于保存订单内的商品的数量等详细数据
+	orderId int NOT NULL,								-- 订单ID。外键
+	deliveryId int NOT NULL,							-- 派送方式
+	quantity int NOT NULL,								-- 数量
+	productId int NOT NULL,								-- 商品ID。外键
+	status varchar(50) NOT NULL,						-- 状态
+	deliveryTime datetime,								-- 发货时间
+	dealTime datetime,									-- 成交时间
+	rate varchar(10),									-- 汇率（非外键）
+	waybill varchar(50),
+	PRIMARY KEY(orderId, productId),
+	FOREIGN KEY (productId) REFERENCES product(productId),
+	FOREIGN KEY (orderId) REFERENCES orders(orderId),
+	FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
+);
+
+CREATE TABLE cart (									-- 购物车
+	userId int NOT NULL,								-- 用户ID。外键
+	productId int NOT NULL,								-- 商品ID。外键
+	quantity int NOT NULL,								-- 数量
+	PRIMARY KEY (userId, productId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (productId) REFERENCES product(productId)
+);
+
+CREATE TABLE friend (								-- 好友表
+	userId int NOT NULL,								-- 用户ID
+	friendId int NOT NULL,								-- 用户的好友的ID
+	PRIMARY KEY (userId, friendId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (friendId) REFERENCES user(userId)
+);
+
+CREATE TABLE message(								-- 信息
+	messageId int AUTO_INCREMENT,						-- 信息ID。主键、自增
+	userId int NOT NULL,								-- 用户ID。外键
+	friendId int NOT NULL,								-- 好友ID。外键
+	content text NOT NULL,								-- 信息内容
+	isUnread bit NOT NULL,								-- 是否阅读
+	messageTime datetime NOT NULL,						-- 信息发送的时间
+	PRIMARY KEY (messageId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (friendId) REFERENCES user(userId)
+);
+
+CREATE TABLE comment(								-- 评论
+	commentId int AUTO_INCREMENT,						-- 评论ID。主键、自增
+	userId int NOT NULL,								-- 用户ID。外键
+	productId int NOT NULL,								-- 商品ID
+	content text NOT NULL,								-- 评价内容
+	commentTime datetime NOT NULL,						-- 评论时间
+	shopScore int,										-- 店铺得分
+	productScore int,									-- 商品得分
+	deliveryScore int,									-- 派送得分
+	replyId int,										-- 引用的评论（没用了，但别删）
+	CONSTRAINT pk_commentId PRIMARY KEY (commentId),
+	FOREIGN KEY (userId) REFERENCES user(userId),
+	FOREIGN KEY (productId) REFERENCES product(productId),
+	FOREIGN KEY (replyId) REFERENCES comment(commentId)
+);
+
+create table advertisement(							-- 广告
+	adId int(11) auto_increment primary key,			-- 广告ID。主键、自增
+	productID int(11),									-- 商品ID。外键
+	cost int(10),										-- 价格
+	picture varchar(100),								-- 图片
+	foreign key(productID) references product(productId)
+);
