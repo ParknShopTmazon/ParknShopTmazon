@@ -720,7 +720,7 @@ var customer = {
                 /** update cost */
                 for (var i = 0; i < list.length; i++) {
                     /** continue the expired one */
-                    if (list[i].getAttribute('class').indexOf('expired') >= 0) {
+                    if (list[i].getAttribute('class').indexOf('expired') >= 0 || list[i].getAttribute('class').indexOf('lack') >= 0) {
                         continue;
                     }
 
