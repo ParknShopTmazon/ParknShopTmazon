@@ -256,14 +256,12 @@
  	<servlet-name>ModifyOrderServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.ModifyOrderServlet</servlet-class>
  </servlet>
- <servlet>
-<<<<<<< HEAD
- 	<servlet-name>OverviewUser</servlet-name>
+ <servlet><servlet-name>OverviewUser</servlet-name>
  	<display-name>OverviewUser</display-name>
  	<description></description>
  	<servlet-class>com.tmazon.servlet.OverviewUser</servlet-class>
  </servlet>
-=======
+ <servlet>
  	<servlet-name>SearchProductAdminServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.SearchProductAdminServlet</servlet-class>
  </servlet>
@@ -275,7 +273,6 @@
  	<servlet-name>SearchProductAdminServlet</servlet-name>
  	<url-pattern>/searchProductAdmin</url-pattern>
  </servlet-mapping>
->>>>>>> 5e95be52329f7024b058443815cec68fe64aac08
  <servlet-mapping>
   <servlet-name>userServlet</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -501,15 +498,13 @@
  	<url-pattern>/modifyorder</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-<<<<<<< HEAD
  	<servlet-name>OverviewUser</servlet-name>
  	<url-pattern>/OverviewUser</url-pattern>
- </servlet-mapping><welcome-file-list>
-=======
- 	<servlet-name>OrderDetailServlet</servlet-name>
+ </servlet-mapping>
+ <servlet-mapping>
+ <servlet-name>OrderDetailServlet</servlet-name>
  	<url-pattern>/orderdetail</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
->>>>>>> 5e95be52329f7024b058443815cec68fe64aac08
   <welcome-file>index</welcome-file>
  </welcome-file-list></web-app>
