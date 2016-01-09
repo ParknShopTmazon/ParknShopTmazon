@@ -1117,7 +1117,8 @@ input {
     display: inline-block;
 }
 
-.cart-container #shop-lists .expired {
+.cart-container #shop-lists .expired,
+.cart-container #shop-lists .lack {
     color: #999 !important;
     vertical-align: top;
 }
