@@ -1026,10 +1026,12 @@ a {
     background-color: #ffa200;
     position: relative;
     margin-bottom: 15px;
+    width: 100%;
+    margin-top: 15px;
 }
 
 .detail-container #order-info .shop-info,
-.detail-container #order-info .shop-status,
+.detail-container #order-info .shop-right-item,
 .detail-container #order-info .shop-rate,
 .detail-container #order-info .shop-deliver,
 .detail-container #order-info .shop-confirm,
@@ -1045,7 +1047,7 @@ a {
     background-color: #fff;
 }
 
-.detail-container #order-info .shop-status,
+.detail-container #order-info .shop-right-item,
 .detail-container #order-info .shop-deliver,
 .detail-container #order-info .shop-confirm,
 .detail-container #order-info .comment-submit {
@@ -1056,8 +1058,13 @@ a {
     line-height: 80px;
 }
 
-.detail-container #order-info .shop-status {
-    margin: 10% auto 0 23%;
+.detail-container #order-info .shop-right-item {
+    margin: 0 auto 0 23%;
+    text-align: left;
+}
+
+.detail-container #order-info .special {
+	color: #ffa200;
 }
 
 .detail-container #order-info .shop-rate {
@@ -1116,13 +1123,7 @@ a {
     background: #000;
 }
 
-.detail-container #order-info .shop-deliver {
-    margin: 15% auto 0 23%;
-    text-align: right;
-    font-size: 1.2em;
-}
-
-.detail-container #order-info .shop-status .value {
+.detail-container #order-info .shop-right-item .value {
     float: right;
     font-size: 1.8em;
 }

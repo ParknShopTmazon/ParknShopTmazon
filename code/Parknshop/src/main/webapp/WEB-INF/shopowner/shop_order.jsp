@@ -86,9 +86,9 @@
 		                </div>
 		                <div class="info">
 		                    <div class="delivery-status">
-		                        <p class="value">${orderInfo.status}</p>
+		                        <p class="deliver value">${orderInfo.status}</p>
 		                        <p class="name">status</p>
-		                        <p><a class="value" href="viewOrder?type=show&oid=${order.orderId}&item=${status.index}">details</a></p>
+		                        <p><a class="value" href="orderdetail?oid=${order.orderId}&item=${status.index}">details</a></p>
                                 <p class="name">more details</p>
 		                    </div>
 		                </div>
