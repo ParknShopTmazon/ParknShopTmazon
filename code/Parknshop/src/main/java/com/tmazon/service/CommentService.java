@@ -8,6 +8,6 @@ public interface CommentService {
 
 	public List<Comment> findByProductId(Integer productId);
 	
-	public Comment addComment(Comment comment);
+	public Comment addComment(Comment comment, int orderId, int productId);
 	
 }
