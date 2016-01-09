@@ -1,17 +1,16 @@
 package com.tmazon.service.impl;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.tmazon.dao.CartDao;
+import com.tmazon.dao.OrderDao;
 import com.tmazon.dao.OrderInfoDao;
 import com.tmazon.dao.ProductDao;
-import com.tmazon.dao.ShopDao;
-import com.tmazon.dao.OrderDao;
 import com.tmazon.domain.Cart;
+import com.tmazon.domain.Order;
 import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.Product;
-import com.tmazon.domain.Order;
 import com.tmazon.domain.User;
 import com.tmazon.service.OrderService;
 import com.tmazon.util.BasicFactory;
@@ -35,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
 
 		boolean flag = true;
 
-		order.setOrderTime(new Date());
+		order.setOrderTime(new Timestamp(System.currentTimeMillis()));
 		order.setStatus(Order.STATUS_NORMAL);
 		order.setPayType(Order.PAY_TYPE_ONLINE_PAYMENT);
 

@@ -236,10 +236,13 @@ const shopOwner = {
             	 
             	 let sum = 0.0;
             	 $shopLists.each(function() {
+            		 const status = $(this).find('.info').find('.delivery-status').find('.value').html();
             		 let salary = $(this).find('.price').find('.shop-price').html();
             		 salary = salary.trim();
             		 salary = parseFloat(salary.substr(1, salary.length));
-            		 sum += salary;
+            		 if (status === 'commented' || status === 'dealed') {
+            			 sum += salary; 
+            		 } 
 				 });
             	 
             	 amount[shopId][dateTime] += sum;
@@ -430,5 +433,9 @@ const shopOwner = {
             /* Act on the event */
             showOrders($('.shops-orders-container #shopId').val(), $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
         });
+    },
+    
+    initShow: function (oid, item) {
+    	
     }
 };
