@@ -1001,9 +1001,9 @@ a {
 .shops-orders-container #order-list .order-item .shopId .value,
 .shops-orders-container #order-list .order-item .productName .value {
     width: 80px;
+    font-size: 0.8em;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	word-break: break-all;
 }
 
 .shops-orders-container input[type="date"] {
