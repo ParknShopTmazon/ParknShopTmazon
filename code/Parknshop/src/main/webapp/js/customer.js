@@ -752,6 +752,11 @@ var customer = {
                         expired = 'expired';
                         input = 'disabled';
                     }
+                    
+                    if (cart[i].stock == 0) {
+                    	expired = 'lack';
+                    	input = 'disabled';
+                    }
                     /** append list item */
                     $('.cart-container #shop-lists').append('<div class="' + expired + ' shop-item">\
                         <div class="pic-container">\
@@ -1405,7 +1410,7 @@ var customer = {
 
                 for (var i in cart) {
                     /** continue expired one */
-                    if (cart[i].expired == 'true') {
+                    if (cart[i].expired == 'true' || cart[i].stock == 0) {
                         continue;
                     }
                     /** calculate the cost */
