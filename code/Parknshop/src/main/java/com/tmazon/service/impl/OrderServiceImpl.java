@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 			Cart cart = cartDao.findByPKId(order.getUserId(),
 					orderInfo.getProductId());
 			Product product = productDao.findById(orderInfo.getProductId());
-			int stockNum = product.getSoldNum();
+			int stockNum = product.getStockNum();
 			int quantity = cart.getQuantity();
 			if(stockNum < quantity){
 				cart.setQuantity(stockNum);
@@ -54,8 +54,9 @@ public class OrderServiceImpl implements OrderService {
 			orderInfo.setQuantity(cart.getQuantity());
 			orderInfo.setStatus(OrderInfo.STATUS_UNPAID);
 			if (orderInfoDao.insert(orderInfo)) {
+				int soldNum = product.getSoldNum() + 0;
 				product.setStockNum(product.getStockNum() - cart.getQuantity());
-				product.setSoldNum(product.getSoldNum() + cart.getQuantity());
+				product.setSoldNum(soldNum + cart.getQuantity());
 				productDao.updateStockNum(product);
 				cartDao.delete(new Cart(order.getUserId(), orderInfo
 						.getProductId(), null));
