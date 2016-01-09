@@ -720,7 +720,7 @@ var customer = {
                 /** update cost */
                 for (var i = 0; i < list.length; i++) {
                     /** continue the expired one */
-                    if (list[i].getAttribute('class').indexOf('expired') >= 0) {
+                    if (list[i].getAttribute('class').indexOf('expired') >= 0 || list[i].getAttribute('class').indexOf('lack') >= 0) {
                         continue;
                     }
 
@@ -1545,14 +1545,14 @@ var customer = {
             }
 
             date.setTime(data.orderTime.time);
-            if (data.orderInfos[item].deliveryTime.time) {
+            if (data.orderInfos[item].deliveryTime) {
                 deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
                 deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
             } else {
                 deliveryTime = '/';
             }
 
-            if (data.orderInfos[item].dealTime.time) {
+            if (data.orderInfos[item].dealTime) {
                 dealTime.setTime(data.orderInfos[item].dealTime.time);
                 dealTime = dealTime.format('yyyy-MM-dd hh:mm');
             } else {

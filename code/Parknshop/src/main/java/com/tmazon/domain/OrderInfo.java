@@ -1,6 +1,6 @@
 package com.tmazon.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class OrderInfo {
 
@@ -19,8 +19,8 @@ public class OrderInfo {
 	private Integer quantity;
 	private Integer productId;
 	private String waybill;
-	private Date deliveryTime;
-	private Date dealTime;
+	private Timestamp deliveryTime;
+	private Timestamp dealTime;
 	private String status;
 	private String rate;
 	public OrderInfo(Integer orderId, Integer deliveryId, Integer quantity, Integer productId, String status) {
@@ -40,19 +40,19 @@ public class OrderInfo {
 		this.status = status;
 	}
 
-	public Date getDeliveryTime() {
+	public Timestamp getDeliveryTime() {
 		return deliveryTime;
 	}
 
-	public void setDeliveryTime(Date deliveryTime) {
+	public void setDeliveryTime(Timestamp deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
 
-	public Date getDealTime() {
+	public Timestamp getDealTime() {
 		return dealTime;
 	}
 
-	public void setDealTime(Date dealTime) {
+	public void setDealTime(Timestamp dealTime) {
 		this.dealTime = dealTime;
 	}
 
