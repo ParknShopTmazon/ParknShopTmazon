@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tmazon.service.AdvertisementService;
 import com.tmazon.service.impl.AdvertisementServiceImpl;
+import com.tmazon.util.BasicFactory;
 
 public class DeleteAdvServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	AdvertisementService advertisementService = BasicFactory.getImpl(AdvertisementService.class);
 	public DeleteAdvServlet() {
 		super();
 	}
@@ -23,13 +24,21 @@ public class DeleteAdvServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("sid"));
+		System.out.println("Sid::"+request.getParameter("sid"));
+		String adIdStr = request.getParameter("sid");
+		String url = request.getHeader("Referer");
+		if(adIdStr != null && !adIdStr.equals("")){
 		
-		if((!request.getParameter("sid").equals(null))&&(!request.getParameter("sid").equals(""))){
-		
-		int id=Integer.parseInt(request.getParameter("sid"));
-		AdvertisementService ad=new AdvertisementServiceImpl();
-		ad.delete(id);
-	}
+			int id=Integer.parseInt(adIdStr);
+			if(advertisementService.delete(id))
+			{
+				System.out.println("Advertisement delete Succeed!");
+			}
+			else
+			{
+				System.out.println("Advertisement delete failed!");
+			}
+			response.sendRedirect(url);
+		}
 	}
 }

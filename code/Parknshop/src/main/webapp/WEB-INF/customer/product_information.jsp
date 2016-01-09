@@ -74,8 +74,11 @@
 									<span class="name">Quantity</span>
 									<span class="value"><input name="quantity" type="number" id="add-to-cart" min="1" max_quantity="${ product.stockNum }" value="1"/></span>
 								</div>
-								<c:if test="${ s_user.role ne 'admin' and s_user.name ne shopOwnerName }">
+								<c:if test="${ s_user.role ne 'admin' and s_user.name ne shopOwnerName and product.stockNum ne 0 }">
 									<button class="btn-warning">Add to cart</button>
+								</c:if>
+								<c:if test="${ product.stockNum eq 0 }">
+									<button class="btn-warning btn-disabled">Lack</button>
 								</c:if>
 								<c:if test="${ s_user.name eq shopOwnerName }">
 									<button class="btn-warning btn-disabled">Your products</button>
@@ -110,14 +113,18 @@
 					<div class="pan"></div>
 					<div class="comment-items">
 						<div>
-							<p class="value">${ comment.userId }</p>
-							<p class="name">${ comment.userName }</p>
+							<p class="value">${ comment.userName }</p>
+							<p class="name">User Name</p>
+						</div>
+						<div>
+							<p class="value">${ comment.content }</p>
+							<p class="name">Comments</p>
 						</div>
 						<div class="comment-part">
 							<p class="value">shop: <span>${ comment.shopScore }</span></p>
 							<p class="value">product: <span>${ comment.productScore }</span></p>
 							<p class="value">delivery: <span>${ comment.deliveryScore }</span></p>
-							<p class="name">${ comment.content }</p>
+							<p class="name">Rate</p>
 						</div>
 					</div>
 				</c:forEach>

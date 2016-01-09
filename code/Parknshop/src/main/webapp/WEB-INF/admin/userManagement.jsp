@@ -14,6 +14,9 @@
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 	</head>
 	<body>
+	<!--<script type="text/javascript">
+			document.getElemntById('select_role')
+		</script>  -->	
 		<%@ include file="header.html"%>
 		<div class="user-container">
 			<form method="post" action="searchUserAdmin">
@@ -30,17 +33,17 @@
 							
 							<select name="select_role" 
 									id ="select_role">
-								<c:if test="${sessionScope.searchInfo.role eq '' || sessionScope.searchInfo.role eq null }">
+								<c:if test="${searchInfo.role eq '' || sessionScope.searchInfo.role eq null }">
 								<option value="" selected="selected">---------</option>
 								<option value="shop_owner">ShopOwner</option>
 								<option value="customer">Customer</option>
 								</c:if>
-								<c:if test="${sessionScope.searchInfo.role eq 'shop_owner' }">
+								<c:if test="${searchInfo.role eq 'shop_owner' }">
 								<option value="" >---------</option>
 								<option value="shop_owner" selected="selected">ShopOwner</option>
 								<option value="customer">Customer</option>
 								</c:if>
-								<c:if test="${sessionScope.searchInfo.role eq 'customer' }">
+								<c:if test="${searchInfo.role eq 'customer' }">
 								<option value="" >---------</option>
 								<option value="shop_owner" >ShopOwner</option>
 								<option value="customer" selected="selected">Customer</option>
@@ -70,23 +73,23 @@
 						<tr>
 							<td colspan="3" rowspan="2" class="pagination">
 							  
-						<form method="post" action="searchUserAdmin">
-								<input id="prev-btn" type="submit"  value="<<"></input>
-								<span name="curIndex" class="active curved">${sessionScope.curPage }</span>
-								<input id="next-btn" type="submit" value=">>"></input>
-								<input name="UserName"  type="hidden" value="${sessionScope.searchInfo.name }" />
-								<input name="select_role"  type="hidden" value="${sessionScope.searchInfo.role }" />
-								<input name="curPage"  type="hidden" value="${sessionScope.curPage }" />
-								<input type="hidden" id="next-val" name="next" value="1"/>
-						</form>
-						
+							<form method="post" action="searchUserAdmin">
+									<input id="prev-btn" type="submit"  value="<<"></input>
+									<span name="curIndex" class="active curved">${curPage }</span>
+									<input id="next-btn" type="submit" value=">>"></input>
+									<input name="UserName"  type="hidden" value="${searchInfo.name }" />
+									<input name="select_role"  type="hidden" value="${searchInfo.role }" />
+									<input name="curPage"  type="hidden" value="${curPage }" />
+									<input type="hidden" id="next-val" name="next" value="1"/>
+							</form>
+						</td>
 						</tr>
 					
 					</tfoot>
 					<tbody>
 					<%-- show the user list --%>
 				
-					<c:forEach items="${sessionScope.userList}" var="user" >
+					<c:forEach items="${userList}" var="user" >
 						<tr>
 							<td align="left">${ user.name }</td>
 							<td align="left">${ user.password }</td>
@@ -107,6 +110,8 @@
 									<input  type="submit" value="BlackList"></input></td>	
 								</form>
 								</c:when>
+								<c:when test="${user.role eq 'shop_owner' && user.status eq 'checking' }">
+								</c:when>
 								<c:otherwise>
 								<form method="post" action="updateUTableServlet"> 
 									<td>
@@ -114,8 +119,7 @@
 									<input type="hidden" name="status" value="normal"/>
 									<input type="hidden" name="user_name" value="${user.name}"/>
 										<input type="submit" value="Activate">
-										</input>
-									
+									</input>
 									</td>
 								</form>
 								</c:otherwise>

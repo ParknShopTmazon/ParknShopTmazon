@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>Shop Order</title>
+<title>Shop Orders</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
 </head>
 <body>
@@ -32,6 +32,8 @@
 					<input type="date" id="endDate" value="" name="end">	
 				</div>
 			</div>
+			<div class="main">Incomes</div>	
+			<div id="chart-container"></div>
 			<div class="main">Orders</div>			
 			<c:if test="${num==0 }">
 			no order
@@ -48,7 +50,7 @@
 		                </div>
 		                <!-- <div class="delete-btn button"></div> -->
 		            </div>
-		            <c:forEach  var="orderInfo" items="${order.orderInfos}">
+		            <c:forEach  var="orderInfo" items="${order.orderInfos}" varStatus="status">
 		            <div class="shop-item">
 		                <div class="pic-container">
 		                    <a href="productInfo?pid=${orderInfo.productId}" target="_blank">
@@ -84,8 +86,10 @@
 		                </div>
 		                <div class="info">
 		                    <div class="delivery-status">
-		                        <p class="value">${orderInfo.status}</p>
+		                        <p class="deliver value">${orderInfo.status}</p>
 		                        <p class="name">status</p>
+		                        <p><a class="value" href="orderdetail?oid=${order.orderId}&item=${status.index}">details</a></p>
+                                <p class="name">more details</p>
 		                    </div>
 		                </div>
 		            	<div class="handle-btn button" oid="${order.orderId}" pid="${orderInfo.productId}" status="${orderInfo.status}">Send</a></div>
@@ -96,7 +100,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		shopOwner.initManage();
 		shopOwner.initOrderList();
 	</script>
 	<%@ include file="footer.html"%>	

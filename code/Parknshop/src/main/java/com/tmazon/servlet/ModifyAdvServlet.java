@@ -25,18 +25,19 @@ public class ModifyAdvServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("advId"));
-		System.out.println(request.getParameter("cost"));
-		if((!request.getParameter("cost").equals(null))&&(!request.getParameter("cost").equals(""))){
-			if((!request.getParameter("advId").equals(null))&&(!request.getParameter("advId").equals(""))){
-				AdvertisementService ad=new AdvertisementServiceImpl();
-				int advId=Integer.parseInt(request.getParameter("advId"));
-				int cost=Integer.parseInt(request.getParameter("cost"));
-				if(advId>0&&cost>0)
-					ad.modify(advId, cost);
-			}
-		}
-		String url = request.getHeader("Referer");
-		response.sendRedirect(url);
+
+//		System.out.println(request.getParameter("advId"));
+//		System.out.println(request.getParameter("cost"));
+//		if((!request.getParameter("cost").equals(null))&&(!request.getParameter("cost").equals(""))){
+//			if((!request.getParameter("advId").equals(null))&&(!request.getParameter("advId").equals(""))){
+//				AdvertisementService ad=new AdvertisementServiceImpl();
+//				int advId=Integer.parseInt(request.getParameter("advId"));
+//				int cost=Integer.parseInt(request.getParameter("cost"));
+//				if(advId>0&&cost>0)
+//					ad.modify(advId, cost);
+//			}
+//		}
+//		String url = request.getHeader("Referer");
+//		response.sendRedirect(url);
 	}
 }

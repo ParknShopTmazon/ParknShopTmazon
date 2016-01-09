@@ -15,7 +15,7 @@
  *      - Author: aleen42
  *      - Description: including all the function of shop owner role.
  *      - Create Time: Jan 7, 2015
- *      - Update Time: Jan 7, 2015 
+ *      - Update Time: Jan 9, 2015 
  *
  *
  **********************************************************************/
@@ -169,7 +169,8 @@ const shopOwner = {
      * @return {[type]} [description]
      */
     initOrderList: function () {
-        /**
+        let amount = {};
+    	/**
          * [initDate: init the date]
          * @return {[type]} [description]
          */
@@ -183,7 +184,7 @@ const shopOwner = {
             $('.shops-orders-container #startDate').val(theFirstDate);
             $('.shops-orders-container #endDate').val(today);
         }
-
+        
         /**
          * [compareDate: compare two date, return 1 when the prev one is greater than the next one with the format yyyy-MM-dd. Otherwise, return -1]
          * @param  {[type]}   prev [prev date]
@@ -211,8 +212,148 @@ const shopOwner = {
             
             return 1;
         }
+        
+        function calculateAmount() {
+        	 const $orderLists = $('.order-item');
+        	 const $shopNames = $('#shopId').children('option');
+        	 
+        	 $shopNames.each(function() {
+        		if ($(this).html() === 'ALL') {
+      				return;
+      			}
+      			
+        		amount[$(this).val()] = {};
+         	});
+             
+             $orderLists.each(function() {
+            	 const $shopLists = $(this).children('.shop-item');
+            	 const dateTime = $(this).find('.brief-info').find('.order-ctime').find('.value').html().split(' ')[0];
+            	 const shopId = $(this).find('.shopId').find('.value').html();
+            	 
+            	 if (typeof(amount[shopId][dateTime]) == 'undefined') {
+            		 amount[shopId][dateTime] = 0.0;
+            	 }
+            	 
+            	 let sum = 0.0;
+            	 $shopLists.each(function() {
+            		 const status = $(this).find('.info').find('.delivery-status').find('.value').html();
+            		 let salary = $(this).find('.price').find('.shop-price').html();
+            		 salary = salary.trim();
+            		 salary = parseFloat(salary.substr(1, salary.length));
+            		 if (status === 'commented' || status === 'dealed') {
+            			 sum += salary; 
+            		 } 
+				 });
+            	 
+            	 amount[shopId][dateTime] += sum;
+             });
+             console.log(amount);
+        }
+        
+        function initChart(sid, start, end) {
+        	$("#chart-container").empty();
+        	
+        	if (compareDate(start, end) > 1) {
+        		return;
+        	}
+        	
+        	const $shopNames = $('#shopId').children('option');
+        	const _sid = sid;
 
-        function showOrders(oid, start, end) {
+        	let markDate = {};
+        	let dataSets = [];
+        	
+        	/** foreach shop to find the date of them */
+        	$shopNames.each(function() {
+        		const valSets = [];
+        		for (let i in amount[$(this).val()]) {
+        			if (compareDate(start, i) > 0 || compareDate(i, end) > 0) {
+        				continue;
+        			} else {
+        				valSets.unshift({
+        					'value': amount[$(this).val()][i]
+        				});
+        				
+        				/** mark the date */
+            			markDate[i] = 0;
+        			}
+                }
+        		
+    			if (_sid === '-1') {
+    				if ($(this).html() === 'ALL') {
+        				return;
+        			}
+            		dataSets.push({
+            			'seriesname': $(this).html(),
+            			'data': valSets
+            		});
+    			} else {
+    				if ($(this).val() == _sid) {
+    					dataSets.push({
+                			'seriesname': $(this).html(),
+                			'data': valSets
+                		});
+    				}
+    			}
+        	});
+        	
+        	let categories = [];
+        	/** generate the categories */
+        	for (let i in markDate) {
+        		categories.unshift({
+        			'label': i
+        		});
+        	}
+        	
+        	/** calculate the average value */
+        	const avgSets = [];
+        	
+        	if (dataSets.length > 1) {
+        		for(let i = 0; i < dataSets[0].data.length; i++) {
+            		let avg = 0;
+            		for(let j = 0; j < dataSets.length; j++) {
+                		avg += dataSets[j].data[i].value
+            		}
+            		
+            		avgSets.push({
+            			'value': String((avg / dataSets.length).toFixed(2))
+            		});
+        		}
+        	}
+        	
+        	if (avgSets.length !== 0) {
+        		dataSets.push({
+                    "seriesname": "Average",
+                    "renderas": "line",
+                    "showvalues": "0",
+                    "data": avgSets
+                });
+        	}
+
+        	$("#chart-container").insertFusionCharts({
+                type: "mscombi2d",
+                width: "100%",
+                height: "480",
+                dataFormat: "json",
+                dataSource: {
+                    "chart": {
+                        "caption": "Incomes of your shops",
+                        "xaxisname": "Date",
+                        "yaxisname": "Amount (In USD)",
+                        "numberprefix": "$",
+                        "theme": "fint",
+                    },
+                    "categories": [
+                        {
+                            "category": categories
+                        }
+                    ],
+                    "dataset": dataSets
+                }
+            });
+        }
+
+        function showOrders(sid, start, end) {
             const $orderLists = $('.order-item');
             
             $orderLists.each(function() {
@@ -226,7 +367,7 @@ const shopOwner = {
                 } else {
                 	$shopLists.each(function() {
                         $(this).show();
-                        if (oid !== '-1' && oid !== $(this).find('.shopId').find('.value').html()) {
+                        if (sid !== '-1' && sid !== $(this).find('.shopId').find('.value').html()) {
                             $(this).hide();
                             i++;
                         }
@@ -237,10 +378,14 @@ const shopOwner = {
                     }
                 }
             });
+            
+            initChart(sid, start, end);
         }
 
         initDate();
-
+        
+        calculateAmount();
+        
         showOrders('-1', $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
 
         const $listBtns = $('.shops-orders-container #order-list .order-item .handle-btn');
@@ -259,7 +404,28 @@ const shopOwner = {
                 
                 $(this).click(function(event) {
                     /* Act on the event */
-                    window.location.href = 'modifyorder?oid=' + oid + '&pid=' + pid;
+                    $.getJSON('changeOrderInfo', {
+                        oid: oid,
+                        pid: pid,
+                        newStatus: 'delivering'
+                    }, function(data, textStatus) {
+                        /*optional stuff to do after success */
+                        if (data.success) {
+                            _this.css({
+                                    'border': '1px solid #e0e0e0',
+                                    'background-color': '#f0f0f0',
+                                    'color': '#e0e0e0'
+                                });
+
+                            _this.removeClass('button');
+
+                            _this.unbind('click');
+                            
+                            _this.prev().find('.delivery-status').find('.deliver').html('delivering');
+                        } else {
+                            alert('faied to send products');
+                        }
+                    });
                 });
             }
         });
@@ -267,6 +433,103 @@ const shopOwner = {
         $('.shops-orders-container #shopId, .shops-orders-container #startDate, .shops-orders-container #endDate').change(function(event) {
             /* Act on the event */
             showOrders($('.shops-orders-container #shopId').val(), $('.shops-orders-container #startDate').val(), $('.shops-orders-container #endDate').val());
+        });
+    },
+    
+    initShow: function (oid, item) {
+    	$.getJSON('orderByType', {
+            type: 'shopOwnerShow',
+            oid: oid
+        }, function(data, textStatus) {
+        	let date = new Date();
+            let deliveryTime = new Date();
+            let dealTime = new Date();
+
+            /** item should not be greater than the actual quantity */
+            if (item >= data.orderInfos.length) {
+                return;
+            }
+
+            date.setTime(data.orderTime.time);
+            if (data.orderInfos[item].deliveryTime) {
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
+                deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                deliveryTime = '/';
+            }
+
+            if (data.orderInfos[item].dealTime) {
+                dealTime.setTime(data.orderInfos[item].dealTime.time);
+                dealTime = dealTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                dealTime = '/';
+            }
+        	
+            /*optional stuff to do after success */
+           $('.detail-container #order-info').append('<div class="shop-info">\
+                   <div class="pic-container">\
+                   <a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
+                       <div class="over">\
+                           <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>\
+                       </div>\
+                   </a>\
+                   <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
+               </div>\
+               <div class="info">\
+                   <div class="item">\
+                       <span class="name">Order Id</span>\
+                       <span class="value">' + data.orderId + '</span>\
+                   </div>\
+                   <div class="item">\
+	                   <span class="name">Product Id</span>\
+                       <span class="value">' + data.orderInfos[item].productId + '</span>\
+	               </div>\
+	               <div class="item">\
+	                   <span class="name">Quantity</span>\
+	                   <span class="value special">' + data.orderInfos[item].quantity + '</span>\
+	               </div>\
+                   <div class="item">\
+	                   <span class="name">User Name</span>\
+	                   <span class="value">' + data.userName + '</span>\
+	               </div>\
+                   <div class="item">\
+                       <span class="name">Receiver Name</span>\
+                       <span class="value special">' + data.address.name + '</span>\
+                   </div>\
+                   <div class="item">\
+	                   <span class="name">Phone Number</span>\
+	                   <span class="value special">' + data.address.phone + '</span>\
+	               </div>\
+                   <div class="address item">\
+                       <span class="name">Address</span>\
+                       <span class="value special">' + data.address.description + '</span>\
+                   </div>\
+                   <div class="time item">\
+                       <span class="name">Create Time</span>\
+                       <span class="value">' + date.format('yyyy-MM-dd hh:mm') + '</span>\
+                   </div>\
+                   <div class="item">\
+                       <span class="name">Delivery Time</span>\
+                       <span class="value">' + deliveryTime + '</span>\
+                   </div>\
+                   <div class="item">\
+                       <span class="name">Deal Time</span>\
+                       <span class="value">' + dealTime + '</span>\
+                   </div>\
+               </div>\
+           </div>\
+           <div class="shop-right-item" style="margin-top: 10%;">\
+               <span class="name">status</span>\
+               <span class="value">' + data.orderInfos[item].status + '</span>\
+           </div>\
+           <div class="shop-right-item" style="margin-top: 14%;">\
+	           <span class="name">delivery company</span>\
+	           <span class="value">' + data.orderInfos[item].delivery.company + '</span>\
+	       </div>\
+	       <div class="shop-right-item" style="margin-top: 18%;">\
+	           <span class="name">delivery options</span>\
+	           <span class="value">' + data.orderInfos[item].delivery.type + '</span>\
+	       </div>'); 
         });
     }
 };

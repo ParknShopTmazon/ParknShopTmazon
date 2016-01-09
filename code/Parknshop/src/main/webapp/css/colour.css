@@ -84,3 +84,164 @@ a.delete {
 .other-container {
 	padding: 95px 0 97px;
 }
+
+/*************************************************
+     *
+     * Dialog
+     *
+     *********************************/
+
+.dialog,
+.dialog__overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.dialog {
+    position: fixed;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.dialog__overlay {
+    position: absolute;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    -webkit-backface-visibility: hidden;
+}
+
+.dialog--open .dialog__overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dialog__content {
+    width: 50%;
+    background: #ffa200;
+    padding: 15px;
+    text-align: left;
+    position: relative;
+    z-index: 5;
+    opacity: 0;
+}
+
+.dialog--open .dialog__content {
+    pointer-events: auto;
+}
+
+
+/* Content */
+
+.dialog h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 2em;
+    margin: 0;
+    border-color: black;
+}
+
+.dialog .info {
+	margin-top: 15px;
+}
+
+.dialog .info > span{
+	font-size: 1.1em;
+	font-weight: normal;
+	margin-right: 5%;
+	color: black;
+}
+
+.dialog .info > input {
+	border-radius: 4px;
+	background-color: #ce8300;
+    border: 1px solid #B27100;
+    font-weight: normal;
+    float: right;
+}
+
+.dialog .close-btn {
+    width: 30px;
+    height: 30px;
+    right: 15px;
+    top: 15px;
+    position: absolute;
+    z-index: 9;
+    background-image: url(./../images/close-btn.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.dialog .dialog-back-btn {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 2em;
+    height: 2em;
+    margin-right: 20px;
+    cursor: pointer;
+    float: left;
+    background-image: url(./../images/dialog-back-btn.png);
+}
+
+.dialog .list ul {
+    padding: 5px 0;
+    margin: 0;
+}
+
+.dialog .list ul > li {
+    list-style-type: none;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    cursor: pointer;
+    padding: 0 15px;
+    position: relative;
+}
+
+.dialog .list ul > li > span {
+    position: absolute;
+    top: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #a10000;
+}
+
+.dialog .list ul .select {
+    background-color: #b27100;
+    color: #fff;
+}
+
+.dialog .dialog__content .picture {
+	width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 15px;
+}
+
+.ad-container .trigger {
+	cursor: pointer;
+	background-color: #ffa200;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.ad-container .delete,
+.ad-container .edit {
+	cursor: pointer;
+	text-decoration: underline;
+}

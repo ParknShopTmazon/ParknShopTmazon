@@ -17,7 +17,7 @@
  *                     file is a javascript file to control all the 
  *                     interaction of customers. 
  *      - Create Time: Dec 9, 2015
- *      - Update Time: Jan 6, 2015 
+ *      - Update Time: Jan 9, 2015 
  *
  *
  **********************************************************************/
@@ -720,7 +720,7 @@ var customer = {
                 /** update cost */
                 for (var i = 0; i < list.length; i++) {
                     /** continue the expired one */
-                    if (list[i].getAttribute('class').indexOf('expired') >= 0) {
+                    if (list[i].getAttribute('class').indexOf('expired') >= 0 || list[i].getAttribute('class').indexOf('lack') >= 0) {
                         continue;
                     }
 
@@ -751,6 +751,11 @@ var customer = {
                     if (cart[i].expired == 'true') {
                         expired = 'expired';
                         input = 'disabled';
+                    }
+                    
+                    if (cart[i].stock == 0) {
+                    	expired = 'lack';
+                    	input = 'disabled';
                     }
                     /** append list item */
                     $('.cart-container #shop-lists').append('<div class="' + expired + ' shop-item">\
@@ -909,14 +914,14 @@ var customer = {
 
             date.setTime(data.orderTime.time);
             if (data.orderInfos[item].deliveryTime) {
-                deliveryTime.setTime(data.orderInfos[item].deliveryTime);
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
                 deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
             } else {
                 deliveryTime = '/';
             }
 
             if (data.orderInfos[item].dealTime) {
-                dealTime.setTime(data.orderInfos[item].dealTime);
+                dealTime.setTime(data.orderInfos[item].dealTime.time);
                 dealTime = dealTime.format('yyyy-MM-dd hh:mm');
             } else {
                 dealTime = '/';
@@ -988,6 +993,7 @@ var customer = {
             		alert('fill the empty comment');
             	} else {
             		$.getJSON('comment', {
+            			orderId: oid,
                         productId: $('#productId').val(),
                         content: $('#commentContent').val(),
                         shopScore: $('#shop_rate').val(),
@@ -1404,7 +1410,7 @@ var customer = {
 
                 for (var i in cart) {
                     /** continue expired one */
-                    if (cart[i].expired == 'true') {
+                    if (cart[i].expired == 'true' || cart[i].stock == 0) {
                         continue;
                     }
                     /** calculate the cost */
@@ -1520,6 +1526,11 @@ var customer = {
                     name: 'Comment',
                     nextStep: 'comment',
                     disabled: ''
+                },
+                commented: {
+                	name: 'Commented',
+                    nextStep: '',
+                    disabled: 'disabled'
                 }
             };
 
@@ -1535,14 +1546,14 @@ var customer = {
 
             date.setTime(data.orderTime.time);
             if (data.orderInfos[item].deliveryTime) {
-                deliveryTime.setTime(data.orderInfos[item].deliveryTime);
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
                 deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
             } else {
                 deliveryTime = '/';
             }
 
             if (data.orderInfos[item].dealTime) {
-                dealTime.setTime(data.orderInfos[item].dealTime);
+                dealTime.setTime(data.orderInfos[item].dealTime.time);
                 dealTime = dealTime.format('yyyy-MM-dd hh:mm');
             } else {
                 dealTime = '/';
@@ -1644,6 +1655,11 @@ var customer = {
                     name: 'Comment',
                     nextType: 'comment',                
                     disabled: ''
+                },
+                commented: {
+                	name: 'Closed',
+                	nextType: '',
+                	disabled: 'disabled'
                 }
             };
 
@@ -1651,7 +1667,8 @@ var customer = {
                 unpaid: 'show',
                 paid: 'show',
                 delivering: 'show',
-                dealed: 'show'
+                dealed: 'show',
+                commented: 'show'
             }
 
             /** [for: append] */

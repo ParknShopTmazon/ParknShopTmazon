@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.swing.internal.plaf.basic.resources.basic;
 import com.tmazon.domain.Comment;
+import com.tmazon.domain.OrderInfo;
 import com.tmazon.domain.User;
 import com.tmazon.service.CommentService;
 import com.tmazon.service.OrderService;
@@ -44,12 +45,19 @@ public class CommentServlet extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		Map<String, String[]> params = req.getParameterMap();
 		
+		String[] orderIdStrings = params.get("orderId");
 		String[] productIdStrings = params.get("productId");
 		String[] contents = params.get("content");
 		String[] shopScoreStrings = params.get("shopScore");
 		String[] productScoreStrings = params.get("productScore");
 		String[] deliveryScoreStrings = params.get("deliveryScore");
 		
+		if(orderIdStrings == null || orderIdStrings.length != 1){
+			jsonObject.put("success", false + "");
+			jsonObject.put("errMsg", "Cannot get order,please try it again!");
+			resp.getWriter().write(jsonObject.toString());
+			return;
+		}
 		if(productIdStrings == null || productIdStrings.length != 1){
 			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Cannot get product,please try it again!");
@@ -81,6 +89,7 @@ public class CommentServlet extends HttpServlet {
 			return;
 		}
 		
+		String orderIdstring = orderIdStrings[0];
 		String productIdString = productIdStrings[0];
 		String content = contents[0];
 		String shopScoreString = shopScoreStrings[0];
@@ -88,10 +97,20 @@ public class CommentServlet extends HttpServlet {
 		String deliveryScoreString = deliveryScoreStrings[0];
 		
 		int productId = ParseUtil.String2Integer(productIdString, null);
+		int orderId = ParseUtil.String2Integer(orderIdstring, null);
 		
-		if(!orderService.isBought(user.getUserId(), productId)){
+		List<OrderInfo> orderInfos = orderService.getOrderInfo(orderId);
+		
+		boolean flag = false;
+		for(OrderInfo orderInfo : orderInfos){
+			if(orderInfo.getProductId() == productId){
+				flag = true;
+			}
+		}
+		
+		if(!flag){
 			jsonObject.put("success", false + "");
-			jsonObject.put("errMsg", "Never bought this product!");
+			jsonObject.put("errMsg", "This product not in the order!");
 			resp.getWriter().write(jsonObject.toString());
 			return;
 		}
@@ -101,18 +120,16 @@ public class CommentServlet extends HttpServlet {
 		int deliveryScore = ParseUtil.String2Score(deliveryScoreString, null);
 		
 		Comment comment = new Comment(null, user.getUserId(), productId, content, null, shopScore, productScore, deliveryScore, null);
-		comment = commentService.addComment(comment);
+		comment = commentService.addComment(comment,orderId,productId);
 		if(comment == null){
 			jsonObject.put("success", false + "");
 			jsonObject.put("errMsg", "Failed!");
 			resp.getWriter().write(jsonObject.toString());
-			System.out.println("##################################### is null");
 			return;
 		}else {
 			jsonObject.put("success", true + "");
 			jsonObject.put("errMsg", "");
 			resp.getWriter().write(jsonObject.toString());
-			System.out.println("##################################### not null");
 			return;
 		}
 		

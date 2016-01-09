@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>Register Shop Page</title>
+    <title>Register Shops</title>
      <link rel="stylesheet" type="text/css" href="css_shop/style.css">
      <link rel="stylesheet" type="text/css" href="css_shop/photobox.css">
 </head>

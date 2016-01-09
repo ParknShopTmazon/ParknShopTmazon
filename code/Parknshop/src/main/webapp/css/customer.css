@@ -415,11 +415,13 @@ input {
 
 .product-container .product-area .comments .comment-items > div {
     display: inline-block;
-    text-align: right;
+    text-align: left;
+    padding-right: 5%;
 }
 
 .product-container .product-area .comments .comment-items .comment-part {
     float: right;
+    text-align: right;
 }
 
 .product-container .product-area .comments .comment-items .name {
@@ -1115,7 +1117,8 @@ input {
     display: inline-block;
 }
 
-.cart-container #shop-lists .expired {
+.cart-container #shop-lists .expired,
+.cart-container #shop-lists .lack {
     color: #999 !important;
     vertical-align: top;
 }

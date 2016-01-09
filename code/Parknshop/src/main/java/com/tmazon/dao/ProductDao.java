@@ -31,4 +31,6 @@ public interface ProductDao {
 	
 	//for add order
 	public boolean updateStockNum(Product product);
+	
+	public List<Product> selectByAdmin(String productName,String category);
 }
