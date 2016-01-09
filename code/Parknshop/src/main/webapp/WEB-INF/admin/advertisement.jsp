@@ -227,7 +227,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${pro.productId }</td>
 								<td>${pro.name }</td>
 								<td>${shopList[status.index].name }</td>		
-								<td><div id="mischief" class="trigger" data-dialog="somedialog">Add</a></td>
+								<td><div id="mischief" class="trigger">Add</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -302,25 +302,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					});
 				});
 				
-				$('.grid_16 .edit').click(function () {
-					const url = 'ModifyAdvServlet';
-					const advId = $(this).parent().prev().prev().prev().html(); 
-					const cost = $(this).parent().prev().children().val();
-					$.ajax({
-						url : url,
-						type : 'POST',
-						data : {
-							advId : advId ,
-							cost : cost
-						},
-						dataType : 'json'
-					}).done(function() {
-						console.log('success');
-					}).fail(function() {
-						console.log('error');
-					});
-				});
-				
 				/** initiate the box */
 				var dlgtrigger = document.querySelector('[data-dialog]');
 	            if (dlgtrigger) {
@@ -331,6 +312,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                $trigger.each(function() {
 	                	$(this).click(dlg.toggle.bind(dlg));
 	                	$(this).click(function() {
+	                		$('#somedialog .picture').show();
 	                		$('#somedialog #productName').html($(this).parent().prev().prev().html());
 	                		$('#somedialog .picture').css({
 	                			'background-image': 'url(' + $(this).parent().prev().prev().prev().prev().children('img').attr('src') + ')'
@@ -339,6 +321,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                });
 	                
 	                $edit.each(function() {
+	                	$('#somedialog .picture').hide();
 	                	$(this).click(dlg.toggle.bind(dlg));
 	                	$(this).click(function() {
 	                		$('#somedialog #productName').html($(this).parent().prev().prev().prev().prev().prev().html());

@@ -148,6 +148,26 @@ a.delete {
     font-weight: 400;
     font-size: 2em;
     margin: 0;
+    border-color: black;
+}
+
+.dialog .info {
+	margin-top: 15px;
+}
+
+.dialog .info > span{
+	font-size: 1.1em;
+	font-weight: normal;
+	margin-right: 5%;
+	color: black;
+}
+
+.dialog .info > input {
+	border-radius: 4px;
+	background-color: #ce8300;
+    border: 1px solid #B27100;
+    font-weight: normal;
+    float: right;
 }
 
 .dialog .close-btn {
