@@ -192,7 +192,8 @@ a {
 .add-products-container,
 .modify-products-container,
 .delete-products-container,
-.shops-orders-container {
+.shops-orders-container,
+.detail-container {
     padding: 95px 4% 97px;
 }
 
@@ -1012,4 +1013,166 @@ a {
     background-color: #ffa200;
     border: none;
     outline: none;
+}
+
+/*****************************************************************
+ *
+ * detail-container
+ *
+ ****************************************************************/
+
+
+.detail-container #order-info {
+    background-color: #ffa200;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.detail-container #order-info .shop-info,
+.detail-container #order-info .shop-status,
+.detail-container #order-info .shop-rate,
+.detail-container #order-info .shop-deliver,
+.detail-container #order-info .shop-confirm,
+.detail-container #order-info .comment-submit {
+    display: inline-block;
+}
+
+.detail-container #order-info .shop-info {
+    width: 30%;
+    padding: 15px;
+    border: 2px dashed #ffa200;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.detail-container #order-info .shop-status,
+.detail-container #order-info .shop-deliver,
+.detail-container #order-info .shop-confirm,
+.detail-container #order-info .comment-submit {
+    width: 20%;
+    height: 80px;
+    position: absolute;
+    text-align: center;
+    line-height: 80px;
+}
+
+.detail-container #order-info .shop-status {
+    margin: 10% auto 0 23%;
+}
+
+.detail-container #order-info .shop-rate {
+    width: 30%;
+    height: 80px;
+    position: absolute;
+    text-align: center;
+    line-height: 80px;
+    margin: 3% auto 0 18%;
+}
+
+.detail-container #order-info .shop-rate .shop,
+.detail-container #order-info .shop-rate .product,
+.detail-container #order-info .shop-rate .delivery,
+.detail-container #order-info .shop-rate .comment-area {
+    height: 29px;
+    margin-bottom: 10px;
+}
+
+.detail-container #order-info .shop-rate .comment-area textarea {
+    width: 60%;
+    height: 100px;
+    resize: none;
+    outline: none;
+    display: inline-block;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    float: right;
+    border-radius: 4px;
+    background-color: #ce8300;
+    border: 2px solid #B27100;
+}
+
+.detail-container #order-info .shop-rate .comment-area textarea::-webkit-input-placeholder {
+    color: #000;
+}
+
+.detail-container #order-info .shop-rate .name {
+    line-height: 29px;
+    float: left;
+}
+
+.detail-container #order-info .shop-rate .name .rate-val {
+	margin-left: 10px;
+	color: #b27100;
+	font-size: 1.3em;
+}
+
+.detail-container #order-info .shop-rate .value {
+    float: right;
+}
+
+.detail-container #order-info .shop-rate .star-on,
+.detail-container #order-info .shop-rate .star-hover {
+    background: #000;
+}
+
+.detail-container #order-info .shop-deliver {
+    margin: 15% auto 0 23%;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+.detail-container #order-info .shop-status .value {
+    float: right;
+    font-size: 1.8em;
+}
+
+.detail-container #order-info .disabled {
+    border: 2px solid #e0e0e0 !important;
+    background-color: #f0f0f0 !important;
+    color: #e0e0e0 !important;
+}
+
+.detail-container #order-info .shop-confirm,
+.detail-container #order-info .comment-submit {
+    border-radius: 4px;
+    border: 2px solid #B27100;
+    background-color: #ce8300;
+    margin: 320px auto 0 23%;
+    font-size: 2.5em;
+    cursor: pointer;
+}
+
+.detail-container #order-info .shop-info .pic-container {
+    margin-bottom: 10px;
+}
+
+.detail-container #order-info .shop-info .info {
+    padding-top: 10px;
+    border-top: 1px solid #999;
+}
+
+.detail-container #order-info .shop-info .item {
+    margin-bottom: 10px;
+}
+
+.detail-container #order-info .shop-info .name {
+    color: #999;
+}
+
+.detail-container #order-info .shop-info .value {
+    float: right;
+    width: 50%;
+    text-align: right;
+    overflow: hidden;
+}
+
+.detail-container #order-info .shop-info .address .value {
+    min-height: 90px;
+}
+
+.detail-container #order-info .shop-info .time {
+    padding-top: 10px;
+    margin-top: 120px;
+    border-top: 1px solid #999;
 }

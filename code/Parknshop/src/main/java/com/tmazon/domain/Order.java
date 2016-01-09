@@ -171,4 +171,15 @@ public class Order {
 	public void setOrderInfo(List<OrderInfo> orderInfos) {
 		this.orderInfos = orderInfos;
 	}
+	
+	private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 }
