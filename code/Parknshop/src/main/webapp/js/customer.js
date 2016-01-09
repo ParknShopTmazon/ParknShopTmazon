@@ -17,7 +17,7 @@
  *                     file is a javascript file to control all the 
  *                     interaction of customers. 
  *      - Create Time: Dec 9, 2015
- *      - Update Time: Jan 6, 2015 
+ *      - Update Time: Jan 9, 2015 
  *
  *
  **********************************************************************/
@@ -988,6 +988,7 @@ var customer = {
             		alert('fill the empty comment');
             	} else {
             		$.getJSON('comment', {
+            			orderId: oid,
                         productId: $('#productId').val(),
                         content: $('#commentContent').val(),
                         shopScore: $('#shop_rate').val(),

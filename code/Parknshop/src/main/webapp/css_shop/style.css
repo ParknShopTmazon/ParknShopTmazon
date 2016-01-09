@@ -18,7 +18,7 @@ html {
 
 body {
     margin: 0;
-    font-family: "Ping Hei", "¶¬ÇàºÚÌå", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "Î¢ÈíÑÅºÚ";
+    font-family: "Ping Hei", "¶¬ÇàºÚÌå", "Hiragino Sans GB", "Hiragino Sans GB W3", "Arial", "Î¢ÈíÑÅºÚ" !important;
     font-size: 15px;
     min-height: 100%;
     height: auto !important;
@@ -27,8 +27,6 @@ body {
     position: relative;
     overflow-y: scroll;
     color: #000;
-    background: url(back.jpeg);
-    background-color: #f5f7f7;
 }
 
 input {
@@ -179,7 +177,6 @@ a {
 .nofloat {
     clear: both;
 }
-
 
 /*****************************************************************
  *
@@ -814,6 +811,10 @@ a {
     text-align: center;
 }
 
+.shops-orders-container #chart-container {
+	text-align: center;
+}
+
 .shops-orders-container #order-list .order-item {
     padding: 15px;
     margin: 15px 0;
@@ -1000,9 +1001,9 @@ a {
 .shops-orders-container #order-list .order-item .shopId .value,
 .shops-orders-container #order-list .order-item .productName .value {
     width: 80px;
+    font-size: 0.8em;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	word-break: break-all;
 }
 
 .shops-orders-container input[type="date"] {

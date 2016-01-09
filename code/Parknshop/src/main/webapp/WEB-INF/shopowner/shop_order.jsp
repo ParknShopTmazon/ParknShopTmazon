@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>Shop Order</title>
+<title>Shop Orders</title>
 <link rel="stylesheet" type="text/css" href="css_shop/style.css">
 </head>
 <body>
@@ -32,6 +32,8 @@
 					<input type="date" id="endDate" value="" name="end">	
 				</div>
 			</div>
+			<div class="main">Incomes</div>	
+			<div id="chart-container"></div>
 			<div class="main">Orders</div>			
 			<c:if test="${num==0 }">
 			no order
@@ -96,7 +98,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		shopOwner.initManage();
 		shopOwner.initOrderList();
 	</script>
 	<%@ include file="footer.html"%>	

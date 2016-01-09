@@ -21,13 +21,13 @@
 				<div class="grid_4">
                 		<p>
 								<label for="title">Start Date:</label>
-								<input name="start"  type="date">
+								<input name="start"  type="date" value="${start }">
                         </p>
 				</div>
                 <div class="grid_4">
                          <p>			
 								<label for="post">End Date:</label>
-								<input name="end"  type="date" > 
+								<input name="end"  type="date" value="${end }" > 
 				         </p>
                 </div>
                 <div class="grid_2">	

@@ -62,13 +62,11 @@ public class ShopOrderServlet extends HttpServlet {
 		
 		Integer shopId = ParseUtil.String2Integer(Id, null);
 		List<OrderInfo> orderInfos= new ArrayList<OrderInfo>();
-		if(shopId==null||shopId==-1){
-			for (Shop shop2 : shopLists) {
-				orderInfos.addAll(orderService.getOrderInfosByshop(shop2.getShopId()));
-			}
-		}else{
-			orderInfos = orderService.getOrderInfosByshop(shopId);
+		
+		for (Shop shop2 : shopLists) {
+			orderInfos.addAll(orderService.getOrderInfosByshop(shop2.getShopId()));
 		}
+		
         Map<Integer, List<OrderInfo>> orderInfoMap =new HashMap<Integer, List<OrderInfo>>();
 		if(orderInfos==null){
 			req.setAttribute("num", 0);

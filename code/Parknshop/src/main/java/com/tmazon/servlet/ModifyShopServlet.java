@@ -126,9 +126,9 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		
 		
 		HttpSession session = req.getSession();
-		String shopId = (String) session.getAttribute(AttrName.SessionScope.SHOPID);
-		Integer shopIdInt = Integer.parseInt(shopId);
-		Shop myShop = shopService.findById(shopIdInt);
+		Integer shopId =(Integer) session.getAttribute(AttrName.SessionScope.SHOPID);
+		
+		Shop myShop = shopService.findById(shopId);
 		String status = myShop.getStatus();
 		
 		String shopName = shopMap.get("name");
@@ -148,7 +148,7 @@ private ShopService shopService = BasicFactory.getImpl(ShopService.class);
 		
 		Shop shop =new Shop();
 		
-		shop.setShopId(shopIdInt);
+		shop.setShopId(shopId);
 		shop.setName(shopName);
 		shop.setType(shopType);
 		shop.setStatus(status);
