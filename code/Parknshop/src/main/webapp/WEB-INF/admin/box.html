@@ -2,12 +2,17 @@
 <div data-dialog="somedialog" style="display: none;"></div>
 <div id="somedialog" class="dialog">
     <div class="dialog__overlay"></div>
+    
     <div id="main" class="dialog__content shown">
         <h2 id="productName"><strong></strong></h2>
         <div class="action close-btn button" data-dialog-close></div>
         <div class="picture"></div>
-        <div class="info"><span>Banner Picture</span><input type="file" name="picture"></div>
-        <div class="info"><span>Cost</span><input type="text" name="cost"></div>
+        <form method="post" action="AddAdvertisementServlet" enctype="multipart/form-data">
+	        <div class="info"><span>Banner Picture</span><input type="file" name="picture"></div>
+	        <div class="info"><span>Cost</span><input type="text" name="cost"></div>
+	        <input type="hidden" id="productId" name="productId" value="">
+	        <div class="submit-btn button">Submit</div>
+        </form>   
     </div>
 </div>
 <script type="text/javascript" src="js/modernizr.custom.js"></script>

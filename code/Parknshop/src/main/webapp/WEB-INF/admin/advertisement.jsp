@@ -227,7 +227,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${pro.productId }</td>
 								<td>${pro.name }</td>
 								<td>${shopList[status.index].name }</td>		
-								<td><div id="mischief" class="trigger">Add</a></td>
+								<td><div id="mischief" class="trigger button">Add</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -302,6 +302,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					});
 				});
 				
+				$('#somedialog .submit-btn').click(function() {
+					$(this).parent().submit();
+				});
+				
 				/** initiate the box */
 				var dlgtrigger = document.querySelector('[data-dialog]');
 	            if (dlgtrigger) {
@@ -317,14 +321,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                		$('#somedialog .picture').css({
 	                			'background-image': 'url(' + $(this).parent().prev().prev().prev().prev().children('img').attr('src') + ')'
 	                		});
+	                		$('#somedialog #productId').val($(this).parent().prev().prev().prev().html());
 	                	});
 	                });
 	                
 	                $edit.each(function() {
-	                	$('#somedialog .picture').hide();
 	                	$(this).click(dlg.toggle.bind(dlg));
 	                	$(this).click(function() {
+	                		$('#somedialog .picture').hide();
 	                		$('#somedialog #productName').html($(this).parent().prev().prev().prev().prev().prev().html());
+	                		$('#somedialog #productId').val($(this).parent().prev().prev().prev().prev().prev().prev().html());
 	                	});
 	                	
 	                });

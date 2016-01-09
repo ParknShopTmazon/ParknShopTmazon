@@ -85,6 +85,22 @@ a.delete {
 	padding: 95px 0 97px;
 }
 
+.button {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+}
+
+.button:active {
+    transform: scale(0.9, 0.9);
+    -webkit-transform: scale(0.9, 0.9);
+    -moz-transform: scale(0.9, 0.9);
+    -o-transform: scale(0.9, 0.9);
+    -ms-transform: scale(0.9, 0.9);
+}
+
 /*************************************************
      *
      * Dialog
@@ -168,6 +184,21 @@ a.delete {
     border: 1px solid #B27100;
     font-weight: normal;
     float: right;
+}
+
+.dialog .submit-btn {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	line-height: 28px;
+	background-color: #ce8300;
+    border: 1px solid #B27100;
+    font-weight: normal;
+    color: black;
+    cursor: pointer;
+    margin-top: 15px;
+    float: right;
+    border-radius: 4px;
 }
 
 .dialog .close-btn {

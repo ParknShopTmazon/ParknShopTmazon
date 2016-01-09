@@ -22,7 +22,17 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	ShopDao shopDao =  BasicFactory.getImpl(ShopDao.class);
 	public boolean addAd(Integer productId, Integer cost,String picture) 
 	{
-		boolean result=advertisementDao.insert(productId,cost,picture);
+		List<Advertisement> adList = advertisementDao.select();
+		for(Advertisement ad : adList)
+		{
+			if(ad.getProductID().intValue() == productId.intValue())
+			{
+				System.out.println("AdServiceImpl::addAd::Errors::Ad existing!");
+				return false;
+			}
+		}
+		boolean result = advertisementDao.insert(productId,cost,picture);
+		
 		return result;
 	}
 	public boolean delete(int adId)
