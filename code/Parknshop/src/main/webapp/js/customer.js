@@ -1521,6 +1521,11 @@ var customer = {
                     name: 'Comment',
                     nextStep: 'comment',
                     disabled: ''
+                },
+                commented: {
+                	name: 'Commented',
+                    nextStep: '',
+                    disabled: 'disabled'
                 }
             };
 
@@ -1645,6 +1650,11 @@ var customer = {
                     name: 'Comment',
                     nextType: 'comment',                
                     disabled: ''
+                },
+                commented: {
+                	name: 'Closed',
+                	nextType: '',
+                	disabled: 'disabled'
                 }
             };
 
@@ -1652,7 +1662,8 @@ var customer = {
                 unpaid: 'show',
                 paid: 'show',
                 delivering: 'show',
-                dealed: 'show'
+                dealed: 'show',
+                commented: 'show'
             }
 
             /** [for: append] */
