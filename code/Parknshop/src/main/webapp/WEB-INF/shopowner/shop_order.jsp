@@ -50,7 +50,7 @@
 		                </div>
 		                <!-- <div class="delete-btn button"></div> -->
 		            </div>
-		            <c:forEach  var="orderInfo" items="${order.orderInfos}">
+		            <c:forEach  var="orderInfo" items="${order.orderInfos}" varStatus="status">
 		            <div class="shop-item">
 		                <div class="pic-container">
 		                    <a href="productInfo?pid=${orderInfo.productId}" target="_blank">
@@ -88,6 +88,8 @@
 		                    <div class="delivery-status">
 		                        <p class="value">${orderInfo.status}</p>
 		                        <p class="name">status</p>
+		                        <p><a class="value" href="viewOrder?type=show&oid=${order.orderId}&item=${status.index}">details</a></p>
+                                <p class="name">more details</p>
 		                    </div>
 		                </div>
 		            	<div class="handle-btn button" oid="${order.orderId}" pid="${orderInfo.productId}" status="${orderInfo.status}">Send</a></div>
