@@ -255,6 +255,12 @@
  	<servlet-name>ModifyOrderServlet</servlet-name>
  	<servlet-class>com.tmazon.servlet.ModifyOrderServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>OverviewUser</servlet-name>
+ 	<display-name>OverviewUser</display-name>
+ 	<description></description>
+ 	<servlet-class>com.tmazon.servlet.OverviewUser</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>userServlet</servlet-name>
   <url-pattern>/user</url-pattern>
@@ -478,6 +484,10 @@
  <servlet-mapping>
  	<servlet-name>ModifyOrderServlet</servlet-name>
  	<url-pattern>/modifyorder</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>OverviewUser</servlet-name>
+ 	<url-pattern>/OverviewUser</url-pattern>
  </servlet-mapping><welcome-file-list>
   <welcome-file>index</welcome-file>
  </welcome-file-list></web-app>
