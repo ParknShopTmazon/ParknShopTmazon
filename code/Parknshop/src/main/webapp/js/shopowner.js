@@ -178,7 +178,7 @@ const shopOwner = {
             const dateObj = new Date();
             const year = dateObj.getFullYear();
             const month = String(dateObj.getMonth() + 1).length == 1 ? '0' + (dateObj.getMonth() + 1) : dateObj.getMonth() + 1;
-            const dateVal = String(dateObj.getDate() + 1).length ? '0' + dateObj.getDate() : dateObj.getDate();
+            const dateVal = String(dateObj.getDate() + 1).length == 1 ? '0' + dateObj.getDate() : dateObj.getDate();
             const today = [year, month, dateVal].join('-');
             const theFirstDate = [year, month, '01'].join('-');
             $('.shops-orders-container #startDate').val(theFirstDate);
@@ -228,14 +228,15 @@ const shopOwner = {
              $orderLists.each(function() {
             	 const $shopLists = $(this).children('.shop-item');
             	 const dateTime = $(this).find('.brief-info').find('.order-ctime').find('.value').html().split(' ')[0];
-            	 const shopId = $(this).find('.shopId').find('.value').html();
             	 
-            	 if (typeof(amount[shopId][dateTime]) == 'undefined') {
-            		 amount[shopId][dateTime] = 0.0;
-            	 }
-            	 
-            	 let sum = 0.0;
             	 $shopLists.each(function() {
+            		 let sum = 0.0;
+            		 const shopId = $(this).find('.shopId').find('.value').html();
+            		 
+            		 if (typeof(amount[shopId][dateTime]) == 'undefined') {
+                		 amount[shopId][dateTime] = 0.0;
+                	 }
+            		 
             		 const status = $(this).find('.info').find('.delivery-status').find('.value').html();
             		 let salary = $(this).find('.price').find('.shop-price').html();
             		 salary = salary.trim();
@@ -243,9 +244,8 @@ const shopOwner = {
             		 if (status === 'commented' || status === 'dealed') {
             			 sum += salary; 
             		 } 
+            		 amount[shopId][dateTime] += sum;
 				 });
-            	 
-            	 amount[shopId][dateTime] += sum;
              });
              console.log(amount);
         }
@@ -312,7 +312,11 @@ const shopOwner = {
         		for(let i = 0; i < dataSets[0].data.length; i++) {
             		let avg = 0;
             		for(let j = 0; j < dataSets.length; j++) {
-                		avg += dataSets[j].data[i].value
+                		if (typeof(dataSets[j].data[i]) == 'undefined') {
+                			avg += 0;
+                		} else {
+                			avg += dataSets[j].data[i].value;
+                		}
             		}
             		
             		avgSets.push({
