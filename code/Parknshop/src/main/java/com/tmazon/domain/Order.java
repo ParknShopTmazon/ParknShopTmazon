@@ -1,10 +1,10 @@
 package com.tmazon.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Order {
-	
+
 	public static final String PAY_TYPE_CASH_ON_DELIVERY = "cash_on_delivery";
 	public static final String PAY_TYPE_ONLINE_PAYMENT = "online_payment";
 
@@ -14,14 +14,15 @@ public class Order {
 	private Integer orderId;
 	private String payType;
 	private String status;
-	private Date orderTime;
+	private Timestamp orderTime;
 	private Integer userId;
 	private Integer addressId;
-	
-	private  List<OrderInfo> orderInfos;
+
+	private List<OrderInfo> orderInfos;
 	private Address address;
-	
-	public Order(Integer orderId, String payType, String status, Date orderTime, Integer userId, Integer addressId) {
+
+	public Order(Integer orderId, String payType, String status,
+			Timestamp orderTime, Integer userId, Integer addressId) {
 		super();
 		this.orderId = orderId;
 		this.payType = payType;
@@ -30,60 +31,74 @@ public class Order {
 		this.userId = userId;
 		this.addressId = addressId;
 	}
+
 	public Order() {
 		super();
 	}
+
 	public Integer getOrderId() {
 		return orderId;
 	}
+
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
+
 	public String getPayType() {
 		return payType;
 	}
+
 	public void setPayType(String payType) {
 		this.payType = payType;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getOrderTime() {
+
+	public Timestamp getOrderTime() {
 		return orderTime;
 	}
-	public void setOrderTime(Date orderTime) {
+
+	public void setOrderTime(Timestamp orderTime) {
 		this.orderTime = orderTime;
 	}
-	
+
 	public Integer getUserId() {
 		return userId;
 	}
+
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	
+
 	public Integer getAddressId() {
 		return addressId;
 	}
+
 	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
+		result = prime * result
+				+ ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-		result = prime * result + ((orderTime == null) ? 0 : orderTime.hashCode());
+		result = prime * result
+				+ ((orderTime == null) ? 0 : orderTime.hashCode());
 		result = prime * result + ((payType == null) ? 0 : payType.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -125,14 +140,18 @@ public class Order {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", payType=" + payType + ", status=" + status + ", orderTime=" + orderTime
+		return "Orders [orderId=" + orderId + ", payType=" + payType
+				+ ", status=" + status + ", orderTime=" + orderTime
 				+ ", userId=" + userId + ", addressId=" + addressId + "]";
 	}
+
 	public List<OrderInfo> getOrderInfos() {
 		return orderInfos;
 	}
+
 	public void setOrderInfos(List<OrderInfo> orderInfos) {
 		this.orderInfos = orderInfos;
 	}
@@ -144,12 +163,12 @@ public class Order {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	public List<OrderInfo> getOrderInfo(){
+
+	public List<OrderInfo> getOrderInfo() {
 		return orderInfos;
 	}
-	
-	public void setOrderInfo(List<OrderInfo> orderInfos){
+
+	public void setOrderInfo(List<OrderInfo> orderInfos) {
 		this.orderInfos = orderInfos;
 	}
 }

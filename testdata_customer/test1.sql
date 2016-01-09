@@ -24,22 +24,22 @@ insert into category values('Home & Office');
 
 
 -- product
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'wahaha',3.20,23.21,'Home & Office',34,12,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'computer',4000.20,10000.21,'Computers & Tablets',65,42,'this is a computer','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'atv',3000.20,230000.21,'TV& Home Theater',343,52,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'apple',5000.20,2000003.21,'Cell Phones',49,122,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'cameras',1000.20,11123.21,'Cameras & Camcorders',43,22,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'audio',3.20,23.21,'Audio',34,12,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'car',3.20,23.21,'Car Electronics & GPS',34,12,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'game',3.20,23.21,'Video, Games, Movies & Music',34,12,'this is a children milk','onsell');
-insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status) values(7880,'health',3.20,23.21,'Health, Fitness & Sports',34,12,'this is a children milk','onsell');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'wahaha',3.20,23.21,'Home & Office',34,12,'this is a children milk','onsell', 'images/product/78780.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'computer',4000.20,10000.21,'Computers & Tablets',65,42,'this is a computer','onsell', 'images/product/78781.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'atv',3000.20,230000.21,'TV& Home Theater',343,52,'this is a children milk','onsell', 'images/product/78782.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'apple',5000.20,2000003.21,'Cell Phones',49,122,'this is a children milk','onsell', 'images/product/78783.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'cameras',1000.20,11123.21,'Cameras & Camcorders',43,22,'this is a children milk','onsell', 'images/product/78784.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'audio',3.20,23.21,'Audio',34,12,'this is a children milk','onsell', 'images/product/78785.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'car',3.20,23.21,'Car Electronics & GPS',34,12,'this is a children milk','onsell', 'images/product/78786.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'game',3.20,23.21,'Video, Games, Movies & Music',34,12,'this is a children milk','onsell', 'images/product/78787.jpg');
+insert into product(shopId,name,price,discountPrice,category,stockNum,soldNum,description,status, picture) values(7880,'health',3.20,23.21,'Health, Fitness & Sports',34,12,'this is a children milk','onsell', 'images/product/78788.jpg');
 
 -- product
-INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78781', '7880', 'p4CartTest1', '32', '28', 'Audio', '400', '200', 'nice', '#','onsell');
-INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78782', '7880', 'p4CartTest2', '12', '3', 'Audio', '12', '88', 'nice', '#','onsell');
-INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78783', '7880', 'p4CartTest3', '34', '22', 'Audio', '56', '44', 'ok', '#','onsell');
-INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78784', '7880', 'p4CartTest4', '178', '168', 'Home & Office', '12', '38', 'great', '#','onsell');
-INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78785', '7880', 'p4CartTest5', '122', '98', 'Home & Office', '34', '12', 'ookk', '#','onsell');
+INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78781', '7880', 'p4CartTest1', '32', '28', 'Audio', '400', '200', 'nice', 'images/product/78789.jpg','onsell');
+INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78782', '7880', 'p4CartTest2', '12', '3', 'Audio', '12', '88', 'nice', 'images/product/78780.jpg','onsell');
+INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78783', '7880', 'p4CartTest3', '34', '22', 'Audio', '56', '44', 'ok', 'images/product/78781.jpg','onsell');
+INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78784', '7880', 'p4CartTest4', '178', '168', 'Home & Office', '12', '38', 'great', 'images/product/78782.jpg','onsell');
+INSERT INTO `parknshop`.`product` (`productId`, `shopId`, `name`, `price`, `discountPrice`, `category`, `stockNum`, `soldNum`, `description`, `picture`,status) VALUES ('78785', '7880', 'p4CartTest5', '122', '98', 'Home & Office', '34', '12', 'ookk', 'images/product/78783.jpg','onsell');
 
 -- update
 UPDATE `parknshop`.`product` SET `status`='pulloff' WHERE `productId`='78781';
@@ -56,13 +56,6 @@ INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('1231
 INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78784', '1');
 INSERT INTO `parknshop`.`cart` (`userId`, `productId`, `quantity`) VALUES ('12312', '78785', '1');
 
--- pic
-UPDATE `parknshop`.`product` SET `picture`='images/product/78781.jpg' WHERE `productId`>'0';
-UPDATE `parknshop`.`product` SET `picture`='images/product/78781.jpg' WHERE `productId`='78781';
-UPDATE `parknshop`.`product` SET `picture`='images/product/78782.jpg' WHERE `productId`='78782';
-UPDATE `parknshop`.`product` SET `picture`='images/product/78783.jpg' WHERE `productId`='78783';
-UPDATE `parknshop`.`product` SET `picture`='images/product/78784.jpg' WHERE `productId`='78784';
-UPDATE `parknshop`.`product` SET `picture`='images/product/78785.jpg' WHERE `productId`='78785';
 
 -- delivery
 INSERT INTO `parknshop`.`delivery` (`deliveryId`, `company`, `price`, `type`) VALUES ('1', 'EMS', '10', 'normal');
