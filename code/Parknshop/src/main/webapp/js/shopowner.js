@@ -308,27 +308,28 @@ const shopOwner = {
         	/** calculate the average value */
         	const avgSets = [];
         	
-        	if (dataSets.length > 1 && dataSets[0].data.length > 1) {
-        		for(let i = 0; i < dataSets.length; i++) {
+        	if (dataSets.length > 1) {
+        		for(let i = 0; i < dataSets[0].data.length; i++) {
             		let avg = 0;
-            		for(let j = 0; j < dataSets[i].data.length; j++) {
+            		for(let j = 0; j < dataSets.length; j++) {
                 		avg += dataSets[j].data[i].value
             		}
             		
             		avgSets.push({
-            			'value': String((avg / dataSets[0].data.length).toFixed(2))
+            			'value': String((avg / dataSets.length).toFixed(2))
             		});
         		}
         	}
         	
-        	dataSets.push({
-                "seriesname": "Average",
-                "renderas": "line",
-                "showvalues": "0",
-                "data": avgSets
-            });
-        	
-        	
+        	if (avgSets.length !== 0) {
+        		dataSets.push({
+                    "seriesname": "Average",
+                    "renderas": "line",
+                    "showvalues": "0",
+                    "data": avgSets
+                });
+        	}
+
         	$("#chart-container").insertFusionCharts({
                 type: "mscombi2d",
                 width: "100%",
@@ -420,7 +421,7 @@ const shopOwner = {
 
                             _this.unbind('click');
                             
-                            _this.prev().find('.delivery-status').find('.value').html('delivering');
+                            _this.prev().find('.delivery-status').find('.deliver').html('delivering');
                         } else {
                             alert('faied to send products');
                         }
@@ -436,6 +437,99 @@ const shopOwner = {
     },
     
     initShow: function (oid, item) {
-    	
+    	$.getJSON('orderByType', {
+            type: 'shopOwnerShow',
+            oid: oid
+        }, function(data, textStatus) {
+        	let date = new Date();
+            let deliveryTime = new Date();
+            let dealTime = new Date();
+
+            /** item should not be greater than the actual quantity */
+            if (item >= data.orderInfos.length) {
+                return;
+            }
+
+            date.setTime(data.orderTime.time);
+            if (data.orderInfos[item].deliveryTime) {
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
+                deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                deliveryTime = '/';
+            }
+
+            if (data.orderInfos[item].dealTime) {
+                dealTime.setTime(data.orderInfos[item].dealTime.time);
+                dealTime = dealTime.format('yyyy-MM-dd hh:mm');
+            } else {
+                dealTime = '/';
+            }
+        	
+            /*optional stuff to do after success */
+           $('.detail-container #order-info').append('<div class="shop-info">\
+                   <div class="pic-container">\
+                   <a href="' + data.orderInfos[item].productUrl + '" target="_blank">\
+                       <div class="over">\
+                           <div class="link-btn" style="background-image: url(./images/link-btn.png);"></div>\
+                       </div>\
+                   </a>\
+                   <div class="shop" style="background-image: url(' + data.orderInfos[item].product.picture + ');"></div>\
+               </div>\
+               <div class="info">\
+                   <div class="item">\
+                       <span class="name">Order Id</span>\
+                       <span class="value">' + data.orderId + '</span>\
+                   </div>\
+                   <div class="item">\
+	                   <span class="name">Product Id</span>\
+                       <span class="value">' + data.orderInfos[item].productId + '</span>\
+	               </div>\
+	               <div class="item">\
+	                   <span class="name">Quantity</span>\
+	                   <span class="value special">' + data.orderInfos[item].quantity + '</span>\
+	               </div>\
+                   <div class="item">\
+	                   <span class="name">User Name</span>\
+	                   <span class="value">' + data.userName + '</span>\
+	               </div>\
+                   <div class="item">\
+                       <span class="name">Receiver Name</span>\
+                       <span class="value special">' + data.address.name + '</span>\
+                   </div>\
+                   <div class="item">\
+	                   <span class="name">Phone Number</span>\
+	                   <span class="value special">' + data.address.phone + '</span>\
+	               </div>\
+                   <div class="address item">\
+                       <span class="name">Address</span>\
+                       <span class="value special">' + data.address.description + '</span>\
+                   </div>\
+                   <div class="time item">\
+                       <span class="name">Create Time</span>\
+                       <span class="value">' + date.format('yyyy-MM-dd hh:mm') + '</span>\
+                   </div>\
+                   <div class="item">\
+                       <span class="name">Delivery Time</span>\
+                       <span class="value">' + deliveryTime + '</span>\
+                   </div>\
+                   <div class="item">\
+                       <span class="name">Deal Time</span>\
+                       <span class="value">' + dealTime + '</span>\
+                   </div>\
+               </div>\
+           </div>\
+           <div class="shop-right-item" style="margin-top: 10%;">\
+               <span class="name">status</span>\
+               <span class="value">' + data.orderInfos[item].status + '</span>\
+           </div>\
+           <div class="shop-right-item" style="margin-top: 14%;">\
+	           <span class="name">delivery company</span>\
+	           <span class="value">' + data.orderInfos[item].delivery.company + '</span>\
+	       </div>\
+	       <div class="shop-right-item" style="margin-top: 18%;">\
+	           <span class="name">delivery options</span>\
+	           <span class="value">' + data.orderInfos[item].delivery.type + '</span>\
+	       </div>'); 
+        });
     }
 };

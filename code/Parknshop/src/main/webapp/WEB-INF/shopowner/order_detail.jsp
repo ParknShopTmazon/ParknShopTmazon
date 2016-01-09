@@ -14,12 +14,12 @@
     <% String item = request.getParameter("item"); %>
     <input type="hidden" value="<%=order_id %>" id="oid">
     <input type="hidden" value="<%=item %>" id="item-number">
-    <div class="page-title">
-	    <span class="back-btn button"></span>
-	    <span class="parknshop">PARKnSHOP</span>
-	    <span class="main-title">Order Details</span>
-	</div>
 	<div class="detail-container">
+		<div class="page-title">
+		    <span class="back-btn button"></span>
+		    <span class="parknshop">PARKnSHOP</span>
+		    <span class="main-title">Order Details</span>
+		</div>
 		<div id="order-info"></div>
 	</div>
     <script type="text/javascript">
