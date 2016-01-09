@@ -192,7 +192,8 @@ a {
 .add-products-container,
 .modify-products-container,
 .delete-products-container,
-.shops-orders-container {
+.shops-orders-container,
+.detail-container {
     padding: 95px 4% 97px;
 }
 
