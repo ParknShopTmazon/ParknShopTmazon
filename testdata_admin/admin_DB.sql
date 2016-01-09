@@ -1,11 +1,15 @@
 
 use parknshop;
 
--- admin 
+-- admin;
+
+
 INSERT INTO user(userId,name,password,role,status) VALUES (3,'admin0','admin0','admin','normal');
 INSERT INTO user(userId,name,password,role,status) VALUES (4,'admin1','admin1','admin','normal');
 
--- user
+-- user;
+
+
 INSERT INTO user(userId,name,password,role,status) VALUES (5,'ruirui','ruirui','customer','normal');
 INSERT INTO user(userId,name,password,role,status) VALUES (6,'zhengzheng','zhengzheng','customer','normal');
 INSERT INTO user(userId,name,password,role,status) VALUES (7,'kuaile','kuaile','customer','normal');
@@ -20,7 +24,9 @@ INSERT INTO user(userId,name,password,role,status) VALUES (15,'aaaaa','aaaaa','c
 INSERT INTO user(userId,name,password,role,status) VALUES (16,'qwerty','qwerty','customer','normal');
 
 
---shop-apply
+-- shop-apply;
+
+
 insert into shop(shopId,name,type,status,owner) values(7881,'aaa','company','checking',7878);
 insert into shop(shopId,name,type,status,owner) values(7882,'bbb','company','checking',7878);
 insert into shop(shopId,name,type,status,owner) values(7883,'ccc','company','checking',7878);
@@ -33,11 +39,12 @@ insert into shop(shopId,name,type,status,owner) values(7889,'abc','company','che
 insert into shop(shopId,name,type,status,owner) values(7890,'fadfas','company','checking',7878);
 insert into shop(shopId,name,type,status,owner) values(7891,'iojio','company','checking',7878);
 
---rate
+-- rate;
 
 insert into rate(rate) value('0.055');
 
---advertisement
+-- advertisement;
+
 
 INSERT INTO `parknshop`.`advertisement` VALUES (1,1,50,null);
 INSERT INTO `parknshop`.`advertisement` VALUES (2,2,30,null);
@@ -49,6 +56,7 @@ INSERT INTO `parknshop`.`advertisement` VALUES (8,8,50,null);
 INSERT INTO `parknshop`.`advertisement` VALUES (9,78781,130,null);
 
 --orderInfo
+
 
 INSERT INTO `parknshop`.`orderinfo` VALUES (1, 1, 5, 78783, 'dealed','2016-01-08 13:53:17', '2016-01-08 14:53:17', '5', null);
 INSERT INTO `parknshop`.`orderinfo` VALUES (2, 1, 3, 78782, 'dealed', '2016-01-07 16:52:17', '2016-01-07 17:53:17', '5', null);
