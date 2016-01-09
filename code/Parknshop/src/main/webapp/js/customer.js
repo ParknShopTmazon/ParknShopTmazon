@@ -914,14 +914,14 @@ var customer = {
 
             date.setTime(data.orderTime.time);
             if (data.orderInfos[item].deliveryTime) {
-                deliveryTime.setTime(data.orderInfos[item].deliveryTime);
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
                 deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
             } else {
                 deliveryTime = '/';
             }
 
             if (data.orderInfos[item].dealTime) {
-                dealTime.setTime(data.orderInfos[item].dealTime);
+                dealTime.setTime(data.orderInfos[item].dealTime.time);
                 dealTime = dealTime.format('yyyy-MM-dd hh:mm');
             } else {
                 dealTime = '/';
@@ -1545,15 +1545,15 @@ var customer = {
             }
 
             date.setTime(data.orderTime.time);
-            if (data.orderInfos[item].deliveryTime) {
-                deliveryTime.setTime(data.orderInfos[item].deliveryTime);
+            if (data.orderInfos[item].deliveryTime.time) {
+                deliveryTime.setTime(data.orderInfos[item].deliveryTime.time);
                 deliveryTime = deliveryTime.format('yyyy-MM-dd hh:mm');
             } else {
                 deliveryTime = '/';
             }
 
-            if (data.orderInfos[item].dealTime) {
-                dealTime.setTime(data.orderInfos[item].dealTime);
+            if (data.orderInfos[item].dealTime.time) {
+                dealTime.setTime(data.orderInfos[item].dealTime.time);
                 dealTime = dealTime.format('yyyy-MM-dd hh:mm');
             } else {
                 dealTime = '/';
