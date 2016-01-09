@@ -35,6 +35,7 @@ public class AdvertisementAdminServlet extends HttpServlet{
 			List<Advertisement> adList = advertisementService.getAdList();
 			List<ShowAd> showAdList = advertisementService.getShowAd(adList);
 			req.getSession().setAttribute("showAdList",showAdList);
+			req.setAttribute("curPage",1);
 			req.getRequestDispatcher("WEB-INF/admin/advertisement.jsp").forward(req,resp);
 			
 		}
