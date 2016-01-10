@@ -247,7 +247,7 @@ var customer = {
                             /** [if: first child] */
                             if (j == 0) {
                                 $('.dialog #main .friend-list .list ul').append('<li class="select button" uid="' + data.friends[j].uid + '">' + data.friends[j].name + '</li>');
-
+                                $('#friendNameBlock').html(data.friends[j].name);
                                 /** get the message of choosen name */
                                 getMessage(data.friends[j].name, true);
                             } else {
