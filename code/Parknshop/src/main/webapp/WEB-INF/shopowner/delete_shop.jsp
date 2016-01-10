@@ -51,9 +51,9 @@
 				</div>	
 				
 				<div class="control-group" align="center">
-						<c:if test="${ not empty r_is_shop_delete_success }">
-							<label style="color: red;">you have unfinished orders,can't delete shop!</label>
-						</c:if>
+					<c:if test="${ r_is_shop_delete_success eq '0' }">
+						<label style="color: red;">you have unfinished orders,can't delete shop!</label>
+					</c:if>
 				</div>	
 			</form>
 	   </div>

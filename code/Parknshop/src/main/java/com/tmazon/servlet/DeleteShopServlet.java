@@ -65,6 +65,7 @@ public class DeleteShopServlet extends HttpServlet {
 		
 		System.out.println("**************************");
 		Integer shopId =(Integer) req.getSession(true).getAttribute(AttrName.SessionScope.SHOPID);
+		
 		System.out.println("shopId=="+shopId);
 		
 		
@@ -79,6 +80,7 @@ public class DeleteShopServlet extends HttpServlet {
 					System.out.println("É¾³ý³É¹¦");
 				}
 				resp.sendRedirect("myshop");
+				return;
 		    }
 			
 		   if(shop.getStatus().equals(Shop.STATUS_SUCCESS)){
@@ -91,8 +93,10 @@ public class DeleteShopServlet extends HttpServlet {
 					}
 					resp.sendRedirect("myshop");
 			   }else{
-				 req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, false);
-			   	resp.sendRedirect("myshop");
+				 req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, "0");
+				 
+				 req.setAttribute("shopId",shopId.toString());
+				 req.getRequestDispatcher("WEB-INF/shopowner/delete_shop.jsp").forward(req,resp);
 			  }
 		    }
 	}
