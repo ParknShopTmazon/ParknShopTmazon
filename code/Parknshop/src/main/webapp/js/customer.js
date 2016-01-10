@@ -296,7 +296,11 @@ var customer = {
             const postData = {
                 friendName: friendName
             };
-
+            
+            const strRegex = '^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$';
+            
+            let RegUrl = new RegExp(strRegex);
+            
             $.ajax({
                     url: 'messages',
                     type: 'POST',
@@ -318,9 +322,17 @@ var customer = {
                                 isRight = 'right';
                                 userName = 'me';
                             }
+                            
+                            let content = '';
+                            
+                            if (RegUrl.test(data.messages[i].content) || data.messages[i].content.indexOf('http://localhost') >= 0) { 
+                        		content = '<a href="" target="_blank" onclick="window.open(' + data.messages[i].content + ');">' + data.messages[i].content + '</a>'
+                        	} else {
+                        		content = data.messages[i].content;
+                        	}
 
                             $('.dialog #main .dialog-show').append('<p class="time ' + isRight + '">' + userName + ': ' + date.format('yyyy-MM-dd hh:mm') + '</p>\
-                            <p class="' + isRight + '">' + data.messages[i].content + '</p>');
+                            <p class="' + isRight + '">' + content + '</p>');
                         }
 
                         updateArrays[friendName] = data.messages.length;
@@ -359,6 +371,9 @@ var customer = {
          * @return {[type]}         [description]
          */
         function sendMessage(name, content) {
+        	let RegUrl = new RegExp(); 
+        	RegUrl.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$"); 
+        	
             $.ajax({
                     url: 'leaveMsg',
                     type: 'POST',
@@ -372,7 +387,11 @@ var customer = {
                     if (data.success) {
                         let date = new Date();
 
-                        /** apeend */
+                        if (RegUrl.test(content) || content.indexOf('http://localhost') >= 0) { 
+                    		content = '<a href="' + content + '" target="_blank">' + content + '</a>'
+                    	}
+                        
+                        /** append */
                         $('.dialog #main .dialog-show').append('<p class="time right">me: ' + date.format('yyyy-MM-dd hh:mm') + '</p>\
                                 <p class="right">' + content + '</p>');
 
