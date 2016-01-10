@@ -409,7 +409,7 @@ input {
 }
 
 .product-container .product-area .comments .comment-items {
-    height: 100px;
+    height: 200px;
     padding: 0 10%;
 }
 
@@ -1918,7 +1918,7 @@ input {
 }
 
 .order-container #order-list .order-item .handle-btn {
-    width: 90px;
+    width: 10%;
     height: 40px;
     line-height: 40px;
     text-align: center;
