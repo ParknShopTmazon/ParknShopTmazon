@@ -1,6 +1,7 @@
 package com.tmazon.dao.impl;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,9 @@ public class RateDaoImpl implements RateDao{
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		
 		try {
-			runner.update(sql,String.valueOf(rate));
+			 DecimalFormat df = new DecimalFormat( "###.00000");
+			 System.out.println("Rate is :::"+df.format(rate));
+			runner.update(sql,df.format(rate));
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

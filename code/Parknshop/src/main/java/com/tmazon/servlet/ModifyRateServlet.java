@@ -24,6 +24,7 @@ public class ModifyRateServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//	System.out.println(123);
+		
 		if(!CheckAdmin.isAdminOnline(request))
 		{
 			response.sendRedirect("login");
@@ -34,9 +35,9 @@ public class ModifyRateServlet extends HttpServlet {
 			double rateNum = Double.valueOf(rate)/100.0;
 			RateUtil.setRate(rateNum);
 			boolean result = overviewAdminService.modifyRate(rateNum);
+			request.getRequestDispatcher("overview").forward(request,response);
 		}
-		String url = request.getHeader("Referer");
-		response.sendRedirect(url);
+		
 	}
 
 }

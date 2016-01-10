@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -45,7 +46,9 @@ public class OverviewAdminServlet extends HttpServlet {
 			req.setAttribute("adNum",adList.size());
 			req.setAttribute("shopOwnerNumber",overviewNumberService.getShopOwnerNumber());
 			req.setAttribute("customerNumber", overviewNumberService.getCustomerNumber());
-			req.setAttribute("rate", RateUtil.getRate()*100);
+			double rateNum = RateUtil.getRate()*100;
+			 DecimalFormat df = new DecimalFormat( "###.0");
+			req.setAttribute("rate", df.format(rateNum));
 			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req,resp);
 		}
 		else
