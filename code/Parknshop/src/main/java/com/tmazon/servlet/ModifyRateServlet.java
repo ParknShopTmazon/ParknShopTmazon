@@ -29,7 +29,7 @@ public class ModifyRateServlet extends HttpServlet {
 		if(!request.getParameter("rate").equals(null)&&!request.getParameter("rate").equals("")){
 			RateUtil.setRate(Double.valueOf(""+request.getParameter("rate")));
 			new RateDaoImpl().modifyRate(Double.valueOf(request.getParameter("rate")));
-			request.getSession().setAttribute("rate", Integer.parseInt(request.getParameter("rate")));
+			request.getSession().setAttribute("rate", Double.valueOf(request.getParameter("rate")));
 		}
 		
 		
