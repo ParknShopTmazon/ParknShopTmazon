@@ -7,18 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tmazon.dao.impl.RateDaoImpl;
+import com.tmazon.service.OverviewAdminService;
+import com.tmazon.util.BasicFactory;
+import com.tmazon.util.CheckAdmin;
 import com.tmazon.util.RateUtil;
 
 
 public class ModifyRateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
-    public ModifyRateServlet() {
-        super();
-    }
-
-	
+	private OverviewAdminService overviewAdminService = BasicFactory.getImpl(OverviewAdminService.class); 
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
 	}
@@ -26,13 +24,17 @@ public class ModifyRateServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//	System.out.println(123);
-		if(!request.getParameter("rate").equals(null)&&!request.getParameter("rate").equals("")){
-			RateUtil.setRate(Double.valueOf(""+request.getParameter("rate")));
-			new RateDaoImpl().modifyRate(Double.valueOf(request.getParameter("rate")));
-			request.getSession().setAttribute("rate", Double.valueOf(request.getParameter("rate")));
+		if(!CheckAdmin.isAdminOnline(request))
+		{
+			response.sendRedirect("login");
+			return;
 		}
-		
-		
+		String rate = request.getParameter("rate");
+		if(rate != null && !rate.equals("")){
+			double rateNum = Double.valueOf(rate)/100.0;
+			RateUtil.setRate(rateNum);
+			boolean result = overviewAdminService.modifyRate(rateNum);
+		}
 		String url = request.getHeader("Referer");
 		response.sendRedirect(url);
 	}

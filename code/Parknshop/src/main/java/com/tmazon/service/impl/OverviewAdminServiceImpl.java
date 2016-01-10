@@ -11,7 +11,10 @@ public class OverviewAdminServiceImpl implements OverviewAdminService{
 	{
 		return rateDao.getRate();
 	}
-	
+	public boolean modifyRate(double rate)
+	{
+		return rateDao.modifyRate(rate);
+	}
 	
 	
 	

@@ -55,32 +55,10 @@
 									<td>Backup</td>
 									<td>2015.12.07-15:33:35</td>
 								</tr>
-								<tr>
-									<td>Rate</td>
-									<td><%=session.getAttribute("rate") %>%</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="box">
-						<h2>Quick Post</h2>
-						<div class="utils">
-							<a href="#">Advanced</a>
-						</div>
-						<form action="#" method="post">
-							<p>
-								<label for="title">Title <small>Alpha-numeric characters only.</small> </label>
-								<input type="text" name="title" />
-							</p>
-							<p>
-								<label for="post">Post <small>Parsed by Markdown.</small> </label>
-								<textarea name="post"></textarea>
-							</p>
-							<p>
-								<input type="submit" value="post" />
-							</p>
-						</form>
-					</div>
+				
 					
 				</div>
 				<div class="grid_6">
@@ -128,26 +106,25 @@
 				</div>
 				<div class="grid_5">
 					<div class="box">
-						<h2>Income</h2>
-						<div class="utils">
-							<a href="#">View More</a>
-						</div>
+						<h2>Rate</h2>
+						<form action="ModifyRateServlet" method="post">
 						<table>
 							<tbody>
 								<tr>
-									<td>Three months of income</td>
-									<td>xxxx.xx$</td>
+									<td>Rate:</td>
+									<td>${sessionScope.rate }%</td>
 								</tr>
 								<tr>
-									<td>Shops num</td>
-									<td>xxxxxx</td>
-								</tr>
-								<tr>
-									<td>income</td>
-									<td>xxxxxx$</td>
+									<td><input type='text' name="rate" style="width:120px"/></td>
+									<td>
+										<div class="grid_2">
+											<input type="submit" value="Modify"/>
+										</div>
+									</td>
 								</tr>
 							</tbody>
 						</table>
+						</form>
 					</div>
 					
 					</div>

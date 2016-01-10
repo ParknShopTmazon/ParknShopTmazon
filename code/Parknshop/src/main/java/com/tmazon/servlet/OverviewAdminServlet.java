@@ -12,12 +12,14 @@ import javax.servlet.http.HttpSession;
 import com.mchange.v2.sql.filter.SynchronizedFilterCallableStatement;
 import com.tmazon.domain.Shop;
 import com.tmazon.domain.User;
+import com.tmazon.service.OverviewAdminService;
 import com.tmazon.service.OverviewNumberService;
 import com.tmazon.service.ShopApplyService;
 import com.tmazon.service.impl.OverviewNumberServiceImpl;
 import com.tmazon.util.AttrName;
 import com.tmazon.util.BasicFactory;
 import com.tmazon.util.CheckAdmin;
+import com.tmazon.util.RateUtil;
 
 
 public class OverviewAdminServlet extends HttpServlet {
@@ -38,7 +40,7 @@ public class OverviewAdminServlet extends HttpServlet {
 			System.out.println(110);
 			req.getSession().setAttribute("shopOwnerNumber",o.getShopOwnerNumber());
 			req.getSession().setAttribute("customerNumber", o.getCustomerNumber());
-			
+			req.getSession().setAttribute("rate", RateUtil.getRate()*100);
 			req.getRequestDispatcher("WEB-INF/admin/overview.jsp").forward(req,resp);
 		}
 		else

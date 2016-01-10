@@ -31,12 +31,11 @@ public class RateDaoImpl implements RateDao{
 	
 	public boolean modifyRate(double rate){
 		String sql="UPDATE rate SET rate = ? ";
-		List<Rate> rateList = null;
+		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
-		ArrayList<Object> params = new ArrayList<Object>();
-		params.add(""+rate);
+		
 		try {
-			runner.update(sql,params);
+			runner.update(sql,String.valueOf(rate));
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -59,11 +59,6 @@
   <servlet-class>com.tmazon.servlet.ProfitServlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>ModifyRate</servlet-name>
-  <display-name>ModifyRate</display-name>
-  <servlet-class>com.tmazon.servlet.ModifyRate</servlet-class>
- </servlet>
- <servlet>
   <servlet-name>ModifyRateServlet</servlet-name>
   <display-name>ModifyRateServlet</display-name>
   <servlet-class>com.tmazon.servlet.ModifyRateServlet</servlet-class>
@@ -348,10 +343,6 @@
  <servlet-mapping>
   <servlet-name>ProfitServlet</servlet-name>
   <url-pattern>/ProfitServlet</url-pattern>
- </servlet-mapping>
- <servlet-mapping>
-  <servlet-name>ModifyRate</servlet-name>
-  <url-pattern>/ModifyRate</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>ModifyRateServlet</servlet-name>
