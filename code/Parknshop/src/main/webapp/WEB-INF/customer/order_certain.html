@@ -10,7 +10,7 @@
             <div id="other-addr-input">
                 <div>
                     <input type="text" required name="receiver" id="receiver" placeholder="receiver name">
-                    <input type="text" required name="phone" id="phone" placeholder="phone number">
+                    <input type="text" required name="phone" id="phone" placeholder="phone number" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
                     <input type="text" required name="add-addr" id="add-addr">
                     <a href="javascript: void(0);">add</a>
                 </div>
