@@ -1,6 +1,7 @@
 package com.tmazon.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -28,6 +29,20 @@ public class RateDaoImpl implements RateDao{
 		}
 	}
 	
+	public boolean modifyRate(double rate){
+		String sql="UPDATE rate SET rate = ? ";
+		List<Rate> rateList = null;
+		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(""+rate);
+		try {
+			runner.update(sql,params);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	
 }

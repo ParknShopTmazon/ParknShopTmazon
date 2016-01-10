@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
     <%
     	String path=request.getContextPath();
     %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -91,10 +92,15 @@
 						<table>
 							<tbody>
 								<tr>
-									<td>1 Tom'Shop</td>
-									<td>2 xxx'Shop</td>
+									<td>1.ShopOwner:</td>
+									<td><%=session.getAttribute("shopOwnerNumber") %></td>
+								</tr>
+								<tr>
+									<td>2.Customer:</td>
+									<td><%=session.getAttribute("customerNumber") %></td>
 								</tr>
 							</tbody>
+
 						</table>
 					</div>
 					<div class="box">
@@ -104,11 +110,17 @@
 						</div>
 						<table>
 							<tbody>
-								<tr>
-									<td>1 Tom'Shop</td>
-									<td>2 xxx'Shop</td>
-								</tr>
-							</tbody>
+					<c:forEach items="${ shopList }" var="shop" varStatus="status">
+						<c:if test="${status.index le 2} ">
+							<tr>
+								<td>${shop.shopId }</td>	
+								<td>${shop.name }</td>
+								<td>${userList[status.index].name }</td>
+								<td>${shop.type }</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+					</tbody>
 						</table>
 					</div>
 				
