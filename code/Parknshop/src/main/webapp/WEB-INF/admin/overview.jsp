@@ -17,6 +17,9 @@
 		<script src="js/glow/1.7.0/core/core.js" type="text/javascript"></script>
 		<script src="js/glow/1.7.0/widgets/widgets.js" type="text/javascript"></script>
 		<link href="js/glow/1.7.0/widgets/widgets.css" type="text/css" rel="stylesheet" />
+		<style>
+		table{font-size:20px;}
+		</style>
 		<script type="text/javascript">
 			glow.ready(function(){
 				new glow.widgets.Sortable(
@@ -33,6 +36,7 @@
 	</head>
 	<body>
 		<%@ include file="header.html"%>
+		<br><br>
 		<div class="overview-container">
 			<div id="content" class="container_16 clearfix">
 				<div class="grid_5">
@@ -48,19 +52,29 @@
 									<td>MySQL</td>
 								</tr>
 								<tr>
-									<td>Node Num</td>
-									<td>50</td>
-								</tr>
-								<tr>
 									<td>Backup</td>
-									<td>2015.12.07-15:33:35</td>
+									<td>2015.12.07</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-				
-					
+					<br>
+					<div class="box">
+						<h2>Advertisement</h2>
+						<div class="utils">
+							<a href="advertisement">View More</a>
+						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td>total:</td>
+									<td>${adNum }</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
+					
 				<div class="grid_6">
 					<div class="box">
 						<h2>UserManagement</h2>
@@ -71,16 +85,17 @@
 							<tbody>
 								<tr>
 									<td>1.ShopOwner:</td>
-									<td><%=session.getAttribute("shopOwnerNumber") %></td>
+									<td>${shopOwnerNumber}</td>
 								</tr>
 								<tr>
 									<td>2.Customer:</td>
-									<td><%=session.getAttribute("customerNumber") %></td>
+									<td>${customerNumber }</td>
 								</tr>
 							</tbody>
 
 						</table>
 					</div>
+					<br>
 					<div class="box">
 						<h2>Shop-Apply</h2>
 						<div class="utils">
@@ -88,22 +103,17 @@
 						</div>
 						<table>
 							<tbody>
-					<c:forEach items="${ shopList }" var="shop" varStatus="status">
-						<c:if test="${status.index le 2} ">
-							<tr>
-								<td>${shop.shopId }</td>	
-								<td>${shop.name }</td>
-								<td>${userList[status.index].name }</td>
-								<td>${shop.type }</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-					</tbody>
+								<tr>
+									<td>Number:</td>
+									<td>${shopApplyNum }</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
-				
 					
 				</div>
+				
+				
 				<div class="grid_5">
 					<div class="box">
 						<h2>Rate</h2>
@@ -112,13 +122,13 @@
 							<tbody>
 								<tr>
 									<td>Rate:</td>
-									<td>${sessionScope.rate }%</td>
+									<td>${rate }%</td>
 								</tr>
 								<tr>
 									<td><input type='text' name="rate" style="width:120px"/></td>
 									<td>
 										<div class="grid_2">
-											<input type="submit" value="Modify"/>
+											<input type="submit"  value="Modify"/>
 										</div>
 									</td>
 								</tr>
@@ -127,7 +137,7 @@
 						</form>
 					</div>
 					
-					</div>
+				 </div>
 				</div>
 			</div>
 		</div>

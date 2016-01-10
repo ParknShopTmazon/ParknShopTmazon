@@ -60,7 +60,7 @@ public class UpdateUTableServlet extends HttpServlet {
 		User search = (User)request.getSession().getAttribute("searchInfo");
 		request.setAttribute("UserName",search.getName());
 		request.setAttribute("select_role",search.getRole());
-		request.setAttribute("CurPage",CurePage.toString());
+		request.setAttribute("curPage",CurePage.toString());
 		request.setAttribute("option","y");
 		request.getRequestDispatcher("/searchUserAdmin").forward(request, response);
 

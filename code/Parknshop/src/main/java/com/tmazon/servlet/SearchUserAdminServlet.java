@@ -46,7 +46,7 @@ public class SearchUserAdminServlet extends HttpServlet{
 		{
 			userName = (String) req.getAttribute("UserName");
 			role = (String) req.getAttribute("select_role");
-			nextStr = "1";
+			nextStr = "0";
 		    curPageStr = (String) req.getAttribute("CurPage");
 		}
 		else
