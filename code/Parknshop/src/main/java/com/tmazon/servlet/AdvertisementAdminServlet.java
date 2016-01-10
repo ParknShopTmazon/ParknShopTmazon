@@ -2,6 +2,7 @@ package com.tmazon.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,6 +35,13 @@ public class AdvertisementAdminServlet extends HttpServlet{
 		{
 			List<Advertisement> adList = advertisementService.getAdList();
 			List<ShowAd> showAdList = advertisementService.getShowAd(adList);
+			showAdList.sort(new Comparator<ShowAd>() {
+
+				public int compare(ShowAd o1, ShowAd o2) {
+					return o1.getProduct().getProductId() - o2.getProduct().getProductId();
+				}
+				
+			});
 			req.getSession().setAttribute("showAdList",showAdList);
 			req.getRequestDispatcher("searchProductAdmin").forward(req,resp);
 			

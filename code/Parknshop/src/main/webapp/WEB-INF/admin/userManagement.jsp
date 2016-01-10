@@ -104,7 +104,7 @@
 								<c:when test="${user.status eq 'normal' }">
 								<form method="post" action="updateUTableServlet"> 
 									<td>
-									<input type="hidden" name="Page" value="${sessionScope.curPage }"/>
+									<input type="hidden" name="Page" value="${curPage }"/>
 									<input type="hidden" name="status" value="black"/>
 									<input type="hidden" name="user_name" value="${user.name}"/>
 									<input  type="submit" value="BlackList"></input></td>	
@@ -115,7 +115,7 @@
 								<c:otherwise>
 								<form method="post" action="updateUTableServlet"> 
 									<td>
-									<input type="hidden" name="Page" value="${sessionScope.curPage }"/>
+									<input type="hidden" name="Page" value="${curPage }"/>
 									<input type="hidden" name="status" value="normal"/>
 									<input type="hidden" name="user_name" value="${user.name}"/>
 										<input type="submit" value="Activate">

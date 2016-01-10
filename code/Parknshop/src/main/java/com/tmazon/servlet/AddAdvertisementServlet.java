@@ -25,6 +25,7 @@ import com.tmazon.domain.Advertisement;
 import com.tmazon.service.AdvertisementService;
 import com.tmazon.service.impl.AdvertisementServiceImpl;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.CheckAdmin;
 import com.tmazon.util.IOUtil;
 
 public class AddAdvertisementServlet extends HttpServlet {
@@ -40,37 +41,42 @@ public class AddAdvertisementServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		String costStr = request.getParameter("cost");
+		if(!CheckAdmin.isAdminOnline(request))
+		{
+			response.sendRedirect("login");
+			return;
+		}
+		String costStr;
 //		System.out.println(request.getParameter("productId"));
 //		System.out.println(costStr);
-		Integer productID = Integer.valueOf(request.getParameter("productId"));
-		Integer cost;
+		Integer cost,productID;
 		// add picture
 		request.setCharacterEncoding("utf-8"); 
-		String contextPath = getServletContext().getRealPath(File.separator+"images_shop"+File.separator);
+		String contextPath = getServletContext().getRealPath(File.separator+"images_admin"+File.separator);
 		String uploadPath =File.separator+ "upload"+File.separator;
 		String tmpPath = "tmp"+File.separator;
 		String path=null;
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-		fileItemFactory.setSizeThreshold(1024 * 1024*10);
+		fileItemFactory.setSizeThreshold(1024 * 1024 * 30);
 		fileItemFactory.setRepository(new File(contextPath + tmpPath));
 		ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
-		List<FileItem> items=null;
+		List<FileItem> items = null;
 		try {
 			items = servletFileUpload.parseRequest(request);
 		} catch (FileUploadException e) {
 			e.printStackTrace();
 		}
 
-		Map<String, String> productMap = new HashMap<String, String>();
+		Map<String, String> advMap = new HashMap<String, String>();
+		
 		for (FileItem item : items)
 		{
 			if (item.isFormField())
 			{
-				productMap.put(item.getFieldName(), item.getString("utf-8"));
+				advMap.put(item.getFieldName(), item.getString("utf-8"));
 			}
 		}
+		
 		
 		
 		for (FileItem item : items)
@@ -97,14 +103,18 @@ public class AddAdvertisementServlet extends HttpServlet {
 				IOUtil.close(is, os);
 				item.delete();
 				
-				path ="images_shop/upload/"+ d1 + "/" + d2 + "/" + fileName;
+				path ="images_admin/upload/"+ d1 + "/" + d2 + "/" + fileName;
 			}
 		}
+		costStr = advMap.get("cost");
+		
+		productID = Integer.valueOf(advMap.get("productId"));
+		
 		if(path == null|| "".equals(path))
 		{
-				path = "images_shop/index.jpg";
+				path = "images_admin/index.jpg";
 		}
-		if(costStr == null || costStr.equals(""))
+		if( costStr == null || costStr.equals(""))
 		{
 			cost = 0;
 		}

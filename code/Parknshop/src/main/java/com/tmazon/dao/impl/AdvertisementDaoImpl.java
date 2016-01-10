@@ -30,41 +30,55 @@ public class AdvertisementDaoImpl implements AdvertisementDao{
 		
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
 		String sql="INSERT INTO advertisement(productID,cost,picture) VALUES(?,?,?)";
-		ArrayList<Object> params =  new ArrayList<Object>();
+//		ArrayList<Object> params =  new ArrayList<Object>();
+//		params.add(productId);
+//		params.add(cost);
+//		params.add(picture);
+		System.out.println(sql);
+		try {
+			runner.insert(sql,new BeanHandler<Advertisement>(Advertisement.class),productId,cost,picture);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	@SuppressWarnings("null")
+	public boolean update(Integer productId,Integer cost,String picture){
+		
+		StringBuilder sql= new StringBuilder("UPDATE advertisement SET ");
+		List<Object> params = new ArrayList<Object>();
+		if(cost != null || !cost.equals(""))
+		{
+			sql.append("cost=? , ");
+			params.add(cost);
+		}
+		if(picture != null || !picture.equals(""))
+		{
+			sql.append("picture=? ");
+			params.add(picture);
+		}
+		sql.append(" WHERE productID =?");
 		params.add(productId);
-		params.add(cost);
-		params.add(picture);
-		try {
-			runner.insert(sql,new BeanHandler<Advertisement>(Advertisement.class),params);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		
-	}
-	public boolean update(Advertisement advertisement){
-		
-		String sql="UPDATE advertisement SET cost = ? ,picture = ? WHERE adId = ?";
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
-		ArrayList<Object> params = new ArrayList<Object>();
-		params.add(advertisement.getCost());
-		params.add(advertisement.getPicture());
-		params.add(advertisement.getAdId());
+		System.out.println(sql.toString());
 		try {
-			runner.update(sql,params);
+			
+			runner.update(sql.toString(),params.toArray());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-	public boolean deleteById(int  adId){
+	public boolean deleteByProductId(Integer  productId){
 		
-		String sql="DELETE FROM advertisement WHERE adId = ?";
+		String sql="DELETE FROM advertisement WHERE productID = ?";
 		QueryRunner runner = new QueryRunner(DaoUtil.getDataSource());
+		System.out.println(sql);
 		try {
-			runner.update(sql,adId);
+			runner.update(sql,productId);
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -166,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table>
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th>ProductId</th>
 								<th>ProductName</th>
 								<th>ShopName</th>
 								<th>Type</th>
@@ -178,8 +178,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tfoot>
 						<tbody>
 							<c:forEach items="${sessionScope.showAdList }" var="ad">
-								<tr>
-									<td>${ad.ad.adId }</td>
+								<tr class="Ads">
+									<td>${ad.product.productId }</td>
 									<td>${ad.product.name }</td>
 									<td>${ad.shop.name }</td>
 									<td>${ad.product.category }</td>
@@ -250,6 +250,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        	
 	                            	
 				<label>&nbsp;</label>	
+				
 				<input type="submit" value="Add"   onclick="vanish()">						  	
 			</form>      
 		</div>
@@ -302,10 +303,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					});
 				});
 				
-				$('#somedialog .submit-btn').click(function() {
-					$(this).parent().submit();
-				});
-				
 				/** initiate the box */
 				var dlgtrigger = document.querySelector('[data-dialog]');
 	            if (dlgtrigger) {
@@ -314,20 +311,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                $trigger = $('.trigger');
 	                $edit = $('.edit');
 	                $trigger.each(function() {
-	                	$(this).click(dlg.toggle.bind(dlg));
+	                	if($('.Ads').length < 10) {
+	                		$(this).click(dlg.toggle.bind(dlg));
+	                	}
+	                	
 	                	$(this).click(function() {
-	                		$('#somedialog .picture').show();
-	                		$('#somedialog #productName').html($(this).parent().prev().prev().html());
-	                		$('#somedialog .picture').css({
-	                			'background-image': 'url(' + $(this).parent().prev().prev().prev().prev().children('img').attr('src') + ')'
-	                		});
-	                		$('#somedialog #productId').val($(this).parent().prev().prev().prev().html());
+	                		if($('.Ads').length >= 10) {
+	        					$('#somedialog .submit-btn').attr('disabled', 'true');
+	        					alert('ads cannot over 10');
+	        				} else {
+	        					$('#somedialog .picture').show();
+		                		$('#somedialog #productName').html($(this).parent().prev().prev().html());
+		                		$('#somedialog .picture').css({
+		                			'background-image': 'url(' + $(this).parent().prev().prev().prev().prev().children('img').attr('src') + ')'
+		                		});
+		                		$('#somedialog #productId').val($(this).parent().prev().prev().prev().html());
+	        				}
 	                	});
 	                });
 	                
 	                $edit.each(function() {
 	                	$(this).click(dlg.toggle.bind(dlg));
 	                	$(this).click(function() {
+	                		$('#somedialog .submit-btn').removeAttr('disabled');
 	                		$('#somedialog .picture').hide();
 	                		$('#somedialog #productName').html($(this).parent().prev().prev().prev().prev().prev().html());
 	                		$('#somedialog #productId').val($(this).parent().prev().prev().prev().prev().prev().prev().html());

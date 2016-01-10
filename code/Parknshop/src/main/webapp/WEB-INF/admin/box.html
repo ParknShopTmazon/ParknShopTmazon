@@ -8,10 +8,10 @@
         <div class="action close-btn button" data-dialog-close></div>
         <div class="picture"></div>
         <form method="post" action="AddAdvertisementServlet" enctype="multipart/form-data">
-	        <div class="info"><span>Banner Picture</span><input type="file" name="picture"></div>
-	        <div class="info"><span>Cost</span><input type="text" name="cost"></div>
+	        <div class="info"><span>Banner Picture</span><input type="file" name="picture" required="required"  accept="image/bmp,image/png,image/jpeg" ></div>
+	        <div class="info"><span>Cost</span><input type="text" name="cost" onkeyup='this.value=this.value.replace(/\D/gi,"")' required></div>
 	        <input type="hidden" id="productId" name="productId" value="">
-	        <div class="submit-btn button">Submit</div>
+	        <input type="submit" class="submit-btn button" value="Submit">
         </form>   
     </div>
 </div>

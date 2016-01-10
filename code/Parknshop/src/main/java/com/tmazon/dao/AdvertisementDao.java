@@ -9,8 +9,8 @@ public interface AdvertisementDao {
 	
 	public boolean insert(Integer productId,Integer cost, String picture);
 	
-	public boolean update(Advertisement advertisement);
+	public boolean update(Integer adId,Integer cost,String picture);
 	
-	public boolean deleteById(int  adId);
+	public boolean deleteByProductId(Integer  productId);
 	
 }

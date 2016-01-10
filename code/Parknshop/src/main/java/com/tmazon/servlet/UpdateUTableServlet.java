@@ -32,11 +32,21 @@ public class UpdateUTableServlet extends HttpServlet {
 		if(!CheckAdmin.isAdminOnline(request))
 		{
 			response.sendRedirect("login");
+			return;
 		}
 		//get user name and status
 		String user_name = request.getParameter("user_name");
 		String status = request.getParameter("status");
-		Integer CurePage = Integer.valueOf(request.getParameter("Page"));
+		String curPageStr = request.getParameter("Page");
+		Integer CurePage;
+		if(curPageStr == null || curPageStr.equals(""))
+		{
+			CurePage = 1;
+		}
+		else
+		{
+			CurePage = Integer.valueOf(curPageStr);
+		}
 //		System.out.println(user_name);
 //		System.out.println(status);
 		if(status.equals(User.STATUS_NORMAL))

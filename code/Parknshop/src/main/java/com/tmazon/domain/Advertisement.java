@@ -1,6 +1,13 @@
 package com.tmazon.domain;
 
-public class Advertisement {
+import java.io.Serializable;
+
+public class Advertisement implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static int MAXNUM = 10;
 	private Integer adId;
 	private Integer productID;
 	private Integer cost;

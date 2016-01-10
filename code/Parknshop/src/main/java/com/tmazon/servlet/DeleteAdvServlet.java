@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.tmazon.service.AdvertisementService;
 import com.tmazon.service.impl.AdvertisementServiceImpl;
 import com.tmazon.util.BasicFactory;
+import com.tmazon.util.CheckAdmin;
 
 public class DeleteAdvServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,12 +25,19 @@ public class DeleteAdvServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Sid::"+request.getParameter("sid"));
-		String adIdStr = request.getParameter("sid");
-		String url = request.getHeader("Referer");
-		if(adIdStr != null && !adIdStr.equals("")){
 		
-			int id=Integer.parseInt(adIdStr);
+		if(!CheckAdmin.isAdminOnline(request))
+		{
+			response.sendRedirect("login");
+			return;
+		}
+		
+		System.out.println("Sid::"+request.getParameter("sid"));
+		String productIdStr = request.getParameter("sid");
+		String url = request.getHeader("Referer");
+		if(productIdStr != null && !productIdStr.equals("")){
+		
+			int id=Integer.parseInt(productIdStr);
 			if(advertisementService.delete(id))
 			{
 				System.out.println("Advertisement delete Succeed!");

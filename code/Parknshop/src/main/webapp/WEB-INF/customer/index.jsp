@@ -19,12 +19,11 @@
 	</c:if>
 	<div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-            	<div class="swiper-banner" style="background-image: url(./images/1380961451846.jpg);"></div>
-            </div>
-            <div class="swiper-slide">
-				<div class="swiper-banner" style="background-image: url(./images/6630096896932174829.jpg);"></div>
-            </div>
+	        <c:forEach items="${showAdList }" var="showAd">
+	        	<div class="swiper-slide">
+            		<a href="productInfo?pid=${showAd.product.productId }"><div class="swiper-banner" style="background-image: url(${showAd.ad.picture});"></div></a>
+            	</div>
+	        </c:forEach>
         </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next"></div>

@@ -1,7 +1,13 @@
 package com.tmazon.domain;
 
-public class ShowAd {
+import java.io.Serializable;
+
+public class ShowAd implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Product product;
 	private Shop  shop;
 	private Advertisement ad;

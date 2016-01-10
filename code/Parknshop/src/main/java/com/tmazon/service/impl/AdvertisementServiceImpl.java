@@ -17,9 +17,9 @@ import com.tmazon.util.Page;
 
 public class AdvertisementServiceImpl implements AdvertisementService {
 
-	AdvertisementDao advertisementDao = BasicFactory.getImpl(AdvertisementDao.class);
-	ProductDao productDao = BasicFactory.getImpl(ProductDao.class);
-	ShopDao shopDao =  BasicFactory.getImpl(ShopDao.class);
+	private AdvertisementDao advertisementDao = BasicFactory.getImpl(AdvertisementDao.class);
+	private ProductDao productDao = BasicFactory.getImpl(ProductDao.class);
+	private ShopDao shopDao =  BasicFactory.getImpl(ShopDao.class);
 	public boolean addAd(Integer productId, Integer cost,String picture) 
 	{
 		List<Advertisement> adList = advertisementDao.select();
@@ -27,17 +27,18 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 		{
 			if(ad.getProductID().intValue() == productId.intValue())
 			{
-				System.out.println("AdServiceImpl::addAd::Errors::Ad existing!");
-				return false;
+				System.out.println("Advertisement update!");
+				return advertisementDao.update(productId,cost,picture);
 			}
 		}
-		boolean result = advertisementDao.insert(productId,cost,picture);
 		
-		return result;
+		System.out.println("Advertisement insert!");
+		
+		return advertisementDao.insert(productId,cost,picture);
 	}
 	public boolean delete(int adId)
 	{
-		return advertisementDao.deleteById(adId);
+		return advertisementDao.deleteByProductId(adId);
 		
 	}
 	/**
@@ -49,7 +50,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	 */
 	public boolean modify(int adId,int cost,String picture){
 		
-		return advertisementDao.update(new Advertisement(adId,null,cost,picture));
+		return advertisementDao.update(adId,cost,picture);
 
 	}
 	public Page<Product> searchByPage(String productName,String type,int curPage,int next)
@@ -72,7 +73,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 		List<ShowAd> showAdList = new ArrayList<ShowAd>();
 		for(Advertisement ad : adList)
 		{
-			Product pro = productDao.findById(ad.getAdId());
+			Product pro = productDao.findById(ad.getProductID());
 			Shop shop = shopDao.findById(pro.getShopId());
 			showAdList.add(new ShowAd(pro,shop,ad));
 		}
@@ -97,7 +98,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 			}
 			return shopList;
 		}
-		
 		
 	}
 }
