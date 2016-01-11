@@ -377,7 +377,7 @@ input {
     height: 400px;
     background-position: top;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% auto;
 }
 
 .product-container .product-info {
