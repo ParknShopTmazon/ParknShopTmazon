@@ -429,12 +429,19 @@ var customer = {
                         for (let i = 0; i < $('.dialog #people-list-main .list ul').children().length; i++) {
                             $('.dialog #people-list-main .list ul').children(i).remove();
                         }
-
+                        
+                        let isSelect = false; 
+                        
                         /** append */
                         for (let j = 0; j < data.users.length; j++) {
                             /** [if: first child] */
-                            if (j == 0) {
+                        	if (data.users[j] === 'admin' || data.users[j] === 'admin0') {
+                        		continue;
+                        	}
+                        	
+                            if (!isSelect) {
                                 $('.dialog #people-list-main .list ul').append('<li class="select button">' + data.users[j] + '</li>')
+                                isSelect = true;
                             } else {
                                 $('.dialog #people-list-main .list ul').append('<li class="button">' + data.users[j] + '</li>')
                             }
