@@ -1,6 +1,7 @@
 package com.tmazon.servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,10 +67,11 @@ public class SearchHistoryAdminServlet extends HttpServlet {
 						System.out.println(startDate.toString()+"::"+endDate.toString());
 			List<History> historyList = historyAdminService.search(startDate,endDate);
 			Page<History> historyPage = historyAdminService.page(historyList,curPage,next);
+			DecimalFormat df = new DecimalFormat( "###.00");
 			double income = historyAdminService.getIncome(historyList);
 			req.setAttribute("historyList",historyPage.getSubitems());
 			req.setAttribute("CurPage",historyPage.getCurPage()==0?1:historyPage.getCurPage());
-			req.setAttribute("Income",income);
+			req.setAttribute("Income",df.format(income));
 			req.setAttribute("start",startDateStr);
 			req.setAttribute("end",endDateStr);
 			req.getRequestDispatcher("WEB-INF/admin/other.jsp").forward(req,resp);
