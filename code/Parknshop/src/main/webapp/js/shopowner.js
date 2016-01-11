@@ -196,21 +196,21 @@ const shopOwner = {
             const nextArray = next.split('-');
             
             /** year */
-            if ((prevArray[0] >> 0) < (nextArray[0] >> 0)) {
-            	return -1;
+            if ((prevArray[0] >> 0) > (nextArray[0] >> 0)) {
+            	return 1;
             }
             
             /** month */
-            if ((prevArray[1] >> 0) < (nextArray[1] >> 0)) {
-            	return -1;
+            if ((prevArray[0] >> 0) == (nextArray[0] >> 0) && (prevArray[1] >> 0) > (nextArray[1] >> 0)) {
+            	return 1;
             }
             
             /** date */
-            if ((prevArray[2] >> 0) <= (nextArray[2] >> 0)) {
-            	return -1;
+            if ((prevArray[0] >> 0) == (nextArray[0] >> 0) && (prevArray[1] >> 0) == (nextArray[1] >> 0) && (prevArray[2] >> 0) > (nextArray[2] >> 0)) {
+            	return 1;
             }
             
-            return 1;
+            return -1;
         }
         
         function calculateAmount() {
@@ -234,7 +234,10 @@ const shopOwner = {
             		 const shopId = $(this).find('.shopId').find('.value').html();
             		 
             		 if (typeof(amount[shopId][dateTime]) == 'undefined') {
-                		 amount[shopId][dateTime] = 0.0;
+            			 for (let i in amount) {
+            				 amount[i][dateTime] = 0.0;
+            			 }
+                		 // amount[shopId][dateTime] = 0.0;
                 	 }
             		 
             		 const status = $(this).find('.info').find('.delivery-status').find('.value').html();
@@ -253,9 +256,9 @@ const shopOwner = {
         function initChart(sid, start, end) {
         	$("#chart-container").empty();
         	
-        	if (compareDate(start, end) > 1) {
-        		return;
-        	}
+//        	if (compareDate(start, end) > 0) {
+//        		return;
+//        	}
         	
         	const $shopNames = $('#shopId').children('option');
         	const _sid = sid;
