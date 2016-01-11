@@ -41,8 +41,8 @@
 			<h2>Product Type</h2>
 			<ul>
 				<a href="index"><li>All</li></a>
-				<c:forEach var="category" items="${ r_categories }">
-					<a href="index?category=${ category }"><li>${ category }</li></a>
+				<c:forEach var="category" items="${ r_categories }" varStatus="status">
+					<a href="index?category=${ status.index }"><li>${ category }</li></a>
 				</c:forEach>
 			</ul>
 			<div class="products-btn"></div>

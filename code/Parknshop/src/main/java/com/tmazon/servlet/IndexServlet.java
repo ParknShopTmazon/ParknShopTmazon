@@ -36,19 +36,50 @@ public class IndexServlet extends HttpServlet {
 		req.setAttribute(AttrName.RequestScope.CATEGORIES, categories);
 		List<Advertisement> adList =  advertisementService.getAdList();
 		List<ShowAd> showAdList = advertisementService.getShowAd(adList);
-		List<Product> productList = new ArrayList<Product>();
-		for(ShowAd showAd : showAdList)
+//		List<Product> productList = new ArrayList<Product>();
+//		for(ShowAd showAd : showAdList)
+//		{
+//			productList.add(showAd.getProduct());
+//		}
+		List<String> category = new  ArrayList<String> ();
+		category.add("Audio");
+		category.add("Cameras & Camcorders");
+		category.add("Car Electronics & GPS");
+		category.add("Cell Phones");
+		category.add("Computers & Tablets");
+		category.add("Health, Fitness & Sports");
+		category.add("Home & Office");
+		category.add("TV& Home Theater");
+		category.add("Video, Games, Movies & Music");
+		String ca = req.getParameter("category");
+		Integer caNum;
+	
+		if(ca == null || ca.equals(""))
 		{
-			productList.add(showAd.getProduct());
+			ca = null;
 		}
-		productList.sort(new Comparator<Product>() {
+		else
+		{
+			ca = category.get(Integer.valueOf(ca));
+		}
+		List<Product> products = productService.select(new Product(null, null, null, null, null, ca , null, null, null, null, null));
+		System.out.println(req.getAttribute("category"));
+		for(Product product : products)
+		{
+			System.out.println(product);
+		}
+		
+		
+		
+		products.sort(new Comparator<Product>() {
 
 			public int compare(Product o1, Product o2) {
 				return o2.getSoldNum() - o1.getSoldNum();
 			}
 			
 		});
-		req.setAttribute(AttrName.RequestScope.PRODUCTS, productList);
+		req.setAttribute(AttrName.RequestScope.PRODUCTS, products);
+//		req.setAttribute("productList2",productList);
 		req.setAttribute("showAdList",showAdList);
 		req.getRequestDispatcher("WEB-INF/customer/index.jsp").forward(req, resp);
 	}
