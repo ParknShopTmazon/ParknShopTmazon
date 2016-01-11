@@ -1027,9 +1027,9 @@ var customer = {
                                 'color': '#e0e0e0'
                             });
 
-                            $('.order-container #pay-btn').removeClass('button');
+                            $('.order-container #order-info .comment-submit').removeClass('button');
 
-                            $('.order-container #pay-btn').unbind('click');
+                            $('.order-container #order-info .comment-submit').unbind('click');
                         } else {
                             alert('Ooops, failed to comment');
                         }
