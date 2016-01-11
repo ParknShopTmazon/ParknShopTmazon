@@ -62,8 +62,8 @@
 				<table  >
 					<thead>
 						<tr>
+							<th align="left">User_ID</th>
 							<th align="left">UserName</th>
-							<th align="left">UserPassword</th>
 							<th align="left">UserRole</th>
 							<th colspan="3" width="10%">Actions</th>
 						</tr>
@@ -91,8 +91,8 @@
 				
 					<c:forEach items="${userList}" var="user" >
 						<tr>
+							<td align="left">${ user.userId }</td>
 							<td align="left">${ user.name }</td>
-							<td align="left">${ user.password }</td>
 							<td align="left">${ user.role }</td>
 						
 							

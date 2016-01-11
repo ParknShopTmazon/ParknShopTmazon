@@ -166,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table>
 						<thead>
 							<tr>
-								<th>ProductId</th>
+								<th>Product_ID</th>
 								<th>ProductName</th>
 								<th>ShopName</th>
 								<th>Type</th>
@@ -198,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<thead>
 							<tr>
 								<th></th>
-								<th>ProductId</th>
+								<th>Product_ID</th>
 								<th>ProductName</th>
 								<th>ShopName</th>
 								

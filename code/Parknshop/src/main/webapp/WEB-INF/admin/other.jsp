@@ -47,6 +47,7 @@
 								<th>ShopName</th>
 								<th>BuyerName</th>
 								<th>Quantity</th>
+								<th>Rate</th>
 								<th>Cost</th>
 								<th>Time</th>
 							</tr>
@@ -73,6 +74,7 @@
 									<td>${history.shop.name}</td>
 									<td>${history.user.name}</td>
 									<td>${history.orderInfo.quantity}</td>
+									<td>${history.rate}</td>
 									<td>${history.cost}</td>
 									<td>${history.dealTime}</td>
 								</tr>
