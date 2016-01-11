@@ -37,20 +37,27 @@
 				<div class="form-item">
 					<div class="form-lable-left">Shop Type:</div>
 					<div class="form-control-right">
-					    <input type="radio" id="person" checked="checked" name="type" value="person">
-						<label name="person" class="checked" for="person">person</label>
-						<input type="radio" id="company" name="type" value="company">
-						<label name="company" for="company">company</label>
-						
+						<c:if test="${type eq 'person' }">
+							<input type="radio" id="person" checked="checked" name="type" value="person">
+							<label name="person" class="checked" for="person">person</label>
+							<input type="radio" id="company" name="type" value="company">
+							<label name="company" for="company">company</label>
+						</c:if>
+					<c:if test="${type eq 'company' }">    
+						<input type="radio" id="person"  name="type" value="person">
+							<label name="person" class="checked" for="person">person</label>
+							<input type="radio" id="company" checked="checked" name="type" value="company">
+							<label name="company" for="company">company</label>
+					</c:if>
 					</div>
 				</div>
 				
-				<div class="form-item">
+				<!-- <div class="form-item">
 					<div class="form-lable-left">Address:</div>
 					<div class="form-control-right">
 						<input class="form-input" id="address" name="address" type="text" value="${param.address}" maxlength="18" business="address" require="true";>
 					</div>
-				</div>	
+				</div>	 -->
 				
 				<div class="form-item-photo">
 					<div class="form-lable-left">Shop Photo</div>
@@ -65,14 +72,14 @@
 				  </div>
 				</div>	
 				
-				<div class="form-item-textarea">
+				<!-- <div class="form-item-textarea">
 					<div class="form-lable-left">Description:</div>
 					<div class="form-textarea">
 						<textarea class="textarea"></textarea>
 						<input type="submit" value="Update" class="submit-btn" >
 					</div>
-				</div>
-
+				</div> -->
+				<input type="submit" value="Update" class="submit-btn" >
 				<div class="control-group" align="center">
 					<c:if test="${ not empty r_error_shop_exists }">
 						<label style="color: red;">shop name already exists</label>

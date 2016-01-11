@@ -68,9 +68,6 @@ public class DeleteShopServlet extends HttpServlet {
 		
 		System.out.println("shopId=="+shopId);
 		
-		
-		
-		
 //			Shop shop =new Shop();
 //			shop.setShopId(id);
 		    Shop shop = shopService.findById(shopId);
@@ -95,7 +92,10 @@ public class DeleteShopServlet extends HttpServlet {
 			   }else{
 				 req.setAttribute(AttrName.RequestScope.IS_SHOP_DELETE_SUCCESS, "0");
 				 
-				 req.setAttribute("shopId",shopId.toString());
+				 req.setAttribute("shopId",shop.getShopId());
+				 req.setAttribute("name",shop.getName());
+				 req.setAttribute("type",shop.getType());
+				 req.setAttribute("picture",shop.getPicture());
 				 req.getRequestDispatcher("WEB-INF/shopowner/delete_shop.jsp").forward(req,resp);
 			  }
 		    }

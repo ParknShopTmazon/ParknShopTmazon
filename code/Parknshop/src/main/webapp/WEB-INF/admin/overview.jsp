@@ -51,10 +51,6 @@
 									<td>DB</td>
 									<td>MySQL</td>
 								</tr>
-								<tr>
-									<td>Backup</td>
-									<td>2015.12.07</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

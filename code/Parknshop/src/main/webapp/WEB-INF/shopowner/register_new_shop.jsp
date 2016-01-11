@@ -36,12 +36,12 @@
 						</div>
 					</div>
 					
-					<div class="form-item">
+					<!-- <div class="form-item">
 						<div class="form-lable-left">Address:</div>
 						<div class="form-control-right">
 							<input class="form-input" id="address" name="address" type="text" value="${param.address}" maxlength="18" business="address" require="true";>
 						</div>
-					</div>	
+					</div>	-->
 					
 					<div class="item-photo form-item">
 						<div class="form-lable-left">Shop Photo:</div>
@@ -52,14 +52,14 @@
 					  </div>
 					</div>	
 						  
-					<div class="form-item-textarea">
+					<!-- <div class="form-item-textarea">
 						<div class="form-lable-left">Description:</div>
 						<div class="form-textarea">
 							<textarea class="textarea" required></textarea>
-							<button type="submit" class="btn-warning">submit</button>
+							
 						</div>
-					</div>
-
+					</div>	-->
+					<button type="submit" class="btn-warning">submit</button>
 					<div class="control-group" align="center">
 						<c:if test="${ not empty r_error_shop_exists }">
 							<label style="color: red;">shop name already exists</label>
