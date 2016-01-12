@@ -25,7 +25,7 @@ public class History {
 	}
 
 	public double getCost() {
-		return orderInfo.getQuantity() * product.getPrice();
+		return orderInfo.getQuantity() * product.getDiscountPrice();
 	}
 	public double getRate()
 	{
